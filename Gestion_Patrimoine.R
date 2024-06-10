@@ -5,6 +5,11 @@ data <- read.csv(file = "Big_Data/Patrimoine_Arboré_(RO).csv", header = TRUE, s
 #Pour supprimer certaines colonnes :
 #data <- subset(data, select = -c(created_date, created_user, last_edited_user, last_edited_date, CreationDate, Creator, EditDate, Editor, remarquable))
 
+
+# -------------------------------------------
+# --------------- Gestion Age ---------------
+# -------------------------------------------
+
 moyenne_age_jeune <- mean(data$age_estim[data$fk_stadedev == "jeune"], na.rm = TRUE)
 moyenne_age_adulte <- mean(data$age_estim[data$fk_stadedev == "adulte"], na.rm = TRUE)
 moyenne_age_vieux <- mean(data$age_estim[data$fk_stadedev == "vieux"], na.rm = TRUE)
