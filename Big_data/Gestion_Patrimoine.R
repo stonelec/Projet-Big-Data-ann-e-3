@@ -21,20 +21,17 @@ limite_adulte = (moyenne_age_vieux + moyenne_age_adulte) / 2
 limite_vieux = (moyenne_age_senescent + moyenne_age_vieux) / 2
 
 # Affichage de les moyennes :
-#print(moyenne_age_jeune)
-#print(moyenne_age_adulte)
-#print(moyenne_age_vieux)
-#print(moyenne_age_senescent)
 
-#age <- data[c("fk_stadedev", "age_estim")]
+
+age <- data[c("fk_stadedev", "age_estim")]
 #View(age)
 
 data$fk_stadedev <- as.character(data$fk_stadedev)
 
 for (i in 1:nrow(data)) {
-
+  
   if(is.na(data$age_estim[i])){
-   
+    
     next 
     
   }
@@ -45,27 +42,6 @@ for (i in 1:nrow(data)) {
     data$age_estim[i] <- NA
     data$feuillage[i] <- NA
     
-  }
-  
-  else if(data$age_estim[i] == 0){
-  
-    if (data$age_estim[i] <= limite_jeune) {
-      data$fk_stadedev[i] <- "jeune"
-      
-    } else if (data$age_estim[i] > limite_jeune && data$age_estim[i] <= limite_adulte) {
-      
-      data$fk_stadedev[i] <- "adulte"
-      
-    } else if (data$age_estim[i] > limite_adulte && data$age_estim[i] <= limite_vieux) {
-      
-      data$fk_stadedev[i] <- "vieux"
-      
-    } else if (data$age_estim[i] > limite_vieux) {
-      
-      data$fk_stadedev[i] <- "senescent"
-      
-      }
-      
   }
   
   else if(data$fk_stadedev[i] == ""){
@@ -97,9 +73,9 @@ for (i in 1:nrow(data)) {
 #tab <- data[c("fk_stadedev")]
 #View(tab)
 
-#View(data)
- 
- 
+View(data)
+
+
 # ------------------------------------------------------------------------------------------------------------------
 # ---------------------------------------- Remplacer les "oui" et les "non" ----------------------------------------
 # ------------------------------------------------------------------------------------------------------------------
@@ -107,26 +83,26 @@ for (i in 1:nrow(data)) {
 data$fk_revetement <- as.character(data$fk_revetement)
 
 for (i in 1:nrow(data)) {
-   
-   if(data$fk_revetement[i] == ""){
-     
-     next
-     
-   }
-   
-   if(data$fk_revetement[i] == "Oui"){
+  
+  if(data$fk_revetement[i] == ""){
     
-     data$fk_revetement[i] <- 1
-     
-   } else if (data$fk_revetement[i] == "Non"){
-     
-     data$fk_revetement[i] <- 0
-
-   }
+    next
+    
+  }
+  
+  if(data$fk_revetement[i] == "Oui"){
+    
+    data$fk_revetement[i] <- 1
+    
+  } else if (data$fk_revetement[i] == "Non"){
+    
+    data$fk_revetement[i] <- 0
+    
+  }
   
 }
 
-#View(data)
+View(data)
 
 # ------------------------------------------------------------------------------------------------------
 # ---------------------------------------- Remplir vide par NA  ----------------------------------------
@@ -143,15 +119,14 @@ for (col_name in columns) {
   for (i in 1:nrow(data)) {
     
     if (is.na(data[[col_name]][i])) {
-    
-        next
+      
+      next
       
     } else if (data[[col_name]][i] == "") {
       
       data[[col_name]][i] <- NA
-    
+      
     }
   }
 }
 View(data)
-
