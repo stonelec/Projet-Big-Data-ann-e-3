@@ -29,6 +29,16 @@ unique(data)
 #-----------------------------------------------------------------------------------------------------
 #              MISE A JOUR ET CALCUL AGE
 #-----------------------------------------------------------------------------------------------------
+
+moyenne_age_jeune <- mean(data$age_estim[data$fk_stadedev == "jeune"], na.rm = TRUE)
+moyenne_age_adulte <- mean(data$age_estim[data$fk_stadedev == "adulte"], na.rm = TRUE)
+moyenne_age_vieux <- mean(data$age_estim[data$fk_stadedev == "vieux"], na.rm = TRUE)
+moyenne_age_senescent <- mean(data$age_estim[data$fk_stadedev == "senescent"], na.rm = TRUE)
+
+limite_jeune = (moyenne_age_jeune + moyenne_age_adulte) / 2
+limite_adulte = (moyenne_age_vieux + moyenne_age_adulte) / 2
+limite_vieux = (moyenne_age_senescent + moyenne_age_vieux) / 2
+
 #calcul age en fonction de la date de plantation
 calculate_age <- function(date_creation) {
        current_date <- Sys.Date()
@@ -38,7 +48,7 @@ calculate_age <- function(date_creation) {
        return(age)
 }
 
-#mise à jour de l'age en fonction de la date de plnatation sinon du stade si pas d'age
+#mise à jour de l'age en fonction de la date de plantation sinon du stade si pas d'age
 for (i in 1:nrow(data)) {
   if (is.na(data$age_estim[i])) { 
     if (is.na(data$dte_plantation[i])) { 
@@ -46,13 +56,13 @@ for (i in 1:nrow(data)) {
       data$age_estim[i] <- round(age, 0)
     }else if (data$fk_stadedev[i] != ""){
       if(data$fk_stadedev[i] == "jeune"){
-        data$age_estim[i] <- 
+        data$age_estim[i] <- moyenne_age_jeune
       }else if (data$fk_stadedev[i] == "adulte"){
-        data$age_estim[i] <- 30
+        data$age_estim[i] <- moyenne_age_adulte
       }else if(data$fk_stadedev[i] == "senescent"){
-        data$age_estim[i] <- 45
-      }else if(data$fk_stadedev[i] == "vieux"){
-        data$age_estim[i] <- 60
+        data$age_estim[i] <- moyenne_age_vieux
+      }else {
+        data$age_estim[i] <- moyenne_age_senescent
       }
       
     }
@@ -62,16 +72,20 @@ for (i in 1:nrow(data)) {
 for (i in 1:nrow(data)) {
   if (is.na(data$age_estim[i])) { 
     if (data$fk_stadedev[i] == ""){
-      if(data$fk_stadedev[i] <= 15){
+      if(data$fk_stadedev[i] <= limite_jeune){
         data$fk_stadedev[i] <- "jeune"
-      }else if (data$fk_stadedev[i] <= 30){
+      }else if (data$fk_stadedev[i] <= limite_adulte){
         data$fk_stadedev[i] <- "adulte"
-      }else if(data$fk_stadedev[i] <= 45){
+      }else if(data$fk_stadedev[i] <= limite_vieux){
         data$fk_stadedev[i] <- "senescent"
       }else {
         data$fk_stadedev[i] <- "vieux"
       }
       
+    }
+    if(data$fk_arb_etat[i] == "SUPPRIMÉ" || data$fk_arb_etat[i] == "Essouché" || data$fk_arb_etat[i] == "ABATTU"){
+      data$fk_stadedev[i] <- "Mort"
+      data$age_estim[i] <- NA
     }
   }
 }
@@ -89,31 +103,32 @@ library(lubridate)
 for (i in seq(nrow(data), 1, -1)) {#parcourir en sens inverse
   if (is.na(data$fk_arb_etat[i]) || data$fk_arb_etat[i] == "" || data$fk_arb_etat[i] == " ") {#SUPPRIMER les arbres sans états
     data <- data[-i,]
-    print("supr")
+    next
   }else if (!is.na(data$age_estim[i]) && data$age_estim[i] == 2010) {#SUPPRIMER l'arbre avec un age de 2010 mais jeune
     data <- data[-i,]
-    print("supr")
+    next
   }else if(data$X[i] == "" || data$Y[i] == ""){#SUPPRIMER les arbres sans position
       data <- data[-i,]
-      print("supr")
+      next
   }else if(is.na(data$age_estim[i]) || data$age_estim[i] == ""){#SUPPRIMER les arbres sans age
     data <- data[-i,]
-    print("supr")
+    next
   }else if(is.na(data$haut_tot[i]) || is.na(data$haut_tronc[i]) || is.na(data$tronc_diam[i])){#SUPPRIMER les arbres sans dimensions
     data <- data[-i,]
-    print("supr")
+    next
   }else if(is.na(data$nomfrancais[i]) || data$nomfrancais[i] == ""){#SUPPRIMER les arbres sans nom
     data <- data[-i,]
-    print("supr")
+    next
   }else if(is.na(data$villeca[i]) || data$villeca[i] == ""){#SUPPRIMER les arbres sans ville
     data <- data[-i,]
-    print("supr")
+    next
   }else if(is.na(data$feuillage[i]) || (data$feuillage[i] == "")){#SUPPRIMER les arbres sans feuillage
     data <- data[-i,]
-    print("supr")
+    next
   }else if(data$fk_arb_etat[i] == "EN PLACE" || is.na(data$fk_arb_etat[i])){#CORRIGER les arbres EN PLACE avec une date d'abatage par ABATTU
     if(data$dte_abattage[i] != ""){
       data$fk_arb_etat[i] == "ABATTU"
+      next
     }
   }
 }
@@ -123,6 +138,11 @@ for (i in seq(nrow(data), 1, -1)) {#parcourir en sens inverse
 #-----------------------------------------------------------------------------------------------------
 data <- select(data,-c(dte_plantation, dte_abattage))
 
+
+#-----------------------------------------------------------------------------------------------------
+#              REMPLACER LES VIDE PAS NA
+#-----------------------------------------------------------------------------------------------------
+data[data == ""] <- NA
 
 compter_na_et_vide <- function(data) {
   result <- sapply(data, function(col) {
@@ -135,3 +155,4 @@ compter_na_et_vide <- function(data) {
 }
 resultat <- compter_na_et_vide(data)
 print(resultat)
+nrow(data)
