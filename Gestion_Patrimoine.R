@@ -13,14 +13,17 @@ data <- read.csv(file = "Big_Data/Patrimoine_Arboré_(RO).csv", header = TRUE, s
 moyenne_age_jeune <- mean(data$age_estim[data$fk_stadedev == "jeune"], na.rm = TRUE)
 moyenne_age_adulte <- mean(data$age_estim[data$fk_stadedev == "adulte"], na.rm = TRUE)
 moyenne_age_vieux <- mean(data$age_estim[data$fk_stadedev == "vieux"], na.rm = TRUE)
+moyenne_age_senescent <- mean(data$age_estim[data$fk_stadedev == "senescent"], na.rm = TRUE)
 
 limite_jeune = (moyenne_age_jeune + moyenne_age_adulte) / 2
 limite_adulte = (moyenne_age_vieux + moyenne_age_adulte) / 2
+limite_vieux = (moyenne_age_senescent + moyenne_age_vieux) / 2
 
 # Affichage de les moyennes :
 #print(moyenne_age_jeune)
 #print(moyenne_age_adulte)
 #print(moyenne_age_vieux)
+#print(moyenne_age_senescent)
 
 #age <- data[c("fk_stadedev", "age_estim")]
 #View(age)
@@ -42,11 +45,15 @@ for (i in 1:nrow(data)) {
       
       data$fk_stadedev[i] <- "adulte"
       
-    } else if (data$age_estim[i] > limite_adulte) {
+    } else if (data$age_estim[i] > limite_adulte && data$age_estim[i] <= limite_vieux) {
       
       data$fk_stadedev[i] <- "vieux"
       
-    }
+    } else if (data$age_estim[i] > limite_vieux) {
+      
+      data$fk_stadedev[i] <- "senescent"
+      
+      }
       
   }
   
@@ -59,9 +66,13 @@ for (i in 1:nrow(data)) {
       
       data$fk_stadedev[i] <- "adulte"
       
-    } else if (data$age_estim[i] > limite_adulte) {
+    } else if (data$age_estim[i] > limite_adulte && data$age_estim[i] <= limite_vieux) {
       
       data$fk_stadedev[i] <- "vieux"
+      
+    } else if (data$age_estim[i] > limite_vieux) {
+      
+      data$fk_stadedev[i] <- "senescent"
       
     }
     
@@ -71,3 +82,6 @@ for (i in 1:nrow(data)) {
 
 age <- data[c("fk_stadedev", "age_estim")]
 View(age)
+
+tab <- data[c("fk_stadedev")]
+View(tab)
