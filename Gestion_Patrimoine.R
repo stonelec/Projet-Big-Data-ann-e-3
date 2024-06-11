@@ -233,20 +233,16 @@ for (i in 1:nrow(data)) {
   # ----- POUR clc_secteur : -----
   # -------------------------------
   
-  if(is.na(data$clc_quartier[i])){
   if(is.na(data$clc_secteur[i])){
     
-    print("On a un NA pour clc_quartier : ")
     print("On a un NA pour clc_secteur : ")
     print(var)
     next
     
   }
   
-  else if(data$clc_quartier[i] == ""){
   else if(data$clc_secteur[i] == ""){
     
-    data$clc_quartier[i] <- NA
     data$clc_secteur[i] <- NA
     
   }
