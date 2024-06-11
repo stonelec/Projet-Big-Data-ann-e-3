@@ -1,0 +1,675 @@
+# | ========================================================== |
+# |===================| Import des données |===================|
+# | ========================================================== |
+
+
+
+data <- read.csv(file = "./Big_data/Patrimoine_Arboré_(RO).csv", header = TRUE, sep = ',', stringsAsFactors = TRUE)
+
+# Charger les bibliothèques nécessaires
+library(ggplot2)
+
+
+
+# | ========================================================== |
+# |======| Voir si des arbes sont trop loin de la ville |======|
+# | ========================================================== |
+
+
+
+numeric_data <- data[!is.na(as.numeric(data$X)) & !is.na(as.numeric(data$Y)), ]
+
+if (nrow(numeric_data) > 0) {
+  moy_X <- mean(as.numeric(numeric_data$X))
+  moy_Y <- mean(as.numeric(numeric_data$Y))
+}
+
+# Fonction pour créer les coordonnées d'un cercle
+create_circle <- function(center_x, center_y, radius, n_points = 100) {
+  t <- seq(0, 2*pi, length.out = n_points)
+  x <- center_x + radius * cos(t)
+  y <- center_y + radius * sin(t)
+  return(data.frame(x = x, y = y))
+}
+
+# Créer les coordonnées du cercle
+circle_data <- create_circle(moy_X, moy_Y, 4500)
+
+# Créer le graphique avec toutes les données et le cercle
+ggplot(data, aes(x = X, y = Y)) +
+  geom_point() +  # Afficher les points des données
+  geom_path(data = circle_data, aes(x = x, y = y), color = "red") +  # Tracer le cercle
+  ggtitle("Répartition des données avec cercle") +
+  xlab("X") +
+  ylab("Y")
+
+
+
+# | ============================================================================== |
+# |======| On cherche des corélations par rapport au stade de développement |======|
+# | ============================================================================== | 
+
+
+
+# 01. Sur la position
+ggplot(data, aes(x = X, y = Y, color = fk_stadedev)) +
+  geom_point() +
+  ggtitle("Répartition des données par classification d'âge") +
+  xlab("X") +
+  ylab("Y")
+
+# 02. Age de l'arbre et date de plantation
+ggplot(data, aes(x=dte_plantation, y=age_estim, color = fk_stadedev))+
+  geom_point() +
+  ggtitle("Age estimé en fonction de la date de plantation") +
+  xlab("Date de plantation") +
+  ylab("Age estim") +
+  theme(axis.text.x = element_blank()) # enlève les valeurs sur l'axe des X
+
+# 03. Stade de développement et date de plantation
+ggplot(data, aes(x=fk_stadedev, y=age_estim, color = fk_stadedev))+
+  geom_point() +
+  ggtitle("Age estimé en fonction du stade de développement") +
+  xlab("Stade de développement") +
+  ylab("Age estim")
+
+# 04. Hauteur du tronc et diamètre du tronc
+ggplot(data, aes(x=haut_tronc, y=tronc_diam, color = fk_stadedev)) +
+  geom_point() +
+  ggtitle("Hauteur du tonc en fonction du diamètre du tronc") +
+  xlab("Hauteur du tronc") +
+  ylab("Diamètre du tronc")
+
+# 05. Age de l'arbre et hauteur totale
+ggplot(data, aes(x=age_estim, y=haut_tot, color = fk_stadedev))+
+  geom_point() +
+  ggtitle("Hauteur totale en fonction de l'âge estimé") +
+  xlab("Age estim") +
+  ylab("Hauteur totale")
+
+# 06. Age de l'arbre et hauteur tronc
+ggplot(data, aes(x=age_estim, y=haut_tronc, color = fk_stadedev))+
+  geom_point() +
+  ggtitle("Hauteur totale en fonction de l'âge estimé") +
+  xlab("Age estim") +
+  ylab("Hauteur totale")
+
+# 07. Age de l'arbre et diamètre tronc
+ggplot(data, aes(x=age_estim, y=tronc_diam, color = fk_stadedev))+
+  geom_point() +
+  ggtitle("Hauteur totale en fonction de l'âge estimé") +
+  xlab("Age estim") +
+  ylab("Hauteur totale")
+
+# 08. Stade de developpement et hauteur totale
+ggplot(data, aes(x=fk_stadedev, y=haut_tot, color = fk_stadedev))+
+  geom_point() +
+  ggtitle("Hauteur totale en fonction du stade de développement") +
+  xlab("Stade de developpement") +
+  ylab("Hauteur totale")
+
+# 09. Stade de developpement et hauteur tronc
+ggplot(data, aes(x=fk_stadedev, y=haut_tronc, color = fk_stadedev))+
+  geom_point() +
+  ggtitle("Hauteur totale en fonction du stade de développement") +
+  xlab("Stade de developpement") +
+  ylab("Hauteur totale")
+
+# 10. Stade de developpement et diamètre tronc
+ggplot(data, aes(x=fk_stadedev, y=tronc_diam, color = fk_stadedev))+
+  geom_point() +
+  ggtitle("Hauteur totale en fonction du stade de développement") +
+  xlab("Stade de developpement") +
+  ylab("Hauteur totale")
+
+
+
+# | ============================================================================== |
+# |=======| On cherche des corrélations par rapport à la forme de l'arbre |========|
+# | ============================================================================== |
+
+
+
+# 01. Répartition des données par forme de l'arbre
+ggplot(data, aes(x = X, y = Y, color = fk_port)) +
+  geom_point() +
+  ggtitle("Répartition des données par forme de l'arbre") +
+  xlab("X") +
+  ylab("Y")
+
+# 02. Âge de l'arbre et date de plantation en fonction de la forme de l'arbre
+ggplot(data, aes(x = dte_plantation, y = age_estim, color = fk_port)) +
+  geom_point() +
+  ggtitle("Âge estimé en fonction de la date de plantation par forme de l'arbre") +
+  xlab("Date de plantation") +
+  ylab("Âge estimé") +
+  theme(axis.text.x = element_blank()) # enlève les valeurs sur l'axe des X
+
+# 03. Forme de l'arbre et âge estimé
+ggplot(data, aes(x = fk_port, y = age_estim, color = fk_port)) +
+  geom_point() +
+  ggtitle("Âge estimé en fonction de la forme de l'arbre") +
+  xlab("Forme de l'arbre") +
+  ylab("Âge estimé") +
+  theme(axis.text.x = element_blank()) # enlève les valeurs sur l'axe des X
+
+# 04. Hauteur du tronc et diamètre du tronc en fonction de la forme de l'arbre
+ggplot(data, aes(x = haut_tronc, y = tronc_diam, color = fk_port)) +
+  geom_point() +
+  ggtitle("Hauteur du tronc en fonction du diamètre du tronc par forme de l'arbre") +
+  xlab("Hauteur du tronc") +
+  ylab("Diamètre du tronc")
+
+# 05. Âge de l'arbre et hauteur totale en fonction de la forme de l'arbre
+ggplot(data, aes(x = age_estim, y = haut_tot, color = fk_port)) +
+  geom_point() +
+  ggtitle("Hauteur totale en fonction de l'âge estimé par forme de l'arbre") +
+  xlab("Âge estimé") +
+  ylab("Hauteur totale")
+
+# 06. Âge de l'arbre et hauteur du tronc en fonction de la forme de l'arbre
+ggplot(data, aes(x = age_estim, y = haut_tronc, color = fk_port)) +
+  geom_point() +
+  ggtitle("Hauteur du tronc en fonction de l'âge estimé par forme de l'arbre") +
+  xlab("Âge estimé") +
+  ylab("Hauteur du tronc")
+
+# 07. Âge de l'arbre et diamètre du tronc en fonction de la forme de l'arbre
+ggplot(data, aes(x = age_estim, y = tronc_diam, color = fk_port)) +
+  geom_point() +
+  ggtitle("Diamètre du tronc en fonction de l'âge estimé par forme de l'arbre") +
+  xlab("Âge estimé") +
+  ylab("Diamètre du tronc")
+
+# 08. Forme de l'arbre et hauteur totale
+ggplot(data, aes(x = fk_port, y = haut_tot, color = fk_port)) +
+  geom_point() +
+  ggtitle("Hauteur totale en fonction de la forme de l'arbre") +
+  xlab("Forme de l'arbre") +
+  ylab("Hauteur totale") +
+  theme(axis.text.x = element_blank()) # enlève les valeurs sur l'axe des X
+
+# 09. Forme de l'arbre et hauteur du tronc
+ggplot(data, aes(x = fk_port, y = haut_tronc, color = fk_port)) +
+  geom_point() +
+  ggtitle("Hauteur du tronc en fonction de la forme de l'arbre") +
+  xlab("Forme de l'arbre") +
+  ylab("Hauteur du tronc") +
+  theme(axis.text.x = element_blank()) # enlève les valeurs sur l'axe des X
+
+# 10. Forme de l'arbre et diamètre du tronc
+ggplot(data, aes(x = fk_port, y = tronc_diam, color = fk_port)) +
+  geom_point() +
+  ggtitle("Diamètre du tronc en fonction de la forme de l'arbre") +
+  xlab("Forme de l'arbre") +
+  ylab("Diamètre du tronc") +
+  theme(axis.text.x = element_blank()) # enlève les valeurs sur l'axe des X
+
+
+
+# | ================================================================== |
+# |======| On cherche des corélations en fonction des quartiers |======|
+# | ================================================================== |
+
+# 01. Répartition des données par quartier
+ggplot(data, aes(x = X, y = Y, color = clc_quartier)) +
+  geom_point() +
+  ggtitle("Répartition des données par quartier") +
+  xlab("X") +
+  ylab("Y") 
+
+# 02. Quartier et date de plantation
+ggplot(data, aes(x = dte_plantation, y = age_estim, color = clc_quartier)) +
+  geom_point() +
+  ggtitle("Âge estimé en fonction de la date de plantation par quartier") +
+  xlab("Date de plantation") +
+  ylab("Âge estimé") 
+
+# 03. Quartier et âge estimé
+ggplot(data, aes(x = clc_quartier, y = age_estim, color = clc_quartier)) +
+  geom_point() +
+  ggtitle("Âge estimé en fonction du quartier") +
+  xlab("Quartier") +
+  ylab("Âge estimé") +
+  theme(axis.text.x = element_blank()) # enlève les valeurs sur l'axe des X
+
+# 04. Hauteur du tronc et diamètre du tronc par quartier
+ggplot(data, aes(x = haut_tronc, y = tronc_diam, color = clc_quartier)) +
+  geom_point() +
+  ggtitle("Hauteur du tronc en fonction du diamètre du tronc par quartier") +
+  xlab("Hauteur du tronc") +
+  ylab("Diamètre du tronc") 
+
+# 05. Âge de l'arbre et hauteur totale par quartier
+ggplot(data, aes(x = age_estim, y = haut_tot, color = clc_quartier)) +
+  geom_point() +
+  ggtitle("Hauteur totale en fonction de l'âge estimé par quartier") +
+  xlab("Âge estimé") +
+  ylab("Hauteur totale") 
+
+# 06. Âge de l'arbre et hauteur du tronc par quartier
+ggplot(data, aes(x = age_estim, y = haut_tronc, color = clc_quartier)) +
+  geom_point() +
+  ggtitle("Hauteur du tronc en fonction de l'âge estimé par quartier") +
+  xlab("Âge estimé") +
+  ylab("Hauteur du tronc") 
+
+# 07. Âge de l'arbre et diamètre du tronc par quartier
+ggplot(data, aes(x = age_estim, y = tronc_diam, color = clc_quartier)) +
+  geom_point() +
+  ggtitle("Diamètre du tronc en fonction de l'âge estimé par quartier") +
+  xlab("Âge estimé") +
+  ylab("Diamètre du tronc") 
+
+# 08. Quartier et hauteur totale
+ggplot(data, aes(x = clc_quartier, y = haut_tot, color = clc_quartier)) +
+  geom_point() +
+  ggtitle("Hauteur totale en fonction du quartier") +
+  xlab("Quartier") +
+  ylab("Hauteur totale") +
+  theme(axis.text.x = element_blank()) # enlève les valeurs sur l'axe des X
+
+# 09. Quartier et hauteur du tronc
+ggplot(data, aes(x = clc_quartier, y = haut_tronc, color = clc_quartier)) +
+  geom_point() +
+  ggtitle("Hauteur du tronc en fonction du quartier") +
+  xlab("Quartier") +
+  ylab("Hauteur du tronc") +
+  theme(axis.text.x = element_blank()) # enlève les valeurs sur l'axe des X
+
+# 10. Quartier et diamètre du tronc
+ggplot(data, aes(x = clc_quartier, y = tronc_diam, color = clc_quartier)) +
+  geom_point() +
+  ggtitle("Diamètre du tronc en fonction du quartier") +
+  xlab("Quartier") +
+  ylab("Diamètre du tronc") +
+  theme(axis.text.x = element_blank()) # enlève les valeurs sur l'axe des X
+
+
+# | ========================================================================= |
+# |======| On cherche des corélations en fonction du type de feuillage |======|
+# | ========================================================================= |
+
+
+
+# 01. Répartition des données par type de feuillage
+ggplot(data, aes(x = X, y = Y, color = feuillage)) +
+  geom_point() +
+  ggtitle("Répartition des données par type de feuillage") +
+  xlab("X") +
+  ylab("Y")
+
+# 02. Date de plantation et âge estimé par type de feuillage
+ggplot(data, aes(x = dte_plantation, y = age_estim, color = feuillage)) +
+  geom_point() +
+  ggtitle("Âge estimé en fonction de la date de plantation par type de feuillage") +
+  xlab("Date de plantation") +
+  ylab("Âge estimé")
+
+# 03. Type de feuillage et âge estimé
+ggplot(data, aes(x = feuillage, y = age_estim, color = feuillage)) +
+  geom_point() +
+  ggtitle("Âge estimé en fonction du type de feuillage") +
+  xlab("Type de feuillage") +
+  ylab("Âge estimé")
+
+# 04. Hauteur du tronc et diamètre du tronc par type de feuillage
+ggplot(data, aes(x = haut_tronc, y = tronc_diam, color = feuillage)) +
+  geom_point() +
+  ggtitle("Hauteur du tronc en fonction du diamètre du tronc par type de feuillage") +
+  xlab("Hauteur du tronc") +
+  ylab("Diamètre du tronc")
+
+# 05. Âge de l'arbre et hauteur totale par type de feuillage
+ggplot(data, aes(x = age_estim, y = haut_tot, color = feuillage)) +
+  geom_point() +
+  ggtitle("Hauteur totale en fonction de l'âge estimé par type de feuillage") +
+  xlab("Âge estimé") +
+  ylab("Hauteur totale")
+
+# 06. Âge de l'arbre et hauteur du tronc par type de feuillage
+ggplot(data, aes(x = age_estim, y = haut_tronc, color = feuillage)) +
+  geom_point() +
+  ggtitle("Hauteur du tronc en fonction de l'âge estimé par type de feuillage") +
+  xlab("Âge estimé") +
+  ylab("Hauteur du tronc")
+
+# 07. Âge de l'arbre et diamètre du tronc par type de feuillage
+ggplot(data, aes(x = age_estim, y = tronc_diam, color = feuillage)) +
+  geom_point() +
+  ggtitle("Diamètre du tronc en fonction de l'âge estimé par type de feuillage") +
+  xlab("Âge estimé") +
+  ylab("Diamètre du tronc")
+
+# 08. Type de feuillage et hauteur totale
+ggplot(data, aes(x = feuillage, y = haut_tot, color = feuillage)) +
+  geom_point() +
+  ggtitle("Hauteur totale en fonction du type de feuillage") +
+  xlab("Type de feuillage") +
+  ylab("Hauteur totale")
+
+# 09. Type de feuillage et hauteur du tronc
+ggplot(data, aes(x = feuillage, y = haut_tronc, color = feuillage)) +
+  geom_point() +
+  ggtitle("Hauteur du tronc en fonction du type de feuillage") +
+  xlab("Type de feuillage") +
+  ylab("Hauteur du tronc")
+
+# 10. Type de feuillage et diamètre du tronc
+ggplot(data, aes(x = feuillage, y = tronc_diam, color = feuillage)) +
+  geom_point() +
+  ggtitle("Diamètre du tronc en fonction du type de feuillage") +
+  xlab("Type de feuillage") +
+  ylab("Diamètre du tronc")
+
+
+
+# | =============================================================== |
+# |======| On cherche des corélations en fonction de villeca |======|
+# | =============================================================== |
+
+
+
+# 01. Répartition des données par ville
+ggplot(data, aes(x = X, y = Y, color = villeca)) +
+  geom_point() +
+  ggtitle("Répartition des données par ville") +
+  xlab("X") +
+  ylab("Y")
+
+# 02. Date de plantation et âge estimé par ville
+ggplot(data, aes(x = dte_plantation, y = age_estim, color = villeca)) +
+  geom_point() +
+  ggtitle("Âge estimé en fonction de la date de plantation par ville") +
+  xlab("Date de plantation") +
+  ylab("Âge estimé")
+
+# 03. Ville et âge estimé
+ggplot(data, aes(x = villeca, y = age_estim, color = villeca)) +
+  geom_point() +
+  ggtitle("Âge estimé en fonction de la ville") +
+  xlab("Ville") +
+  ylab("Âge estimé")
+
+# 04. Hauteur du tronc et diamètre du tronc par ville
+ggplot(data, aes(x = haut_tronc, y = tronc_diam, color = villeca)) +
+  geom_point() +
+  ggtitle("Hauteur du tronc en fonction du diamètre du tronc par ville") +
+  xlab("Hauteur du tronc") +
+  ylab("Diamètre du tronc")
+
+# 05. Âge de l'arbre et hauteur totale par ville
+ggplot(data, aes(x = age_estim, y = haut_tot, color = villeca)) +
+  geom_point() +
+  ggtitle("Hauteur totale en fonction de l'âge estimé par ville") +
+  xlab("Âge estimé") +
+  ylab("Hauteur totale")
+
+# 06. Âge de l'arbre et hauteur du tronc par ville
+ggplot(data, aes(x = age_estim, y = haut_tronc, color = villeca)) +
+  geom_point() +
+  ggtitle("Hauteur du tronc en fonction de l'âge estimé par ville") +
+  xlab("Âge estimé") +
+  ylab("Hauteur du tronc")
+
+# 07. Âge de l'arbre et diamètre du tronc par ville
+ggplot(data, aes(x = age_estim, y = tronc_diam, color = villeca)) +
+  geom_point() +
+  ggtitle("Diamètre du tronc en fonction de l'âge estimé par ville") +
+  xlab("Âge estimé") +
+  ylab("Diamètre du tronc")
+
+# 08. Ville et hauteur totale
+ggplot(data, aes(x = villeca, y = haut_tot, color = villeca)) +
+  geom_point() +
+  ggtitle("Hauteur totale en fonction de la ville") +
+  xlab("Ville") +
+  ylab("Hauteur totale")
+
+# 09. Ville et hauteur du tronc
+ggplot(data, aes(x = villeca, y = haut_tronc, color = villeca)) +
+  geom_point() +
+  ggtitle("Hauteur du tronc en fonction de la ville") +
+  xlab("Ville") +
+  ylab("Hauteur du tronc")
+
+# 10. Ville et diamètre du tronc
+ggplot(data, aes(x = villeca, y = tronc_diam, color = villeca)) +
+  geom_point() +
+  ggtitle("Diamètre du tronc en fonction de la ville") +
+  xlab("Ville") +
+  ylab("Diamètre du tronc")
+
+
+
+# | =================================================================== |
+# |======| On cherche des corélations en fonction du type de sol |======|
+# | =================================================================== |
+
+
+
+# 01. Répartition des données par type de sol
+ggplot(data, aes(x = X, y = Y, color = fk_pied)) +
+  geom_point() +
+  ggtitle("Répartition des données par type de sol") +
+  xlab("X") +
+  ylab("Y")
+
+# 02. Date de plantation et âge estimé par type de sol
+ggplot(data, aes(x = dte_plantation, y = age_estim, color = fk_pied)) +
+  geom_point() +
+  ggtitle("Âge estimé en fonction de la date de plantation par type de sol") +
+  xlab("Date de plantation") +
+  ylab("Âge estimé")
+
+# 03. Type de sol et âge estimé
+ggplot(data, aes(x = fk_pied, y = age_estim, color = fk_pied)) +
+  geom_point() +
+  ggtitle("Âge estimé en fonction du type de sol") +
+  xlab("Type de sol") +
+  ylab("Âge estimé")
+
+# 04. Hauteur du tronc et diamètre du tronc par type de sol
+ggplot(data, aes(x = haut_tronc, y = tronc_diam, color = fk_pied)) +
+  geom_point() +
+  ggtitle("Hauteur du tronc en fonction du diamètre du tronc par type de sol") +
+  xlab("Hauteur du tronc") +
+  ylab("Diamètre du tronc")
+
+# 05. Âge de l'arbre et hauteur totale par type de sol
+ggplot(data, aes(x = age_estim, y = haut_tot, color = fk_pied)) +
+  geom_point() +
+  ggtitle("Hauteur totale en fonction de l'âge estimé par type de sol") +
+  xlab("Âge estimé") +
+  ylab("Hauteur totale")
+
+# 06. Âge de l'arbre et hauteur du tronc par type de sol
+ggplot(data, aes(x = age_estim, y = haut_tronc, color = fk_pied)) +
+  geom_point() +
+  ggtitle("Hauteur du tronc en fonction de l'âge estimé par type de sol") +
+  xlab("Âge estimé") +
+  ylab("Hauteur du tronc")
+
+# 07. Âge de l'arbre et diamètre du tronc par type de sol
+ggplot(data, aes(x = age_estim, y = tronc_diam, color = fk_pied)) +
+  geom_point() +
+  ggtitle("Diamètre du tronc en fonction de l'âge estimé par type de sol") +
+  xlab("Âge estimé") +
+  ylab("Diamètre du tronc")
+
+# 08. Type de sol et hauteur totale
+ggplot(data, aes(x = fk_pied, y = haut_tot, color = fk_pied)) +
+  geom_point() +
+  ggtitle("Hauteur totale en fonction du type de sol") +
+  xlab("Type de sol") +
+  ylab("Hauteur totale")
+
+# 09. Type de sol et hauteur du tronc
+ggplot(data, aes(x = fk_pied, y = haut_tronc, color = fk_pied)) +
+  geom_point() +
+  ggtitle("Hauteur du tronc en fonction du type de sol") +
+  xlab("Type de sol") +
+  ylab("Hauteur du tronc")
+
+# 10. Type de sol et diamètre du tronc
+ggplot(data, aes(x = fk_pied, y = tronc_diam, color = fk_pied)) +
+  geom_point() +
+  ggtitle("Diamètre du tronc en fonction du type de sol") +
+  xlab("Type de sol") +
+  ylab("Diamètre du tronc")
+
+
+
+# | ================================================================== |
+# |======| On cherche des corélations en fonction du revètement |======|
+# | ================================================================== |
+
+
+
+# 01. Répartition des données par revêtement
+ggplot(data, aes(x = X, y = Y, color = fk_revetement)) +
+  geom_point() +
+  ggtitle("Répartition des données par revêtement") +
+  xlab("X") +
+  ylab("Y")
+
+# 02. Date de plantation et âge estimé par revêtement
+ggplot(data, aes(x = dte_plantation, y = age_estim, color = fk_revetement)) +
+  geom_point() +
+  ggtitle("Âge estimé en fonction de la date de plantation par revêtement") +
+  xlab("Date de plantation") +
+  ylab("Âge estimé")
+
+# 03. Revêtement et âge estimé
+ggplot(data, aes(x = fk_revetement, y = age_estim, color = fk_revetement)) +
+  geom_point() +
+  ggtitle("Âge estimé en fonction de la présence de revêtement") +
+  xlab("Présence de revêtement") +
+  ylab("Âge estimé")
+
+# 04. Hauteur du tronc et diamètre du tronc par revêtement
+ggplot(data, aes(x = haut_tronc, y = tronc_diam, color = fk_revetement)) +
+  geom_point() +
+  ggtitle("Hauteur du tronc en fonction du diamètre du tronc par revêtement") +
+  xlab("Hauteur du tronc") +
+  ylab("Diamètre du tronc")
+
+# 05. Âge de l'arbre et hauteur totale par revêtement
+ggplot(data, aes(x = age_estim, y = haut_tot, color = fk_revetement)) +
+  geom_point() +
+  ggtitle("Hauteur totale en fonction de l'âge estimé par revêtement") +
+  xlab("Âge estimé") +
+  ylab("Hauteur totale")
+
+# 06. Âge de l'arbre et hauteur du tronc par revêtement
+ggplot(data, aes(x = age_estim, y = haut_tronc, color = fk_revetement)) +
+  geom_point() +
+  ggtitle("Hauteur du tronc en fonction de l'âge estimé par revêtement") +
+  xlab("Âge estimé") +
+  ylab("Hauteur du tronc")
+
+# 07. Âge de l'arbre et diamètre du tronc par revêtement
+ggplot(data, aes(x = age_estim, y = tronc_diam, color = fk_revetement)) +
+  geom_point() +
+  ggtitle("Diamètre du tronc en fonction de l'âge estimé par revêtement") +
+  xlab("Âge estimé") +
+  ylab("Diamètre du tronc")
+
+# 08. Revêtement et hauteur totale
+ggplot(data, aes(x = fk_revetement, y = haut_tot, color = fk_revetement)) +
+  geom_point() +
+  ggtitle("Hauteur totale en fonction de la présence de revêtement") +
+  xlab("Présence de revêtement") +
+  ylab("Hauteur totale")
+
+# 09. Revêtement et hauteur du tronc
+ggplot(data, aes(x = fk_revetement, y = haut_tronc, color = fk_revetement)) +
+  geom_point() +
+  ggtitle("Hauteur du tronc en fonction de la présence de revêtement") +
+  xlab("Présence de revêtement") +
+  ylab("Hauteur du tronc")
+
+# 10. Revêtement et diamètre du tronc
+ggplot(data, aes(x = fk_revetement, y = tronc_diam, color = fk_revetement)) +
+  geom_point() +
+  ggtitle("Diamètre du tronc en fonction de la présence de revêtement") +
+  xlab("Présence de revêtement") +
+  ylab("Diamètre du tronc")
+
+
+
+# | ============================================================================= |
+# |======| On cherche des corélations en fonction du caractère remarquable |======|
+# | ============================================================================= |
+
+
+
+# 01. Répartition des données par caractère remarquable
+ggplot(data, aes(x = X, y = Y, color = remarquable)) +
+  geom_point() +
+  ggtitle("Répartition des données par caractère remarquable") +
+  xlab("X") +
+  ylab("Y")
+
+# 02. Date de plantation et âge estimé par caractère remarquable
+ggplot(data, aes(x = dte_plantation, y = age_estim, color = remarquable)) +
+  geom_point() +
+  ggtitle("Âge estimé en fonction de la date de plantation par caractère remarquable") +
+  xlab("Date de plantation") +
+  ylab("Âge estimé")
+
+# 03. Caractère remarquable et âge estimé
+ggplot(data, aes(x = remarquable, y = age_estim, color = remarquable)) +
+  geom_point() +
+  ggtitle("Âge estimé en fonction du caractère remarquable") +
+  xlab("Caractère remarquable") +
+  ylab("Âge estimé")
+
+# 04. Hauteur du tronc et diamètre du tronc par caractère remarquable
+ggplot(data, aes(x = haut_tronc, y = tronc_diam, color = remarquable)) +
+  geom_point() +
+  ggtitle("Hauteur du tronc en fonction du diamètre du tronc par caractère remarquable") +
+  xlab("Hauteur du tronc") +
+  ylab("Diamètre du tronc")
+
+# 05. Âge de l'arbre et hauteur totale par caractère remarquable
+ggplot(data, aes(x = age_estim, y = haut_tot, color = remarquable)) +
+  geom_point() +
+  ggtitle("Hauteur totale en fonction de l'âge estimé par caractère remarquable") +
+  xlab("Âge estimé") +
+  ylab("Hauteur totale")
+
+# 06. Âge de l'arbre et hauteur du tronc par caractère remarquable
+ggplot(data, aes(x = age_estim, y = haut_tronc, color = remarquable)) +
+  geom_point() +
+  ggtitle("Hauteur du tronc en fonction de l'âge estimé par caractère remarquable") +
+  xlab("Âge estimé") +
+  ylab("Hauteur du tronc")
+
+# 07. Âge de l'arbre et diamètre du tronc par caractère remarquable
+ggplot(data, aes(x = age_estim, y = tronc_diam, color = remarquable)) +
+  geom_point() +
+  ggtitle("Diamètre du tronc en fonction de l'âge estimé par caractère remarquable") +
+  xlab("Âge estimé") +
+  ylab("Diamètre du tronc")
+
+# 08. Caractère remarquable et hauteur totale
+ggplot(data, aes(x = remarquable, y = haut_tot, color = remarquable)) +
+  geom_point() +
+  ggtitle("Hauteur totale en fonction du caractère remarquable") +
+  xlab("Caractère remarquable") +
+  ylab("Hauteur totale")
+
+# 09. Caractère remarquable et hauteur du tronc
+ggplot(data, aes(x = remarquable, y = haut_tronc, color = remarquable)) +
+  geom_point() +
+  ggtitle("Hauteur du tronc en fonction du caractère remarquable") +
+  xlab("Caractère remarquable") +
+  ylab("Hauteur du tronc")
+
+# 10. Caractère remarquable et diamètre du tronc
+ggplot(data, aes(x = remarquable, y = tronc_diam, color = remarquable)) +
+  geom_point() +
+  ggtitle("Diamètre du tronc en fonction du caractère remarquable") +
+  xlab("Caractère remarquable") +
+  ylab("Diamètre du tronc")
