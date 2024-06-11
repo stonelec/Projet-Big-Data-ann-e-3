@@ -8,41 +8,7 @@ data <- read.csv(file = "./Big_data/Patrimoine_Arboré_(RO).csv", header = TRUE,
 
 # Charger les bibliothèques nécessaires
 library(ggplot2)
-
-
-
-# | ========================================================== |
-# |======| Voir si des arbes sont trop loin de la ville |======|
-# | ========================================================== |
-
-
-
-numeric_data <- data[!is.na(as.numeric(data$X)) & !is.na(as.numeric(data$Y)), ]
-
-if (nrow(numeric_data) > 0) {
-  moy_X <- mean(as.numeric(numeric_data$X))
-  moy_Y <- mean(as.numeric(numeric_data$Y))
-}
-
-# Fonction pour créer les coordonnées d'un cercle
-create_circle <- function(center_x, center_y, radius, n_points = 100) {
-  t <- seq(0, 2*pi, length.out = n_points)
-  x <- center_x + radius * cos(t)
-  y <- center_y + radius * sin(t)
-  return(data.frame(x = x, y = y))
-}
-
-# Créer les coordonnées du cercle
-circle_data <- create_circle(moy_X, moy_Y, 4500)
-
-# Créer le graphique avec toutes les données et le cercle
-ggplot(data, aes(x = X, y = Y)) +
-  geom_point() +  # Afficher les points des données
-  geom_path(data = circle_data, aes(x = x, y = y), color = "red") +  # Tracer le cercle
-  ggtitle("Répartition des données avec cercle") +
-  xlab("X") +
-  ylab("Y")
-
+library(dplyr)
 
 
 # | ============================================================================== |
@@ -51,27 +17,7 @@ ggplot(data, aes(x = X, y = Y)) +
 
 
 
-# 01. Sur la position
-ggplot(data, aes(x = X, y = Y, color = fk_stadedev)) +
-  geom_point() +
-  ggtitle("Répartition des données par classification d'âge") +
-  xlab("X") +
-  ylab("Y")
 
-# 02. Age de l'arbre et date de plantation
-ggplot(data, aes(x=dte_plantation, y=age_estim, color = fk_stadedev))+
-  geom_point() +
-  ggtitle("Age estimé en fonction de la date de plantation") +
-  xlab("Date de plantation") +
-  ylab("Age estim") +
-  theme(axis.text.x = element_blank()) # enlève les valeurs sur l'axe des X
-
-# 03. Stade de développement et date de plantation
-ggplot(data, aes(x=fk_stadedev, y=age_estim, color = fk_stadedev))+
-  geom_point() +
-  ggtitle("Age estimé en fonction du stade de développement") +
-  xlab("Stade de développement") +
-  ylab("Age estim")
 
 # 04. Hauteur du tronc et diamètre du tronc
 ggplot(data, aes(x=haut_tronc, y=tronc_diam, color = fk_stadedev)) +
@@ -81,11 +27,7 @@ ggplot(data, aes(x=haut_tronc, y=tronc_diam, color = fk_stadedev)) +
   ylab("Diamètre du tronc")
 
 # 05. Age de l'arbre et hauteur totale
-ggplot(data, aes(x=age_estim, y=haut_tot, color = fk_stadedev))+
-  geom_point() +
-  ggtitle("Hauteur totale en fonction de l'âge estimé") +
-  xlab("Age estim") +
-  ylab("Hauteur totale")
+
 
 # 06. Age de l'arbre et hauteur tronc
 ggplot(data, aes(x=age_estim, y=haut_tronc, color = fk_stadedev))+
@@ -131,11 +73,7 @@ ggplot(data, aes(x=fk_stadedev, y=tronc_diam, color = fk_stadedev))+
 
 
 # 01. Répartition des données par forme de l'arbre
-ggplot(data, aes(x = X, y = Y, color = fk_port)) +
-  geom_point() +
-  ggtitle("Répartition des données par forme de l'arbre") +
-  xlab("X") +
-  ylab("Y")
+
 
 # 02. Âge de l'arbre et date de plantation en fonction de la forme de l'arbre
 ggplot(data, aes(x = dte_plantation, y = age_estim, color = fk_port)) +
@@ -212,11 +150,7 @@ ggplot(data, aes(x = fk_port, y = tronc_diam, color = fk_port)) +
 # | ================================================================== |
 
 # 01. Répartition des données par quartier
-ggplot(data, aes(x = X, y = Y, color = clc_quartier)) +
-  geom_point() +
-  ggtitle("Répartition des données par quartier") +
-  xlab("X") +
-  ylab("Y") 
+
 
 # 02. Quartier et date de plantation
 ggplot(data, aes(x = dte_plantation, y = age_estim, color = clc_quartier)) +
@@ -293,18 +227,15 @@ ggplot(data, aes(x = clc_quartier, y = tronc_diam, color = clc_quartier)) +
 
 
 # 01. Répartition des données par type de feuillage
-ggplot(data, aes(x = X, y = Y, color = feuillage)) +
-  geom_point() +
-  ggtitle("Répartition des données par type de feuillage") +
-  xlab("X") +
-  ylab("Y")
+
 
 # 02. Date de plantation et âge estimé par type de feuillage
 ggplot(data, aes(x = dte_plantation, y = age_estim, color = feuillage)) +
   geom_point() +
   ggtitle("Âge estimé en fonction de la date de plantation par type de feuillage") +
   xlab("Date de plantation") +
-  ylab("Âge estimé")
+  ylab("Âge estimé") +
+  theme(axis.text.x = element_blank()) # enlève les valeurs sur l'axe des X
 
 # 03. Type de feuillage et âge estimé
 ggplot(data, aes(x = feuillage, y = age_estim, color = feuillage)) +
@@ -371,18 +302,15 @@ ggplot(data, aes(x = feuillage, y = tronc_diam, color = feuillage)) +
 
 
 # 01. Répartition des données par ville
-ggplot(data, aes(x = X, y = Y, color = villeca)) +
-  geom_point() +
-  ggtitle("Répartition des données par ville") +
-  xlab("X") +
-  ylab("Y")
+
 
 # 02. Date de plantation et âge estimé par ville
 ggplot(data, aes(x = dte_plantation, y = age_estim, color = villeca)) +
   geom_point() +
   ggtitle("Âge estimé en fonction de la date de plantation par ville") +
   xlab("Date de plantation") +
-  ylab("Âge estimé")
+  ylab("Âge estimé") +
+  theme(axis.text.x = element_blank()) # enlève les valeurs sur l'axe des X
 
 # 03. Ville et âge estimé
 ggplot(data, aes(x = villeca, y = age_estim, color = villeca)) +
@@ -449,25 +377,23 @@ ggplot(data, aes(x = villeca, y = tronc_diam, color = villeca)) +
 
 
 # 01. Répartition des données par type de sol
-ggplot(data, aes(x = X, y = Y, color = fk_pied)) +
-  geom_point() +
-  ggtitle("Répartition des données par type de sol") +
-  xlab("X") +
-  ylab("Y")
+
 
 # 02. Date de plantation et âge estimé par type de sol
 ggplot(data, aes(x = dte_plantation, y = age_estim, color = fk_pied)) +
   geom_point() +
   ggtitle("Âge estimé en fonction de la date de plantation par type de sol") +
   xlab("Date de plantation") +
-  ylab("Âge estimé")
+  ylab("Âge estimé") +
+  theme(axis.text.x = element_blank()) # enlève les valeurs sur l'axe des X
 
 # 03. Type de sol et âge estimé
 ggplot(data, aes(x = fk_pied, y = age_estim, color = fk_pied)) +
   geom_point() +
   ggtitle("Âge estimé en fonction du type de sol") +
   xlab("Type de sol") +
-  ylab("Âge estimé")
+  ylab("Âge estimé") +
+  theme(axis.text.x = element_blank()) # enlève les valeurs sur l'axe des X
 
 # 04. Hauteur du tronc et diamètre du tronc par type de sol
 ggplot(data, aes(x = haut_tronc, y = tronc_diam, color = fk_pied)) +
@@ -502,43 +428,43 @@ ggplot(data, aes(x = fk_pied, y = haut_tot, color = fk_pied)) +
   geom_point() +
   ggtitle("Hauteur totale en fonction du type de sol") +
   xlab("Type de sol") +
-  ylab("Hauteur totale")
+  ylab("Hauteur totale") +
+  theme(axis.text.x = element_blank()) # enlève les valeurs sur l'axe des X
 
 # 09. Type de sol et hauteur du tronc
 ggplot(data, aes(x = fk_pied, y = haut_tronc, color = fk_pied)) +
   geom_point() +
   ggtitle("Hauteur du tronc en fonction du type de sol") +
   xlab("Type de sol") +
-  ylab("Hauteur du tronc")
+  ylab("Hauteur du tronc") +
+  theme(axis.text.x = element_blank()) # enlève les valeurs sur l'axe des X
 
 # 10. Type de sol et diamètre du tronc
 ggplot(data, aes(x = fk_pied, y = tronc_diam, color = fk_pied)) +
   geom_point() +
   ggtitle("Diamètre du tronc en fonction du type de sol") +
   xlab("Type de sol") +
-  ylab("Diamètre du tronc")
+  ylab("Diamètre du tronc") +
+  theme(axis.text.x = element_blank()) # enlève les valeurs sur l'axe des X
 
 
 
 # | ================================================================== |
-# |======| On cherche des corélations en fonction du revètement |======|
+# |======| On cherche des corélations en fonction du revêtement |======|
 # | ================================================================== |
 
 
 
 # 01. Répartition des données par revêtement
-ggplot(data, aes(x = X, y = Y, color = fk_revetement)) +
-  geom_point() +
-  ggtitle("Répartition des données par revêtement") +
-  xlab("X") +
-  ylab("Y")
+
 
 # 02. Date de plantation et âge estimé par revêtement
 ggplot(data, aes(x = dte_plantation, y = age_estim, color = fk_revetement)) +
   geom_point() +
   ggtitle("Âge estimé en fonction de la date de plantation par revêtement") +
   xlab("Date de plantation") +
-  ylab("Âge estimé")
+  ylab("Âge estimé") +
+  theme(axis.text.x = element_blank()) # enlève les valeurs sur l'axe des X
 
 # 03. Revêtement et âge estimé
 ggplot(data, aes(x = fk_revetement, y = age_estim, color = fk_revetement)) +
@@ -604,6 +530,9 @@ ggplot(data, aes(x = fk_revetement, y = tronc_diam, color = fk_revetement)) +
 
 
 
+n_occur <- data.frame(table(data$remarquable))
+n_occur[n_occur$Freq > 1,]                       #  110 -> oui /// 11 290 -> non
+
 # 01. Répartition des données par caractère remarquable
 ggplot(data, aes(x = X, y = Y, color = remarquable)) +
   geom_point() +
@@ -616,7 +545,8 @@ ggplot(data, aes(x = dte_plantation, y = age_estim, color = remarquable)) +
   geom_point() +
   ggtitle("Âge estimé en fonction de la date de plantation par caractère remarquable") +
   xlab("Date de plantation") +
-  ylab("Âge estimé")
+  ylab("Âge estimé") +
+  theme(axis.text.x = element_blank()) # enlève les valeurs sur l'axe des X
 
 # 03. Caractère remarquable et âge estimé
 ggplot(data, aes(x = remarquable, y = age_estim, color = remarquable)) +
@@ -673,3 +603,141 @@ ggplot(data, aes(x = remarquable, y = tronc_diam, color = remarquable)) +
   ggtitle("Diamètre du tronc en fonction du caractère remarquable") +
   xlab("Caractère remarquable") +
   ylab("Diamètre du tronc")
+
+
+
+# | ==================================================================== |
+# |======| On cherche des corélations en fonction de la situation |======|
+# | ==================================================================== |
+
+
+
+# 01. Répartition des données par situation
+ggplot(data, aes(x = X, y = Y, color = fk_situation)) +
+  geom_point() +
+  ggtitle("Répartition des données par situation") +
+  xlab("X") +
+  ylab("Y")
+
+# 02. Date de plantation et âge estimé par situation
+ggplot(data, aes(x = dte_plantation, y = age_estim, color = fk_situation)) +
+  geom_point() +
+  ggtitle("Âge estimé en fonction de la date de plantation par situation") +
+  xlab("Date de plantation") +
+  ylab("Âge estimé") +
+  theme(axis.text.x = element_blank()) # enlève les valeurs sur l'axe des X
+
+# 03. Situation et âge estimé
+ggplot(data, aes(x = fk_situation, y = age_estim, color = fk_situation)) +
+  geom_point() +
+  ggtitle("Âge estimé en fonction de la présence de revêtement") +
+  xlab("Présence de revêtement") +
+  ylab("Âge estimé")
+
+# 04. Hauteur du tronc et diamètre du tronc par situation
+ggplot(data, aes(x = haut_tronc, y = tronc_diam, color = fk_situation)) +
+  geom_point() +
+  ggtitle("Hauteur du tronc en fonction du diamètre du tronc par situation") +
+  xlab("Hauteur du tronc") +
+  ylab("Diamètre du tronc")
+
+# 05. Âge de l'arbre et hauteur totale par situation
+ggplot(data, aes(x = age_estim, y = haut_tot, color = fk_situation)) +
+  geom_point() +
+  ggtitle("Hauteur totale en fonction de l'âge estimé par situation") +
+  xlab("Âge estimé") +
+  ylab("Hauteur totale")
+
+# 06. Âge de l'arbre et hauteur du tronc par situation
+ggplot(data, aes(x = age_estim, y = haut_tronc, color = fk_situation)) +
+  geom_point() +
+  ggtitle("Hauteur du tronc en fonction de l'âge estimé par situation") +
+  xlab("Âge estimé") +
+  ylab("Hauteur du tronc")
+
+# 07. Âge de l'arbre et diamètre du tronc par situation
+ggplot(data, aes(x = age_estim, y = tronc_diam, color = fk_situation)) +
+  geom_point() +
+  ggtitle("Diamètre du tronc en fonction de l'âge estimé par situation") +
+  xlab("Âge estimé") +
+  ylab("Diamètre du tronc")
+
+# 08. Situation et hauteur totale
+ggplot(data, aes(x = fk_situation, y = haut_tot, color = fk_situation)) +
+  geom_point() +
+  ggtitle("Hauteur totale en fonction de la présence de revêtement") +
+  xlab("Présence de revêtement") +
+  ylab("Hauteur totale")
+
+# 09. Situation et hauteur du tronc
+ggplot(data, aes(x = fk_situation, y = haut_tronc, color = fk_situation)) +
+  geom_point() +
+  ggtitle("Hauteur du tronc en fonction de la présence de revêtement") +
+  xlab("Présence de revêtement") +
+  ylab("Hauteur du tronc")
+
+# 10. Situation et diamètre du tronc
+ggplot(data, aes(x = fk_situation, y = tronc_diam, color = fk_situation)) +
+  geom_point() +
+  ggtitle("Diamètre du tronc en fonction de la présence de revêtement") +
+  xlab("Présence de revêtement") +
+  ylab("Diamètre du tronc")
+
+
+
+# | =========================================================================== |
+# |======| On cherche des corélations entre différentes caractéristiques |======|
+# | =========================================================================== |
+
+
+
+# A-- Voir la répartition en fonction du stade dans chaque villeca
+# Création d'un nouveau dataframe contenant le compte des occurrences pour chaque combinaison de valeurs
+counts_stade_ville <- data %>%
+  group_by(fk_stadedev, villeca) %>%
+  summarize(counts_stade_ville = n())
+
+# Création du graphique
+ggplot(counts_stade_ville, aes(x = fk_stadedev, y = villeca)) +
+  geom_tile(aes(fill = counts_stade_ville)) +
+  geom_text(aes(label = counts_stade_ville), color = "black") +
+  scale_fill_gradient(low = "white", high = "blue") +  # Dégradé de couleur pour les tuiles
+  ggtitle("Nombre de valeurs en fonction de l'intersection de fk_stadedev et villeca") +
+  xlab("fk_stadedev") +
+  ylab("villeca")
+
+
+
+# B-- Voir la répartition en fonction du stade dans chaque quartier
+# Création d'un nouveau dataframe contenant le compte des occurrences pour chaque combinaison de valeurs
+counts_stade_quartier <- data %>%
+  group_by(fk_stadedev, clc_quartier) %>%
+  summarize(counts_stade_quartier = n())
+
+# Création du graphique
+ggplot(counts_stade_quartier, aes(x = fk_stadedev, y = clc_quartier)) +
+  geom_tile(aes(fill = counts_stade_quartier)) +
+  geom_text(aes(label = counts_stade_quartier), color = "black") +
+  scale_fill_gradient(low = "white", high = "blue") +  # Dégradé de couleur pour les tuiles
+  ggtitle("Nombre de valeurs en fonction de l'intersection de fk_stadedev et clc_quartier") +
+  xlab("fk_stadedev") +
+  ylab("Quartier") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+
+# C-- Voir la répartition en fonction du stade pour chaque situation
+# Création d'un nouveau dataframe contenant le compte des occurrences pour chaque combinaison de valeurs
+counts_stade_situation <- data %>%
+  group_by(fk_stadedev, fk_situation) %>%
+  summarize(counts_stade_situation = n())
+
+# Création du graphique
+ggplot(counts_stade_situation, aes(x = fk_stadedev, y = fk_situation)) +
+  geom_tile(aes(fill = counts_stade_situation)) +
+  geom_text(aes(label = counts_stade_situation), color = "black") +
+  scale_fill_gradient(low = "white", high = "blue") +  # Dégradé de couleur pour les tuiles
+  ggtitle("Nombre de valeurs en fonction de l'intersection de fk_stadedev et fk_situation") +
+  xlab("fk_stadedev") +
+  ylab("fk_situation") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
