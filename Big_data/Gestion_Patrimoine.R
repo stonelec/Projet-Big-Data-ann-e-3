@@ -132,121 +132,26 @@ for (i in 1:nrow(data)) {
 # ---------------------------------------- Remplir vide par NA  ----------------------------------------
 # ------------------------------------------------------------------------------------------------------
 
-var <- 0
+columns <- c("X","Y","OBJECTID","src_geo","clc_quartier","clc_secteur","id_arbre","haut_tot",
+             "haut_tronc","tronc_diam","fk_arb_etat","fk_stadedev","fk_port","fk_pied","fk_situation","fk_revetement",
+             "commentaire_environnement","dte_plantation","age_estim","fk_prec_estim","clc_nbr_diag","dte_abattage",
+             "fk_nomtech","villeca","nomfrancais","nomlatin","GlobalID","feuillage")
 
-for (i in 1:nrow(data)) {
-  
-  var = var + 1
-    
-  # --------------------
-  # ----- POUR X : -----
-  # --------------------
-  
-  if(is.na(data$X[i])){
-    
-    print("On a un NA pour X : ")
-    print(var)
-    next
-    
-  }
-  
-  else if(data$X[i] == ""){
-    
-    data$X[i] <- NA
-    
-  }
-  
-  
-  # --------------------
-  # ----- POUR Y : -----
-  # --------------------
-  
-  if(is.na(data$Y[i])){
-    
-    print("On a un NA pour Y : ")
-    print(var)
-    next
-    
-  }
-  
-  else if(data$Y[i] == ""){
 
-    data$Y[i] <- NA
+for (col_name in columns) {
+  
+  for (i in 1:nrow(data)) {
     
+    if (is.na(data[[col_name]][i])) {
+    
+        next
+      
+    } else if (data[[col_name]][i] == "") {
+      
+      data[[col_name]][i] <- NA
+    
+    }
   }
-  
-  # ---------------------------
-  # ----- POUR OBJECTID : -----
-  # ---------------------------
-  
-  if(is.na(data$OBJECTID[i])){
-    
-    print("On a un NA pour OBJECTID : ")
-    print(var)
-    next
-    
-  }
-  
-  else if(data$OBJECTID[i] == ""){
-  
-    data$OBJECTID[i] <- NA
-    
-  }
-  
-  # --------------------------
-  # ----- POUR src_geo : -----
-  # --------------------------
-  
-  if(is.na(data$src_geo[i])){
-    
-    print("On a un NA pour src_geo : ")
-    print(var)
-    next
-    
-  }
-  
-  else if(data$src_geo[i] == ""){
-    
-    data$src_geo[i] <- NA
-    
-  }
-  
-  # -------------------------------
-  # ----- POUR clc_quartier : -----
-  # -------------------------------
-  
-  if(is.na(data$clc_quartier[i])){
-    
-    print("On a un NA pour clc_quartier : ")
-    print(var)
-    next
-    
-  }
-  
-  else if(data$clc_quartier[i] == ""){
-    
-    data$clc_quartier[i] <- NA
-    
-  }
-  
-  # -------------------------------
-  # ----- POUR clc_secteur : -----
-  # -------------------------------
-  
-  if(is.na(data$clc_secteur[i])){
-    
-    print("On a un NA pour clc_secteur : ")
-    print(var)
-    next
-    
-  }
-  
-  else if(data$clc_secteur[i] == ""){
-    
-    data$clc_secteur[i] <- NA
-    
-  }
-  
 }
+View(data)
 
-#View(data)
