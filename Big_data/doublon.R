@@ -10,6 +10,9 @@ n_occur[n_occur$Freq > 1,]
 #0
 n_occur <- data.frame(table(data$id_arbre))
 n_occur[n_occur$Freq > 1,]
+
+n_occur <- data.frame(table(data$fk_arb_etat))
+n_occur[n_occur$Freq > 1,]
 #beacoup d'occurence
 
 #occurence porsition
