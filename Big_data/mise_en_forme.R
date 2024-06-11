@@ -1,6 +1,9 @@
 install.packages("stringr", repos='http://cran.us.r-project.org')
 library("stringr")
 data <- read.csv(file = "Patrimoine_Arboré_(RO).csv", header = TRUE, sep = ',', stringsAsFactors = TRUE)
+#-----------------------------------------------------------------------------------------------------
+#              MISE EN FORME DES DONNEES
+#-----------------------------------------------------------------------------------------------------
 #Enlevé majuscule & vérifier
 data$fk_stadedev <- data$fk_stadedev %>% str_to_lower()
 unique(data$fk_stadedev)
@@ -24,7 +27,10 @@ unique(data$fk_pied)
 data[ data == " "] <- ""
 unique(data)
 
-#alcul age avec date plantation
+#-----------------------------------------------------------------------------------------------------
+#              MISE A JOUR ET CALCUL AGE
+#-----------------------------------------------------------------------------------------------------
+#calcul age en fonction de la date de plantation
 calculate_age <- function(date_creation) {
        current_date <- Sys.Date()
        date_creation <- as.POSIXct(date_creation, format = "%Y/%m/%d %H:%M:%S") 
@@ -32,6 +38,7 @@ calculate_age <- function(date_creation) {
        age <- as.numeric(age_in_days) / 365.25
        return(age)
 }
+#mise à jour de l'age en fonction de la date de plnatation sinon du stade si pas d'age
 for (i in 1:nrow(data)) {
   if (is.na(data$age_estim[i])) { 
     if (is.na(data$dte_plantation[i])) { 
@@ -51,7 +58,7 @@ for (i in 1:nrow(data)) {
     }
   }
 }
-#calcul stade avec age
+#mise à jour du stade en fonction de l'age si pas de stade
 for (i in 1:nrow(data)) {
   if (is.na(data$age_estim[i])) { 
     if (data$fk_stadedev[i] == ""){
@@ -68,23 +75,36 @@ for (i in 1:nrow(data)) {
     }
   }
 }
-#supprimer collone
+#-----------------------------------------------------------------------------------------------------
+#              SUPPRIMER LES COLLONES D'ADMINISTRATION
+#-----------------------------------------------------------------------------------------------------
 library(dplyr)
 data <- select(data,-c(created_date, created_user, id_arbre, commentaire_environnement, last_edited_user, last_edited_date, CreationDate, Creator, EditDate, Editor, remarquable, nomlatin, nomfrancais))
 
-#supprime ligne
+
 #-----------------------------------------------------------------------------------------------------
-#              PROBLEM SUPPRIME PAS TOUTES LES LIGNES
+#              SUPPRIMER LES ARBES INCOHERENT
 #-----------------------------------------------------------------------------------------------------
-for (i in seq(nrow(data), 1, -1)) {#en sens inverse
-  if (is.na(data$fk_arb_etat[i]) || data$fk_arb_etat[i] == "" || data$fk_arb_etat[i] == " ") { 
+library(lubridate)
+for (i in seq(nrow(data), 1, -1)) {#parcourir en sens inverse
+  if (is.na(data$fk_arb_etat[i]) || data$fk_arb_etat[i] == "" || data$fk_arb_etat[i] == " ") {#les arbres sans états
     data <- data[-i,]
-  } else if (!is.na(data$age_estim[i]) && data$age_estim[i] == 2010) {
+  }
+  if (!is.na(data$age_estim[i]) && data$age_estim[i] == 2010) {#l'arbre avec un age de 2010 mais jeune
     data <- data[-i,]
-  }else if(data$fk_arb_etat[i] != "ABATTU" || data$fk_arb_etat[i] != "SUPPRIMÉ" || data$fk_arb_etat[i] != "REMPLACÉ" || data$fk_arb_etat[i] == "Essouché"){
+  }
+  if(data$fk_arb_etat[i] != "ABATTU" || data$fk_arb_etat[i] != "SUPPRIMÉ" || data$fk_arb_etat[i] != "REMPLACÉ" || data$fk_arb_etat[i] == "Essouché"){
     if (any(is.na(data[i, ])) || any(data[i, ] == "") || any(data[i, ] == " ")) { 
+      #data <- data[-i,]
+    }
+  }
+  if(data$fk_arb_etat[i] == "EN PLACE"){#les arbres EN PLACE avec une date d'abatage
+    print(hey)
+    if(data$dte_abattage[i] != " "){
+      print("spr")
       data <- data[-i,]
     }
+    
   }
 }
 
