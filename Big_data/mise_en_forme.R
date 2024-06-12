@@ -1,5 +1,5 @@
 library("stringr")
-data <- read.csv(file = "Patrimoine_Arboré_(RO).csv")
+data <- read.csv(file = "./Big_data/Patrimoine_Arboré_(RO).csv")
 #-----------------------------------------------------------------------------------------------------
 #              MISE EN FORME DES DONNEES
 #-----------------------------------------------------------------------------------------------------
@@ -93,7 +93,7 @@ for (i in 1:nrow(data)) {
 #              SUPPRIMER LES COLLONES D'ADMINISTRATION
 #-----------------------------------------------------------------------------------------------------
 library(dplyr)
-data <- select(data,-c(src_geo, created_date, created_user, id_arbre, commentaire_environnement,clc_nbr_diag, last_edited_user, last_edited_date, CreationDate, Creator, EditDate, Editor, remarquable, nomlatin, fk_nomtech, fk_prec_estim))
+data <- select(data,-c(src_geo, created_date, created_user, id_arbre, commentaire_environnement,clc_nbr_diag, last_edited_user, last_edited_date, CreationDate, Creator, EditDate, Editor, nomlatin, fk_nomtech, fk_prec_estim))
 
 
 #-----------------------------------------------------------------------------------------------------
