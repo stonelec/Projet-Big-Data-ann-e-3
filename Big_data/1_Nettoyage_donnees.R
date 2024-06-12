@@ -1,3 +1,5 @@
+# Librairies nécessaires au projet
+library(ggplot2)
 library(dplyr)
 library("stringr")
 data <- read.csv(file = "./Big_data/Patrimoine_Arboré_(RO).csv")
