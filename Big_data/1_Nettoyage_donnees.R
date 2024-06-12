@@ -1,6 +1,6 @@
 library(dplyr)
 library("stringr")
-data <- read.csv(file = "Patrimoine_Arboré_(RO).csv")
+data <- read.csv(file = "./Big_data/Patrimoine_Arboré_(RO).csv")
 #-----------------------------------------------------------------------------------------------------
 #              HARMONISATION
 #-----------------------------------------------------------------------------------------------------
@@ -49,7 +49,7 @@ data <- data %>%   filter(!(is.na(age_estim)))
 data <- data %>%   filter(!(is.na(haut_tot) | is.na(haut_tronc) | is.na(tronc_diam)))
 
 # SUPPRIMER les arbres avec hauteur total < hauteur tronc
-data <- data %>%   filter(!(haut_tot <haut_tronc))
+data <- data %>%   filter(!(haut_tot < haut_tronc))
 
 # SUPPRIMER les arbres sans nom
 data <- data %>%   filter(!(is.na(nomfrancais) ))
@@ -60,8 +60,11 @@ data <- data %>%   filter(!(is.na(nomfrancais) ))
 # SUPPRIMER les arbres sans clc_quartier
 #data <- data %>%   filter(!(is.na(clc_quartier)))
 
+# SUPPRIMER les arbres sans clc_secteur
+data <- data %>%   filter(!(is.na(clc_secteur)))
+
 # SUPPRIMER les arbres sans fk_revetement
-data <- data %>%   filter(!(is.na(fk_revetement)))
+#data <- data %>%   filter(!(is.na(fk_revetement)))
 
 # SUPPRIMER les arbres sans fk_stadedev
 data <- data %>%   filter(!(is.na(fk_stadedev)))
@@ -94,6 +97,9 @@ data <- data %>%  mutate(villeca = if_else(is.na(villeca), "cdq", villeca))
 #REMPLACER clc_quartier
 data <- data %>%  mutate(clc_quartier = if_else(is.na(clc_quartier), "périphérie", clc_quartier))
 
+#REMPLACER fk_revetement
+data <- data %>%  mutate(fk_revetement = if_else(is.na(fk_revetement), "inconu", fk_revetement))
+
 #REMPLACER fk_stadedev
 #data <- data %>%  mutate(fk_stadedev = if_else(is.na(fk_stadedev), "inconu", fk_stadedev))
 
@@ -116,7 +122,7 @@ data <- data %>%  mutate(dte_abattage = if_else(is.na(dte_abattage), "0", dte_ab
 data <- data %>%  mutate(feuillage = if_else(is.na(feuillage), "inconu", feuillage))
 
 #REMPLACER remarquable
-data <- data %>%  mutate(remarquable = if_else(is.na(remarquable), "non", remarquable))
+data <- data %>%  mutate(remarquable = if_else(is.na(remarquable), "Non", remarquable))
 
 #-----------------------------------------------------------------------------------------------------
 #              SUPPRIMER LES COLLONES EN TROP
@@ -140,3 +146,6 @@ resultat <- compter_na_et_vide(data)
 print(resultat)
 ncol(data)
 nrow(data)
+
+data_ia <- mutate_all(data, function(x) as.numeric(as.character(x)))
+data_ia <- lapply(data, function(x) {  if(is.factor(x)) as.numeric(as.character(x)) else x})
