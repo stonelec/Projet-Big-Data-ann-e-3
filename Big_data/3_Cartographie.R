@@ -2,6 +2,7 @@
 # |===================| Import des données |===================|
 # | ========================================================== |
 
+<<<<<<< HEAD:Big_data/Cartographie.R
 
 
 #data <- read.csv(file = "./Big_data/Patrimoine_Arboré_(RO).csv", header = TRUE, sep = ',', stringsAsFactors = TRUE)
@@ -10,11 +11,11 @@
 library(ggplot2)
 library(dplyr)
 
+=======
+>>>>>>> 51ae2032a25fe45f602780ff9decd4b62e8f02e9:Big_data/3_Cartographie.R
 # Déterminer les limites des axes 
 xlim <- range(c(data$X))
 ylim <- range(c(data$Y))
-
-
 
 # | ========================================================== |
 # |======| Voir si des arbes sont trop loin de la ville |======|
