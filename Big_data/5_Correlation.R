@@ -51,7 +51,7 @@ graphe_cor_haut_tronc_tot
 graphe_cor_haut_diam
 
 
-cor_matrix <- cor(data, method = "pearson")
+cor_matrix <- cor(data_ia, method = "pearson")
 print(cor_matrix)
 
 
@@ -64,11 +64,106 @@ print(cor_matrix)
 # Créer le tableau de contingence
 cont_dev_remar <- table(data$fk_stadedev,data$remarquable)
 # Tracer le graphique mozaïque
-mosaicplot(cont_dev_remar, main = "Graphique Mozaïque : Caractère Remarquable vs. Stade de Développement")
+mosaicplot(cont_dev_remar, main = "Graphique Mozaïque : Caractère Remarquable vs. Stade de Développement", color = TRUE)
+
+# ------------- Remarquable // Quartier -------------
+
+# Créer le tableau de contingence
+cont_quartier_remar <- table(data$clc_quartier,data$remarquable)
+# Tracer le graphique mozaïque
+mosaicplot(cont_quartier_remar, main = "Graphique Mozaïque : Caractère Remarquable vs. Quartier", las = 2, color = TRUE)
+
+# ------------- Remarquable // Feuillage -------------
+
+# Créer le tableau de contingence
+cont_feuill_remar <- table(data$feuillage,data$remarquable)
+# Tracer le graphique mozaïque
+mosaicplot(cont_feuill_remar, main = "Graphique Mozaïque : Caractère Remarquable vs. Feuillage", color = TRUE)
+
+# ------------- Remarquable // Situation -------------
+
+# Créer le tableau de contingence
+cont_situation_remar <- table(data$fk_situation,data$remarquable)
+# Tracer le graphique mozaïque
+mosaicplot(cont_situation_remar, main = "Graphique Mozaïque : Caractère Remarquable vs. Situation", color = TRUE)
+
+# ------------- Remarquable // Revetement -------------
+
+# Créer le tableau de contingence
+cont_revet_remar <- table(data$fk_revetement,data$remarquable)
+# Tracer le graphique mozaïque
+mosaicplot(cont_revet_remar, main = "Graphique Mozaïque : Caractère Remarquable vs. Revêtement", color = TRUE, xlab = "Revêtement", ylab = "Remarquable")
+
+
+
+# ------------- Feuillage // Stade de développement -------------
+
+# Créer le tableau de contingence
+cont_dev_feuill <- table(data$fk_stadedev,data$feuillage)
+# Tracer le graphique mozaïque
+mosaicplot(cont_dev_feuill, main = "Graphique Mozaïque : Type de feuillage vs. Stade de Développement", color = TRUE)
+
+# ------------- Feuillage // Quartier -------------
+
+# Créer le tableau de contingence
+cont_quartier_feuill <- table(data$clc_quartier,data$feuillage)
+# Tracer le graphique mozaïque
+mosaicplot(cont_quartier_feuill, main = "Graphique Mozaïque : Type de feuillage vs. Quartier", las = 2, color = TRUE)
+
+# ------------- Feuillage // Situation -------------
+
+# Créer le tableau de contingence
+cont_situation_feuill <- table(data$fk_situation,data$feuillage)
+# Tracer le graphique mozaïque
+mosaicplot(cont_situation_feuill, main = "Graphique Mozaïque : Type de feuillage vs. Situation", color = TRUE)
+
+# ------------- Feuillage // Revêtement -------------
+
+# Créer le tableau de contingence
+cont_revet_feuill <- table(data$feuillage,data$fk_revetement)
+# Tracer le graphique mozaïque
+mosaicplot(cont_revet_feuill, main = "Graphique Mozaïque : Type de feuillage vs. Revêtement", color = TRUE)
 
 
 
 
+# ------------- Quartier // Stade de développement -------------
+
+# Créer le tableau de contingence
+cont_quartier_dev <- table(data$clc_quartier,data$fk_stadedev)
+# Tracer le graphique mozaïque
+mosaicplot(cont_quartier_dev, main = "Graphique Mozaïque : Stade de développement vs. Quartier", las = 2, color = TRUE)
+
+# ------------------ Quartier // Situation ------------------
+
+# Créer le tableau de contingence
+cont_quartier_situation <- table(data$clc_quartier, data$fk_situation)
+# Tracer le graphique mozaïque 
+mosaicplot(cont_quartier_situation, main = "Graphique Mozaïque : Quartier vs. Situation", las = 2, color = TRUE)
+
+# ------------- Quartier // Revêtement -------------
+
+# Créer le tableau de contingence
+cont_quartier_revet <- table(data$clc_quartier,data$fk_revetement)
+# Tracer le graphique mozaïque
+mosaicplot(cont_quartier_revet, main = "Graphique Mozaïque : Revêtement vs. Quartier", las = 2, color = TRUE)
+
+
+
+# ------------------ Situation // Revêtement ------------------
+
+# Créer le tableau de contingence
+cont_situation_revet <- table(data$fk_situation, data$fk_revetement)
+# Tracer le graphique mozaïque 
+mosaicplot(cont_situation_revet, main = "Graphique Mozaïque : Revêtement vs. Situation", color = TRUE)
+
+
+# ------------------ Situation // Stade de développement ------------------
+
+# Créer le tableau de contingence
+cont_situation_dev <- table(data$fk_situation, data$fk_stadedev)
+# Tracer le graphique mozaïque 
+mosaicplot(cont_situation_dev, main = "Graphique Mozaïque : Stade de développement vs. Situation", color = TRUE)
 
 # | --------------------------------------------------- |
 # |------| Ecarts de moyennes entre deux groupes |------|
