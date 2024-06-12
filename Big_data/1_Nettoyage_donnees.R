@@ -4,6 +4,20 @@ library(dplyr)
 library("stringr")
 data <- read.csv(file = "./Big_data/Patrimoine_Arboré_(RO).csv")
 #-----------------------------------------------------------------------------------------------------
+#              AFFICHAGE VALEURS VIDES
+#-----------------------------------------------------------------------------------------------------
+compter_na_et_vide <- function(data) {
+  result <- sapply(data, function(col) {
+    n_na <- sum(is.na(col))
+    n_vide <- sum(col == "")
+    n_espace <- sum(trimws(col) == " ")
+    return(c(NA_count = n_na, Empty_count = n_vide, Space_count = n_espace))
+  })
+  return(as.data.frame(t(result)))
+}
+
+
+#-----------------------------------------------------------------------------------------------------
 #              HARMONISATION
 #-----------------------------------------------------------------------------------------------------
 #ENLEVER majuscule
@@ -11,12 +25,16 @@ data$fk_stadedev <- data$fk_stadedev %>% str_to_lower()
 data$fk_port <- data$fk_port %>% str_to_lower()
 data$fk_pied <- data$fk_pied  %>% str_to_lower()
 data$fk_arb_etat <- data$fk_arb_etat %>% str_to_lower()
+data$fk_pied <- data$fk_pied %>% str_to_lower()
 unique(data$fk_arb_etat)
 
 #RAJOUTER accent à e
 data$fk_port[ data$fk_port == "couronné"] <- "couronne"
 
-
+print("AVANT CLEAN")
+compter_na_et_vide(data)
+ncol(data)
+nrow(data)
 
 #-----------------------------------------------------------------------------------------------------
 #              SUPPRIMER LES COLLONES INUTILES
@@ -50,11 +68,14 @@ data <- data %>%   filter(!(is.na(age_estim)))
 # SUPPRIMER les arbres sans dimensions
 data <- data %>%   filter(!(is.na(haut_tot) | is.na(haut_tronc) | is.na(tronc_diam)))
 
+# SUPPRIMER les arbres sans tronc avec un diamètre
+data <- data %>%   filter(!(haut_tronc == 0 & tronc_diam >= 0))
+
 # SUPPRIMER les arbres avec hauteur total < hauteur tronc
 data <- data %>%   filter(!(haut_tot < haut_tronc))
 
 # SUPPRIMER les arbres sans nom
-data <- data %>%   filter(!(is.na(nomfrancais) ))
+data <- data %>%   filter(!(is.na(nomfrancais)))
 
 # SUPPRIMER les arbres sans ville
 #data <- data %>%   filter(!(is.na(villeca)))
@@ -81,10 +102,10 @@ data <- data %>%   filter(!(is.na(fk_pied)))
 data <- data %>%   filter(!(is.na(fk_situation)))
 
 # SUPPRIMER les arbres sans feuillage
-#data <- data %>%   filter(!(is.na(feuillage)))
+data <- data %>%   filter(!(is.na(feuillage)))
 
 # SUPPRIMER les arbres sans feuillage
-#data <- data %>%   filter(!(is.na(remarquable)))
+data <- data %>%   filter(!(is.na(remarquable)))
 #-----------------------------------------------------------------------------------------------------
 #              CORRIGER
 #-----------------------------------------------------------------------------------------------------
@@ -121,10 +142,10 @@ data <- data %>%  mutate(dte_plantation = if_else(is.na(dte_plantation), "0", dt
 data <- data %>%  mutate(dte_abattage = if_else(is.na(dte_abattage), "0", dte_abattage))
 
 #REMPLACER feuillage
-data <- data %>%  mutate(feuillage = if_else(is.na(feuillage), "inconnu", feuillage))
+#data <- data %>%  mutate(feuillage = if_else(is.na(feuillage), "inconnu", feuillage))
 
 #REMPLACER remarquable
-data <- data %>%  mutate(remarquable = if_else(is.na(remarquable), "inconnu", remarquable))
+#data <- data %>%  mutate(remarquable = if_else(is.na(remarquable), "inconnu", remarquable))
 
 #-----------------------------------------------------------------------------------------------------
 #              SUPPRIMER LES COLLONES EN TROP
@@ -132,20 +153,9 @@ data <- data %>%  mutate(remarquable = if_else(is.na(remarquable), "inconnu", re
 #data <- select(data,-c(dte_plantation, dte_abattage))
 
 
-#-----------------------------------------------------------------------------------------------------
-#              AFFICHAGE VALEURS VIDES
-#-----------------------------------------------------------------------------------------------------
-compter_na_et_vide <- function(data) {
-  result <- sapply(data, function(col) {
-    n_na <- sum(is.na(col))
-    n_vide <- sum(col == "")
-    n_espace <- sum(trimws(col) == " ")
-    return(c(NA_count = n_na, Empty_count = n_vide, Space_count = n_espace))
-  })
-  return(as.data.frame(t(result)))
-}
-resultat <- compter_na_et_vide(data)
-print(resultat)
+
+print("APRES CLEAN")
+compter_na_et_vide(data)
 ncol(data)
 nrow(data)
 
@@ -155,7 +165,7 @@ nrow(data)
 #              CREER UN DATA QUANTITATIF POUR IA
 #-----------------------------------------------------------------------------------------------------
 data_ia<-data#recopier data
-#transormer les collones qualitatives en collones quantitatifs
+#transormer les collones qualitatives en collones- quantitatifs
 data_ia$clc_quartier <- as.numeric(as.factor(data$clc_quartier))
 data_ia$clc_secteur <- as.numeric(as.factor(data$clc_secteur))
 data_ia$clc_quartier <- as.numeric(as.factor(data$clc_quartier))
