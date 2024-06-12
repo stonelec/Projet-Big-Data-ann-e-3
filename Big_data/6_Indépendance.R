@@ -131,21 +131,69 @@ resultat <- compter_na_et_vide(data)
 print(resultat)
 nrow(data)
 
+View(data)
+
 #-----------------------------------------------------------------------------------------------------
-#              Indépendance des variables
+#              LES QUARTIERS
 #-----------------------------------------------------------------------------------------------------
 
-# ----- Pour les quartiers : -----
+columns <- c("clc_quartier","fk_arb_etat","fk_stadedev","fk_port","fk_pied",
+             "fk_situation","fk_revetement", "feuillage","remarquable")
 
-# Comparaison clc_quartier et fk_arb_etat : 
 
-#Tableau croisée :
-tableau_croisée <-table(data$clc_quartier, data$fk_arb_etat)
-print(tableau_croisée)
+#Le simulate.p.value est utilisé souvent lorsqu'on a des données manquantes
+#ou quand nous avons pas beaucoup de données et permet d'avoir une plus grande précisions. 
+#Dans notre cas, nous avons rajouter des données mais elles sont considérées comme manquantes.
+#C'est pour cela que nous allons faire avec les 2 méthodes
 
-# Test du chi2 :
-chisq_quartier_etat <- chisq.test(tableau_croisée)
-print(chisq_quartier_etat)
+for (i in 1:(length(columns)-1)) {
 
-#Affichage :
-print(chisq_quartier_etat$p.value)
+    for (j in (i+1):length(columns)) {
+      
+      print("")
+      print("--------------------------------------------------------------")
+      print("")
+      
+      # ----- Création du tableau croisé : -----
+      tableau_croise <- table(data[[columns[i]]], data[[columns[j]]])
+      print(paste("Tableau croisé entre", columns[i], "et", columns[j]))
+      #print(tableau_croise)
+      
+      # ----- Test du chi2 : -----  
+      
+      #METHODE SANS SIMULATE.P.VALUE :
+      avec_simulate__chisq <- chisq.test(tableau_croise, simulate.p.value = TRUE)
+      
+      #METHODE AVEC SIMULATE.P.VALUE :
+      sans_simulate__chisq <- chisq.test(tableau_croise)
+      
+      #Affichage de d'autres données
+      #print(test_chisq$statistic)
+      #print("")
+      #print(test_chisq$observed)
+      #print(test_chisq$expected)
+      
+      if (avec_simulate__chisq$p.value >= 0.05){
+        
+        print(paste("Pour la méthode sans simulate, les valeurs sont indépendantes car ", avec_simulate__chisq$p.value ," est supérieur à 0.05"))
+        
+      }
+      else{
+        
+        print(paste("Pour la méthode sans simulate, les valeurs sont dépendantes car ", avec_simulate__chisq$p.value ," est inférieure à 0.05"))
+        
+      }
+      if (sans_simulate__chisq$p.value >= 0.05){
+        
+        print(paste("Pour la méthode sans simulate, les valeurs sont indépendantes car ", sans_simulate__chisq$p.value ," est supérieur à 0.05"))
+        
+      }
+      else{
+        
+        print(paste("Pour la méthode sans simulate, les valeurs sont dépendantes car ", sans_simulate__chisq$p.value ," est inférieure à 0.05"))
+        
+      }
+      
+    }
+  
+}
