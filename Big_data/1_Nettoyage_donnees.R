@@ -1,6 +1,7 @@
 library(dplyr)
 library("stringr")
-data <- read.csv(file = "Patrimoine_Arboré_(RO).csv")
+old_data <- read.csv(file = "./Big_data/Patrimoine_Arboré_(RO).csv")
+data <- read.csv(file = "./Big_data/Patrimoine_Arboré_(RO).csv")
 #-----------------------------------------------------------------------------------------------------
 #              HARMONISATION
 #-----------------------------------------------------------------------------------------------------
