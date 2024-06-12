@@ -4,7 +4,7 @@
 
 
 
-data <- read.csv(file = "./Big_data/Patrimoine_Arboré_(RO).csv", header = TRUE, sep = ',', stringsAsFactors = TRUE)
+#data <- read.csv(file = "./Big_data/Patrimoine_Arboré_(RO).csv", header = TRUE, sep = ',', stringsAsFactors = TRUE)
 
 # Charger les bibliothèques nécessaires
 library(ggplot2)
