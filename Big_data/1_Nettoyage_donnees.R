@@ -101,16 +101,16 @@ data <- data %>%  mutate(clc_quartier = if_else(is.na(clc_quartier), "périphér
 data <- data %>%  mutate(fk_revetement = if_else(is.na(fk_revetement), "inconu", fk_revetement))
 
 #REMPLACER fk_stadedev
-#data <- data %>%  mutate(fk_stadedev = if_else(is.na(fk_stadedev), "inconu", fk_stadedev))
+#data <- data %>%  mutate(fk_stadedev = if_else(is.na(fk_stadedev), "inconnu", fk_stadedev))
 
 #REMPLACER fk_port
-#data <- data %>%  mutate(fk_port = if_else(is.na(fk_port), "inconu", fk_port))
+#data <- data %>%  mutate(fk_port = if_else(is.na(fk_port), "inconnu", fk_port))
 
 #REMPLACER fk_pied
-#data <- data %>%  mutate(fk_pied = if_else(is.na(fk_pied), "inconu", fk_pied))
+#data <- data %>%  mutate(fk_pied = if_else(is.na(fk_pied), "inconnu", fk_pied))
 
 #REMPLACER fk_situation
-#data <- data %>%  mutate(fk_situation = if_else(is.na(fk_situation), "inconu", fk_situation))
+#data <- data %>%  mutate(fk_situation = if_else(is.na(fk_situation), "inconnu", fk_situation))
 
 #REMPLACER dte_plantation
 data <- data %>%  mutate(dte_plantation = if_else(is.na(dte_plantation), "0", dte_plantation))
@@ -119,10 +119,10 @@ data <- data %>%  mutate(dte_plantation = if_else(is.na(dte_plantation), "0", dt
 data <- data %>%  mutate(dte_abattage = if_else(is.na(dte_abattage), "0", dte_abattage))
 
 #REMPLACER feuillage
-data <- data %>%  mutate(feuillage = if_else(is.na(feuillage), "inconu", feuillage))
+data <- data %>%  mutate(feuillage = if_else(is.na(feuillage), "inconnu", feuillage))
 
 #REMPLACER remarquable
-data <- data %>%  mutate(remarquable = if_else(is.na(remarquable), "Non", remarquable))
+data <- data %>%  mutate(remarquable = if_else(is.na(remarquable), "inconnu", remarquable))
 
 #-----------------------------------------------------------------------------------------------------
 #              SUPPRIMER LES COLLONES EN TROP
@@ -146,6 +146,3 @@ resultat <- compter_na_et_vide(data)
 print(resultat)
 ncol(data)
 nrow(data)
-
-data_ia <- mutate_all(data, function(x) as.numeric(as.character(x)))
-data_ia <- lapply(data, function(x) {  if(is.factor(x)) as.numeric(as.character(x)) else x})
