@@ -1,3 +1,15 @@
+#install.packages("leaflet")
+#install.packages("sf")
+#install.packages("RColorBrewer")
+
+# Charger les bibliothèques nécessaires
+library(leaflet)
+library(readr)
+library(dplyr)
+library(sf)
+library(RColorBrewer)
+
+
 # | ========================================================== |
 # |===================| Import des données |===================|
 # | ========================================================== |
@@ -6,43 +18,63 @@
 xlim <- range(c(data$X))
 ylim <- range(c(data$Y))
 
-# | ========================================================== |
-# |======| Voir si des arbes sont trop loin de la ville |======|
-# | ========================================================== |
-
-
-
-numeric_data <- data[!is.na(as.numeric(data$X)) & !is.na(as.numeric(data$Y)), ]
-
-if (nrow(numeric_data) > 0) {
-  moy_X <- mean(as.numeric(numeric_data$X))
-  moy_Y <- mean(as.numeric(numeric_data$Y))
-}
-
-# Fonction pour créer les coordonnées d'un cercle
-create_circle <- function(center_x, center_y, radius, n_points = 100) {
-  t <- seq(0, 2*pi, length.out = n_points)
-  x <- center_x + radius * cos(t)
-  y <- center_y + radius * sin(t)
-  return(data.frame(x = x, y = y))
-}
-
-# Créer les coordonnées du cercle
-circle_data <- create_circle(moy_X, moy_Y, 4500)
-
-# Créer le graphique avec toutes les données et le cercle
-map_ville <- ggplot(data, aes(x = X, y = Y)) +
-  geom_point() +  # Afficher les points des données
-  geom_path(data = circle_data, aes(x = x, y = y), color = "red") +  # Tracer le cercle
-  ggtitle("Répartition des données avec cercle") +
-  xlab("X") +
-  ylab("Y") 
-
-map_ville
-
 # | ======================================================================= |
 # |======| Observer la répartition en fonction de certains attributs |======|
 # | ======================================================================= |
+
+# <<-------------------// Quartier \\------------------->>
+
+map_quartier <- ggplot(data, aes(x = X, y = Y, color = clc_quartier)) +
+  geom_point() +
+  ggtitle("Répartition des données par quartier") +
+  xlab("X") +
+  ylab("Y") +
+  xlim(xlim) + ylim(ylim)
+
+map_quartier
+
+# Créer un objet sf avec les coordonnées Lambert CC Zone 49 = Saint Quentin
+coordinates_sf <- st_as_sf(data, coords = c("X", "Y"), crs = 3949)
+
+# Transformer les coordonnées en WGS84
+coordinates_wgs84 <- st_transform(coordinates_sf, crs = 4326)
+
+# Extraire les nouvelles colonnes de longitude et latitude
+data$lon <- st_coordinates(coordinates_wgs84)[,1]
+data$lat <- st_coordinates(coordinates_wgs84)[,2]
+
+# Remplacer les valeurs NA de clc_quartier par une valeur temporaire pour gestion
+data <- data %>% mutate(clc_quartier = ifelse(is.na(clc_quartier), "Unknown", clc_quartier))
+
+# Générer une palette de couleurs basée sur les quartiers
+unique_quartiers <- unique(data$clc_quartier)
+num_colors <- length(unique_quartiers)
+palette <- brewer.pal(min(num_colors, 12), "Paired")  # Utiliser la palette Paired pour des couleurs vives
+
+# Si plus de 12 quartiers, répéter les couleurs
+if (num_colors > 12) {
+  palette <- rep(palette, length.out = num_colors)
+}
+
+# Ajouter la couleur noire pour les "Unknown"
+palette <- c(palette, "black")
+unique_quartiers <- c(unique_quartiers, "Unknown")
+
+# Créer une fonction de couleur pour les quartiers
+pal <- colorFactor(palette, domain = unique_quartiers)
+
+# Créer une carte leaflet avec une légende
+map_quartier_colo <- leaflet(data) %>%
+  addTiles() %>%
+  addCircleMarkers(~lon, ~lat, radius = 1, 
+                   color = ~ifelse(clc_quartier == "Unknown", "black", pal(clc_quartier)),
+                   fill = TRUE, fillOpacity = 0.7) %>%
+  addLegend("bottomright", colors = palette, labels = unique_quartiers,
+            title = "Quartiers",
+            opacity = 1)
+
+# Afficher la carte
+map_quartier_colo
 
 
 # <<-------------------// Stade de développement \\------------------->>
@@ -106,16 +138,6 @@ map_port <- ggplot(data, aes(x = X, y = Y, color = fk_port)) +
 
 map_port
 
-# <<-------------------// Quartier \\------------------->>
-
-map_quartier <- ggplot(data, aes(x = X, y = Y, color = clc_quartier)) +
-  geom_point() +
-  ggtitle("Répartition des données par quartier") +
-  xlab("X") +
-  ylab("Y") +
-  xlim(xlim) + ylim(ylim)
-
-map_quartier
 
 # <<-------------------// Feuillage \\------------------->>
 
