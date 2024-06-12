@@ -98,7 +98,7 @@ data <- data %>%  mutate(villeca = if_else(is.na(villeca), "cdq", villeca))
 data <- data %>%  mutate(clc_quartier = if_else(is.na(clc_quartier), "périphérie", clc_quartier))
 
 #REMPLACER fk_revetement
-data <- data %>%  mutate(fk_revetement = if_else(is.na(fk_revetement), "inconu", fk_revetement))
+data <- data %>%  mutate(fk_revetement = if_else(is.na(fk_revetement), "inconnu", fk_revetement))
 
 #REMPLACER fk_stadedev
 #data <- data %>%  mutate(fk_stadedev = if_else(is.na(fk_stadedev), "inconnu", fk_stadedev))
