@@ -1,49 +1,37 @@
+library(dplyr)
 library("stringr")
 data <- read.csv(file = "Patrimoine_Arboré_(RO).csv")
 #-----------------------------------------------------------------------------------------------------
-#              MISE EN FORME DES DONNEES
+#              HARMONISATION
 #-----------------------------------------------------------------------------------------------------
-#Enlevé majuscule & vérifier
+#ENLEVER majuscule
 data$fk_stadedev <- data$fk_stadedev %>% str_to_lower()
-unique(data$fk_stadedev)
 data$fk_port <- data$fk_port %>% str_to_lower()
-unique(data$fk_port)
 data$fk_pied <- data$fk_pied  %>% str_to_lower()
-unique(data$fk_pied)
+data$fk_arb_etat <- data$fk_arb_etat %>% str_to_lower()
+unique(data$fk_arb_etat)
 
-#Rajouté accent a e
-data$fk_port[ data$fk_port == "couronne"] <- "couronné"
-unique(data$fk_port)
+#RAJOUTER accent à e
+data$fk_port[ data$fk_port == "couronné"] <- "couronne"
 
-#Remplacer espace seul par vide
-data$fk_stadedev[ data$fk_stadedev == " "] <- ""
-unique(data$fk_stadedev)
-data$fk_port[ data$fk_port == " "] <- ""
-unique(data$fk_port)
-data$fk_pied[ data$fk_pied == " "] <- ""
-unique(data$fk_pied)
-#pour touss
-data[ data == " "] <- ""
-unique(data)
+
 
 #-----------------------------------------------------------------------------------------------------
-#              SUPPRIMER LES COLLONES D'ADMINISTRATION
+#              SUPPRIMER LES COLLONES INUTILES
 #-----------------------------------------------------------------------------------------------------
-library(dplyr)
 data <- select(data,-c(src_geo, created_date, created_user, id_arbre, commentaire_environnement,clc_nbr_diag, last_edited_user, last_edited_date, CreationDate, Creator, EditDate, Editor, nomlatin, fk_nomtech, fk_prec_estim))
 
+#-----------------------------------------------------------------------------------------------------
+#              REMPLACER LES VIDES
+#-----------------------------------------------------------------------------------------------------
+#REMPLACER espace seul par vide
+data[ data == " "] <- ""
 
-#-----------------------------------------------------------------------------------------------------
-#              REMPLACER LES VIDE PAS NA
-#-----------------------------------------------------------------------------------------------------
+#REMPLACER vide par NA
 data[data == ""] <- NA
-#-----------------------------------------------------------------------------------------------------
-#              CORRIGER LES ARBES INCOHERENTS
-#-----------------------------------------------------------------------------------------------------
-library(dplyr)
 
 #-----------------------------------------------------------------------------------------------------
-#              SUPPRIMER
+#              SUPPRIMER LES ARBRES INVALIDES
 #-----------------------------------------------------------------------------------------------------
 # SUPPRIMER les arbres sans états
 data <- data %>%   filter(!(is.na(fk_arb_etat)))
@@ -67,35 +55,56 @@ data <- data %>%   filter(!(haut_tot <haut_tronc))
 data <- data %>%   filter(!(is.na(nomfrancais) ))
 
 # SUPPRIMER les arbres sans ville
-data <- data %>%   filter(!(is.na(villeca)))
+#data <- data %>%   filter(!(is.na(villeca)))
 
+# SUPPRIMER les arbres sans clc_quartier
+#data <- data %>%   filter(!(is.na(clc_quartier)))
+
+# SUPPRIMER les arbres sans fk_revetement
+data <- data %>%   filter(!(is.na(fk_revetement)))
+
+# SUPPRIMER les arbres sans fk_stadedev
+data <- data %>%   filter(!(is.na(fk_stadedev)))
+
+# SUPPRIMER les arbres sans fk_port
+data <- data %>%   filter(!(is.na(fk_port)))
+
+# SUPPRIMER les arbres sans fk_pied
+data <- data %>%   filter(!(is.na(fk_pied)))
+
+# SUPPRIMER les arbres sans fk_situation
+data <- data %>%   filter(!(is.na(fk_situation)))
+
+# SUPPRIMER les arbres sans feuillage
+#data <- data %>%   filter(!(is.na(feuillage)))
+
+# SUPPRIMER les arbres sans feuillage
+#data <- data %>%   filter(!(is.na(remarquable)))
 #-----------------------------------------------------------------------------------------------------
 #              CORRIGER
 #-----------------------------------------------------------------------------------------------------
 # CORRIGER les arbres EN PLACE avec une date d'abattage par ABATTU
-#data <- data %>%   mutate(fk_stadedev= if_else(fk_arb_etat == "EN PLACE" & dte_abattage != "", "ABATTU", "mort"))
+data <- data %>%  mutate(fk_arb_etat = if_else(!is.na(dte_abattage) & fk_arb_etat == "en place", "abattu", fk_arb_etat))
+#-----------------------------------------------------------------------------------------------------
+#              REMPLACER LES VALEURS INCONUS
+#-----------------------------------------------------------------------------------------------------
+#REMPLACER villeca
+data <- data %>%  mutate(villeca = if_else(is.na(villeca), "cdq", villeca))
 
-data <- data %>%  mutate(fk_stadedev = if_else((fk_arb_etat == "ABATTU" | fk_arb_etat == "EN PLACE" | fk_arb_etat == "SUPPRIMÉ") & is.na(dte_abattage), "mort", fk_stadedev))
-#-----------------------------------------------------------------------------------------------------
-#              REMPLACER LES VELEURS INCONUS
-#-----------------------------------------------------------------------------------------------------
 #REMPLACER clc_quartier
-data <- data %>%  mutate(clc_quartier = if_else(is.na(clc_quartier), "inconu", clc_quartier))
-
-#REMPLACER fk_revetement
-data <- data %>%  mutate(fk_revetement = if_else(is.na(fk_revetement), "inconu", fk_revetement))
+data <- data %>%  mutate(clc_quartier = if_else(is.na(clc_quartier), "périphérie", clc_quartier))
 
 #REMPLACER fk_stadedev
-data <- data %>%  mutate(fk_stadedev = if_else(is.na(fk_stadedev), "inconu", fk_stadedev))
+#data <- data %>%  mutate(fk_stadedev = if_else(is.na(fk_stadedev), "inconu", fk_stadedev))
 
 #REMPLACER fk_port
-data <- data %>%  mutate(fk_port = if_else(is.na(fk_port), "inconu", fk_port))
+#data <- data %>%  mutate(fk_port = if_else(is.na(fk_port), "inconu", fk_port))
 
 #REMPLACER fk_pied
-data <- data %>%  mutate(fk_pied = if_else(is.na(fk_pied), "inconu", fk_pied))
+#data <- data %>%  mutate(fk_pied = if_else(is.na(fk_pied), "inconu", fk_pied))
 
 #REMPLACER fk_situation
-data <- data %>%  mutate(fk_situation = if_else(is.na(fk_situation), "inconu", fk_situation))
+#data <- data %>%  mutate(fk_situation = if_else(is.na(fk_situation), "inconu", fk_situation))
 
 #REMPLACER dte_plantation
 data <- data %>%  mutate(dte_plantation = if_else(is.na(dte_plantation), "0", dte_plantation))
@@ -107,7 +116,7 @@ data <- data %>%  mutate(dte_abattage = if_else(is.na(dte_abattage), "0", dte_ab
 data <- data %>%  mutate(feuillage = if_else(is.na(feuillage), "inconu", feuillage))
 
 #REMPLACER remarquable
-data <- data %>%  mutate(remarquable = if_else(is.na(remarquable), "inconu", remarquable))
+data <- data %>%  mutate(remarquable = if_else(is.na(remarquable), "non", remarquable))
 
 #-----------------------------------------------------------------------------------------------------
 #              SUPPRIMER LES COLLONES EN TROP
@@ -115,16 +124,19 @@ data <- data %>%  mutate(remarquable = if_else(is.na(remarquable), "inconu", rem
 #data <- select(data,-c(dte_plantation, dte_abattage))
 
 
-
+#-----------------------------------------------------------------------------------------------------
+#              AFFICHAGE VALEURS VIDES
+#-----------------------------------------------------------------------------------------------------
 compter_na_et_vide <- function(data) {
   result <- sapply(data, function(col) {
     n_na <- sum(is.na(col))
-    n_vide <- sum(col == "", na.rm = TRUE)
-    n_espace <- sum(trimws(col) == " ", na.rm = TRUE)
+    n_vide <- sum(col == "")
+    n_espace <- sum(trimws(col) == " ")
     return(c(NA_count = n_na, Empty_count = n_vide, Space_count = n_espace))
   })
   return(as.data.frame(t(result)))
 }
 resultat <- compter_na_et_vide(data)
 print(resultat)
+ncol(data)
 nrow(data)
