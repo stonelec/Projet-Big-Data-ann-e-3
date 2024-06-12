@@ -55,18 +55,20 @@ cor_matrix <- cor(data, method = "pearson")
 print(cor_matrix)
 
 
-# | --------------------------------------------------- |
-# |------| Ecarts de moyennes entre deux groupes |------|
-# | --------------------------------------------------- | 
+# | ------------------------------------- |
+# |------| Tableaux de contingence |------|
+# | ------------------------------------- | 
+
+# ------------- Remarquable // Stade de développement -------------
 
 # Créer le tableau de contingence
 cont_dev_remar <- table(data$fk_stadedev,data$remarquable)
 # Tracer le graphique mozaïque
-moz_cont_dev_remar <- mosaicplot(cont_dev_remar, main = "Graphique Mozaïque : Caractère Remarquable vs. Stade de Développement")
+mosaicplot(cont_dev_remar, main = "Graphique Mozaïque : Caractère Remarquable vs. Stade de Développement")
 
 
 
-moz_cont_dev_remar
+
 
 # | --------------------------------------------------- |
 # |------| Ecarts de moyennes entre deux groupes |------|

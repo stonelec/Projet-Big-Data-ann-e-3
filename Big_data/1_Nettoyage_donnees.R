@@ -2,6 +2,7 @@
 library(ggplot2)
 library(dplyr)
 library("stringr")
+old_data <- read.csv(file = "./Big_data/Patrimoine_Arboré_(RO).csv")
 data <- read.csv(file = "./Big_data/Patrimoine_Arboré_(RO).csv")
 #-----------------------------------------------------------------------------------------------------
 #              HARMONISATION
