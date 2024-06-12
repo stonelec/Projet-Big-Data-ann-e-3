@@ -149,3 +149,32 @@ resultat <- compter_na_et_vide(data)
 print(resultat)
 ncol(data)
 nrow(data)
+
+
+
+#-----------------------------------------------------------------------------------------------------
+#              CREER UN DATA QUANTITATIF POUR IA
+#-----------------------------------------------------------------------------------------------------
+data_ia<-data#recopier data
+#transormer les collones qualitatives en collones quantitatifs
+data_ia$clc_quartier <- as.numeric(as.factor(data$clc_quartier))
+data_ia$clc_secteur <- as.numeric(as.factor(data$clc_secteur))
+data_ia$clc_quartier <- as.numeric(as.factor(data$clc_quartier))
+data_ia$fk_arb_etat <- as.numeric(as.factor(data$fk_arb_etat))
+data_ia$fk_stadedev <- as.numeric(as.factor(data$fk_stadedev))
+data_ia$fk_port <- as.numeric(as.factor(data$fk_port))
+data_ia$fk_pied <- as.numeric(as.factor(data$fk_pied))
+data_ia$fk_situation <- as.numeric(as.factor(data$fk_situation))
+data_ia$fk_revetement <- as.numeric(as.factor(data$fk_revetement))
+data_ia$dte_plantation <- as.numeric(as.factor(data$dte_plantation))
+data_ia$fk_revetement <- as.numeric(as.factor(data$fk_revetement))
+data_ia$dte_abattage <- as.numeric(as.factor(data$dte_abattage))
+data_ia$villeca <- as.numeric(as.factor(data$villeca))
+data_ia$nomfrancais <- as.numeric(as.factor(data$nomfrancais))
+data_ia$GlobalID <- as.numeric(as.factor(data$GlobalID))
+data_ia$nomfrancais <- as.numeric(as.factor(data$nomfrancais))
+data_ia$GlobalID <- as.numeric(as.factor(data$GlobalID))
+data_ia$nomfrancais <- as.numeric(as.factor(data$nomfrancais))
+data_ia$GlobalID <- as.numeric(as.factor(data$GlobalID))
+data_ia$feuillage <- as.numeric(as.factor(data$feuillage))
+data_ia$remarquable <- as.numeric(as.factor(data$remarquable))
