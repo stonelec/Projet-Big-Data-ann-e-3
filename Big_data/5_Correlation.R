@@ -1,43 +1,6 @@
-# | ====================================== |
-# |======| Corélations avec pearson |======|
-# | ====================================== | 
-
-
-# | ------------------------------------ |
-# |------| Matrice de corrélation |------|
-# | ------------------------------------ |
-
-# Calculer la matrice de corrélation
-cor_matrix <- cor(data_ia, method = "pearson")
-# Afficher la matrice de corrélation
-print(cor_matrix)
-# Transformer la matrice de corrélation en un format long pour ggplot
-melted_cor_matrix <- melt(cor_matrix)
-# Créer un heatmap avec ggplot2
-ggplot(data = melted_cor_matrix, aes(x = Var1, y = Var2, fill = value)) +
-  geom_tile() +
-  scale_fill_gradient2(low = "blue", high = "red", mid = "white", 
-                       midpoint = 0, limit = c(-1, 1), space = "Lab", 
-                       name="Correlation") +
-  theme_minimal() + 
-  theme(axis.text.x = element_text(angle = 45, vjust = 1, 
-                                   size = 12, hjust = 1)) +
-  coord_fixed() +
-  labs(title = "Matrice de Corrélation",
-       x = "Variables",
-       y = "Variables") +
-  theme(axis.title.x = element_blank(),
-        axis.title.y = element_blank(),
-        panel.grid.major = element_blank(),
-        panel.border = element_blank(),
-        panel.background = element_blank(),
-        axis.ticks = element_blank())
-
-
-# | --------------------------------------- |
-# |------| Graphiques de corrélation |------|
-# | --------------------------------------- |
-
+# | -------------------------------------- |
+# |------| Corélations avec pearson |------|
+# | -------------------------------------- | 
 
 cor_age_diam <- cor(data$age_estim, data$tronc_diam, method = "pearson")
 graphe_cor_age_diam <- ggplot(data, aes(x = age_estim, y = tronc_diam)) +
@@ -88,83 +51,95 @@ graphe_cor_haut_tronc_tot
 graphe_cor_haut_diam
 
 
+cor_matrix <- cor(data, method = "pearson")
+print(cor_matrix)
 
-# | ===================================== |
-# |======| Tableaux de contingence |======|
-# | ===================================== | 
 
-# ------------- Remarquable // Stade de développement -------------
+# | --------------------------------------------------- |
+# |------| Ecarts de moyennes entre deux groupes |------|
+# | --------------------------------------------------- | 
 
 # Créer le tableau de contingence
 cont_dev_remar <- table(data$fk_stadedev,data$remarquable)
 # Tracer le graphique mozaïque
-mosaicplot(cont_dev_remar, main = "Graphique Mozaïque : Caractère Remarquable vs. Stade de Développement", color = TRUE, las=1)
-
-cont_dev_remar
-
-# ------------- Remarquable // Quartier -------------
-
-# Créer le tableau de contingence
-cont_quartier_remar <- table(data$clc_quartier,data$remarquable)
-# Tracer le graphique mozaïque
-mosaicplot(cont_quartier_remar, main = "Graphique Mozaïque : Caractère Remarquable vs. Quartier", las = 2, color = TRUE)
-
-cont_quartier_remar
-
-# ------------- Remarquable // Feuillage -------------
-
-# Créer le tableau de contingence
-cont_feuill_remar <- table(data$feuillage,data$remarquable)
-# Tracer le graphique mozaïque
-mosaicplot(cont_feuill_remar, main = "Graphique Mozaïque : Caractère Remarquable vs. Feuillage", color = TRUE, las=1)
-
-cont_feuill_remar
-
-# ------------- Remarquable // Situation -------------
-
-# Créer le tableau de contingence
-cont_situation_remar <- table(data$fk_situation,data$remarquable)
-# Tracer le graphique mozaïque
-mosaicplot(cont_situation_remar, main = "Graphique Mozaïque : Caractère Remarquable vs. Situation", color = TRUE, las=1)
-
-cont_situation_remar
-
-# ------------- Remarquable // Revetement -------------
-
-# Créer le tableau de contingence
-cont_revet_remar <- table(data$fk_revetement,data$remarquable)
-# Tracer le graphique mozaïque
-mosaicplot(cont_revet_remar, main = "Graphique Mozaïque : Caractère Remarquable vs. Revêtement", color = TRUE, xlab = "Revêtement", ylab = "Remarquable")
-
-cont_revet_remar
-
-# ------------- Remarquable // Age -------------
-
-# Créer le tableau de contingence
-cont_age_remar <- table(data$age_estim,data$remarquable)
-# Tracer le graphique mozaïque
-mosaicplot(cont_age_remar, main = "Graphique Mozaïque : Caractère Remarquable vs. Age estimé", color = TRUE, xlab = "Revêtement", ylab = "Remarquable")
-
-cont_age_remar
+moz_cont_dev_remar <- mosaicplot(cont_dev_remar, main = "Graphique Mozaïque : Caractère Remarquable vs. Stade de Développement")
 
 
-# ------------- Feuillage // Stade de développement -------------
 
-# Créer le tableau de contingence
-cont_dev_feuill <- table(data$fk_stadedev,data$feuillage)
-# Tracer le graphique mozaïque
-mosaicplot(cont_dev_feuill, main = "Graphique Mozaïque : Type de feuillage vs. Stade de Développement", color = TRUE)
+moz_cont_dev_remar
 
-cont_dev_feuill
+# | --------------------------------------------------- |
+# |------| Ecarts de moyennes entre deux groupes |------|
+# | --------------------------------------------------- | 
 
-# ------------- Feuillage // Quartier -------------
+# Liste des variables à comparer
+variables <- c("age_estim", "haut_tot", "tronc_diam")
 
-# Créer le tableau de contingence
-cont_quartier_feuill <- table(data$clc_quartier,data$feuillage)
-# Tracer le graphique mozaïque
-mosaicplot(cont_quartier_feuill, main = "Graphique Mozaïque : Type de feuillage vs. Quartier", las = 2, color = TRUE)
+# ------------------ Type de feuillage ------------------
 
-<<<<<<< HEAD
+# Comparaison des moyennes pour chaque variable
+for (variable in variables) {
+  cat("\nComparaison des moyennes pour:", variable, "\n")
+  
+  # Extraire les données pour chaque groupe
+  conifere_values <- data_conifere[[variable]]
+  feuillu_values <- data_feuillu[[variable]]
+  
+  # Effectuer le test t de Student
+  t_test_result_feuill <- t.test(conifere_values, feuillu_values)
+  
+  # Afficher les résultats
+  cat("Moyenne (Conifère):", mean(conifere_values), "\n")
+  cat("Moyenne (Feuillu):", mean(feuillu_values), "\n")
+  cat("t-value:", t_test_result_feuill$statistic, "\n")
+  cat("p-value:", t_test_result_feuill$p.value, "\n")
+  cat("Intervalle de confiance:", t_test_result_feuill$conf.int, "\n")
+}
+
+# ------------------ Remarquable ------------------
+
+# Comparaison des moyennes pour chaque variable
+for (variable in variables) {
+  cat("\nComparaison des moyennes pour:", variable, "\n")
+  
+  # Extraire les données pour chaque groupe
+  remar_non_values <- data_remarquable_non[[variable]]
+  remar_oui_values <- data_remarquable_oui[[variable]]
+  
+  # Effectuer le test t de Student
+  t_test_result_remar <- t.test(remar_non_values, remar_oui_values)
+  
+  # Afficher les résultats
+  cat("Moyenne (Remarquable=non):", mean(remar_non_values), "\n")
+  cat("Moyenne (Remarquable=oui):", mean(remar_oui_values), "\n")
+  cat("t-value:", t_test_result_remar$statistic, "\n")
+  cat("p-value:", t_test_result_remar$p.value, "\n")
+  cat("Intervalle de confiance:", t_test_result_remar$conf.int, "\n")
+}
+
+
+# ------------------ Revêtement ------------------
+
+# Comparaison des moyennes pour chaque variable
+for (variable in variables) {
+  cat("\nComparaison des moyennes pour:", variable, "\n")
+  
+  # Extraire les données pour chaque groupe
+  revet_non_values <- data_revet_non[[variable]]
+  revet_oui_values <- data_revet_oui[[variable]]
+  
+  # Effectuer le test t de Student
+  t_test_result_revet <- t.test(revet_non_values, revet_oui_values)
+  
+  # Afficher les résultats
+  cat("Moyenne (Revetement=non):", mean(revet_non_values), "\n")
+  cat("Moyenne (Revetement=oui):", mean(revet_oui_values), "\n")
+  cat("t-value:", t_test_result_revet$statistic, "\n")
+  cat("p-value:", t_test_result_revet$p.value, "\n")
+  cat("Intervalle de confiance:", t_test_result_revet$conf.int, "\n")
+}
+
+
 # | ------------------------------------------ |
 # |------| PPREDICTION PROCHAIN ARBRE |------|
 # | ------------------------------------------ |
@@ -178,11 +153,11 @@ data_ia$fk_stadedev <- as.numeric(as.factor(data$fk_stadedev))
 data_ia$fk_situation <- as.numeric(as.factor(data$fk_situation))
 data_ia$remarquable <- as.numeric(as.factor(data$remarquable))
 test_data <- data
+#model_age <- lm(age_estim ~ fk_arb_etat + haut_tronc + tronc_diam + fk_stadedev + fk_situation + remarquable, data = train_data)
 model_age <- lm(age_estim ~ haut_tronc + tronc_diam, data = train_data)
-
 # PRERDIR sur les données de test
 test_data$age_pred <- predict(model_age, newdata = test_data)
-
+summary(model_age)
 # CALCULER les écarts sur test
 test_data$age_resid <- abs(test_data$age_estim - test_data$age_pred)
 
@@ -194,89 +169,3 @@ ggplot(test_data, aes(x = age_estim, y = age_resid)) +
   theme_minimal() + 
   annotate("text", x = max(test_data$age_estim) - 20, y = mean(test_data$age_resid) + 1.5,label = paste("Moyenne des écarts =", round(mean(test_data$age_resid), 2)), color = "red")
   
-=======
-cont_quartier_feuill
-
-# ------------- Feuillage // Situation -------------
-
-# Créer le tableau de contingence
-cont_situation_feuill <- table(data$fk_situation,data$feuillage)
-# Tracer le graphique mozaïque
-mosaicplot(cont_situation_feuill, main = "Graphique Mozaïque : Type de feuillage vs. Situation", color = TRUE)
-
-cont_situation_feuill
-
-# ------------- Feuillage // Revêtement -------------
-
-# Créer le tableau de contingence
-cont_revet_feuill <- table(data$feuillage,data$fk_revetement)
-# Tracer le graphique mozaïque
-mosaicplot(cont_revet_feuill, main = "Graphique Mozaïque : Type de feuillage vs. Revêtement", color = TRUE)
-
-cont_revet_feuill
-
-# ------------- Feuillage // Revêtement -------------
-
-# Créer le tableau de contingence
-cont_age_feuill <- table(data$age_estim,data$feuillage)
-# Tracer le graphique mozaïque
-mosaicplot(cont_age_feuill, main = "Graphique Mozaïque : Type de feuillage vs. Age estimé", color = TRUE)
-
-cont_age_feuill
-
-
-# ------------- Quartier // Stade de développement -------------
-
-# Créer le tableau de contingence
-cont_quartier_dev <- table(data$clc_quartier,data$fk_stadedev)
-# Tracer le graphique mozaïque
-mosaicplot(cont_quartier_dev, main = "Graphique Mozaïque : Stade de développement vs. Quartier", las = 2, color = TRUE)
-
-cont_quartier_dev
-
-# ------------------ Quartier // Situation ------------------
-
-# Créer le tableau de contingence
-cont_quartier_situation <- table(data$clc_quartier, data$fk_situation)
-# Tracer le graphique mozaïque 
-mosaicplot(cont_quartier_situation, main = "Graphique Mozaïque : Quartier vs. Situation", las = 2, color = TRUE)
-
-cont_quartier_situation
-
-# ------------- Quartier // Revêtement -------------
-
-# Créer le tableau de contingence
-cont_quartier_revet <- table(data$clc_quartier,data$fk_revetement)
-# Tracer le graphique mozaïque
-mosaicplot(cont_quartier_revet, main = "Graphique Mozaïque : Revêtement vs. Quartier", las = 2, color = TRUE)
-
-cont_quartier_revet
-
-# ------------------ Situation // Revêtement ------------------
-
-# Créer le tableau de contingence
-cont_situation_revet <- table(data$fk_situation, data$fk_revetement)
-# Tracer le graphique mozaïque 
-mosaicplot(cont_situation_revet, main = "Graphique Mozaïque : Revêtement vs. Situation", color = TRUE)
-
-cont_situation_revet
-
-# ------------------ Situation // Stade de développement ------------------
-
-# Créer le tableau de contingence
-cont_situation_dev <- table(data$fk_situation, data$fk_stadedev)
-# Tracer le graphique mozaïque 
-mosaicplot(cont_situation_dev, main = "Graphique Mozaïque : Stade de développement vs. Situation", color = TRUE)
-
-cont_situation_dev
-
-# ------------------ Age // Stade de développement ------------------
-
-# Créer le tableau de contingence
-cont_age_dev <- table(data$age_estim, data$fk_stadedev)
-# Tracer le graphique mozaïque 
-mosaicplot(cont_age_dev, main = "Graphique Mozaïque : Stade de développement vs. Age", color = TRUE, las=1)
-
-cont_age_dev
-
->>>>>>> 4cfa27d88ccf604a7903541e8aced8b9d8c37a4f
