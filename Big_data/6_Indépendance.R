@@ -36,12 +36,12 @@ for (i in 1:(length(columns)-1)) {
       
       if (avec_simulate__chisq$p.value >= 0.05){
         
-        print(paste("Pour la méthode sans simulate, les valeurs sont indépendantes car ", avec_simulate__chisq$p.value ," est supérieur à 0.05"))
+        print(paste("Pour la méthode avec simulate, les valeurs sont indépendantes car ", avec_simulate__chisq$p.value ," est supérieur à 0.05"))
         
       }
       else{
         
-        print(paste("Pour la méthode sans simulate, les valeurs sont dépendantes car ", avec_simulate__chisq$p.value ," est inférieure à 0.05"))
+        print(paste("Pour la méthode avec simulate, les valeurs sont dépendantes car ", avec_simulate__chisq$p.value ," est inférieure à 0.05"))
         
       }
       if (sans_simulate__chisq$p.value >= 0.05){
