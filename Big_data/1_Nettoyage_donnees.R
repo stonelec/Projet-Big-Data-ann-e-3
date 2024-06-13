@@ -145,7 +145,7 @@ data <- data %>%  mutate(fk_revetement = if_else(is.na(fk_revetement), "inconnu"
 #data <- data %>%  mutate(feuillage = if_else(is.na(feuillage), "inconnu", feuillage))
 
 #REMPLACER remarquable
-data <- data %>%  mutate(remarquable = if_else(is.na(remarquable), "non", remarquable))
+data <- data %>%  mutate(remarquable = if_else(is.na(remarquable), "Non", remarquable))
 
 #-----------------------------------------------------------------------------------------------------
 #              SUPPRIMER LES COLLONES EN TROP
