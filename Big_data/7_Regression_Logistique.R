@@ -294,40 +294,31 @@ lines((data_1$haut_tot + data_1$haut_tronc + data_1$tronc_diam + data_1$age_esti
 # ------------------------------ Trouver R2 : ------------------------------ 
 # --------------------------------------------------------------------------
 
+data_1 <- data
+
+# Mettre à 0 si pas d'abbatage prévu, mettre à 1 sinon
+data_1$fk_arb_etat <- ifelse(data_1$fk_arb_etat != "en place", 1, 0)
+
 # Modèle de régression logistique
-model <- glm(fk_arb_etat ~ clc_quartier + clc_secteur + fk_stadedev + fk_port + fk_pied + fk_situation + fk_revetement + haut_tot + haut_tronc+ tronc_diam +age_estim, data = data_1, family = binomial)
+model <- glm(fk_arb_etat ~ X + Y + OBJECTID + clc_quartier + clc_secteur + haut_tot + haut_tronc+ tronc_diam + fk_stadedev + fk_port + fk_pied + fk_situation + fk_revetement + age_estim + villeca + nomfrancais + feuillage + remarquable, data = data_1, family = binomial)
 summary(model)
 
-columns <- c("clc_quartier","fk_arb_etat","fk_stadedev","fk_port","fk_pied",
-             "fk_situation","fk_revetement", "feuillage","remarquable")
+# Création du modèle nul (intercept seulement)
+null_model <- glm(fk_arb_etat ~ 1, data = data_1, family = binomial)
 
+# Extraction des déviances résiduelles
+deviance_model <- deviance(model)
+deviance_null <- deviance(null_model)
 
-#Le simulate.p.value est utilisé souvent lorsqu'on a des données manquantes
-#ou quand nous avons pas beaucoup de données et permet d'avoir une plus grande précisions. 
-#Dans notre cas, nous avons rajouter des données mais elles sont considérées comme manquantes.
-#C'est pour cela que nous allons faire avec les 2 méthodes
+# Calcul de la statistique chi-carré (différence des déviances)
+chi_sq <- deviance_null - deviance_model
 
-for (i in 1:(length(columns)-1)) {
-  
-  for (j in (i+1):length(columns)) {
-    
-    print("")
-    print("--------------------------------------------------------------")
-    print("")
-    
-    # ----- Création du tableau croisé : -----
-    tableau_croise <- table(data[[columns[i]]], data[[columns[j]]])
-    print(paste("Tableau croisé entre", columns[i], "et", columns[j]))
-    #print(tableau_croise)
-    
-    # ----- Test du chi2 : -----  
-    
-    #METHODE SANS SIMULATE.P.VALUE :
-    avec_simulate__chisq <- chisq.test(tableau_croise, simulate.p.value = TRUE)
-    
-    #METHODE AVEC SIMULATE.P.VALUE :
-    sans_simulate__chisq <- chisq.test(tableau_croise)
-    
-  }
-  
-}
+# Calcul du R2 pseudo avec chi-carré
+R2_chi_sq <- 1 - (deviance_model / deviance_null)
+
+# Affichage des résultats
+#print(paste("Chi-carré:", chi_sq))
+print(paste("R2 pseudo avec chi-carré:", R2_chi_sq))
+
+#Avant tri : "R2 pseudo avec chi-carré: 0.0758252342176691"
+#Après tri : "R2 pseudo avec chi-carré: 0.486086353803393"
