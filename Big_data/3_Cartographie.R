@@ -79,7 +79,7 @@ map_quartier_colo
 
 # <<-------------------// Stade de développement \\------------------->>
 
-# Séparation des données en deux sous-ensembles : revêtement oui et revêtement non
+# Séparation des données en quatre sous-ensemble: jeune; adulte; vieux; senescent
 data_stade_jeune <- subset(data, fk_stadedev == "jeune")
 data_stade_adulte <- subset(data, fk_stadedev == "adulte")
 data_stade_vieux <- subset(data, fk_stadedev == "vieux")
@@ -120,12 +120,27 @@ map_stade_senescent <- ggplot(data_stade_senescent, aes(x = X, y = Y)) +
   ylab("Y") +
   xlim(xlim) + ylim(ylim)
 
+map_stade_vieux_zoom <- ggplot(data_stade_vieux, aes(x = X, y = Y)) +
+  geom_point(color = "green") +
+  ggtitle("Répartition des données pour stade=vieux") +
+  xlab("X") +
+  ylab("Y") 
+
+map_stade_senescent_zoom <- ggplot(data_stade_senescent, aes(x = X, y = Y)) +
+  geom_point(color = "brown") +
+  ggtitle("Répartition des données pour stade=senescent") +
+  xlab("X") +
+  ylab("Y")
+
 # Affichage des graphiques
 map_stade
 map_stade_jeune
 map_stade_adulte
 map_stade_vieux
 map_stade_senescent
+
+map_stade_vieux_zoom
+map_stade_senescent_zoom
 
 # <<-------------------// Forme de l'arbre \\------------------->>
 
@@ -287,5 +302,40 @@ map_remar_oui_quartier <- ggplot(data_remarquable_oui, aes(x = X, y = Y, color=c
   xlim(xlim) + ylim(ylim)
 
 map_remar_oui_quartier
+
+# <<-------------------// Etat de l'arbre \\------------------->>
+
+map_etat <- ggplot(data, aes(x = X, y = Y, color = fk_arb_etat)) +
+  geom_point() +
+  ggtitle("Répartition des données par état de l'arbre") +
+  xlab("X") +
+  ylab("Y") +
+  xlim(xlim) + ylim(ylim)
+
+map_etat
+
+# Séparation des données en deux sous-ensembles: en place ou non
+data_en_place_oui <- subset(data, fk_arb_etat == "en place")
+data_en_place_non <- subset(data, fk_arb_etat != "en place")
+
+map_etat_en_place <- ggplot(data_en_place_oui, aes(x = X, y = Y, color = fk_stadedev)) +
+  geom_point() +
+  ggtitle("Répartition des données pour les arbres en place par stade de développement") +
+  xlab("X") +
+  ylab("Y") +
+  xlim(xlim) + ylim(ylim)
+
+map_etat_en_place_non <- ggplot(data_en_place_non, aes(x = X, y = Y, color = fk_stadedev)) +
+  geom_point() +
+  ggtitle("Répartition des données pour les arbres pas en place par stade de développement") +
+  xlab("X") +
+  ylab("Y") +
+  xlim(xlim) + ylim(ylim)
+
+map_etat_en_place
+map_etat_en_place_non
+
+
+
 
 

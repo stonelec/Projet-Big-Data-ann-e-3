@@ -9,16 +9,6 @@
 # |------| Corélations avec le stade de développement |------|
 # | -------------------------------------------------------- | 
 
-# ---------- Entre l'âge de l'arbre et la date de plantation ----------
-nuage_stade_0 <- ggplot(old_data, aes(x=dte_plantation, y=age_estim, color = fk_stadedev))+
-  geom_point() +
-  ggtitle("Age estimé en fonction de la date de plantation") +
-  xlab("Date de plantation") +
-  ylab("Age estim") +
-  theme(axis.text.x = element_blank()) # enlève les valeurs sur l'axe des X
-
-nuage_stade_0
-
 # ---------- Entre la hauteur du tronc et le diamètre du tronc ----------
 nuage_stade_1 <- ggplot(data, aes(x=haut_tronc, y=tronc_diam, color = fk_stadedev)) +
   geom_point() +
@@ -55,16 +45,6 @@ nuage_stade_4
 # | -------------------------------------------------- |
 # |------| Corélations avec la forme de l'arbre |------|
 # | -------------------------------------------------- | 
-
-# ---------- Entre l'âge de l'arbre et la date de plantation ----------
-nuage_port_0 <- ggplot(old_data, aes(x=dte_plantation, y=age_estim, color = fk_port))+
-  geom_point() +
-  ggtitle("Age estimé en fonction de la date de plantation") +
-  xlab("Date de plantation") +
-  ylab("Age estim") +
-  theme(axis.text.x = element_blank()) # enlève les valeurs sur l'axe des X
-
-nuage_port_0
   
 # ---------- Entre la hauteur du tronc et le diamètre du tronc ----------
 nuage_port_2 <- ggplot(data, aes(x=haut_tronc, y=tronc_diam, color = fk_port)) +
@@ -105,355 +85,285 @@ nuage_port_1
 # |------| Corélations avec le quartier |------|
 # | ------------------------------------------ | 
 
-# ---------- Entre l'âge de l'arbre et la date de plantation ----------
-nuage_quartier_0 <- ggplot(old_data, aes(x=dte_plantation, y=age_estim, color = clc_quartier))+
-  geom_point() +
-  ggtitle("Age estimé en fonction de la date de plantation") +
-  xlab("Date de plantation") +
-  ylab("Age estim") +
-  theme(axis.text.x = element_blank()) # enlève les valeurs sur l'axe des X
-
-nuage_quartier_0
-
 # ---------- Entre la hauteur du tronc et le diamètre du tronc ----------
-nuage_quartier_2 <- ggplot(data, aes(x=haut_tronc, y=tronc_diam, color = clc_quartier)) +
+nuage_quartier_1 <- ggplot(data, aes(x=haut_tronc, y=tronc_diam, color = clc_quartier)) +
   geom_point() +
   ggtitle("Hauteur du tonc en fonction du diamètre du tronc") +
   xlab("Hauteur du tronc") +
   ylab("Diamètre du tronc")
 
-nuage_quartier_2
+nuage_quartier_1
 
 # ---------- Entre la hauteur totale et la hauteur du tronc ----------
-nuage_quartier_3 <- ggplot(data, aes(x=haut_tronc, y=haut_tot, color = clc_quartier)) +
+nuage_quartier_2 <- ggplot(data, aes(x=haut_tronc, y=haut_tot, color = clc_quartier)) +
   geom_point() +
   ggtitle("Hauteur du tonc en fonction de la hauteur totale") +
   xlab("Hauteur totale") +
   ylab("Hauteur du tronc")
 
-nuage_quartier_3
+nuage_quartier_2
 
 # ---------- Entre la hauteur totale et l'âge estimé ----------
-nuage_quartier_4 <- ggplot(data, aes(x=age_estim, y=haut_tot, color = clc_quartier))+
+nuage_quartier_3 <- ggplot(data, aes(x=age_estim, y=haut_tot, color = clc_quartier))+
   geom_point() +
   ggtitle("Hauteur totale en fonction de l'âge estimé") +
   xlab("Age estim") +
   ylab("Hauteur totale")
 
-nuage_quartier_4
+nuage_quartier_3
 
 # ---------- Entre le diamètre du tronc et l'âge estimé ----------
-nuage_quartier_1 <- ggplot(data, aes(x=age_estim, y=tronc_diam, color = clc_quartier))+
+nuage_quartier_4 <- ggplot(data, aes(x=age_estim, y=tronc_diam, color = clc_quartier))+
   geom_point() +
   ggtitle("Diamètre du tronc en fonction de l'âge estimé") +
   xlab("Age estim") +
   ylab("Diamètre du tronc")
 
-nuage_quartier_1
+nuage_quartier_4
   
 # | ------------------------------------------- |
 # |------| Corélations avec le feuillage |------|
 # | ------------------------------------------- | 
 
-# ---------- Entre l'âge de l'arbre et la date de plantation ----------
-nuage_feuillage_0 <- ggplot(old_data, aes(x=dte_plantation, y=age_estim, color = feuillage))+
-  geom_point() +
-  ggtitle("Age estimé en fonction de la date de plantation") +
-  xlab("Date de plantation") +
-  ylab("Age estim") +
-  theme(axis.text.x = element_blank()) # enlève les valeurs sur l'axe des X
-
-nuage_feuillage_0  
-
 # ---------- Entre la hauteur du tronc et le diamètre du tronc ----------
-nuage_feuillage_2 <- ggplot(data, aes(x=haut_tronc, y=tronc_diam, color = feuillage)) +
+nuage_feuillage_1 <- ggplot(data, aes(x=haut_tronc, y=tronc_diam, color = feuillage)) +
   geom_point() +
   ggtitle("Hauteur du tonc en fonction du diamètre du tronc") +
   xlab("Hauteur du tronc") +
   ylab("Diamètre du tronc")
 
-nuage_feuillage_2
+nuage_feuillage_1
 
 # ---------- Entre la hauteur totale et la hauteur du tronc ----------
-nuage_feuillage_3 <- ggplot(data, aes(x=haut_tronc, y=haut_tot, color = feuillage)) +
+nuage_feuillage_2 <- ggplot(data, aes(x=haut_tronc, y=haut_tot, color = feuillage)) +
   geom_point() +
   ggtitle("Hauteur du tonc en fonction de la hauteur totale") +
   xlab("Hauteur totale") +
   ylab("Hauteur du tronc")
 
-nuage_feuillage_3
+nuage_feuillage_2
 
 # ---------- Entre la hauteur totale et l'âge estimé ----------
-nuage_feuillage_4 <- ggplot(data, aes(x=age_estim, y=haut_tot, color = feuillage))+
+nuage_feuillage_3 <- ggplot(data, aes(x=age_estim, y=haut_tot, color = feuillage))+
   geom_point() +
   ggtitle("Hauteur totale en fonction de l'âge estimé") +
   xlab("Age estim") +
   ylab("Hauteur totale")
 
-nuage_feuillage_4
+nuage_feuillage_3
 
 # ---------- Entre le diamètre du tronc et l'âge estimé ----------
-nuage_feuillage_1 <- ggplot(data, aes(x=age_estim, y=tronc_diam, color = feuillage))+
+nuage_feuillage_4 <- ggplot(data, aes(x=age_estim, y=tronc_diam, color = feuillage))+
   geom_point() +
   ggtitle("Diamètre du tronc en fonction de l'âge estimé") +
   xlab("Age estim") +
   ylab("Diamètre du tronc")
 
-nuage_feuillage_1
+nuage_feuillage_4
 
 # | --------------------------------------------------- |
 # |------| Corélations avec le paramètre villeca |------|
 # | --------------------------------------------------- | 
 
-# ---------- Entre l'âge de l'arbre et la date de plantation ----------
-nuage_villeca_0 <- ggplot(old_data, aes(x=dte_plantation, y=age_estim, color = villeca))+
-  geom_point() +
-  ggtitle("Age estimé en fonction de la date de plantation") +
-  xlab("Date de plantation") +
-  ylab("Age estim") +
-  theme(axis.text.x = element_blank()) # enlève les valeurs sur l'axe des X
-
-nuage_villeca_0
-
 # ---------- Entre la hauteur du tronc et le diamètre du tronc ----------
-nuage_villeca_2 <- ggplot(data, aes(x=haut_tronc, y=tronc_diam, color = villeca)) +
+nuage_villeca_1 <- ggplot(data, aes(x=haut_tronc, y=tronc_diam, color = villeca)) +
   geom_point() +
   ggtitle("Hauteur du tonc en fonction du diamètre du tronc") +
   xlab("Hauteur du tronc") +
   ylab("Diamètre du tronc")
 
-nuage_villeca_2
+nuage_villeca_1
 
 # ---------- Entre la hauteur totale et la hauteur du tronc ----------
-nuage_villeca_3 <- ggplot(data, aes(x=haut_tronc, y=haut_tot, color = villeca)) +
+nuage_villeca_2 <- ggplot(data, aes(x=haut_tronc, y=haut_tot, color = villeca)) +
   geom_point() +
   ggtitle("Hauteur du tonc en fonction de la hauteur totale") +
   xlab("Hauteur totale") +
   ylab("Hauteur du tronc")
 
-nuage_villeca_3
+nuage_villeca_2
 
 # ---------- Entre la hauteur totale et l'âge estimé ----------
-nuage_villeca_4 <- ggplot(data, aes(x=age_estim, y=haut_tot, color = villeca))+
+nuage_villeca_3 <- ggplot(data, aes(x=age_estim, y=haut_tot, color = villeca))+
   geom_point() +
   ggtitle("Hauteur totale en fonction de l'âge estimé") +
   xlab("Age estim") +
   ylab("Hauteur totale")
 
-nuage_villeca_4
+nuage_villeca_3
 
 # ---------- Entre le diamètre du tronc et l'âge estimé ----------
-nuage_villeca_1 <- ggplot(data, aes(x=age_estim, y=tronc_diam, color = villeca))+
+nuage_villeca_4 <- ggplot(data, aes(x=age_estim, y=tronc_diam, color = villeca))+
   geom_point() +
   ggtitle("Diamètre du tronc en fonction de l'âge estimé") +
   xlab("Age estim") +
   ylab("Diamètre du tronc")
 
-nuage_villeca_1
+nuage_villeca_4
 
 
 # | --------------------------------------------- |
 # |------| Corélations avec le type de sol |------|
 # | --------------------------------------------- | 
 
-# ---------- Entre l'âge de l'arbre et la date de plantation ----------
-nuage_pied_0 <- ggplot(old_data, aes(x=dte_plantation, y=age_estim, color = fk_pied))+
-  geom_point() +
-  ggtitle("Age estimé en fonction de la date de plantation") +
-  xlab("Date de plantation") +
-  ylab("Age estim") +
-  theme(axis.text.x = element_blank()) # enlève les valeurs sur l'axe des X
-
-nuage_pied_0
-
 # ---------- Entre la hauteur du tronc et le diamètre du tronc ----------
-nuage_pied_2 <- ggplot(data, aes(x=haut_tronc, y=tronc_diam, color = fk_pied)) +
+nuage_pied_1 <- ggplot(data, aes(x=haut_tronc, y=tronc_diam, color = fk_pied)) +
   geom_point() +
   ggtitle("Hauteur du tonc en fonction du diamètre du tronc") +
   xlab("Hauteur du tronc") +
   ylab("Diamètre du tronc")
 
-nuage_pied_2
+nuage_pied_1
 
 # ---------- Entre la hauteur totale et la hauteur du tronc ----------
-nuage_pied_3 <- ggplot(data, aes(x=haut_tronc, y=haut_tot, color = fk_pied)) +
+nuage_pied_2 <- ggplot(data, aes(x=haut_tronc, y=haut_tot, color = fk_pied)) +
   geom_point() +
   ggtitle("Hauteur du tonc en fonction de la hauteur totale") +
   xlab("Hauteur totale") +
   ylab("Hauteur du tronc")
 
-nuage_pied_3
+nuage_pied_2
 
 # ---------- Entre la hauteur totale et l'âge estimé ----------
-nuage_pied_4 <- ggplot(data, aes(x=age_estim, y=haut_tot, color = fk_pied))+
+nuage_pied_3 <- ggplot(data, aes(x=age_estim, y=haut_tot, color = fk_pied))+
   geom_point() +
   ggtitle("Hauteur totale en fonction de l'âge estimé") +
   xlab("Age estim") +
   ylab("Hauteur totale")
 
-nuage_pied_4
+nuage_pied_3
 
 # ---------- Entre le diamètre du tronc et l'âge estimé ----------
-nuage_pied_1 <- ggplot(data, aes(x=age_estim, y=tronc_diam, color = fk_pied))+
+nuage_pied_4 <- ggplot(data, aes(x=age_estim, y=tronc_diam, color = fk_pied))+
   geom_point() +
   ggtitle("Diamètre du tronc en fonction de l'âge estimé") +
   xlab("Age estim") +
   ylab("Diamètre du tronc")
 
-nuage_pied_1
+nuage_pied_4
 
 
 # | ---------------------------------------------------- |
 # |------| Corélations avec le type de revetement |------|
 # | ---------------------------------------------------- | 
 
-# ---------- Entre l'âge de l'arbre et la date de plantation ----------
-nuage_revetement_0 <- ggplot(old_data, aes(x=dte_plantation, y=age_estim, color = fk_revetement))+
-  geom_point() +
-  ggtitle("Age estimé en fonction de la date de plantation") +
-  xlab("Date de plantation") +
-  ylab("Age estim") +
-  theme(axis.text.x = element_blank()) # enlève les valeurs sur l'axe des X
-
-nuage_revetement_0
-
 # ---------- Entre la hauteur du tronc et le diamètre du tronc ----------
-nuage_revetement_2 <- ggplot(data, aes(x=haut_tronc, y=tronc_diam, color = fk_revetement)) +
+nuage_revetement_1 <- ggplot(data, aes(x=haut_tronc, y=tronc_diam, color = fk_revetement)) +
   geom_point() +
   ggtitle("Hauteur du tonc en fonction du diamètre du tronc") +
   xlab("Hauteur du tronc") +
   ylab("Diamètre du tronc")
 
-nuage_revetement_2
+nuage_revetement_1
 
 # ---------- Entre la hauteur totale et la hauteur du tronc ----------
-nuage_revetement_3 <- ggplot(data, aes(x=haut_tronc, y=haut_tot, color = fk_revetement)) +
+nuage_revetement_2 <- ggplot(data, aes(x=haut_tronc, y=haut_tot, color = fk_revetement)) +
   geom_point() +
   ggtitle("Hauteur du tonc en fonction de la hauteur totale") +
   xlab("Hauteur totale") +
   ylab("Hauteur du tronc")
 
-nuage_revetement_3
+nuage_revetement_
 
 # ---------- Entre la hauteur totale et l'âge estimé ----------
-nuage_revetement_4 <- ggplot(data, aes(x=age_estim, y=haut_tot, color = fk_revetement))+
+nuage_revetement_3 <- ggplot(data, aes(x=age_estim, y=haut_tot, color = fk_revetement))+
   geom_point() +
   ggtitle("Hauteur totale en fonction de l'âge estimé") +
   xlab("Age estim") +
   ylab("Hauteur totale")
 
-nuage_revetement_4
+nuage_revetement_3
 
 # ---------- Entre le diamètre du tronc et l'âge estimé ----------
-nuage_revetement_1 <- ggplot(data, aes(x=age_estim, y=tronc_diam, color = fk_revetement))+
+nuage_revetement_4 <- ggplot(data, aes(x=age_estim, y=tronc_diam, color = fk_revetement))+
   geom_point() +
   ggtitle("Diamètre du tronc en fonction de l'âge estimé") +
   xlab("Age estim") +
   ylab("Diamètre du tronc")
 
-nuage_revetement_1
+nuage_revetement_4
 
 
 # | ------------------------------------------------------------- |
 # |------| Corélations avec la caractéristique remarquable |------|
 # | ------------------------------------------------------------- | 
 
-# ---------- Entre l'âge de l'arbre et la date de plantation ----------
-nuage_remarquable_0 <- ggplot(old_data, aes(x=dte_plantation, y=age_estim, color = remarquable))+
-  geom_point() +
-  ggtitle("Age estimé en fonction de la date de plantation") +
-  xlab("Date de plantation") +
-  ylab("Age estim") +
-  theme(axis.text.x = element_blank()) # enlève les valeurs sur l'axe des X
-
-nuage_remarquable_0
-
 # ---------- Entre la hauteur du tronc et le diamètre du tronc ----------
-nuage_remarquable_2 <- ggplot(data, aes(x=haut_tronc, y=tronc_diam, color = remarquable)) +
+nuage_remarquable_1 <- ggplot(data, aes(x=haut_tronc, y=tronc_diam, color = remarquable)) +
   geom_point() +
   ggtitle("Hauteur du tonc en fonction du diamètre du tronc") +
   xlab("Hauteur du tronc") +
   ylab("Diamètre du tronc")
 
-nuage_remarquable_2
+nuage_remarquable_1
 
 # ---------- Entre la hauteur totale et la hauteur du tronc ----------
-nuage_remarquable_3 <- ggplot(data, aes(x=haut_tronc, y=haut_tot, color = remarquable)) +
+nuage_remarquable_2 <- ggplot(data, aes(x=haut_tronc, y=haut_tot, color = remarquable)) +
   geom_point() +
   ggtitle("Hauteur du tonc en fonction de la hauteur totale") +
   xlab("Hauteur totale") +
   ylab("Hauteur du tronc")
 
-nuage_remarquable_3
+nuage_remarquable_2
 
 # ---------- Entre la hauteur totale et l'âge estimé ----------
-nuage_remarquable_4 <- ggplot(data, aes(x=age_estim, y=haut_tot, color = remarquable))+
+nuage_remarquable_3 <- ggplot(data, aes(x=age_estim, y=haut_tot, color = remarquable))+
   geom_point() +
   ggtitle("Hauteur totale en fonction de l'âge estimé") +
   xlab("Age estim") +
   ylab("Hauteur totale")
 
-nuage_remarquable_4
+nuage_remarquable_3
 
 # ---------- Entre le diamètre du tronc et l'âge estimé ----------
-nuage_remarquable_1 <- ggplot(data, aes(x=age_estim, y=tronc_diam, color = remarquable))+
+nuage_remarquable_4 <- ggplot(data, aes(x=age_estim, y=tronc_diam, color = remarquable))+
   geom_point() +
   ggtitle("Diamètre du tronc en fonction de l'âge estimé") +
   xlab("Age estim") +
   ylab("Diamètre du tronc")
 
-nuage_remarquable_1
+nuage_remarquable_4
 
 
 # | ------------------------------------------- |
 # |------| Corélations avec la situation |------|
 # | ------------------------------------------- | 
 
-# ---------- Entre l'âge de l'arbre et la date de plantation ----------
-nuage_situation_0 <- ggplot(old_data, aes(x=dte_plantation, y=age_estim, color = fk_situation))+
-  geom_point() +
-  ggtitle("Age estimé en fonction de la date de plantation") +
-  xlab("Date de plantation") +
-  ylab("Age estim") +
-  theme(axis.text.x = element_blank()) # enlève les valeurs sur l'axe des X
-
-nuage_situation_0
-
 # ---------- Entre la hauteur du tronc et le diamètre du tronc ----------
-nuage_situation_2 <- ggplot(data, aes(x=haut_tronc, y=tronc_diam, color = fk_situation)) +
+nuage_situation_1 <- ggplot(data, aes(x=haut_tronc, y=tronc_diam, color = fk_situation)) +
   geom_point() +
   ggtitle("Hauteur du tonc en fonction du diamètre du tronc") +
   xlab("Hauteur du tronc") +
   ylab("Diamètre du tronc")
 
-nuage_situation_2
+nuage_situation_1
 
 # ---------- Entre la hauteur totale et la hauteur du tronc ----------
-nuage_situation_3 <- ggplot(data, aes(x=haut_tronc, y=haut_tot, color = fk_situation)) +
+nuage_situation_2 <- ggplot(data, aes(x=haut_tronc, y=haut_tot, color = fk_situation)) +
   geom_point() +
   ggtitle("Hauteur du tonc en fonction de la hauteur totale") +
   xlab("Hauteur totale") +
   ylab("Hauteur du tronc")
 
-nuage_situation_3
+nuage_situation_2
 
 # ---------- Entre la hauteur totale et l'âge estimé ----------
-nuage_situation_4 <- ggplot(data, aes(x=age_estim, y=haut_tot, color = fk_situation))+
+nuage_situation_3 <- ggplot(data, aes(x=age_estim, y=haut_tot, color = fk_situation))+
   geom_point() +
   ggtitle("Hauteur totale en fonction de l'âge estimé") +
   xlab("Age estim") +
   ylab("Hauteur totale")
 
-nuage_situation_4
+nuage_situation_3
 
 # ---------- Entre le diamètre du tronc et l'âge estimé ----------
-nuage_situation_1 <- ggplot(data, aes(x=age_estim, y=tronc_diam, color = fk_situation))+
+nuage_situation_4 <- ggplot(data, aes(x=age_estim, y=tronc_diam, color = fk_situation))+
   geom_point() +
   ggtitle("Diamètre du tronc en fonction de l'âge estimé") +
   xlab("Age estim") +
   ylab("Diamètre du tronc")
 
-nuage_situation_1
+nuage_situation_4
 
 
 # |        =================================================        | 

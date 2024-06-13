@@ -1,5 +1,9 @@
+#install.packages("ggplot2")
+#install.packages("reshape2")
+
 # Librairies nécessaires au projet
 library(ggplot2)
+library(reshape2)
 library(dplyr)
 library("stringr")
 old_data <- read.csv(file = "./Big_data/Patrimoine_Arboré_(RO).csv")
