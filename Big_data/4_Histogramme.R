@@ -641,3 +641,57 @@ hist_etat <- hist(data$feuillage_numeric,
                   xaxt = "n")
 
 axis(1, at = hist_etat$mids, labels = levels(data$feuillage_factor), las = 3)
+
+columns <- c("clc_quartier","haut_tot","haut_tronc","tronc_diam", "fk_arb_etat","fk_stadedev","fk_port","fk_pied",
+             "fk_situation","fk_revetement", "age_estim", "feuillage","remarquable")
+
+for (i in 1:(length(columns)-1)) {
+  
+  for (j in (i+1):length(columns)) {
+    
+    tableau <- table(data[[columns[i]]], data[[columns[j]]])
+    
+    tab <- as.data.frame(tableau)
+    colnames(tab) <- c(columns[i], columns[j], "Freq")
+    
+    graph <- ggplot(tab, aes_string(x = columns[i], y = "Freq", fill = columns[j])) +
+      geom_bar(stat = "identity", position = "dodge") +
+      theme_minimal() +
+      labs(title = paste("Relation entre", columns[i], "et", columns[j]),
+           x = columns[i],
+           y = "Fréquence") +
+      theme(axis.text.x = element_text(angle = 45, hjust = 1))
+    
+    # Afficher le graphique
+    print(graph)
+    
+  }
+
+}
+
+for (i in 1:(length(columns)-1)) {
+  
+  for (j in (i+1):length(columns)) {
+    
+    tableau <- table(data[[columns[i]]], data[[columns[j]]])
+    
+    tab <- as.data.frame(tableau)
+    colnames(tab) <- c(columns[i], columns[j], "Freq")
+    
+    graph <- ggplot(tab, aes_string(x = columns[i], y = "Freq", fill = columns[j])) +
+      geom_bar(stat = "identity", position = "dodge") +
+      theme_minimal() +
+      labs(title = paste("Relation entre", columns[i], "et", columns[j]),
+           x = columns[i],
+           y = "Fréquence") +
+      theme(axis.text.x = element_text(angle = 45, hjust = 1))
+    
+    # Afficher le graphique
+    print(graph)
+    
+  }
+  
+}
+
+
+

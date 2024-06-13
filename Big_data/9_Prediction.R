@@ -1,33 +1,3 @@
-library(ggplot2)
-
-columns <- c("fk_stadedev", "fk_port", "fk_pied", "fk_situation", "feuillage")
-
-for (i in 1:length(columns)) {
-  
-  # Create a contingency table
-  tableau <- table(data$clc_quartier, data[[columns[i]]])
-  
-  # Convert the table to a data frame
-  tab <- as.data.frame(tableau)
-  
-  # Rename the columns
-  colnames(tab) <- c("clc_quartier", columns[i], "Freq")
-  
-  # Create the ggplot graph
-  graph <- ggplot(tab, aes_string(x = "clc_quartier", y = "Freq", fill = columns[i])) +
-    geom_bar(stat = "identity", position = "dodge") +
-    theme_minimal() +
-    labs(title = paste("Relation entre clc_quartier et", columns[i]),
-         x = "clc_quartier",
-         y = "Fréquence") +
-    theme(axis.text.x = element_text(angle = 45, hjust = 1))
-  
-  # Display the graph
-  print(graph)
-}
-
-
-
 # | ======================================== |
 # |======| PPREDICTION PROCHAIN ARBRE |======|
 # | ======================================== |
@@ -36,6 +6,7 @@ for (i in 1:length(columns)) {
 # | =================================== |
 # |======| PPREDICTION AGE ARBRE |======|
 # | =================================== |
+
 
 data_ia$fk_arb_etat <- as.numeric(as.factor(data$fk_arb_etat)) # ça sert a rien gros fdp
 data_ia$fk_stadedev <- as.numeric(as.factor(data$fk_stadedev)) # ça sert a rien gros fdp

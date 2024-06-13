@@ -2,19 +2,56 @@
 # |============| Statistiques pour toute la base de données |============|
 # | ==================================================================== |
 
-moy_age = mean(data$age_estim, na.rm = TRUE)
-moy_haut_tot = mean(data$haut_tot, na.rm = TRUE)
-moy_haut_tronc = mean(data$haut_tronc, na.rm = TRUE)
-moy_tronc_diam = mean(data$tronc_diam, na.rm = TRUE)
-
-moyenne_generale <- data %>%
+# Calcul des statistiques pour chaque variable
+table_age_estim <- data %>%
   summarise(
-    moy_age, moy_haut_tot, moy_haut_tronc, moy_tronc_diam
+    Moyenne = mean(age_estim, na.rm = TRUE),
+    Médiane = median(age_estim, na.rm = TRUE),
+    Écart_type = sd(age_estim, na.rm = TRUE),
+    Maximum = max(age_estim, na.rm = TRUE),
+    Minimum = min(age_estim, na.rm = TRUE)
   )
 
-# Affichage de la moyenne générale pour age_estim
-print("Moyenne générale")
-moyenne_generale
+table_haut_tot <- data %>%
+  summarise(
+    Moyenne = mean(haut_tot, na.rm = TRUE),
+    Médiane = median(haut_tot, na.rm = TRUE),
+    Écart_type = sd(haut_tot, na.rm = TRUE),
+    Maximum = max(haut_tot, na.rm = TRUE),
+    Minimum = min(haut_tot, na.rm = TRUE)
+  )
+
+table_haut_tronc <- data %>%
+  summarise(
+    Moyenne = mean(haut_tronc, na.rm = TRUE),
+    Médiane = median(haut_tronc, na.rm = TRUE),
+    Écart_type = sd(haut_tronc, na.rm = TRUE),
+    Maximum = max(haut_tronc, na.rm = TRUE),
+    Minimum = min(haut_tronc, na.rm = TRUE)
+  )
+
+table_tronc_diam <- data %>%
+  summarise(
+    Moyenne = mean(tronc_diam, na.rm = TRUE),
+    Médiane = median(tronc_diam, na.rm = TRUE),
+    Écart_type = sd(tronc_diam, na.rm = TRUE),
+    Maximum = max(tronc_diam, na.rm = TRUE),
+    Minimum = min(tronc_diam, na.rm = TRUE)
+  )
+
+# Affichage des résultats
+print("Statistiques pour 'age_estim':")
+table_age_estim
+
+print("Statistiques pour 'haut_tot':")
+table_haut_tot
+
+print("Statistiques pour 'haut_tronc':")
+table_haut_tronc
+
+print("Statistiques pour 'tronc_diam':")
+table_tronc_diam
+
 
 
 
@@ -28,7 +65,9 @@ table_age_estim_quartiers <- data %>%
   summarise(
     age_moyenne = mean(age_estim, na.rm = TRUE),
     age_mediane = median(age_estim, na.rm = TRUE),
-    age_ecart_type = sd(age_estim, na.rm = TRUE)
+    age_ecart_type = sd(age_estim, na.rm = TRUE),
+    age_minimum = min(age_estim, na.rm = TRUE),
+    age_maximum = max(age_estim, na.rm = TRUE)
   )  
 
 # Affichage des résultats pour age_estim
@@ -41,7 +80,9 @@ table_haut_tot_quartiers <- data %>%
   summarise(
     hauteur_totale_moyenne = mean(haut_tot, na.rm = TRUE),
     hauteur_totale_mediane = median(haut_tot, na.rm = TRUE),
-    hauteur_totale_ecart_type = sd(haut_tot, na.rm = TRUE)
+    hauteur_totale_ecart_type = sd(haut_tot, na.rm = TRUE),
+    hauteur_totale_minimum = min(haut_tot, na.rm = TRUE),
+    hauteur_totale_maximum = max(haut_tot, na.rm = TRUE)
   )
 
 # Affichage des résultats pour haut_tot
@@ -54,7 +95,9 @@ table_haut_tronc_quartiers <- data %>%
   summarise(
     hauteur_tronc_moyenne = mean(haut_tronc, na.rm = TRUE),
     hauteur_tronc_mediane = median(haut_tronc, na.rm = TRUE),
-    hauteur_tronc_ecart_type = sd(haut_tronc, na.rm = TRUE)
+    hauteur_tronc_ecart_type = sd(haut_tronc, na.rm = TRUE),
+    hauteur_tronc_minimum = min(haut_tronc, na.rm = TRUE),
+    hauteur_tronc_maximum = max(haut_tronc, na.rm = TRUE)
   )
 
 # Affichage des résultats pour haut_tronc
@@ -67,7 +110,9 @@ table_tronc_diam_quartiers <- data %>%
   summarise(
     tronc_diametre_moyenne = mean(tronc_diam, na.rm = TRUE),
     tronc_diametre_mediane = median(tronc_diam, na.rm = TRUE),
-    tronc_diametre_ecart_type = sd(tronc_diam, na.rm = TRUE)
+    tronc_diametre_ecart_type = sd(tronc_diam, na.rm = TRUE),
+    tronc_diametre_minimum = min(tronc_diam, na.rm = TRUE),
+    tronc_diametre_maximum = max(tronc_diam, na.rm = TRUE)
   )
 
 # Affichage des résultats pour tronc_diam
@@ -81,56 +126,64 @@ table_tronc_diam_quartiers
 # | ============================================================== |
 
 # ------------------- Age estimé ------------------- 
-table_age_estim_secteur <- data %>%
+table_age_estim_secteurs <- data %>%
   group_by(clc_secteur) %>%
   summarise(
     age_moyenne = mean(age_estim, na.rm = TRUE),
     age_mediane = median(age_estim, na.rm = TRUE),
-    age_ecart_type = sd(age_estim, na.rm = TRUE)
+    age_ecart_type = sd(age_estim, na.rm = TRUE),
+    age_minimum = min(age_estim, na.rm = TRUE),
+    age_maximum = max(age_estim, na.rm = TRUE)
   )  
 
 # Affichage des résultats pour age_estim
 print("Tableau des statistiques pour l'age_estim")
-table_age_estim_secteur
+table_age_estim_secteurs
 
 # ------------------- Hauteur totale -------------------
-table_haut_tot_secteur <- data %>%
+table_haut_tot_secteurs <- data %>%
   group_by(clc_secteur) %>%
   summarise(
     hauteur_totale_moyenne = mean(haut_tot, na.rm = TRUE),
     hauteur_totale_mediane = median(haut_tot, na.rm = TRUE),
-    hauteur_totale_ecart_type = sd(haut_tot, na.rm = TRUE)
+    hauteur_totale_ecart_type = sd(haut_tot, na.rm = TRUE),
+    hauteur_totale_minimum = min(haut_tot, na.rm = TRUE),
+    hauteur_totale_maximum = max(haut_tot, na.rm = TRUE)
   )
 
 # Affichage des résultats pour haut_tot
 print("Tableau des statistiques pour la hauteur totale (haut_tot)")
-table_haut_tot_secteur
+table_haut_tot_secteurs
 
 # ------------------- Hauteur tronc -------------------
-table_haut_tronc_secteur <- data %>%
+table_haut_tronc_secteurs <- data %>%
   group_by(clc_secteur) %>%
   summarise(
     hauteur_tronc_moyenne = mean(haut_tronc, na.rm = TRUE),
     hauteur_tronc_mediane = median(haut_tronc, na.rm = TRUE),
-    hauteur_tronc_ecart_type = sd(haut_tronc, na.rm = TRUE)
+    hauteur_tronc_ecart_type = sd(haut_tronc, na.rm = TRUE),
+    hauteur_tronc_minimum = min(haut_tronc, na.rm = TRUE),
+    hauteur_tronc_maximum = max(haut_tronc, na.rm = TRUE)
   )
 
 # Affichage des résultats pour haut_tronc
 print("Tableau des statistiques pour la hauteur du tronc (haut_tronc)")
-table_haut_tronc_secteur
+table_haut_tronc_secteurs
 
 # ------------------- Diamètre tronc -------------------
-table_tronc_diam_secteur <- data %>%
+table_tronc_diam_secteurs <- data %>%
   group_by(clc_secteur) %>%
   summarise(
     tronc_diametre_moyenne = mean(tronc_diam, na.rm = TRUE),
     tronc_diametre_mediane = median(tronc_diam, na.rm = TRUE),
-    tronc_diametre_ecart_type = sd(tronc_diam, na.rm = TRUE)
+    tronc_diametre_ecart_type = sd(tronc_diam, na.rm = TRUE),
+    tronc_diametre_minimum = min(tronc_diam, na.rm = TRUE),
+    tronc_diametre_maximum = max(tronc_diam, na.rm = TRUE)
   )
 
 # Affichage des résultats pour tronc_diam
 print("Tableau des statistiques pour le diamètre du tronc (tronc_diam)")
-table_tronc_diam_secteur
+table_tronc_diam_secteurs
 
 
 
@@ -144,7 +197,9 @@ table_age_estim_situation <- data %>%
   summarise(
     age_moyenne = mean(age_estim, na.rm = TRUE),
     age_mediane = median(age_estim, na.rm = TRUE),
-    age_ecart_type = sd(age_estim, na.rm = TRUE)
+    age_ecart_type = sd(age_estim, na.rm = TRUE),
+    age_minimum = min(age_estim, na.rm = TRUE),
+    age_maximum = max(age_estim, na.rm = TRUE)
   )  
 
 # Affichage des résultats pour age_estim
@@ -157,7 +212,9 @@ table_haut_tot_situation <- data %>%
   summarise(
     hauteur_totale_moyenne = mean(haut_tot, na.rm = TRUE),
     hauteur_totale_mediane = median(haut_tot, na.rm = TRUE),
-    hauteur_totale_ecart_type = sd(haut_tot, na.rm = TRUE)
+    hauteur_totale_ecart_type = sd(haut_tot, na.rm = TRUE),
+    hauteur_totale_minimum = min(haut_tot, na.rm = TRUE),
+    hauteur_totale_maximum = max(haut_tot, na.rm = TRUE)
   )
 
 # Affichage des résultats pour haut_tot
@@ -170,7 +227,9 @@ table_haut_tronc_situation <- data %>%
   summarise(
     hauteur_tronc_moyenne = mean(haut_tronc, na.rm = TRUE),
     hauteur_tronc_mediane = median(haut_tronc, na.rm = TRUE),
-    hauteur_tronc_ecart_type = sd(haut_tronc, na.rm = TRUE)
+    hauteur_tronc_ecart_type = sd(haut_tronc, na.rm = TRUE),
+    hauteur_tronc_minimum = min(haut_tronc, na.rm = TRUE),
+    hauteur_tronc_maximum = max(haut_tronc, na.rm = TRUE)
   )
 
 # Affichage des résultats pour haut_tronc
@@ -183,7 +242,9 @@ table_tronc_diam_situation <- data %>%
   summarise(
     tronc_diametre_moyenne = mean(tronc_diam, na.rm = TRUE),
     tronc_diametre_mediane = median(tronc_diam, na.rm = TRUE),
-    tronc_diametre_ecart_type = sd(tronc_diam, na.rm = TRUE)
+    tronc_diametre_ecart_type = sd(tronc_diam, na.rm = TRUE),
+    tronc_diametre_minimum = min(tronc_diam, na.rm = TRUE),
+    tronc_diametre_maximum = max(tronc_diam, na.rm = TRUE)
   )
 
 # Affichage des résultats pour tronc_diam
@@ -202,7 +263,9 @@ table_age_estim_feuillage <- data %>%
   summarise(
     age_moyenne = mean(age_estim, na.rm = TRUE),
     age_mediane = median(age_estim, na.rm = TRUE),
-    age_ecart_type = sd(age_estim, na.rm = TRUE)
+    age_ecart_type = sd(age_estim, na.rm = TRUE),
+    age_minimum = min(age_estim, na.rm = TRUE),
+    age_maximum = max(age_estim, na.rm = TRUE)
   )  
 
 # Affichage des résultats pour age_estim
@@ -215,7 +278,9 @@ table_haut_tot_feuillage <- data %>%
   summarise(
     hauteur_totale_moyenne = mean(haut_tot, na.rm = TRUE),
     hauteur_totale_mediane = median(haut_tot, na.rm = TRUE),
-    hauteur_totale_ecart_type = sd(haut_tot, na.rm = TRUE)
+    hauteur_totale_ecart_type = sd(haut_tot, na.rm = TRUE),
+    hauteur_totale_minimum = min(haut_tot, na.rm = TRUE),
+    hauteur_totale_maximum = max(haut_tot, na.rm = TRUE)
   )
 
 # Affichage des résultats pour haut_tot
@@ -228,7 +293,9 @@ table_haut_tronc_feuillage <- data %>%
   summarise(
     hauteur_tronc_moyenne = mean(haut_tronc, na.rm = TRUE),
     hauteur_tronc_mediane = median(haut_tronc, na.rm = TRUE),
-    hauteur_tronc_ecart_type = sd(haut_tronc, na.rm = TRUE)
+    hauteur_tronc_ecart_type = sd(haut_tronc, na.rm = TRUE),
+    hauteur_tronc_minimum = min(haut_tronc, na.rm = TRUE),
+    hauteur_tronc_maximum = max(haut_tronc, na.rm = TRUE)
   )
 
 # Affichage des résultats pour haut_tronc
@@ -241,7 +308,9 @@ table_tronc_diam_feuillage <- data %>%
   summarise(
     tronc_diametre_moyenne = mean(tronc_diam, na.rm = TRUE),
     tronc_diametre_mediane = median(tronc_diam, na.rm = TRUE),
-    tronc_diametre_ecart_type = sd(tronc_diam, na.rm = TRUE)
+    tronc_diametre_ecart_type = sd(tronc_diam, na.rm = TRUE),
+    tronc_diametre_minimum = min(tronc_diam, na.rm = TRUE),
+    tronc_diametre_maximum = max(tronc_diam, na.rm = TRUE)
   )
 
 # Affichage des résultats pour tronc_diam
@@ -260,7 +329,9 @@ table_age_estim_revetement <- data %>%
   summarise(
     age_moyenne = mean(age_estim, na.rm = TRUE),
     age_mediane = median(age_estim, na.rm = TRUE),
-    age_ecart_type = sd(age_estim, na.rm = TRUE)
+    age_ecart_type = sd(age_estim, na.rm = TRUE),
+    age_minimum = min(age_estim, na.rm = TRUE),
+    age_maximum = max(age_estim, na.rm = TRUE)
   )  
 
 # Affichage des résultats pour age_estim
@@ -273,7 +344,9 @@ table_haut_tot_revetement <- data %>%
   summarise(
     hauteur_totale_moyenne = mean(haut_tot, na.rm = TRUE),
     hauteur_totale_mediane = median(haut_tot, na.rm = TRUE),
-    hauteur_totale_ecart_type = sd(haut_tot, na.rm = TRUE)
+    hauteur_totale_ecart_type = sd(haut_tot, na.rm = TRUE),
+    hauteur_totale_minimum = min(haut_tot, na.rm = TRUE),
+    hauteur_totale_maximum = max(haut_tot, na.rm = TRUE)
   )
 
 # Affichage des résultats pour haut_tot
@@ -286,7 +359,9 @@ table_haut_tronc_revetement <- data %>%
   summarise(
     hauteur_tronc_moyenne = mean(haut_tronc, na.rm = TRUE),
     hauteur_tronc_mediane = median(haut_tronc, na.rm = TRUE),
-    hauteur_tronc_ecart_type = sd(haut_tronc, na.rm = TRUE)
+    hauteur_tronc_ecart_type = sd(haut_tronc, na.rm = TRUE),
+    hauteur_tronc_minimum = min(haut_tronc, na.rm = TRUE),
+    hauteur_tronc_maximum = max(haut_tronc, na.rm = TRUE)
   )
 
 # Affichage des résultats pour haut_tronc
@@ -299,9 +374,10 @@ table_tronc_diam_revetement <- data %>%
   summarise(
     tronc_diametre_moyenne = mean(tronc_diam, na.rm = TRUE),
     tronc_diametre_mediane = median(tronc_diam, na.rm = TRUE),
-    tronc_diametre_ecart_type = sd(tronc_diam, na.rm = TRUE)
+    tronc_diametre_ecart_type = sd(tronc_diam, na.rm = TRUE),
+    tronc_diametre_minimum = min(tronc_diam, na.rm = TRUE),
+    tronc_diametre_maximum = max(tronc_diam, na.rm = TRUE)
   )
-
 # Affichage des résultats pour tronc_diam
 print("Tableau des statistiques pour le diamètre du tronc (tronc_diam)")
 table_tronc_diam_revetement
@@ -318,8 +394,10 @@ table_age_estim_remarquable <- data %>%
   summarise(
     age_moyenne = mean(age_estim, na.rm = TRUE),
     age_mediane = median(age_estim, na.rm = TRUE),
-    age_ecart_type = sd(age_estim, na.rm = TRUE)
-  )  
+    age_ecart_type = sd(age_estim, na.rm = TRUE),
+    age_minimum = min(age_estim, na.rm = TRUE),
+    age_maximum = max(age_estim, na.rm = TRUE)
+  )   
 
 # Affichage des résultats pour age_estim
 print("Tableau des statistiques pour l'age_estim")
@@ -331,7 +409,9 @@ table_haut_tot_remarquable <- data %>%
   summarise(
     hauteur_totale_moyenne = mean(haut_tot, na.rm = TRUE),
     hauteur_totale_mediane = median(haut_tot, na.rm = TRUE),
-    hauteur_totale_ecart_type = sd(haut_tot, na.rm = TRUE)
+    hauteur_totale_ecart_type = sd(haut_tot, na.rm = TRUE),
+    hauteur_totale_minimum = min(haut_tot, na.rm = TRUE),
+    hauteur_totale_maximum = max(haut_tot, na.rm = TRUE)
   )
 
 # Affichage des résultats pour haut_tot
@@ -344,7 +424,9 @@ table_haut_tronc_remarquable <- data %>%
   summarise(
     hauteur_tronc_moyenne = mean(haut_tronc, na.rm = TRUE),
     hauteur_tronc_mediane = median(haut_tronc, na.rm = TRUE),
-    hauteur_tronc_ecart_type = sd(haut_tronc, na.rm = TRUE)
+    hauteur_tronc_ecart_type = sd(haut_tronc, na.rm = TRUE),
+    hauteur_tronc_minimum = min(haut_tronc, na.rm = TRUE),
+    hauteur_tronc_maximum = max(haut_tronc, na.rm = TRUE)
   )
 
 # Affichage des résultats pour haut_tronc
@@ -357,7 +439,9 @@ table_tronc_diam_remarquable <- data %>%
   summarise(
     tronc_diametre_moyenne = mean(tronc_diam, na.rm = TRUE),
     tronc_diametre_mediane = median(tronc_diam, na.rm = TRUE),
-    tronc_diametre_ecart_type = sd(tronc_diam, na.rm = TRUE)
+    tronc_diametre_ecart_type = sd(tronc_diam, na.rm = TRUE),
+    tronc_diametre_minimum = min(tronc_diam, na.rm = TRUE),
+    tronc_diametre_maximum = max(tronc_diam, na.rm = TRUE)
   )
 
 # Affichage des résultats pour tronc_diam
@@ -376,9 +460,10 @@ table_age_estim_port <- data %>%
   summarise(
     age_moyenne = mean(age_estim, na.rm = TRUE),
     age_mediane = median(age_estim, na.rm = TRUE),
-    age_ecart_type = sd(age_estim, na.rm = TRUE)
-  )  
-
+    age_ecart_type = sd(age_estim, na.rm = TRUE),
+    age_minimum = min(age_estim, na.rm = TRUE),
+    age_maximum = max(age_estim, na.rm = TRUE)
+  ) 
 # Affichage des résultats pour age_estim
 print("Tableau des statistiques pour l'age_estim")
 table_age_estim_port 
@@ -389,7 +474,9 @@ table_haut_tot_port <- data %>%
   summarise(
     hauteur_totale_moyenne = mean(haut_tot, na.rm = TRUE),
     hauteur_totale_mediane = median(haut_tot, na.rm = TRUE),
-    hauteur_totale_ecart_type = sd(haut_tot, na.rm = TRUE)
+    hauteur_totale_ecart_type = sd(haut_tot, na.rm = TRUE),
+    hauteur_totale_minimum = min(haut_tot, na.rm = TRUE),
+    hauteur_totale_maximum = max(haut_tot, na.rm = TRUE)
   )
 
 # Affichage des résultats pour haut_tot
@@ -402,7 +489,9 @@ table_haut_tronc_port <- data %>%
   summarise(
     hauteur_tronc_moyenne = mean(haut_tronc, na.rm = TRUE),
     hauteur_tronc_mediane = median(haut_tronc, na.rm = TRUE),
-    hauteur_tronc_ecart_type = sd(haut_tronc, na.rm = TRUE)
+    hauteur_tronc_ecart_type = sd(haut_tronc, na.rm = TRUE),
+    hauteur_tronc_minimum = min(haut_tronc, na.rm = TRUE),
+    hauteur_tronc_maximum = max(haut_tronc, na.rm = TRUE)
   )
 
 # Affichage des résultats pour haut_tronc
@@ -415,9 +504,10 @@ table_tronc_diam_port <- data %>%
   summarise(
     tronc_diametre_moyenne = mean(tronc_diam, na.rm = TRUE),
     tronc_diametre_mediane = median(tronc_diam, na.rm = TRUE),
-    tronc_diametre_ecart_type = sd(tronc_diam, na.rm = TRUE)
+    tronc_diametre_ecart_type = sd(tronc_diam, na.rm = TRUE),
+    tronc_diametre_minimum = min(tronc_diam, na.rm = TRUE),
+    tronc_diametre_maximum = max(tronc_diam, na.rm = TRUE)
   )
-
 # Affichage des résultats pour tronc_diam
 print("Tableau des statistiques pour le diamètre du tronc (tronc_diam)")
 table_tronc_diam_port
@@ -434,7 +524,9 @@ table_age_estim_pied <- data %>%
   summarise(
     age_moyenne = mean(age_estim, na.rm = TRUE),
     age_mediane = median(age_estim, na.rm = TRUE),
-    age_ecart_type = sd(age_estim, na.rm = TRUE)
+    age_ecart_type = sd(age_estim, na.rm = TRUE),
+    age_minimum = min(age_estim, na.rm = TRUE),
+    age_maximum = max(age_estim, na.rm = TRUE)
   )  
 
 # Affichage des résultats pour age_estim
@@ -447,7 +539,9 @@ table_haut_tot_pied <- data %>%
   summarise(
     hauteur_totale_moyenne = mean(haut_tot, na.rm = TRUE),
     hauteur_totale_mediane = median(haut_tot, na.rm = TRUE),
-    hauteur_totale_ecart_type = sd(haut_tot, na.rm = TRUE)
+    hauteur_totale_ecart_type = sd(haut_tot, na.rm = TRUE),
+    hauteur_totale_minimum = min(haut_tot, na.rm = TRUE),
+    hauteur_totale_maximum = max(haut_tot, na.rm = TRUE)
   )
 
 # Affichage des résultats pour haut_tot
@@ -460,7 +554,9 @@ table_haut_tronc_pied <- data %>%
   summarise(
     hauteur_tronc_moyenne = mean(haut_tronc, na.rm = TRUE),
     hauteur_tronc_mediane = median(haut_tronc, na.rm = TRUE),
-    hauteur_tronc_ecart_type = sd(haut_tronc, na.rm = TRUE)
+    hauteur_tronc_ecart_type = sd(haut_tronc, na.rm = TRUE),
+    hauteur_tronc_minimum = min(haut_tronc, na.rm = TRUE),
+    hauteur_tronc_maximum = max(haut_tronc, na.rm = TRUE)
   )
 
 # Affichage des résultats pour haut_tronc
@@ -473,7 +569,9 @@ table_tronc_diam_pied <- data %>%
   summarise(
     tronc_diametre_moyenne = mean(tronc_diam, na.rm = TRUE),
     tronc_diametre_mediane = median(tronc_diam, na.rm = TRUE),
-    tronc_diametre_ecart_type = sd(tronc_diam, na.rm = TRUE)
+    tronc_diametre_ecart_type = sd(tronc_diam, na.rm = TRUE),
+    tronc_diametre_minimum = min(tronc_diam, na.rm = TRUE),
+    tronc_diametre_maximum = max(tronc_diam, na.rm = TRUE)
   )
 
 # Affichage des résultats pour tronc_diam
@@ -492,20 +590,23 @@ table_age_estim_etat <- data %>%
   summarise(
     age_moyenne = mean(age_estim, na.rm = TRUE),
     age_mediane = median(age_estim, na.rm = TRUE),
-    age_ecart_type = sd(age_estim, na.rm = TRUE)
-  )  
+    age_ecart_type = sd(age_estim, na.rm = TRUE),
+    age_minimum = min(age_estim, na.rm = TRUE),
+    age_maximum = max(age_estim, na.rm = TRUE)
+  )   
 
 # Affichage des résultats pour age_estim
 print("Tableau des statistiques pour l'age_estim")
 table_age_estim_etat
-
 # ------------------- Hauteur totale -------------------
 table_haut_tot_etat <- data %>%
   group_by(fk_arb_etat) %>%
   summarise(
     hauteur_totale_moyenne = mean(haut_tot, na.rm = TRUE),
     hauteur_totale_mediane = median(haut_tot, na.rm = TRUE),
-    hauteur_totale_ecart_type = sd(haut_tot, na.rm = TRUE)
+    hauteur_totale_ecart_type = sd(haut_tot, na.rm = TRUE),
+    hauteur_totale_minimum = min(haut_tot, na.rm = TRUE),
+    hauteur_totale_maximum = max(haut_tot, na.rm = TRUE)
   )
 
 # Affichage des résultats pour haut_tot
@@ -518,9 +619,10 @@ table_haut_tronc_etat <- data %>%
   summarise(
     hauteur_tronc_moyenne = mean(haut_tronc, na.rm = TRUE),
     hauteur_tronc_mediane = median(haut_tronc, na.rm = TRUE),
-    hauteur_tronc_ecart_type = sd(haut_tronc, na.rm = TRUE)
+    hauteur_tronc_ecart_type = sd(haut_tronc, na.rm = TRUE),
+    hauteur_tronc_minimum = min(haut_tronc, na.rm = TRUE),
+    hauteur_tronc_maximum = max(haut_tronc, na.rm = TRUE)
   )
-
 # Affichage des résultats pour haut_tronc
 print("Tableau des statistiques pour la hauteur du tronc (haut_tronc)")
 table_haut_tronc_etat
@@ -531,7 +633,9 @@ table_tronc_diam_etat <- data %>%
   summarise(
     tronc_diametre_moyenne = mean(tronc_diam, na.rm = TRUE),
     tronc_diametre_mediane = median(tronc_diam, na.rm = TRUE),
-    tronc_diametre_ecart_type = sd(tronc_diam, na.rm = TRUE)
+    tronc_diametre_ecart_type = sd(tronc_diam, na.rm = TRUE),
+    tronc_diametre_minimum = min(tronc_diam, na.rm = TRUE),
+    tronc_diametre_maximum = max(tronc_diam, na.rm = TRUE)
   )
 
 # Affichage des résultats pour tronc_diam
