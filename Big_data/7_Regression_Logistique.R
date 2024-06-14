@@ -17,10 +17,6 @@ data_1$fk_arb_etat <- ifelse(data_1$fk_arb_etat != "en place", 1, 0)
 model <- glm(fk_arb_etat ~ age_estim, data = data_1, family = binomial)
 summary(model)
 
-#On obtient :
-#Intercept estimate = -3.047476
-#age_estime estimate = 0.018954
-
 logit_ypredit= 0.018954*data_1$age_estim -3.047476
 ypredit=exp(logit_ypredit)/(1+ exp(logit_ypredit)) # transfo inverse de logit
 
@@ -300,7 +296,7 @@ data_1 <- data
 data_1$fk_arb_etat <- ifelse(data_1$fk_arb_etat != "en place", 1, 0)
 
 # Modèle de régression logistique
-model <- glm(fk_arb_etat ~ X + Y + OBJECTID + clc_quartier + clc_secteur + haut_tot + haut_tronc+ tronc_diam + fk_stadedev + fk_port + fk_pied + fk_situation + fk_revetement + age_estim + villeca + nomfrancais + feuillage + remarquable, data = data_1, family = binomial)
+model <- glm(fk_arb_etat ~ age_estim, data = data_1, family = binomial)
 summary(model)
 
 # Création du modèle nul (intercept seulement)
