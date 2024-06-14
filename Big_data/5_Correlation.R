@@ -72,11 +72,11 @@ graphe_cor_haut_tronc_tot <- ggplot(data, aes(x = haut_tronc, y = haut_tot)) +
   xlab("Hauteur totale") +
   ylab("Hauteur du tronc")
 
-cor_haut_diam <- cor(data$haut_tronc, data$tronc_diam, method = "pearson")
-graphe_cor_haut_diam <- ggplot(data, aes(x = haut_tronc, y = tronc_diam)) +
+cor_haut_diam <- cor(data$haut_tot, data$tronc_diam, method = "pearson")
+graphe_cor_haut_diam <- ggplot(data, aes(x = haut_tot, y = tronc_diam)) +
   geom_point() +
   geom_smooth(method = "lm", color = "orange", se = FALSE) + # Ligne de régression linéaire
-  ggtitle("Corrélation entre la hauteur du tronc et le diamètre du tronc", round(cor_haut_diam,2)) +
+  ggtitle("Corrélation entre la hauteur totale et le diamètre du tronc", round(cor_haut_diam,2)) +
   xlab("Hauteur du tronc") +
   ylab("Diamètre du tronc")
 
