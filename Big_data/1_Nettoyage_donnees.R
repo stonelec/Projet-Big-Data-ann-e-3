@@ -68,17 +68,8 @@ data <- data %>%   filter(!(haut_tot < haut_tronc))
 # SUPPRIMER les arbres sans nom
 data <- data %>%   filter(!(is.na(nomfrancais)))
 
-# SUPPRIMER les arbres sans ville
-#data <- data %>%   filter(!(is.na(villeca)))
-
-# SUPPRIMER les arbres sans clc_quartier
-#data <- data %>%   filter(!(is.na(clc_quartier)))
-
 # SUPPRIMER les arbres sans clc_secteur
 data <- data %>%   filter(!(is.na(clc_secteur)))
-
-# SUPPRIMER les arbres sans fk_revetement
-#data <- data %>%   filter(!(is.na(fk_revetement)))
 
 # SUPPRIMER les arbres sans fk_stadedev
 data <- data %>%   filter(!(is.na(fk_stadedev)))
@@ -128,21 +119,6 @@ data <- data %>%  mutate(clc_quartier = if_else(is.na(clc_quartier), "Périphér
 
 #REMPLACER fk_revetement
 data <- data %>%  mutate(fk_revetement = if_else(is.na(fk_revetement), "inconnu", fk_revetement))
-
-#REMPLACER fk_stadedev
-#data <- data %>%  mutate(fk_stadedev = if_else(is.na(fk_stadedev), "inconnu", fk_stadedev))
-
-#REMPLACER fk_port
-#data <- data %>%  mutate(fk_port = if_else(is.na(fk_port), "inconnu", fk_port))
-
-#REMPLACER fk_pied
-#data <- data %>%  mutate(fk_pied = if_else(is.na(fk_pied), "inconnu", fk_pied))
-
-#REMPLACER fk_situation
-#data <- data %>%  mutate(fk_situation = if_else(is.na(fk_situation), "inconnu", fk_situation))
-
-#REMPLACER feuillage
-#data <- data %>%  mutate(feuillage = if_else(is.na(feuillage), "inconnu", feuillage))
 
 #REMPLACER remarquable
 data <- data %>%  mutate(remarquable = if_else(is.na(remarquable), "Non", remarquable))
