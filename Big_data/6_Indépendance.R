@@ -7,11 +7,6 @@ columns <- c("clc_quartier","fk_arb_etat","fk_stadedev","fk_port","fk_pied",
              "fk_situation","fk_revetement", "feuillage","remarquable")
 
 
-#Le simulate.p.value est utilisé souvent lorsqu'on a des données manquantes
-#ou quand nous avons pas beaucoup de données et permet d'avoir une plus grande précisions. 
-#Dans notre cas, nous avons rajouter des données mais elles sont considérées comme manquantes.
-#C'est pour cela que nous allons faire avec les 2 méthodes
-
 for (i in 1:(length(columns)-1)) {
 
     for (j in (i+1):length(columns)) {
