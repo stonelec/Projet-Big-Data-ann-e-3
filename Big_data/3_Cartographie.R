@@ -260,6 +260,15 @@ map_revet
 map_revet_oui
 map_revet_non
 
+map_revet_oui_quartier <- ggplot(data_revet_oui, aes(x = X, y = Y, color =  clc_quartier)) +
+  geom_point() +
+  ggtitle("Répartition des données pour revêtement = oui") +
+  xlab("X") +
+  ylab("Y") +
+  xlim(xlim) + ylim(ylim)
+
+map_revet_oui_quartier
+
 # <<-------------------// Remarquable \\------------------->>
 
 map_remar <- ggplot(data, aes(x = X, y = Y, color = remarquable)) +
@@ -293,13 +302,24 @@ map_remar
 map_remar_oui
 map_remar_non
 
-# Affichage de la carte pour remarquable = non; par quartier
+# Affichage de la carte pour remarquable = oui; par quartier
 map_remar_oui_quartier <- ggplot(data_remarquable_oui, aes(x = X, y = Y, color=clc_quartier)) +
   geom_point() +
   ggtitle("Répartition des données pour remarquable = oui sur chaque quartier") +
   xlab("X") +
   ylab("Y") +
   xlim(xlim) + ylim(ylim)
+
+# Affichage de la carte pour remarquable = oui; par stade de développement
+map_remar_oui_dev <- ggplot(data_remarquable_oui, aes(x = X, y = Y, color=fk_stadedev)) +
+  geom_point() +
+  ggtitle("Répartition des données pour remarquable = oui pour chaque stade de développemeent") +
+  xlab("X") +
+  ylab("Y") +
+  xlim(xlim) + ylim(ylim)
+
+map_remar_oui_quartier
+map_remar_oui_dev
 
 map_remar_oui_quartier
 

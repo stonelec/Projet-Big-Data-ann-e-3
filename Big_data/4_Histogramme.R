@@ -2,6 +2,23 @@
 # ---------------------------------------- Matrice en fonction du quartier ----------------------------------------
 # -----------------------------------------------------------------------------------------------------------------
 
+# ----- Affichage des stades de développement en fonction des quartiers : ----- 
+
+counts_function <- data %>%
+  group_by(fk_stadedev, clc_quartier) %>%
+  summarize(counts_function = n())
+
+matrice_dev_quartier <- ggplot(counts_function, aes(x = fk_stadedev, y = clc_quartier)) +
+  geom_tile(aes(fill = counts_function)) +
+  geom_text(aes(label = counts_function), color = "black") +
+  scale_fill_gradient(low = "white", high = "blue") +   # Dégradé de couleur pour les tuiles
+  ggtitle("Etats des stades de développement en fonction des quartiers") +
+  xlab("Satde de développement") +
+  ylab("Quartiers") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+matrice_dev_quartier
+
 # ----- Affichage des états en fonction des quartiers : ----- 
 
 counts_function <- data %>%

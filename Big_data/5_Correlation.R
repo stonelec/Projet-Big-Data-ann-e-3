@@ -80,7 +80,6 @@ graphe_cor_haut_diam <- ggplot(data, aes(x = haut_tot, y = tronc_diam)) +
   xlab("Hauteur du tronc") +
   ylab("Diamètre du tronc")
 
-
 graphe_cor_age_diam
 graphe_cor_age_haut
 graphe_cor_age_haut_tronc
