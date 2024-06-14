@@ -1,5 +1,10 @@
+# -----------------------------------------------------------------------------------
+# ------------------------------ Gestion des données : ------------------------------ 
+# -----------------------------------------------------------------------------------
+
 data_1 <- data
 
+#Pour réaliser la régression logistique, nous devons avoir des valeurs binomiales pour comparer à d'autres 
 data_1$fk_arb_etat <- as.factor(data_1$fk_arb_etat)
 
 # Mettre à 0 si pas d'abbatage prévu, mettre à 1 sinon
@@ -280,42 +285,4 @@ myreg <- glm(fk_arb_etat ~ haut_tot + haut_tronc+tronc_diam+age_estim, data = da
 ypredit <- myreg$fitted
 o <- order(data_1$haut_tot + data_1$haut_tronc + data_1$tronc_diam+ data_1$age_estim)
 lines((data_1$haut_tot + data_1$haut_tronc + data_1$tronc_diam + data_1$age_estim)[o], ypredit[o], col = "purple", lwd = 2)
-
-
-# --------------------------------------------------------------------------
-# ------------------------------ Trouver R2 : ------------------------------ 
-# --------------------------------------------------------------------------
-
-data_2 <- data
-
-# Mettre à 0 si pas d'abbatage prévu, mettre à 1 sinon
-data_2$fk_arb_etat <- ifelse(data_2$fk_arb_etat != "en place", 1, 0)
-
-# Modèle de régression logistique
-<<<<<<< HEAD
-model <- glm(fk_arb_etat ~ X + Y + OBJECTID + clc_quartier + clc_secteur + haut_tot + haut_tronc+ tronc_diam + fk_stadedev + fk_port + fk_pied + fk_situation + fk_revetement + age_estim + villeca + nomfrancais + feuillage + remarquable, data = data_2, family = binomial)
-=======
-model <- glm(fk_arb_etat ~ age_estim, data = data_1, family = binomial)
->>>>>>> 60e57cf974860b85b0fff7586d2f68fc2c0d2b33
-summary(model)
-
-# Création du modèle nul (intercept seulement)
-null_model <- glm(fk_arb_etat ~ 1, data = data_2, family = binomial)
-
-# Extraction des déviances résiduelles
-deviance_model <- deviance(model)
-deviance_null <- deviance(null_model)
-
-# Calcul de la statistique chi-carré (différence des déviances)
-chi_sq <- deviance_null - deviance_model
-
-# Calcul du R2 pseudo avec chi-carré
-R2_chi_sq <- 1 - (deviance_model / deviance_null)
-
-# Affichage des résultats
-#print(paste("Chi-carré:", chi_sq))
-print(paste("R2 pseudo avec chi-carré:", R2_chi_sq))
-
-#Avant tri : "R2 pseudo avec chi-carré: 0.0758252342176691"
-#Après tri : "R2 pseudo avec chi-carré: 0.486086353803393"
 
