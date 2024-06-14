@@ -55,11 +55,26 @@ for (i in 1:(length(columns)-1)) {
         
       }
       
-      mosaic_title <- paste("Mosaic plot entre", columns[i], "et", columns[j])
-      mosaicplot(tableau_croise, main = mosaic_title, shade = TRUE, legend = TRUE, las=2)
+      #mosaic_title <- paste("Mosaic plot entre", columns[i], "et", columns[j])
+      #mosaicplot(tableau_croise, main = mosaic_title, shade = TRUE, legend = TRUE, las=2)
       
     }
 
   
 }
 
+tableau_croise <- table(data$clc_quartier, data$fk_arb_etat)
+
+print("Tableau croisée")
+print(tableau_croise)
+
+print("Chisq avec simulate : ")
+avec_simulate__chisq <- chisq.test(tableau_croise, simulate.p.value = TRUE)
+print(avec_simulate__chisq$residuals)
+
+print("Chisq sans simulate : ")
+sans_simulate__chisq <- chisq.test(tableau_croise)
+print(sans_simulate__chisq$residuals)
+
+mosaic_title <- paste("Mosaic plot entre clc_quartier et fk_arb_etat")
+mosaicplot(tableau_croise, main = mosaic_title, shade = TRUE, legend = TRUE, las=2)
