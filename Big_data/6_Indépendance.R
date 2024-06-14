@@ -6,7 +6,6 @@
 columns <- c("clc_quartier","fk_arb_etat","fk_stadedev","fk_port","fk_pied",
              "fk_situation","fk_revetement", "feuillage","remarquable")
 
-
 for (i in 1:(length(columns)-1)) {
 
     for (j in (i+1):length(columns)) {
