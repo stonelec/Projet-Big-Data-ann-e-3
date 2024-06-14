@@ -1,19 +1,9 @@
-library(ggplot2)
 # | ===================================================== |
 # |======| PPREDICTION ARBRE POUR POLITIQUE URBAINE|======|
 # | ===================================================== |
-#nombre d'arbes en fonction du quartier
-ggplot(tab, aes_string(x = "clc_quartier", y = "Freq")) +
-  geom_bar(stat = "identity", fill="darkred") +
-  theme_gray() +
-  labs(title = "Nombre d'arbres par quartier",
-       x = "Quartier",
-       y = "Nombre d'arbres") +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
 #nombre d'arbes en fonction de plusieurs caractéritiques 
 columns <- c("fk_stadedev", "fk_port", "fk_pied", "fk_situation", "feuillage")
-
 for (i in 1:length(columns)) {
   
   # Create a contingency table
@@ -38,6 +28,14 @@ for (i in 1:length(columns)) {
   # Display the graph
   print(graph)
 }
+#nombre d'arbes en fonction du quartier
+ggplot(tab, aes_string(x = "clc_quartier", y = "Freq")) +
+  geom_bar(stat = "identity", fill="darkred") +
+  theme_gray() +
+  labs(title = "Nombre d'arbres par quartier",
+       x = "Quartier",
+       y = "Nombre d'arbres") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
 # | =================================== |
 # |======| PPREDICTION AGE ARBRE |======|
