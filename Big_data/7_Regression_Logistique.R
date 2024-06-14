@@ -285,3 +285,4 @@ myreg <- glm(fk_arb_etat ~ haut_tot + haut_tronc+tronc_diam+age_estim, data = da
 ypredit <- myreg$fitted
 o <- order(data_1$haut_tot + data_1$haut_tronc + data_1$tronc_diam+ data_1$age_estim)
 lines((data_1$haut_tot + data_1$haut_tronc + data_1$tronc_diam + data_1$age_estim)[o], ypredit[o], col = "purple", lwd = 2)
+
