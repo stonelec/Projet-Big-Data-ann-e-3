@@ -9,6 +9,7 @@ data_1$fk_arb_etat <- ifelse(data_1$fk_arb_etat != "en place", 1, 0)
 #n_occur <- data.frame(table(data_1$fk_arb_etat))
 #n_occur[n_occur$Freq > 1,]
 
+
 # ---------------------------------------------------------------------------------
 # ------------------------------ Pour le age_estim : ------------------------------ 
 # ---------------------------------------------------------------------------------
@@ -28,8 +29,9 @@ plot(data_1$age_estim,data_1$fk_arb_etat)
 o=order(data_1$age_estim)
 points(data_1$age_estim[o],ypredit[o], col="red", type="l", lwd=2)
 
+
 # ---------------------------------------------------------------------------------
-# ------------------------------ Pour le haut_tot : ------------------------------ 
+# ------------------------------ Pour le haut_tot : ------------------------------- 
 # ---------------------------------------------------------------------------------
 
 # Modèle de régression logistique
@@ -44,8 +46,9 @@ ypredit=myreg$fitted
 o=order(data_1$haut_tot)
 points(data_1$haut_tot[o],ypredit[o], col="red", type="l", lwd=2)
 
+
 # ---------------------------------------------------------------------------------
-# ------------------------------ Pour le haut_tronc : ------------------------------ 
+# ------------------------------ Pour le haut_tronc : ----------------------------- 
 # ---------------------------------------------------------------------------------
 
 # Modèle de régression logistique
@@ -60,8 +63,9 @@ ypredit=myreg$fitted
 o=order(data_1$haut_tronc)
 points(data_1$haut_tronc[o],ypredit[o], col="red", type="l", lwd=2)
 
+
 # ---------------------------------------------------------------------------------
-# ------------------------------ Pour le tronc_diam : ------------------------------ 
+# ------------------------------ Pour le tronc_diam : ----------------------------- 
 # ---------------------------------------------------------------------------------
 
 # Modèle de régression logistique
@@ -75,10 +79,6 @@ myreg=glm(data_1$fk_arb_etat~data_1$tronc_diam, family=binomial(link=logit))
 ypredit=myreg$fitted
 o=order(data_1$tronc_diam)
 points(data_1$tronc_diam[o],ypredit[o], col="red", type="l", lwd=2)
-
-
-
-
 
 
 # ---------------------------------------------------------------------------------------------
@@ -98,6 +98,7 @@ ypredit <- myreg$fitted
 o <- order(data_1$age_estim + data_1$haut_tot)
 lines((data_1$age_estim + data_1$haut_tot)[o], ypredit[o], col = "green", lwd = 2)
 
+
 # -----------------------------------------------------------------------------------------------
 # ------------------------------ Pour le age_estim et haut_tronc : ------------------------------ 
 # -----------------------------------------------------------------------------------------------
@@ -114,6 +115,7 @@ myreg <- glm(fk_arb_etat ~ age_estim + haut_tronc, data = data_1, family = binom
 ypredit <- myreg$fitted
 o <- order(data_1$age_estim + data_1$haut_tronc)
 lines((data_1$age_estim + data_1$haut_tronc)[o], ypredit[o], col = "green", lwd = 2)
+
 
 # -----------------------------------------------------------------------------------------------
 # ------------------------------ Pour le age_estim et tronc_diam : ------------------------------ 
@@ -132,6 +134,7 @@ ypredit <- myreg$fitted
 o <- order(data_1$age_estim + data_1$tronc_diam)
 lines((data_1$age_estim + data_1$tronc_diam)[o], ypredit[o], col = "green", lwd = 2)
 
+
 # ----------------------------------------------------------------------------------------------
 # ------------------------------ Pour le haut_tot et haut_tronc : ------------------------------ 
 # ----------------------------------------------------------------------------------------------
@@ -148,6 +151,7 @@ myreg <- glm(fk_arb_etat ~ haut_tot + haut_tronc, data = data_1, family = binomi
 ypredit <- myreg$fitted
 o <- order(data_1$haut_tot + data_1$haut_tronc)
 lines((data_1$haut_tot + data_1$haut_tronc)[o], ypredit[o], col = "green", lwd = 2)
+
 
 # ----------------------------------------------------------------------------------------------
 # ------------------------------ Pour le haut_tot et tronc_diam : ------------------------------ 
@@ -166,6 +170,7 @@ ypredit <- myreg$fitted
 o <- order(data_1$haut_tot + data_1$tronc_diam)
 lines((data_1$haut_tot + data_1$tronc_diam)[o], ypredit[o], col = "green", lwd = 2)
 
+
 # ------------------------------------------------------------------------------------------------
 # ------------------------------ Pour le haut_tronc et tronc_diam : ------------------------------ 
 # ------------------------------------------------------------------------------------------------
@@ -182,10 +187,6 @@ myreg <- glm(fk_arb_etat ~ haut_tronc + tronc_diam, data = data_1, family = bino
 ypredit <- myreg$fitted
 o <- order(data_1$haut_tronc + data_1$tronc_diam)
 lines((data_1$haut_tronc + data_1$tronc_diam)[o], ypredit[o], col = "green", lwd = 2)
-
-
-
-
 
 
 # -------------------------------------------------------------------------------------------------------
@@ -206,6 +207,7 @@ ypredit <- myreg$fitted
 o <- order(data_1$age_estim + data_1$haut_tot + data_1$haut_tronc)
 lines((data_1$age_estim + data_1$haut_tot + data_1$haut_tronc)[o], ypredit[o], col = "purple", lwd = 2)
 
+
 # -------------------------------------------------------------------------------------------------------
 # ------------------------------ Pour le age_estim, haut_tot, tronc_diam : ------------------------------ 
 # -------------------------------------------------------------------------------------------------------
@@ -223,6 +225,7 @@ myreg <- glm(fk_arb_etat ~ age_estim + haut_tot+tronc_diam, data = data_1, famil
 ypredit <- myreg$fitted
 o <- order(data_1$age_estim + data_1$haut_tot + data_1$tronc_diam)
 lines((data_1$age_estim + data_1$haut_tot + data_1$tronc_diam)[o], ypredit[o], col = "purple", lwd = 2)
+
 
 # -------------------------------------------------------------------------------------------------------
 # ------------------------------ Pour le age_estim, haut_tronc, tronc_diam : ------------------------------ 
@@ -242,6 +245,7 @@ ypredit <- myreg$fitted
 o <- order(data_1$age_estim + data_1$haut_tronc + data_1$tronc_diam)
 lines((data_1$age_estim + data_1$haut_tronc + data_1$tronc_diam)[o], ypredit[o], col = "purple", lwd = 2)
 
+
 # -------------------------------------------------------------------------------------------------------
 # ------------------------------ Pour le haut_tot, haut_tronc, tronc_diam : ------------------------------ 
 # -------------------------------------------------------------------------------------------------------
@@ -259,10 +263,6 @@ myreg <- glm(fk_arb_etat ~ haut_tot + haut_tronc+tronc_diam, data = data_1, fami
 ypredit <- myreg$fitted
 o <- order(data_1$haut_tot + data_1$haut_tronc + data_1$tronc_diam)
 lines((data_1$haut_tot + data_1$haut_tronc + data_1$tronc_diam)[o], ypredit[o], col = "purple", lwd = 2)
-
-
-
-
 
 
 # -------------------------------------------------------------------------------------------------------
@@ -286,25 +286,21 @@ o <- order(data_1$haut_tot + data_1$haut_tronc + data_1$tronc_diam+ data_1$age_e
 lines((data_1$haut_tot + data_1$haut_tronc + data_1$tronc_diam + data_1$age_estim)[o], ypredit[o], col = "purple", lwd = 2)
 
 
-
-
-
-
 # --------------------------------------------------------------------------
 # ------------------------------ Trouver R2 : ------------------------------ 
 # --------------------------------------------------------------------------
 
-data_1 <- data
+data_2 <- data
 
 # Mettre à 0 si pas d'abbatage prévu, mettre à 1 sinon
-data_1$fk_arb_etat <- ifelse(data_1$fk_arb_etat != "en place", 1, 0)
+data_2$fk_arb_etat <- ifelse(data_2$fk_arb_etat != "en place", 1, 0)
 
 # Modèle de régression logistique
-model <- glm(fk_arb_etat ~ X + Y + OBJECTID + clc_quartier + clc_secteur + haut_tot + haut_tronc+ tronc_diam + fk_stadedev + fk_port + fk_pied + fk_situation + fk_revetement + age_estim + villeca + nomfrancais + feuillage + remarquable, data = data_1, family = binomial)
+model <- glm(fk_arb_etat ~ X + Y + OBJECTID + clc_quartier + clc_secteur + haut_tot + haut_tronc+ tronc_diam + fk_stadedev + fk_port + fk_pied + fk_situation + fk_revetement + age_estim + villeca + nomfrancais + feuillage + remarquable, data = data_2, family = binomial)
 summary(model)
 
 # Création du modèle nul (intercept seulement)
-null_model <- glm(fk_arb_etat ~ 1, data = data_1, family = binomial)
+null_model <- glm(fk_arb_etat ~ 1, data = data_2, family = binomial)
 
 # Extraction des déviances résiduelles
 deviance_model <- deviance(model)
@@ -322,3 +318,4 @@ print(paste("R2 pseudo avec chi-carré:", R2_chi_sq))
 
 #Avant tri : "R2 pseudo avec chi-carré: 0.0758252342176691"
 #Après tri : "R2 pseudo avec chi-carré: 0.486086353803393"
+
