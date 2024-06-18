@@ -85,9 +85,9 @@ for i in range(len(haut_tronc)):
 
 """import plotly.express as px
 
-df = pd.read_csv("Data_Arbre.csv")
+data = pd.read_csv("Data_Arbre.csv")
 
-fig = px.scatter_mapbox(df,
+fig = px.scatter_mapbox(data,
                         lat="latitude",
                         lon="longitude",
                         height=800,
@@ -150,7 +150,8 @@ from sklearn.cluster import KMeans
 plt.scatter(arbre["haut_tronc"], arbre["haut_tot"], c=colormap[model.labels_], s=40)
 plt.show()
 
-"""# -----------------------------------------------------------------------
+"""
+# -----------------------------------------------------------------------
 # ------------------------------ Métriques ------------------------------
 # -----------------------------------------------------------------------
 
