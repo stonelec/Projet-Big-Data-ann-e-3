@@ -13,9 +13,16 @@ from sklearn.datasets import make_blobs
 # ------------------------------ Préparation des données ------------------------------
 # -------------------------------------------------------------------------------------
 
-tab_taille = pd.read_csv("Data_Arbre.csv")
+data_arbre = pd.read_csv("Data_Arbre.csv", usecols=["haut_tronc", "age_estim", "tronc_diam", "fk_prec_estim" ])
 
-haut_tronc = tab_taille['haut_tronc']
+position = pd.read_csv("Data_Arbre.csv", usecols=["longitude", "latitude"])
+longitude = pd.read_csv("Data_Arbre.csv", usecols=["longitude"])
+latitude = pd.read_csv("Data_Arbre.csv", usecols=["latitude"])
+
+haut_tot = pd.read_csv("Data_Arbre.csv", usecols=["haut_tot"])
+haut_tronc = pd.read_csv("Data_Arbre.csv", usecols=["haut_tronc"])
+
+diametre = pd.read_csv("Data_Arbre.csv", usecols=["tronc_diam"])
 
 #Vérifier si tout est bien :
 """
@@ -34,10 +41,19 @@ for i in range(len(haut_tronc)):
 # ------------------------------------------------------------------------------
 
 #Récupérer la taille de chaque arbre : fait
-#Calculer la moyenne et la médianne :
-#Après, définir chaque arbre (petit, grand) et (petit, moyen, grand)
-#Appliquer le clustering 2 et 3, regarder les résultats
-#Afficher en fonction de la position
+#Appliquer le clustering 2 et 3, regarder les résultats : fait
+#Afficher en fonction de la position : en cours
+
+# ------------------------------------------------------------------------------
+# ------------------------------ Afficher la data ------------------------------
+# ------------------------------------------------------------------------------
+
+#Regarder la taille des arbres en fonction de la fréquence des arbres
+
+"""
+haut_tot.hist(bins=50, figsize=(10, 10))
+plt.show()
+"""
 
 # ---------------------------------------------------------------------------------
 # ------------------------------ Moyenne et médianne ------------------------------
@@ -51,9 +67,6 @@ for i in range(len(haut_tronc)):
 
     sum += int(haut_tronc[i])
     indice += 1
-
-print("Somme : ", sum)
-print("Indice : ", indice)
 
 moyenne = sum/indice
 
@@ -83,11 +96,12 @@ for i in range(len(haut_tronc)):
 # ------------------------------ Affichage de la carte ------------------------------
 # -----------------------------------------------------------------------------------
 
-"""import plotly.express as px
+# ----- Afficher sur la ville l'emplacement des arbres -----
 
-data = pd.read_csv("Data_Arbre.csv")
+"""
+import plotly.express as px
 
-fig = px.scatter_mapbox(data,
+fig = px.scatter_mapbox(position,
                         lat="latitude",
                         lon="longitude",
                         height=800,
@@ -97,32 +111,6 @@ fig.update_layout(mapbox_style="open-street-map")
 fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
 fig.show()
 
-
-X = tab_taille['longitude']
-Y = tab_taille['latitude']
-
-plt.figure(figsize=(10, 10))
-
-#Pour affichier en fonction des petits et grands arbres, attention long :
-""""""
-for i in range(len(haut_tronc)):
-
-    if int(haut_tronc[i]) < moyenne:
-
-        print("Petit : ", i)
-        plt.scatter(X[i], Y[i], c="green")
-
-    else:
-
-        print("Grand : ", i)
-        plt.scatter(X[i], Y[i], c="blue")
-"""
-"""
-
-plt.scatter(X, Y)
-plt.xlabel("$X$", fontsize=5)
-plt.ylabel("$Y$", fontsize=5)
-#plt.show()
 """
 
 # -----------------------------------------------------------------------------------------
@@ -137,31 +125,78 @@ import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.cluster import KMeans
 
-#arbre = pd.read_csv("Data_Arbre.csv")
+model = KMeans(n_clusters=3, random_state=42).fit(data_arbre)
 
-#haut_tronc = arbre["haut_tronc"]
-#haut_tot = arbre["haut_tot"]
+print(model.labels_)
 
-#model = KMeans(n_clusters=3).fit(arbre)
+#Affichage en fonction de la position
 
-#print(model.labels_)
+colormap = np.array(['Red', 'Blue', 'Yellow'])
+plt.scatter(longitude, latitude, c=colormap[model.labels_], s=40)
+plt.xlabel('Longitude (X)')
+plt.ylabel('Latitude (Y)')
+plt.title('3 Clusters en fonction de la position des arbres')
 
-"""colormap = np.array(['Red', 'Blue', 'Yellow'])
-plt.scatter(arbre["haut_tronc"], arbre["haut_tot"], c=colormap[model.labels_], s=40)
+plt.scatter([], [], c=colormap[0], label=f'Cluster 1')
+plt.scatter([], [], c=colormap[1], label=f'Cluster 2')
+plt.scatter([], [], c=colormap[2], label=f'Cluster 3')
+
+plt.legend()
 plt.show()
 
+#Affichage en fonction du diamètre et la hauteur totale
+
 """
+colormap = np.array(['Red', 'Blue', 'Yellow'])
+plt.scatter(diametre, haut_tot, c=colormap[model.labels_], s=40)
+plt.xlabel('Diamètre')
+plt.ylabel('Hauteur')
+plt.title('3 Clusters en fonction de la position des arbres')
+
+plt.scatter([], [], c=colormap[1], label=f'Arbres petits')
+plt.scatter([], [], c=colormap[0], label=f'Arbres moyens')
+plt.scatter([], [], c=colormap[2], label=f'Arbres grands')
+
+#plt.legend()
+#plt.show()
+"""
+
+"""import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.cluster import KMeans
+from sklearn.metrics import silhouette_score
+
+arbre = pd.read_csv("Data_Arbre.csv", usecols=["tronc_diam", "age_estim"])
+
+from sklearn.cluster import KMeans
+
+all_cluster = []
+
+for i in range(1, 11):
+    kmeans = KMeans(n_clusters = i, init = 'k-means++', max_iter = 300, n_init = 10, random_state = 0)
+    kmeans.fit(arbre)
+    all_cluster.append(kmeans.inertia_)
+
+plt.plot(range(1, 11), all_cluster)
+plt.title('The elbow method')
+plt.xlabel('Number of clusters')
+plt.ylabel('all_cluster')
+plt.show()"""
+
 # -----------------------------------------------------------------------
 # ------------------------------ Métriques ------------------------------
 # -----------------------------------------------------------------------
 
 # ---------- KMeans ----------
 
+"""
 from sklearn.metrics import silhouette_score
 
-arbre = pd.read_csv("Data_Arbre.csv", usecols=["haut_tot"])
-
-range_n_clusters = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+range_n_clusters = [2, 3, 4, 5, 6, 7, 8, 9, 10,
+                    11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+                    21, 22, 23, 24, 25, 26, 27, 28, 29, 30]
 silhouette_avg = []
 
 var = 1
@@ -184,4 +219,80 @@ plt.plot(range_n_clusters, silhouette_avg)
 plt.xlabel('Nombre de cluster')
 plt.ylabel('Score')
 plt.title('Silhouette Coefficient')
+plt.show()"""
+
+# ---------- Calinski-Harabasz Index ----------
+
+"""from sklearn.cluster import KMeans
+from sklearn.metrics import calinski_harabasz_score
+
+arbre = pd.read_csv("Data_Arbre.csv", usecols=["haut_tronc", "age_estim", "tronc_diam", "fk_prec_estim" ])
+
+
+#Les clusters qu'on va tester
+range_n_clusters = [2, 3, 4, 5, 6, 7, 8, 9, 10,
+                    11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+                    21, 22, 23, 24, 25, 26, 27, 28, 29, 30]
+
+#On récupère le score ici et on le garde
+score = []
+res = 0
+
+#Pour voir les tests(pas utile juste pour moi)
+var = 1
+
+for num_clusters in range_n_clusters:
+
+    var += 1
+
+    print("Test : ", var)
+
+    # initialise kmeans
+    kmeans = KMeans(n_clusters=num_clusters, random_state=42).fit(arbre)
+    res = calinski_harabasz_score(arbre, kmeans.labels_)
+
+    # score
+    score.append(res)
+
+plt.plot(range_n_clusters, score)
+plt.xlabel('Nombre de cluster')
+plt.ylabel('Score')
+plt.title('Calinski-Harabasz Index')
 plt.show()
+"""
+
+# ---------- Davies-Bouldin Index ----------
+
+"""
+from sklearn.metrics import davies_bouldin_score
+from sklearn.cluster import KMeans
+
+arbre = pd.read_csv("Data_Arbre.csv", usecols=["haut_tronc", "age_estim", "tronc_diam", "fk_prec_estim" ])
+
+
+range_n_clusters = [2, 3, 4, 5, 6, 7, 8, 9, 10,
+                    11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+                    21, 22, 23, 24, 25, 26, 27, 28, 29, 30]
+
+score = []
+var = 0
+
+for num_clusters in range_n_clusters:
+
+    var += 1
+
+    print("Test : ", var)
+
+    # initialise kmeans
+    kmeans = KMeans(n_clusters=num_clusters, random_state=42).fit_predict(arbre)
+    res = davies_bouldin_score(arbre, kmeans)
+
+    # score
+    score.append(res)
+
+plt.plot(range_n_clusters, score)
+plt.xlabel('Nombre de cluster')
+plt.ylabel('Score')
+plt.title('Davies-Bouldin Index')
+plt.show()
+"""
