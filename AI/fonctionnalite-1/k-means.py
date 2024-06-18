@@ -4,14 +4,19 @@ from sklearn.cluster import KMeans
 
 data_arbre = pd.read_csv("../Data_Arbre.csv", usecols=["longitude", "latitude", "haut_tronc", "age_estim", "tronc_diam", "fk_prec_estim" ])
 
-def calcul_score_kmeans(n):
-    model = KMeans(n_clusters=n, random_state=42).fit(data_arbre)
-    score = model.labels_
-    return score
+def calcul_kmeans(n):
 
-if __name__ == "__main__":
-    if len(sys.argv) > 1:
-        n_clusters = int(sys.argv[1])
-        print(calcul_score_kmeans(n_clusters))
-    else:
-        print("Veuillez fournir le nombre de clusters en argument.")
+    model = KMeans(n_clusters=n, random_state=42).fit(data_arbre)
+    return model.labels_
+
+print("-----------------------------------------------------")
+print("Calcul de kmeans avec comme nombre de clusters : ", 2) #int(sys.argv[1])
+print("-----------------------------------------------------")
+
+#Fonction calcul calcul kmeans :
+n_clusters = 2 #int(sys.argv[1])
+print(calcul_kmeans(n_clusters))
+
+print("-----------------------------------------------------")
+print("Méthode pour calculer le score : ") #int(sys.argv[1])
+print("-----------------------------------------------------")
