@@ -13,7 +13,7 @@ from sklearn.datasets import make_blobs
 # ------------------------------ Préparation des données ------------------------------
 # -------------------------------------------------------------------------------------
 
-data_arbre = pd.read_csv("Data_Arbre.csv", usecols=["haut_tronc", "age_estim", "tronc_diam", "fk_prec_estim" ])
+data_arbre = pd.read_csv("Data_Arbre.csv", usecols=["longitude", "latitude", "haut_tronc", "age_estim", "tronc_diam", "fk_prec_estim" ])
 
 position = pd.read_csv("Data_Arbre.csv", usecols=["longitude", "latitude"])
 longitude = pd.read_csv("Data_Arbre.csv", usecols=["longitude"])
@@ -25,6 +25,7 @@ haut_tronc = pd.read_csv("Data_Arbre.csv", usecols=["haut_tronc"])
 diametre = pd.read_csv("Data_Arbre.csv", usecols=["tronc_diam"])
 
 #Vérifier si tout est bien :
+
 """
 var = 0
 
@@ -98,10 +99,9 @@ for i in range(len(haut_tronc)):
 
 # ----- Afficher sur la ville l'emplacement des arbres -----
 
-"""
 import plotly.express as px
 
-fig = px.scatter_mapbox(position,
+"""fig = px.scatter_mapbox(position,
                         lat="latitude",
                         lon="longitude",
                         height=800,
@@ -110,7 +110,6 @@ fig = px.scatter_mapbox(position,
 fig.update_layout(mapbox_style="open-street-map")
 fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
 fig.show()
-
 """
 
 # -----------------------------------------------------------------------------------------
@@ -119,7 +118,7 @@ fig.show()
 
 # ---------- KMeans ----------
 
-import pandas as pd
+"""import pandas as pd
 import numpy as np
 
 import matplotlib.pyplot as plt
@@ -143,47 +142,29 @@ plt.scatter([], [], c=colormap[2], label=f'Cluster 3')
 
 plt.legend()
 plt.show()
-
-#Affichage en fonction du diamètre et la hauteur totale
-
 """
-colormap = np.array(['Red', 'Blue', 'Yellow'])
-plt.scatter(diametre, haut_tot, c=colormap[model.labels_], s=40)
-plt.xlabel('Diamètre')
-plt.ylabel('Hauteur')
-plt.title('3 Clusters en fonction de la position des arbres')
+# ----- Afficher sur la ville l'emplacement des arbres avec les clusters -----
 
-plt.scatter([], [], c=colormap[1], label=f'Arbres petits')
-plt.scatter([], [], c=colormap[0], label=f'Arbres moyens')
-plt.scatter([], [], c=colormap[2], label=f'Arbres grands')
-
-#plt.legend()
-#plt.show()
-"""
-
-"""import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
-from sklearn.cluster import KMeans
-from sklearn.metrics import silhouette_score
-
-arbre = pd.read_csv("Data_Arbre.csv", usecols=["tronc_diam", "age_estim"])
-
+"""import plotly.express as px
 from sklearn.cluster import KMeans
 
-all_cluster = []
+# Effectuer le clustering
+model = KMeans(n_clusters=3, random_state=42).fit(data_arbre)
+data_arbre['cluster'] = model.labels_
 
-for i in range(1, 11):
-    kmeans = KMeans(n_clusters = i, init = 'k-means++', max_iter = 300, n_init = 10, random_state = 0)
-    kmeans.fit(arbre)
-    all_cluster.append(kmeans.inertia_)
+# Tracer la carte avec Plotly Express
+fig = px.scatter_mapbox(data_arbre,
+                        lat="latitude",
+                        lon="longitude",
+                        color="cluster",  # Colorer par cluster
+                        zoom=10,  # Ajuster le niveau de zoom initial
+                        height=700,
+                        width=700)
 
-plt.plot(range(1, 11), all_cluster)
-plt.title('The elbow method')
-plt.xlabel('Number of clusters')
-plt.ylabel('all_cluster')
-plt.show()"""
+fig.update_layout(mapbox_style="open-street-map")
+fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
+
+fig.show()"""
 
 # -----------------------------------------------------------------------
 # ------------------------------ Métriques ------------------------------
@@ -223,7 +204,9 @@ plt.show()"""
 
 # ---------- Calinski-Harabasz Index ----------
 
-"""from sklearn.cluster import KMeans
+"""
+
+from sklearn.cluster import KMeans
 from sklearn.metrics import calinski_harabasz_score
 
 arbre = pd.read_csv("Data_Arbre.csv", usecols=["haut_tronc", "age_estim", "tronc_diam", "fk_prec_estim" ])
