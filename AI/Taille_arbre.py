@@ -124,7 +124,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.cluster import KMeans
 
-model = KMeans(n_clusters=3, random_state=42).fit(data_arbre)
+model = KMeans(n_clusters=3, random_state=42).fit_predict(data_arbre)
 
 print(model.labels_)
 
@@ -143,6 +143,7 @@ plt.scatter([], [], c=colormap[2], label=f'Cluster 3')
 plt.legend()
 plt.show()
 """
+
 # ----- Afficher sur la ville l'emplacement des arbres avec les clusters -----
 
 """import plotly.express as px
@@ -170,7 +171,7 @@ fig.show()"""
 # ------------------------------ Métriques ------------------------------
 # -----------------------------------------------------------------------
 
-# ---------- KMeans ----------
+# ---------- Silhouette Coefficient ----------
 
 """
 from sklearn.metrics import silhouette_score
@@ -189,8 +190,7 @@ for num_clusters in range_n_clusters:
     print("Test : ", var)
 
     # initialise kmeans
-    kmeans = KMeans(n_clusters=num_clusters, random_state=42)
-    kmeans.fit(arbre)
+    kmeans = KMeans(n_clusters=num_clusters, random_state=42).fit_predict(arbre)
     cluster_labels = kmeans.labels_
 
     # silhouette score
