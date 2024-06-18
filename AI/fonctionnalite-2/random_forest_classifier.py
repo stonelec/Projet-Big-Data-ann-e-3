@@ -259,29 +259,43 @@ n_classes = y_test_bin.shape[1]
 
 # Calculer les courbes ROC et l'AUC pour chaque nombre d'arbres et pour chaque classe
 for idx, n_estimators in enumerate(range_n_estimators):
+
+    tab_fpr_rf = []
+    tab_tpr_rf = []
+
     plt.figure(figsize=(10, 6))
     for i in range(n_classes):
         false_positive_rate, true_positive_rate, _ = roc_curve(y_test_bin[:, i], tab_y_prob_rf[idx][:, i])
-        roc_auc = auc(false_positive_rate, true_positive_rate)                      # roc_auc = roc _ area under the curve
-        plt.plot(false_positive_rate, true_positive_rate, lw=2, label=f'Classe {i} (AUC = {roc_auc:.2f})')
+        roc_auc = auc(false_positive_rate, true_positive_rate)     # roc_auc = roc _ area under the curve
 
+        tab_fpr_rf.append(false_positive_rate)
+        tab_tpr_rf.append(true_positive_rate)
+
+        # Affichage de la courbe ROC pour chaque quantité d'arbres et pour chaque classe
+        plt.plot(false_positive_rate, true_positive_rate, lw=2, label=f'Classe {i} (AUC = {roc_auc:.2f})')
     plt.plot([0, 1], [0, 1], color='navy', lw=2, linestyle='--')
     plt.xlim([0.0, 1.0])
     plt.ylim([0.0, 1.05])
     plt.xlabel('Taux de Faux Positifs')
     plt.ylabel('Taux de Vrais Positifs')
-    plt.title(f'Courbe ROC pour le modèle Random Forest avec {n_estimators} arbres')
+    plt.title(f'Courbe ROC pour le modèle Random Forest avec {n_estimators} arbres pour chaque classe')
     plt.legend(loc='lower right')
     plt.grid(True)
     plt.show()
 
-# Calculer les courbes ROC et l'AUC pour chaque nombre d'arbres
-for idx, n_estimators in enumerate(range_n_estimators):
-    plt.figure(figsize=(10, 6))
-    false_positive_rate, true_positive_rate, _ = roc_curve(y_test_bin[:, i], tab_y_prob_rf[idx][:, i])
-    roc_auc = auc(false_positive_rate, true_positive_rate)                      # roc_auc = roc _ area under the curve
-    plt.plot(false_positive_rate, true_positive_rate, lw=2, label=f'Classe {i} (AUC = {roc_auc:.2f})')
+    # Affichage de la courbe ROC pour chaque quantité d'arbres
+    # Combiner les courbes ROC pour une courbe globale
+    fpr_global = np.unique(np.concatenate(tab_fpr_rf))
+    tpr_global = np.zeros_like(fpr_global)
 
+    for fpr_i, tpr_i in zip(tab_fpr_rf, tab_tpr_rf):
+        tpr_global += np.interp(fpr_global, fpr_i, tpr_i)
+
+    tpr_global /= n_classes  # Moyenne des vrais positifs pour chaque taux de faux positifs
+
+    roc_auc_global = auc(fpr_global, tpr_global)
+
+    plt.plot(fpr_global, tpr_global, color='b', lw=2, label=f'ROC (AUC = {roc_auc_global:.2f})')
     plt.plot([0, 1], [0, 1], color='navy', lw=2, linestyle='--')
     plt.xlim([0.0, 1.0])
     plt.ylim([0.0, 1.05])
