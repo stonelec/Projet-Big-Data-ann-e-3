@@ -5,9 +5,9 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
 
-grid_search_mode = 1            # 1 pour activer la recherche par grille, 0 pour désactiver
-bdd = 1                         # 1 pour AI_Patrimoine_Arboré_(RO), 0 pour Data_Arbre
-num_features = 1                # 2 pour ['tronc_diam', 'haut_tot', 'haut_tronc'], 1 pour 2 + [...,'remarquable','fk_pied'] et 0 pour 2 + [...,'feuillage','fk_revetement']
+grid_search_mode = 0            # 1 pour activer la recherche par grille, 0 pour désactiver
+bdd = 0                         # 1 pour AI_Patrimoine_Arboré_(RO), 0 pour Data_Arbre
+num_features = 0                # 2 pour ['tronc_diam', 'haut_tot', 'haut_tronc'], 1 pour 2 + [...,'remarquable','fk_pied'] et 0 pour 2 + [...,'feuillage','fk_revetement']
 
 
 # Charger la base de données
@@ -143,14 +143,14 @@ match bdd:
     case 0: # Data_Arbre
         match num_features:
             case 2:  # ['tronc_diam', 'haut_tot', 'haut_tronc']
-                #
-                rf = RandomForestClassifier(random_state=42)
+                # {'max_depth': 10, 'min_samples_leaf': 1, 'min_samples_split': 5, 'n_estimators': 50}
+                rf = RandomForestClassifier(max_depth=10, min_samples_leaf=1, min_samples_split=5, n_estimators=50, random_state=42)
             case 1:  # ['tronc_diam', 'haut_tot', 'haut_tronc', 'remarquable', 'fk_pied']
-                #
-                rf = RandomForestClassifier(random_state=42)
+                # {'max_depth': 20, 'min_samples_leaf': 2, 'min_samples_split': 2, 'n_estimators': 50}
+                rf = RandomForestClassifier(max_depth=20, min_samples_leaf=2, min_samples_split=2, n_estimators=50, random_state=42)
             case 0:  # ['tronc_diam', 'haut_tot', 'haut_tronc', 'feuillage', 'fk_revetement']
-                #
-                rf = RandomForestClassifier(random_state=42)
+                # {'max_depth': None, 'min_samples_leaf': 1, 'min_samples_split': 5, 'n_estimators': 300}
+                rf = RandomForestClassifier(max_depth=None, min_samples_leaf=1, min_samples_split=5, n_estimators=300, random_state=42)
 
 rf.fit(X_train_scaled, y_train_classes)
 pred_rf = rf.predict(X_test_scaled)

@@ -6,7 +6,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
 
 grid_search_mode = 0            # 1 pour activer la recherche par grille, 0 pour désactiver
-bdd = 1                         # 1 pour AI_Patrimoine_Arboré_(RO), 0 pour Data_Arbre
+bdd = 0                         # 1 pour AI_Patrimoine_Arboré_(RO), 0 pour Data_Arbre
 num_features = 0                # 2 pour ['tronc_diam', 'haut_tot', 'haut_tronc'], 1 pour 2 + [...,'remarquable','fk_pied'] et 0 pour 2 + [...,'feuillage','fk_revetement']
 
 
@@ -142,14 +142,14 @@ match bdd:
     case 0: # Data_Arbre
         match num_features:
             case 2:  # ['tronc_diam', 'haut_tot', 'haut_tronc']
-                # best-param = {'algorithm': 'brute', 'n_neighbors': 11, 'p': 1, 'weights': 'uniform'}
-                knn = KNeighborsClassifier(algorithm='brute', n_neighbors=11, p=1, weights='uniform')
+                # best-param = {'algorithm': 'ball_tree', 'n_neighbors': 10, 'p': 1, 'weights': 'distance'}
+                knn = KNeighborsClassifier(algorithm='ball_tree', n_neighbors=10, p=1, weights='distance')
             case 1:  # ['tronc_diam', 'haut_tot', 'haut_tronc', 'remarquable', 'fk_pied']
-                # {'algorithm': 'brute', 'n_neighbors': 14, 'p': 1, 'weights': 'distance'}
-                knn = KNeighborsClassifier(algorithm='brute', n_neighbors=14, p=1, weights='distance')
+                # {'algorithm': 'brute', 'n_neighbors': 10, 'p': 1, 'weights': 'distance'}
+                knn = KNeighborsClassifier(algorithm='brute', n_neighbors=10, p=1, weights='distance')
             case 0:  # ['tronc_diam', 'haut_tot', 'haut_tronc', 'feuillage', 'fk_revetement']
-                # {'algorithm': 'ball_tree', 'n_neighbors': 4, 'p': 2, 'weights': 'uniform'}
-                knn = KNeighborsClassifier(algorithm='ball_tree', n_neighbors=4, p=2, weights='uniform')
+                # {'algorithm': 'ball_tree', 'n_neighbors': 14, 'p': 1, 'weights': 'distance'}
+                knn = KNeighborsClassifier(algorithm='ball_tree', n_neighbors=14, p=1, weights='distance')
 
 knn.fit(X_train_scaled, y_train_classes)
 pred_knn = knn.predict(X_test_scaled)
@@ -169,8 +169,10 @@ print(f'Accuracy: {accuracy_knn:.4f}')
 from sklearn.model_selection import cross_val_score
 
 scores_knn = cross_val_score(knn, X_train_scaled, y_train_classes, cv=5, scoring='accuracy')  # Calculer le score de validation croisée avec 5 valeurs croisées
-
 print(f'Score de validation croisée: {scores_knn}')
+
+moyenne_scores_knn = scores_knn.mean()
+print(f'Moyenne des scores de validation croisée: {moyenne_scores_knn:.4f}')
 
 # -------------------------------------------------------- RMSE --------------------------------------------------------
 from sklearn.metrics import mean_squared_error
