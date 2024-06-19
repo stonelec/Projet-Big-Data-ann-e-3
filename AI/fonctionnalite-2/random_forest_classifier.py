@@ -4,12 +4,25 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
 
-# Charger la base de données
-data = pd.read_csv('../AI_Patrimoine_Arboré_(RO).csv')
-#data = pd.read_csv('../Data_Arbre.csv')
+grid_search_mode = 1            # 1 pour activer la recherche par grille, 0 pour désactiver
+bdd = 1                         # 1 pour AI_Patrimoine_Arboré_(RO), 0 pour Data_Arbre
+num_features = 0                # 2 pour ['tronc_diam', 'haut_tot', 'haut_tronc'], 1 pour 2 + [...,'remarquable','fk_pied'] et 0 pour 2 + [...,'feuillage','fk_revetement']
 
-# Sélectionner les caractéristiques basées sur la corrélation
-features = ['tronc_diam', 'haut_tot', 'haut_tronc']
+# Charger la base de données
+if bdd == 1:
+    data = pd.read_csv('../AI_Patrimoine_Arboré_(RO).csv')
+else:
+    data = pd.read_csv('../Data_Arbre.csv')
+
+# Sélectionner les caractéristiques
+match num_features:
+    case 2:
+        features = ['tronc_diam', 'haut_tot', 'haut_tronc']
+    case 1:
+        features = ['tronc_diam', 'haut_tot', 'haut_tronc', 'remarquable', 'fk_pied']
+    case 0:
+        features = ['tronc_diam', 'haut_tot', 'haut_tronc', 'feuillage', 'fk_revetement']
+
 target = 'age_estim'
 
 # Filtrer les colonnes pertinentes
@@ -55,253 +68,174 @@ X_test_scaled = scaler.transform(X_test)
 
 
 # ======================================================================================================================
-# ===================================== Implémentation du modèle Random Forest Classification ==========================
+# ==================================================== Grid Search =====================================================
 # ======================================================================================================================
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import GridSearchCV
+from sklearn.metrics import classification_report
 
-# Définir la plage de nombres d'arbres à tester
-range_n_estimators = range(10, 110, 10)  # le n_estimators est le nombre d'arbres dans la forêt; il va de 10 à 100; On teste toutes les dizaines
-n_estimators = len(range_n_estimators)
-tab_rf = []
-tab_pred_rf = []
+if grid_search_mode == 1:
+    # Définir les hyperparamètres à tester
+    param_grid_rf = {
+        'n_estimators': [50, 100, 200, 300],            # Nombre d'arbres
+        'max_depth': [None, 10, 20, 30],                # Profondeur des arbres
+        'min_samples_split': [2, 5, 10],                # Échantillons minimum pour diviser un nœud
+        'min_samples_leaf': [1, 2, 4],                  # Échantillons minimum pour être à une feuille                                   # distance de Minkowski
+    }
 
-for n_estimators in range_n_estimators:
-    rf = RandomForestClassifier(n_estimators=n_estimators, random_state=42)
-    rf.fit(X_train_scaled, y_train_classes)
-    y_pred_rf = rf.predict(X_test_scaled)
+    # Créer le modèle K-Nearest Neighbors
+    rf = RandomForestClassifier(random_state=42)
 
-    tab_rf.append(rf)
-    tab_pred_rf.append(y_pred_rf)
+    # Configurer GridSearchCV
+    grid_search = GridSearchCV(estimator=rf, param_grid=param_grid_rf, scoring='accuracy', n_jobs=-1)
+    # n_jobs = -1 means using all processors
 
+    # Exécuter la recherche par grille
+    grid_search.fit(X_train_scaled, y_train_classes)
+
+    # Afficher les meilleurs hyperparamètres
+    print("Meilleurs hyperparamètres trouvés par GridSearchCV :")
+    print(grid_search.best_params_)
+
+    best_rf = grid_search.best_estimator_
+    y_pred = best_rf.predict(X_test_scaled)
+
+    # Évaluation des performances
+    print("Classification Report:")
+    print(classification_report(y_test_classes, y_pred, target_names=['0-10', '10-50', '50-100', '100-200']))
+
+
+# ======================================================================================================================
+# ===================================== Implémentation du modèle Random Forest Classification ==========================
+# ======================================================================================================================
+
+match bdd:
+    case 1: # AI_Patrimoine_Arboré_(RO)
+        match num_features:
+            case 2: # ['tronc_diam', 'haut_tot', 'haut_tronc']
+            # best-param = {'max_depth': 10, 'min_samples_leaf': 1, 'min_samples_split': 10, 'n_estimators': 100}
+                rf = RandomForestClassifier(max_depth=10, min_samples_leaf=1, min_samples_split=10, n_estimators=100, random_state=42)
+            case 1: # ['tronc_diam', 'haut_tot', 'haut_tronc', 'remarquable', 'fk_pied']
+                # {'max_depth': 20, 'min_samples_leaf': 1, 'min_samples_split': 10, 'n_estimators': 200}
+                rf = RandomForestClassifier(max_depth=20, min_samples_leaf=1, min_samples_split=10, n_estimators=200, random_state=42)
+            case 0: # ['tronc_diam', 'haut_tot', 'haut_tronc', 'feuillage', 'fk_revetement']
+                # {'max_depth': 10, 'min_samples_leaf': 1, 'min_samples_split': 10, 'n_estimators': 100}
+                rf = RandomForestClassifier(max_depth=10, min_samples_leaf=1, min_samples_split=10, n_estimators=100, random_state=42)
+
+    case 0: # Data_Arbre
+        match num_features:
+            case 2:  # ['tronc_diam', 'haut_tot', 'haut_tronc']
+                #
+                rf = RandomForestClassifier(random_state=42)
+            case 1:  # ['tronc_diam', 'haut_tot', 'haut_tronc', 'remarquable', 'fk_pied']
+                #
+                rf = RandomForestClassifier(random_state=42)
+            case 0:  # ['tronc_diam', 'haut_tot', 'haut_tronc', 'feuillage', 'fk_revetement']
+                #
+                rf = RandomForestClassifier(random_state=42)
+
+rf.fit(X_train_scaled, y_train_classes)
+pred_rf = rf.predict(X_test_scaled)
 
 # ======================================================================================================================
 # ============================================ Évaluation et visualisation =============================================
 # ======================================================================================================================
 import matplotlib.pyplot as plt
-# --------------------------------------- Précision en fonction du nombre d'arbes --------------------------------------
+# ------------------------------------------------------ Précision -----------------------------------------------------
 from sklearn.metrics import accuracy_score
 
-accuracy_scores_rf = []
+accuracy_rf = accuracy_score(y_test_classes, pred_rf)  # Calculer le score de précision et l'ajouter à la liste
 
-# Évaluation des performances pour chaque nombre d'arbres (n_estimators)
-for idx, n_estimators in enumerate(range_n_estimators):
-    # enumerate retourne à la fois l'index et la valeur de chaque élément
-    accuracy_rf = accuracy_score(y_test_classes, tab_pred_rf[idx])  # Calculer le score de précision et l'ajouter à la liste
-    accuracy_scores_rf.append(accuracy_rf)
+print(f'Accuracy: {accuracy_rf:.4f}')
 
-    print(f'Nombre d\'arbres: {n_estimators}, accuracy: {accuracy_rf:.4f}')
-
-# Calculer la moyenne des scores de précision
-mean_accuracy_score_rf = np.mean(accuracy_scores_rf)
-print(f'Moyenne des scores d\'accuracy: {mean_accuracy_score_rf:.2f}')
-
-# Tracer les scores de précision pour chaque nombre d'arbres
-plt.figure(figsize=(10, 6))
-plt.plot(range_n_estimators, accuracy_scores_rf, marker='o')
-plt.axhline(y=mean_accuracy_score_rf, color='r', linestyle='--', label=f'Moyenne = {mean_accuracy_score_rf:.2f}')
-plt.xlabel('Nombre d\'arbres')
-plt.ylabel('Précision')
-plt.title('Accuracy en fonction du nombre d\'arbres pour Random Forest')
-plt.legend(loc='best')
-plt.grid(True)
-plt.show()
-
-# ---------------------------------- Validation croisée en fonction du nombre d'arbes ----------------------------------
+# ------------------------------------------------- Validation croisée -------------------------------------------------
 from sklearn.model_selection import cross_val_score
 
-cross_val_scores_rf = []
+scores_rf = cross_val_score(rf, X_train_scaled, y_train_classes, cv=5, scoring='accuracy')  # Calculer le score de validation croisée avec 5 valeurs croisées
 
-# Calculer le score de validation croisée pour chaque nombre d'arbres
-for idx, n_estimators in enumerate(range_n_estimators):
-    scores_rf = cross_val_score(tab_rf[idx], X_train_scaled, y_train_classes, cv=5, scoring='accuracy')   # Calculer le score de validation croisée avec 5 valeurs croisées
-    cross_val_scores_rf.append(np.mean(scores_rf))
+print(f'Score de validation croisée: {scores_rf}')
 
-    print(f'Nombre d\'arbres: {n_estimators}, scores de validation croisée: {scores_rf}')
-
-# Calculer la moyenne des scores de validation croisée
-mean_cross_val_score_rf = np.mean(cross_val_scores_rf)
-print(f'Moyenne des scores de validation croisée en accuracy: {mean_cross_val_score_rf:.2f}')
-
-# Tracer les scores de validation croisée pour chaque nombre d'arbres
-plt.figure(figsize=(10, 6))
-plt.plot(range_n_estimators, cross_val_scores_rf, marker='o', linestyle='-', label='Scores de validation croisée')
-plt.axhline(y=mean_cross_val_score_rf, color='r', linestyle='--', label=f'Moyenne = {mean_cross_val_score_rf:.2f}')
-plt.xlabel('Nombre d\'arbres')
-plt.ylabel('Score de validation croisée (accuracy)')
-plt.title('Score de validation croisée en fonction du nombre d\'arbres pour Random Forest')
-plt.legend(loc='best')
-plt.grid(True)
-plt.show()
-
-# -------------------------------------------- RMSE -----------------------------------------------------------
+# -------------------------------------------------------- RMSE --------------------------------------------------------
 from sklearn.metrics import mean_squared_error
 
-rmse_scores_rf = []
+rmse_rf = np.sqrt(mean_squared_error(y_test_classes, pred_rf))
 
-# Calculer la RMSE pour chaque modèle Random Forest
-for idx, n_estimators in enumerate(range_n_estimators):
-    rmse_rf = np.sqrt(mean_squared_error(y_test_classes, tab_pred_rf[idx]))
-    rmse_scores_rf.append(rmse_rf)
-
-    print(f'Nombre de voisins: {n_estimators}, RMSE: {rmse_rf:.4f}')
-
-# Calculer la moyenne des scores de validation croisée
-mean_rmse_score_rf = np.mean(rmse_scores_rf)
-print(f'Moyenne des RMSE: {mean_rmse_score_rf:.2f}')
-
-# Tracer les scores de RMSE pour chaque nombre d'arbres
-plt.figure(figsize=(10, 6))
-plt.plot(range_n_estimators, rmse_scores_rf, marker='o', linestyle='-')
-plt.axhline(y=mean_rmse_score_rf, color='r', linestyle='--', label=f'Moyenne = {mean_rmse_score_rf:.2f}')
-plt.xlabel('Nombre d\'arbres')
-plt.ylabel('RMSE')
-plt.title('RMSE en fonction du nombre d\'arbres pour Random Forest')
-plt.legend(loc='best')
-plt.grid(True)
-plt.show()
+print(f'RMSE: {rmse_rf:.4f}')
 
 # ------------------------------------------------- Matrice de confusion -----------------------------------------------
 from sklearn.metrics import confusion_matrix
 import seaborn as sns
 
-for idx, n_estimators in enumerate(range_n_estimators):
-    conf_matrix_rf = confusion_matrix(y_test_classes, tab_pred_rf[idx])
+conf_matrix_rf = confusion_matrix(y_test_classes, pred_rf)
 
-    print(f'Matrice de confusion pour Random Forest avec n = {n_estimators}')
-    print(conf_matrix_rf)
-    """
-    plt.figure(figsize=(10, 6))
-    sns.heatmap(conf_matrix_rf, annot=True, fmt='d', cmap='Blues',
-                xticklabels=['0-10', '10-50', '50-100', '100-200'],
-                yticklabels=['0-10', '10-50', '50-100', '100-200'])
-    plt.xlabel('Prédictions')
-    plt.ylabel('Vérités terrain')
-    plt.title(f'Matrice de confusion pour Random Forest avec n = {n_estimators} - score = {accuracy_scores_rf[idx]:.2f}')
-    plt.show()
-    """
+print('Matrice de confusion pour Multi Layer Perceptron')
+print(conf_matrix_rf)
 
+plt.figure(figsize=(10, 6))
+sns.heatmap(conf_matrix_rf, annot=True, fmt='d', cmap='Blues',
+            xticklabels=['0-10', '10-50', '50-100', '100-200'],
+            yticklabels=['0-10', '10-50', '50-100', '100-200'])
+plt.xlabel('Prédictions')
+plt.ylabel('Vérités terrain')
+plt.title(f'Matrice de confusion pour Random Forest - score = {accuracy_rf:.2f}')
+plt.show()
 
 # ------------------------------------------------- Précision et Rappel ------------------------------------------------
 from sklearn.metrics import precision_score, recall_score, f1_score
 
-precision_scores_rf = []
-recall_scores_rf = []
-f1_scores_rf = []
-
 # Évaluer la précision et le rappel pour chaque nombre de voisins
-for idx, n_estimators in enumerate(range_n_estimators):
-    precision_rf = precision_score(y_test_classes, tab_pred_rf[idx], average='weighted', zero_division=1)     # Calcul de la précision moyenne pondérée
 
-    recall_rf = recall_score(y_test_classes, tab_pred_rf[idx], average='weighted', zero_division=1)           # Calcul du rappel moyen pondéré
+precision_rf = precision_score(y_test_classes, pred_rf, average='weighted', zero_division=1)  # Calcul de la précision moyenne pondérée
 
-    f1_rf = f1_score(y_test_classes, tab_pred_rf[idx], average='weighted', zero_division=1)                     # Calcul du f1_score
+recall_rf = recall_score(y_test_classes, pred_rf, average='weighted', zero_division=1)  # Calcul du rappel moyen pondéré
 
-    precision_scores_rf.append(precision_rf)
-    recall_scores_rf.append(recall_rf)
-    f1_scores_rf.append(f1_rf)
+f1_rf = f1_score(y_test_classes, pred_rf, average='weighted', zero_division=1)  # Calcul du f1_score
 
-    print(f'Nombre d\'arbres: {n_estimators}, Précision: {precision_rf:.4f}, Rappel: {recall_rf:.4f}, Ratio: {f1_rf:.4f}')
-
-# Calculer les moyennes de la précision, du rappel et du F1-score
-mean_precision_score_rf = np.mean(precision_scores_rf)
-print(f'Moyenne des scores de précision: {mean_precision_score_rf:.2f}')
-
-mean_recall_score_rf = np.mean(recall_scores_rf)
-print(f'Moyenne des scores de rappel: {mean_recall_score_rf:.2f}')
-
-mean_f1_score_rf = np.mean(f1_scores_rf)
-print(f'Moyenne des F1-score: {mean_f1_score_rf:.2f}')
-
-# Afficher les graphiques de la précision, du rappel et du F1-score
-# Précision
-plt.figure(figsize=(10, 6))
-plt.plot(range_n_estimators, precision_scores_rf, marker='o', linestyle='-')
-plt.axhline(y=mean_cross_val_score_rf, color='r', linestyle='--', label=f'Moyenne = {mean_precision_score_rf:.2f}')
-plt.xlabel('Nombre de voisins')
-plt.ylabel('Précision')
-plt.title('Précision en fonction du nombre de voisins pour K-Nearest Neighbors')
-plt.legend(loc='best')
-plt.grid(True)
-plt.show()
-# Rappel
-plt.figure(figsize=(10, 6))
-plt.plot(range_n_estimators, recall_scores_rf, marker='o', linestyle='-')
-plt.axhline(y=mean_cross_val_score_rf, color='r', linestyle='--', label=f'Moyenne = {mean_recall_score_rf:.2f}')
-plt.xlabel('Nombre de voisins')
-plt.ylabel('Rappel')
-plt.title('Rappel en fonction du nombre de voisins pour K-Nearest Neighbors')
-plt.legend(loc='best')
-plt.grid(True)
-plt.show()
-# F1-score
-plt.figure(figsize=(10, 6))
-plt.plot(range_n_estimators, f1_scores_rf, marker='o', linestyle='-')
-plt.axhline(y=mean_cross_val_score_rf, color='r', linestyle='--', label=f'Moyenne = {mean_f1_score_rf:.2f}')
-plt.xlabel('Nombre de voisins')
-plt.ylabel('F1-score')
-plt.title('F1-score en fonction du nombre de voisins pour K-Nearest Neighbors')
-plt.legend(loc='best')
-plt.grid(True)
-plt.show()
+print(f'Précision: {precision_rf:.4f}, Rappel: {recall_rf:.4f}, F1-Score: {f1_rf:.4f}')
 
 # ----------------------------------------------------- Courbe ROC -----------------------------------------------------
 from sklearn.metrics import roc_curve, auc
 from sklearn.preprocessing import label_binarize
 
-tab_y_prob_rf = []
-for idx, n_estimators in enumerate(range_n_estimators):
-    y_prob_rf = tab_rf[idx].predict_proba(X_test_scaled)
-    tab_y_prob_rf.append(y_prob_rf)
+y_prob_rf = rf.predict_proba(X_test_scaled)
 
 # Binariser les classes pour chaque classe pour la courbe ROC
 y_test_bin = label_binarize(y_test_classes, classes=[0, 1, 2, 3])
 n_classes = y_test_bin.shape[1]
 
 # Calculer les courbes ROC et l'AUC pour chaque nombre d'arbres et pour chaque classe
-for idx, n_estimators in enumerate(range_n_estimators):
+tab_fpr_rf = []
+tab_tpr_rf = []
+plt.figure(figsize=(10, 6))
+for i in range(n_classes):
+    false_positive_rate_mlp, true_positive_rate_mlp, thresholds_mlp = roc_curve(y_test_bin[:, i], y_prob_rf[:, i])
+    roc_auc = auc(false_positive_rate_mlp, true_positive_rate_mlp)  # roc_auc = roc _ area under the curve
 
-    tab_fpr_rf = []
-    tab_tpr_rf = []
+    tab_fpr_rf.append(false_positive_rate_mlp)
+    tab_tpr_rf.append(true_positive_rate_mlp)
 
-    plt.figure(figsize=(10, 6))
-    for i in range(n_classes):
-        false_positive_rate_rf, true_positive_rate_rf, thresholds_rf = roc_curve(y_test_bin[:, i], tab_y_prob_rf[idx][:, i])
-        roc_auc = auc(false_positive_rate_rf, true_positive_rate_rf)     # roc_auc = roc _ area under the curve
-
-        tab_fpr_rf.append(false_positive_rate_rf)
-        tab_tpr_rf.append(true_positive_rate_rf)
-
-        # Affichage de la courbe ROC pour chaque quantité d'arbres et pour chaque classe
-        plt.plot(false_positive_rate_rf, true_positive_rate_rf, lw=2, label=f'Classe {i} (AUC = {roc_auc:.2f})')
-    plt.plot([0, 1], [0, 1], color='navy', lw=2, linestyle='--')
-    plt.xlim([0.0, 1.0])
-    plt.ylim([0.0, 1.05])
-    plt.xlabel('Taux de Faux Positifs')
-    plt.ylabel('Taux de Vrais Positifs')
-    plt.title(f'Courbe ROC pour le modèle Random Forest avec {n_estimators} arbres pour chaque classe')
-    plt.legend(loc='lower right')
-    plt.grid(True)
-    plt.show()
-
-    # Affichage de la courbe ROC pour chaque quantité d'arbres
     # Combiner les courbes ROC pour une courbe globale
-    fpr_global = np.unique(np.concatenate(tab_fpr_rf))
-    tpr_global = np.zeros_like(fpr_global)
+fpr_global = np.unique(np.concatenate(tab_fpr_rf))
+tpr_global = np.zeros_like(fpr_global)
 
-    for fpr_i, tpr_i in zip(tab_fpr_rf, tab_tpr_rf):
-        tpr_global += np.interp(fpr_global, fpr_i, tpr_i)
+for fpr_i, tpr_i in zip(tab_fpr_rf, tab_tpr_rf):
+    tpr_global += np.interp(fpr_global, fpr_i, tpr_i)
 
-    tpr_global /= n_classes  # Moyenne des vrais positifs pour chaque taux de faux positifs
+tpr_global /= n_classes  # Moyenne des vrais positifs pour chaque taux de faux positifs
 
-    roc_auc_global = auc(fpr_global, tpr_global)
+roc_auc_global = auc(fpr_global, tpr_global)
 
-    plt.plot(fpr_global, tpr_global, color='b', lw=2, label=f'ROC (AUC = {roc_auc_global:.2f})')
-    plt.plot([0, 1], [0, 1], color='navy', lw=2, linestyle='--')
-    plt.xlim([0.0, 1.0])
-    plt.ylim([0.0, 1.05])
-    plt.xlabel('Taux de Faux Positifs')
-    plt.ylabel('Taux de Vrais Positifs')
-    plt.title(f'Courbe ROC pour le modèle Random Forest avec {n_estimators} arbres')
-    plt.legend(loc='lower right')
-    plt.grid(True)
-    plt.show()
+# Affichage de la courbe ROC pour chaque quantité d'arbres
+plt.plot(fpr_global, tpr_global, color='b', lw=2, label=f'ROC (AUC = {roc_auc_global:.2f})')
+plt.plot([0, 1], [0, 1], color='navy', lw=2, linestyle='--')
+plt.xlim([0.0, 1.0])
+plt.ylim([0.0, 1.05])
+plt.xlabel('Taux de Faux Positifs')
+plt.ylabel('Taux de Vrais Positifs')
+plt.title(f'Courbe ROC pour le modèle Random Forest')
+plt.legend(loc='lower right')
+plt.grid(True)
+plt.show()
+
+print(f'AUC: {roc_auc_global:.4f}')
+

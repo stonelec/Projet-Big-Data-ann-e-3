@@ -4,12 +4,26 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
 
-# Charger la base de données
-data = pd.read_csv('../AI_Patrimoine_Arboré_(RO).csv')
-#data = pd.read_csv('../Data_Arbre.csv')
+grid_search_mode = 1            # 1 pour activer la recherche par grille, 0 pour désactiver
+bdd = 1                         # 1 pour AI_Patrimoine_Arboré_(RO), 0 pour Data_Arbre
+num_features = 2                # 2 pour ['tronc_diam', 'haut_tot', 'haut_tronc'], 1 pour 2 + [...,'remarquable','fk_pied'] et 0 pour 2 + [...,'feuillage','fk_revetement']
 
-# Sélectionner les caractéristiques basées sur la corrélation
-features = ['tronc_diam', 'haut_tot', 'haut_tronc']
+
+# Charger la base de données
+if bdd == 1:
+    data = pd.read_csv('../AI_Patrimoine_Arboré_(RO).csv')
+else:
+    data = pd.read_csv('../Data_Arbre.csv')
+
+# Sélectionner les caractéristiques
+match num_features:
+    case 2:
+        features = ['tronc_diam', 'haut_tot', 'haut_tronc']
+    case 1:
+        features = ['tronc_diam', 'haut_tot', 'haut_tronc', 'remarquable', 'fk_pied']
+    case 0:
+        features = ['tronc_diam', 'haut_tot', 'haut_tronc', 'feuillage', 'fk_revetement']
+
 target = 'age_estim'
 
 # Filtrer les colonnes pertinentes
@@ -53,13 +67,78 @@ scaler = StandardScaler()
 X_train_scaled = scaler.fit_transform(X_train)
 X_test_scaled = scaler.transform(X_test)
 
+# ======================================================================================================================
+# ==================================================== Grid Search =====================================================
+# ======================================================================================================================
+from sklearn.neural_network import MLPClassifier
+from sklearn.model_selection import GridSearchCV
+from sklearn.metrics import classification_report
+
+if grid_search_mode == 1:
+    # Définir les hyperparamètres à tester
+    param_grid_melp = {
+        'hidden_layer_sizes': [(50,), (100,), (50, 50), (100, 50, 25)],  # Combinaisons de tailles de couches cachées
+        'activation': ['logistic', 'tanh', 'relu'],  # Fonctions d'activation à tester
+        'solver': ['sgd', 'adam'],  # Algorithmes d'optimisation
+        'max_iter': [500, 1000, 2000],  # Nombre d'itérations
+        'early_stopping': [True]  # Utilisation de l'arrêt anticipé
+    }
+
+    # Créer le modèle K-Nearest Neighbors
+    mlp = MLPClassifier(random_state=42)
+
+    # Configurer GridSearchCV
+    grid_search = GridSearchCV(estimator=mlp, param_grid=param_grid_melp, scoring='accuracy', n_jobs=-1)
+    # n_jobs = -1 means using all processors
+
+    # Exécuter la recherche par grille
+    grid_search.fit(X_train_scaled, y_train_classes)
+
+    # Afficher les meilleurs hyperparamètres
+    print("Meilleurs hyperparamètres trouvés par GridSearchCV :")
+    print(grid_search.best_params_)
+
+    best_knn = grid_search.best_estimator_
+    y_pred = best_knn.predict(X_test_scaled)
+
+    # Évaluation des performances
+    print("Classification Report:")
+    print(classification_report(y_test_classes, y_pred, target_names=['0-10', '10-50', '50-100', '100-200']))
+    print("")
+    print("")
+
 
 # ======================================================================================================================
 # ======================================== Implémentation du modèle Multi Layer Perceptron =============================
 # ======================================================================================================================
-from sklearn.neural_network import MLPClassifier
 
-mlp = MLPClassifier(hidden_layer_sizes=(100,), max_iter=500, random_state=42)
+match bdd:
+    case 1:  # AI_Patrimoine_Arboré_(RO)
+        match num_features:
+            case 2:  # ['tronc_diam', 'haut_tot', 'haut_tronc']
+                # best-param = {'activation': 'relu', 'early_stopping': True, 'hidden_layer_sizes': (50, 50), 'max_iter': 500, 'solver': 'adam'}
+                mlp = MLPClassifier(activation='relu', early_stopping=True, hidden_layer_sizes=(50, 50), max_iter=500, solver='adam', random_state=42)
+            case 1:  # ['tronc_diam', 'haut_tot', 'haut_tronc', 'remarquable', 'fk_pied']
+                # {'activation': 'relu', 'early_stopping': True, 'hidden_layer_sizes': (100, 50, 25), 'max_iter': 500, 'solver': 'adam'}
+                mlp = MLPClassifier(activation='relu', early_stopping=True, hidden_layer_sizes=(100, 50, 25), max_iter=500, solver='adam', random_state=42)
+            case 0:  # ['tronc_diam', 'haut_tot', 'haut_tronc', 'feuillage', 'fk_revetement']
+                # {'activation': 'relu', 'early_stopping': True, 'hidden_layer_sizes': (50, 50), 'max_iter': 500, 'solver': 'adam'}
+                mlp = MLPClassifier(activation='relu', early_stopping=True, hidden_layer_sizes=(50, 50), max_iter=500, solver='adam', random_state=42)
+
+
+    case 0:  # Data_Arbre
+        match num_features:
+            case 2:  # ['tronc_diam', 'haut_tot', 'haut_tronc']
+                #
+                mlp = MLPClassifier(random_state=42)
+            case 1:  # ['tronc_diam', 'haut_tot', 'haut_tronc', 'remarquable', 'fk_pied']
+                #
+                mlp = MLPClassifier(random_state=42)
+            case 0:  # ['tronc_diam', 'haut_tot', 'haut_tronc', 'feuillage', 'fk_revetement']
+                #
+                mlp = MLPClassifier(random_state=42)
+
+
 mlp.fit(X_train_scaled, y_train_classes)
 pred_mlp = mlp.predict(X_test_scaled)
 
@@ -119,7 +198,7 @@ recall_mlp = recall_score(y_test_classes, pred_mlp, average='weighted', zero_div
 
 f1_mlp = f1_score(y_test_classes, pred_mlp, average='weighted', zero_division=1)                        # Calcul du f1_score
 
-print(f'Précision: {precision_mlp:.4f}, Rappel: {recall_mlp:.4f}, Ratio: {f1_mlp:.4f}')
+print(f'Précision: {precision_mlp:.4f}, Rappel: {recall_mlp:.4f}, F1-Score: {f1_mlp:.4f}')
 
 # ----------------------------------------------------- Courbe ROC -----------------------------------------------------
 from sklearn.metrics import roc_curve, auc
@@ -164,3 +243,6 @@ plt.title(f'Courbe ROC pour le modèle Multi-Layer-Perceptron')
 plt.legend(loc='lower right')
 plt.grid(True)
 plt.show()
+
+print(f'AUC: {roc_auc_global:.4f}')
+
