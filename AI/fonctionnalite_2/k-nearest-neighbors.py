@@ -2,13 +2,32 @@
 # ============================================== Préparation des données ===============================================
 # ======================================================================================================================
 import pandas as pd
+import time
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
 
-grid_search_mode = 0            # 1 pour activer la recherche par grille, 0 pour désactiver
-bdd = 0                         # 1 pour AI_Patrimoine_Arboré_(RO), 0 pour Data_Arbre
-num_features = 0                # 2 pour ['tronc_diam', 'haut_tot', 'haut_tronc'], 1 pour 2 + [...,'remarquable','fk_pied'] et 0 pour 2 + [...,'feuillage','fk_revetement']
+print("Bienvenue dans le programme de prédiction de l'âge des arbres avec K-Nearest Neighbors !")
 
+print("Voulez-vous activer la recherche par grille pour trouver les meilleurs hyperparamètres (GridSearch) ?")
+print("1 - Oui")
+print("0 - Non")
+grid_search_mode = int(input("Votre choix: "))
+
+print("Veuillez choisir la base de données à utiliser:")
+print("1 - AI_Patrimoine_Arboré_(RO)")
+print("0 - Data_Arbre")
+bdd = int(input("Votre choix: "))
+
+print("Veuillez choisir les caractéristiques à utiliser en entrée:")
+print("2 - ['tronc_diam', 'haut_tot', 'haut_tronc']")
+print("1 - ['tronc_diam', 'haut_tot', 'haut_tronc', 'remarquable', 'fk_pied']")
+print("0 - ['tronc_diam', 'haut_tot', 'haut_tronc', 'feuillage', 'fk_revetement']")
+num_features = int(input("Votre choix: "))
+
+print("Merci de patienter quelques instants...")
+time.sleep(2)
+print("")
+print("")
 
 # Charger la base de données
 if bdd == 1:
