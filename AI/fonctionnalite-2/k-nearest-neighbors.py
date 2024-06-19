@@ -4,7 +4,7 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
 
-grid_search_mode = 1            # 1 pour activer la recherche par grille, 0 pour désactiver
+grid_search_mode = 0            # 1 pour activer la recherche par grille, 0 pour désactiver
 bdd = 1                         # 1 pour AI_Patrimoine_Arboré_(RO), 0 pour Data_Arbre
 num_features = 0                # 2 pour ['tronc_diam', 'haut_tot', 'haut_tronc'], 1 pour 2 + [...,'remarquable','fk_pied'] et 0 pour 2 + [...,'feuillage','fk_revetement']
 
@@ -168,7 +168,7 @@ import seaborn as sns
 
 conf_matrix_knn = confusion_matrix(y_test_classes, pred_knn)
 
-print('Matrice de confusion pour Multi Layer Perceptron')
+print('Matrice de confusion pour K-Nearest Neighbors')
 print(conf_matrix_knn)
 
 plt.figure(figsize=(10, 6))
