@@ -23,6 +23,8 @@ haut_tot = pd.read_csv("Data_Arbre.csv", usecols=["haut_tot"])
 haut_tronc = pd.read_csv("Data_Arbre.csv", usecols=["haut_tronc"])
 
 diametre = pd.read_csv("Data_Arbre.csv", usecols=["tronc_diam"])
+age_estim = pd.read_csv("Data_Arbre.csv", usecols=["age_estim"])
+prec_estim = pd.read_csv("Data_Arbre.csv", usecols=["fk_prec_estim"])
 
 #Vérifier si tout est bien :
 
@@ -112,26 +114,24 @@ fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
 fig.show()
 """
 
-# -----------------------------------------------------------------------------------------
-# ------------------------------ Apprentissage Non Supervisé ------------------------------
-# -----------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------------------
+# ------------------------------ Apprentissage Non Supervisé : Kmeans ------------------------------
+# --------------------------------------------------------------------------------------------------
 
-# ---------- KMeans ----------
+# ----- Kmeans -----
 
-"""import pandas as pd
 import numpy as np
 
 import matplotlib.pyplot as plt
 from sklearn.cluster import KMeans
 
-model = KMeans(n_clusters=3, random_state=42).fit_predict(data_arbre)
-
-print(model.labels_)
+n_clusters = 3
+model = KMeans(n_clusters=n_clusters, random_state=42).fit_predict(data_arbre)
 
 #Affichage en fonction de la position
 
-colormap = np.array(['Red', 'Blue', 'Yellow'])
-plt.scatter(longitude, latitude, c=colormap[model.labels_], s=40)
+"""colormap = np.array(['Red', 'Blue', 'Yellow'])
+plt.scatter(longitude, latitude, c=colormap[model], s=40)
 plt.xlabel('Longitude (X)')
 plt.ylabel('Latitude (Y)')
 plt.title('3 Clusters en fonction de la position des arbres')
@@ -139,19 +139,110 @@ plt.title('3 Clusters en fonction de la position des arbres')
 plt.scatter([], [], c=colormap[0], label=f'Cluster 1')
 plt.scatter([], [], c=colormap[1], label=f'Cluster 2')
 plt.scatter([], [], c=colormap[2], label=f'Cluster 3')
+"""
+#Récupérer les clusters :
+
+center = KMeans(n_clusters=n_clusters, random_state=42).fit(data_arbre)
+centroides = center.cluster_centers_
+
+"""# Ajouter les centroïdes au plot
+plt.scatter(centroides[:, 0], centroides[:, 1], c='Black', marker='X', s=100, label='Centroides')
+
+# Ajouter une légende
+for i in range(n_clusters):
+    plt.scatter([], [], c=colormap[i])
 
 plt.legend()
-plt.show()
-"""
+plt.show()"""
 
-# ----- Afficher sur la ville l'emplacement des arbres avec les clusters -----
+# ----- Afficher sur la ville l'emplacement des arbres avec les clusters et les centroides -----
 
-"""import plotly.express as px
+import plotly.express as px
 from sklearn.cluster import KMeans
 
 # Effectuer le clustering
 model = KMeans(n_clusters=3, random_state=42).fit(data_arbre)
 data_arbre['cluster'] = model.labels_
+
+# Récupérer les centroïdes
+centroides = pd.DataFrame(center.cluster_centers_, columns=["longitude", "latitude", "haut_tronc", "age_estim", "tronc_diam", "fk_prec_estim"])
+centroides['cluster'] = ['centroid'] * n_clusters  # Ajouter une étiquette pour les centroïdes
+
+
+# Tracer la carte avec Plotly Express
+fig = px.scatter_mapbox(data_arbre,
+                        lat="latitude",
+                        lon="longitude",
+                        color="cluster",  # Colorer par cluster
+                        zoom=10,  # Ajuster le niveau de zoom initial
+                        height=700,
+                        width=700)
+
+# Ajouter les centroïdes
+fig.add_trace(px.scatter_mapbox(centroides,
+                                lat="latitude",
+                                lon="longitude",
+                                color_discrete_sequence=["green"],
+                                height=700,
+                                width=700).data[0])
+
+fig.update_layout(mapbox_style="open-street-map")
+fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
+
+fig.show()
+
+# -------------------------------------------------------------------------------------------------
+# ------------------------------ Apprentissage Non Supervisé : BIRCH ------------------------------
+# -------------------------------------------------------------------------------------------------
+
+# Explication :
+
+# Le but est de construire un arbre avec notre data. C'est à partir des feuilles que vont etre lu les centroïdes
+# Le centroïde sera soit le final, soit il sera donnée en entrée à un algo de regrouppement
+
+# ----- BIRCH -----
+
+"""from sklearn.cluster import Birch
+
+brc = Birch(n_clusters=3)
+brc.fit(data_arbre)
+labels = brc.predict(data_arbre)
+print(labels)"""
+
+# ----- Afficher sur la ville l'emplacement des arbres avec les clusters -----
+
+"""data_arbre['cluster'] = labels
+
+# Tracer la carte avec Plotly Express
+fig = px.scatter_mapbox(data_arbre,
+                        lat="latitude",
+                        lon="longitude",
+                        color="cluster",  # Colorer par cluster
+                        zoom=10,  # Ajuster le niveau de zoom initial
+                        height=700,
+                        width=700)
+
+fig.update_layout(mapbox_style="open-street-map")
+fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
+
+fig.show()"""
+
+# -------------------------------------------------------------------------------------------------------------------
+# ------------------------------ Apprentissage Non Supervisé : AgglomerativeClustering ------------------------------
+# -------------------------------------------------------------------------------------------------------------------
+
+# Explication :
+
+# ----- AgglomerativeClustering -----
+
+"""from sklearn.cluster import AgglomerativeClustering
+
+labels = AgglomerativeClustering(n_clusters=3).fit_predict(data_arbre)
+print(labels)"""
+
+#  ----- Afficher sur la ville l'emplacement des arbres avec les clusters -----
+
+"""data_arbre['cluster'] = labels
 
 # Tracer la carte avec Plotly Express
 fig = px.scatter_mapbox(data_arbre,
@@ -173,8 +264,7 @@ fig.show()"""
 
 # ---------- Silhouette Coefficient ----------
 
-"""
-from sklearn.metrics import silhouette_score
+"""from sklearn.metrics import silhouette_score
 
 range_n_clusters = [2, 3, 4, 5, 6, 7, 8, 9, 10,
                     11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
@@ -190,11 +280,10 @@ for num_clusters in range_n_clusters:
     print("Test : ", var)
 
     # initialise kmeans
-    kmeans = KMeans(n_clusters=num_clusters, random_state=42).fit_predict(arbre)
-    cluster_labels = kmeans.labels_
+    labels = KMeans(n_clusters=num_clusters, random_state=42).fit_predict(data_arbre)
 
     # silhouette score
-    silhouette_avg.append(silhouette_score(arbre, cluster_labels))
+    silhouette_avg.append(silhouette_score(data_arbre, labels))
 
 plt.plot(range_n_clusters, silhouette_avg)
 plt.xlabel('Nombre de cluster')
@@ -204,9 +293,7 @@ plt.show()"""
 
 # ---------- Calinski-Harabasz Index ----------
 
-"""
-
-from sklearn.cluster import KMeans
+"""from sklearn.cluster import KMeans
 from sklearn.metrics import calinski_harabasz_score
 
 arbre = pd.read_csv("Data_Arbre.csv", usecols=["haut_tronc", "age_estim", "tronc_diam", "fk_prec_estim" ])
@@ -231,8 +318,8 @@ for num_clusters in range_n_clusters:
     print("Test : ", var)
 
     # initialise kmeans
-    kmeans = KMeans(n_clusters=num_clusters, random_state=42).fit(arbre)
-    res = calinski_harabasz_score(arbre, kmeans.labels_)
+    labels = KMeans(n_clusters=num_clusters, random_state=42).fit_predict(data_arbre)
+    res = calinski_harabasz_score(arbre, labels)
 
     # score
     score.append(res)
@@ -241,13 +328,11 @@ plt.plot(range_n_clusters, score)
 plt.xlabel('Nombre de cluster')
 plt.ylabel('Score')
 plt.title('Calinski-Harabasz Index')
-plt.show()
-"""
+plt.show()"""
 
 # ---------- Davies-Bouldin Index ----------
 
-"""
-from sklearn.metrics import davies_bouldin_score
+"""from sklearn.metrics import davies_bouldin_score
 from sklearn.cluster import KMeans
 
 arbre = pd.read_csv("Data_Arbre.csv", usecols=["haut_tronc", "age_estim", "tronc_diam", "fk_prec_estim" ])
@@ -267,8 +352,8 @@ for num_clusters in range_n_clusters:
     print("Test : ", var)
 
     # initialise kmeans
-    kmeans = KMeans(n_clusters=num_clusters, random_state=42).fit_predict(arbre)
-    res = davies_bouldin_score(arbre, kmeans)
+    labels = KMeans(n_clusters=num_clusters, random_state=42).fit_predict(data_arbre)
+    res = davies_bouldin_score(arbre, labels)
 
     # score
     score.append(res)
@@ -277,5 +362,4 @@ plt.plot(range_n_clusters, score)
 plt.xlabel('Nombre de cluster')
 plt.ylabel('Score')
 plt.title('Davies-Bouldin Index')
-plt.show()
-"""
+plt.show()"""

@@ -12,12 +12,16 @@ print("-----------------------------------------------------")
 print("Calcul de kmeans avec comme nombre de clusters : ", 2) #int(sys.argv[1])
 print("-----------------------------------------------------")
 
-n_clusters = 2 #int(sys.argv[1])
+n_clusters = 3 #int(sys.argv[1])
 
 def calcul_kmeans(n):
 
-    model = KMeans(n_clusters=n, random_state=42).fit(data_arbre)
-    labels = model.predict(data_arbre)
+    """model = KMeans(n_clusters=n, random_state=42).fit(data_arbre)
+    labels = model.predict(data_arbre)"""
+
+    from sklearn.cluster import AgglomerativeClustering
+    labels = AgglomerativeClustering(n_clusters=n).fit_predict(data_arbre)
+
     return labels
 
 #Fonction calcul calcul kmeans :
