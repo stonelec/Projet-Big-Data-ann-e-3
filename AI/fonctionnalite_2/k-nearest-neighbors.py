@@ -6,7 +6,7 @@ from sklearn.model_selection import train_test_split
 
 grid_search_mode = 0            # 1 pour activer la recherche par grille, 0 pour désactiver
 bdd = 1                         # 1 pour AI_Patrimoine_Arboré_(RO), 0 pour Data_Arbre
-num_features = 2                # 2 pour ['tronc_diam', 'haut_tot', 'haut_tronc'], 1 pour 2 + [...,'remarquable','fk_pied'] et 0 pour 2 + [...,'feuillage','fk_revetement']
+num_features = 0                # 2 pour ['tronc_diam', 'haut_tot', 'haut_tronc'], 1 pour 2 + [...,'remarquable','fk_pied'] et 0 pour 2 + [...,'feuillage','fk_revetement']
 
 
 # Charger la base de données
@@ -67,28 +67,27 @@ scaler = StandardScaler()
 X_train_scaled = scaler.fit_transform(X_train)
 X_test_scaled = scaler.transform(X_test)
 
-
 # ======================================================================================================================
 # ==================================================== Grid Search =====================================================
 # ======================================================================================================================
-from sklearn.ensemble import RandomForestClassifier
+from sklearn.neighbors import KNeighborsClassifier
 from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import classification_report
 
 if grid_search_mode == 1:
     # Définir les hyperparamètres à tester
-    param_grid_rf = {
-        'n_estimators': [50, 100, 200, 300],            # Nombre d'arbres
-        'max_depth': [None, 10, 20, 30],                # Profondeur des arbres
-        'min_samples_split': [2, 5, 10],                # Échantillons minimum pour diviser un nœud
-        'min_samples_leaf': [1, 2, 4],                  # Échantillons minimum pour être à une feuille                                   # distance de Minkowski
+    param_grid_knn = {
+    'n_neighbors': range(2, 16),                                # nombre de voisins
+    'weights': ['uniform', 'distance'],                         # poids des voisins
+    'algorithm': ['ball_tree', 'kd_tree', 'brute', 'auto'],     # algorithme utilisé
+    'p': [1, 2]                                                 # distance de Minkowski
     }
 
     # Créer le modèle K-Nearest Neighbors
-    rf = RandomForestClassifier(random_state=42)
+    knn = KNeighborsClassifier()
 
     # Configurer GridSearchCV
-    grid_search = GridSearchCV(estimator=rf, param_grid=param_grid_rf, scoring='accuracy', n_jobs=-1)
+    grid_search = GridSearchCV(estimator=knn, param_grid=param_grid_knn, scoring='accuracy', n_jobs=-1)
     # n_jobs = -1 means using all processors
 
     # Exécuter la recherche par grille
@@ -98,8 +97,8 @@ if grid_search_mode == 1:
     print("Meilleurs hyperparamètres trouvés par GridSearchCV :")
     print(grid_search.best_params_)
 
-    best_rf = grid_search.best_estimator_
-    y_pred = best_rf.predict(X_test_scaled)
+    best_knn = grid_search.best_estimator_
+    y_pred = best_knn.predict(X_test_scaled)
 
     # Évaluation des performances
     print("Classification Report:")
@@ -107,36 +106,36 @@ if grid_search_mode == 1:
 
 
 # ======================================================================================================================
-# ===================================== Implémentation du modèle Random Forest Classification ==========================
+# ====================================== Implémentation du modèle K-Nearest Neighbors ==================================
 # ======================================================================================================================
 
 match bdd:
     case 1: # AI_Patrimoine_Arboré_(RO)
         match num_features:
             case 2: # ['tronc_diam', 'haut_tot', 'haut_tronc']
-            # best-param = {'max_depth': 10, 'min_samples_leaf': 1, 'min_samples_split': 10, 'n_estimators': 100}
-                rf = RandomForestClassifier(max_depth=10, min_samples_leaf=1, min_samples_split=10, n_estimators=100, random_state=42)
+            # best-param = {'algorithm': 'brute', 'n_neighbors': 11, 'p': 1, 'weights': 'uniform'}
+                knn = KNeighborsClassifier(algorithm='brute', n_neighbors=11, p=1, weights='uniform')
             case 1: # ['tronc_diam', 'haut_tot', 'haut_tronc', 'remarquable', 'fk_pied']
-                # {'max_depth': 20, 'min_samples_leaf': 1, 'min_samples_split': 10, 'n_estimators': 200}
-                rf = RandomForestClassifier(max_depth=20, min_samples_leaf=1, min_samples_split=10, n_estimators=200, random_state=42)
+                # {'algorithm': 'brute', 'n_neighbors': 14, 'p': 1, 'weights': 'distance'}
+                knn = KNeighborsClassifier(algorithm='brute', n_neighbors=14, p=1, weights='distance')
             case 0: # ['tronc_diam', 'haut_tot', 'haut_tronc', 'feuillage', 'fk_revetement']
-                # {'max_depth': 10, 'min_samples_leaf': 1, 'min_samples_split': 10, 'n_estimators': 100}
-                rf = RandomForestClassifier(max_depth=10, min_samples_leaf=1, min_samples_split=10, n_estimators=100, random_state=42)
+                # {'algorithm': 'ball_tree', 'n_neighbors': 4, 'p': 2, 'weights': 'uniform'}
+                knn = KNeighborsClassifier(algorithm='ball_tree', n_neighbors=4, p=2, weights='uniform')
 
     case 0: # Data_Arbre
         match num_features:
             case 2:  # ['tronc_diam', 'haut_tot', 'haut_tronc']
-                #
-                rf = RandomForestClassifier(random_state=42)
+                # best-param = {'algorithm': 'brute', 'n_neighbors': 11, 'p': 1, 'weights': 'uniform'}
+                knn = KNeighborsClassifier(algorithm='brute', n_neighbors=11, p=1, weights='uniform')
             case 1:  # ['tronc_diam', 'haut_tot', 'haut_tronc', 'remarquable', 'fk_pied']
-                #
-                rf = RandomForestClassifier(random_state=42)
+                # {'algorithm': 'brute', 'n_neighbors': 14, 'p': 1, 'weights': 'distance'}
+                knn = KNeighborsClassifier(algorithm='brute', n_neighbors=14, p=1, weights='distance')
             case 0:  # ['tronc_diam', 'haut_tot', 'haut_tronc', 'feuillage', 'fk_revetement']
-                #
-                rf = RandomForestClassifier(random_state=42)
+                # {'algorithm': 'ball_tree', 'n_neighbors': 4, 'p': 2, 'weights': 'uniform'}
+                knn = KNeighborsClassifier(algorithm='ball_tree', n_neighbors=4, p=2, weights='uniform')
 
-rf.fit(X_train_scaled, y_train_classes)
-pred_rf = rf.predict(X_test_scaled)
+knn.fit(X_train_scaled, y_train_classes)
+pred_knn = knn.predict(X_test_scaled)
 
 # ======================================================================================================================
 # ============================================ Évaluation et visualisation =============================================
@@ -145,42 +144,40 @@ import matplotlib.pyplot as plt
 # ------------------------------------------------------ Précision -----------------------------------------------------
 from sklearn.metrics import accuracy_score
 
-accuracy_rf = accuracy_score(y_test_classes, pred_rf)  # Calculer le score de précision et l'ajouter à la liste
+accuracy_knn = accuracy_score(y_test_classes, pred_knn)  # Calculer le score de précision et l'ajouter à la liste
 
-print(f'Accuracy: {accuracy_rf:.4f}')
+print(f'Accuracy: {accuracy_knn:.4f}')
 
 # ------------------------------------------------- Validation croisée -------------------------------------------------
 from sklearn.model_selection import cross_val_score
 
-scores_rf = cross_val_score(rf, X_train_scaled, y_train_classes, cv=5, scoring='accuracy')  # Calculer le score de validation croisée avec 5 valeurs croisées
-print(f'Score de validation croisée: {scores_rf}')
+scores_knn = cross_val_score(knn, X_train_scaled, y_train_classes, cv=5, scoring='accuracy')  # Calculer le score de validation croisée avec 5 valeurs croisées
 
-moyenne_scores_rf = scores_rf.mean()
-print(f'Moyenne des scores de validation croisée: {moyenne_scores_rf:.4f}')
+print(f'Score de validation croisée: {scores_knn}')
 
 # -------------------------------------------------------- RMSE --------------------------------------------------------
 from sklearn.metrics import mean_squared_error
 
-rmse_rf = np.sqrt(mean_squared_error(y_test_classes, pred_rf))
+rmse_knn = np.sqrt(mean_squared_error(y_test_classes, pred_knn))
 
-print(f'RMSE: {rmse_rf:.4f}')
+print(f'RMSE: {rmse_knn:.4f}')
 
 # ------------------------------------------------- Matrice de confusion -----------------------------------------------
 from sklearn.metrics import confusion_matrix
 import seaborn as sns
 
-conf_matrix_rf = confusion_matrix(y_test_classes, pred_rf)
+conf_matrix_knn = confusion_matrix(y_test_classes, pred_knn)
 
 print('Matrice de confusion pour Random Forest')
-print(conf_matrix_rf)
+print(conf_matrix_knn)
 
 plt.figure(figsize=(10, 6))
-sns.heatmap(conf_matrix_rf, annot=True, fmt='d', cmap='Blues',
+sns.heatmap(conf_matrix_knn, annot=True, fmt='d', cmap='Blues',
             xticklabels=['0-10', '10-50', '50-100', '100-200'],
             yticklabels=['0-10', '10-50', '50-100', '100-200'])
 plt.xlabel('Prédictions')
 plt.ylabel('Vérités terrain')
-plt.title(f'Matrice de confusion pour Random Forest - score = {accuracy_rf:.2f}')
+plt.title(f'Matrice de confusion pour K-Neasrest Neighbors - score = {accuracy_knn:.2f}')
 plt.show()
 
 # ------------------------------------------------- Précision et Rappel ------------------------------------------------
@@ -188,19 +185,19 @@ from sklearn.metrics import precision_score, recall_score, f1_score
 
 # Évaluer la précision et le rappel pour chaque nombre de voisins
 
-precision_rf = precision_score(y_test_classes, pred_rf, average='weighted', zero_division=1)  # Calcul de la précision moyenne pondérée
+precision_knn = precision_score(y_test_classes, pred_knn, average='weighted', zero_division=1)  # Calcul de la précision moyenne pondérée
 
-recall_rf = recall_score(y_test_classes, pred_rf, average='weighted', zero_division=1)  # Calcul du rappel moyen pondéré
+recall_knn = recall_score(y_test_classes, pred_knn, average='weighted', zero_division=1)  # Calcul du rappel moyen pondéré
 
-f1_rf = f1_score(y_test_classes, pred_rf, average='weighted', zero_division=1)  # Calcul du f1_score
+f1_knn = f1_score(y_test_classes, pred_knn, average='weighted', zero_division=1)  # Calcul du f1_score
 
-print(f'Précision: {precision_rf:.4f}, Rappel: {recall_rf:.4f}, F1-Score: {f1_rf:.4f}')
+print(f'Précision: {precision_knn:.4f}, Rappel: {recall_knn:.4f}, F1-Score: {f1_knn:.4f}')
 
 # ----------------------------------------------------- Courbe ROC -----------------------------------------------------
 from sklearn.metrics import roc_curve, auc
 from sklearn.preprocessing import label_binarize
 
-y_prob_rf = rf.predict_proba(X_test_scaled)
+y_prob_knn = knn.predict_proba(X_test_scaled)
 
 # Binariser les classes pour chaque classe pour la courbe ROC
 y_test_bin = label_binarize(y_test_classes, classes=[0, 1, 2, 3])
@@ -211,7 +208,7 @@ tab_fpr_rf = []
 tab_tpr_rf = []
 plt.figure(figsize=(10, 6))
 for i in range(n_classes):
-    false_positive_rate_mlp, true_positive_rate_mlp, thresholds_mlp = roc_curve(y_test_bin[:, i], y_prob_rf[:, i])
+    false_positive_rate_mlp, true_positive_rate_mlp, thresholds_mlp = roc_curve(y_test_bin[:, i], y_prob_knn[:, i])
     roc_auc = auc(false_positive_rate_mlp, true_positive_rate_mlp)  # roc_auc = roc _ area under the curve
 
     tab_fpr_rf.append(false_positive_rate_mlp)
@@ -235,7 +232,7 @@ plt.xlim([0.0, 1.0])
 plt.ylim([0.0, 1.05])
 plt.xlabel('Taux de Faux Positifs')
 plt.ylabel('Taux de Vrais Positifs')
-plt.title(f'Courbe ROC pour le modèle Random Forest')
+plt.title(f'Courbe ROC pour le modèle K-Nearest Neighbors')
 plt.legend(loc='lower right')
 plt.grid(True)
 plt.show()

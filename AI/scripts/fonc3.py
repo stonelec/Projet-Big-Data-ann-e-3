@@ -1,5 +1,6 @@
 import sys
-from ..fonctionnalite_2 import random_forest_classifier as rfc
+
+
 print("")
 print("|=============================================================================|")
 print("|         Apprentissage supervisé : Système d'alerte pour les tempêtes        |")
@@ -15,7 +16,8 @@ print("")
 
 #execution du fichier correspondant à la méthode de classification
 if(methode == "random_forest"):
-    rfc.f1_random_forest()
+    import AI.fonctionnalite_3.random_forest_classifier as rfc
+    rfc.random_forest_classifier()
 else:
     print("Erreur: méthode de classification non reconnue")
     print("Veuillez choisir entre random_forest & ...")
