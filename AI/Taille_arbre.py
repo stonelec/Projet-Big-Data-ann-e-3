@@ -4,27 +4,22 @@
 
 import pandas as pd
 import numpy as np
+
+import plotly.express as px
 import matplotlib.pyplot as plt
 
-from sklearn.datasets import make_blobs
-
+from sklearn.cluster import KMeans
+from sklearn.cluster import Birch
+from sklearn.cluster import AgglomerativeClustering
 
 # -------------------------------------------------------------------------------------
 # ------------------------------ Préparation des données ------------------------------
 # -------------------------------------------------------------------------------------
 
-data_arbre = pd.read_csv("Data_Arbre.csv", usecols=["longitude", "latitude", "haut_tronc", "age_estim", "tronc_diam", "fk_prec_estim" ])
+data_arbre = pd.read_csv("Data_Arbre.csv", usecols=["haut_tronc", "age_estim", "tronc_diam", "fk_prec_estim"])
 
-position = pd.read_csv("Data_Arbre.csv", usecols=["longitude", "latitude"])
-longitude = pd.read_csv("Data_Arbre.csv", usecols=["longitude"])
-latitude = pd.read_csv("Data_Arbre.csv", usecols=["latitude"])
-
-haut_tot = pd.read_csv("Data_Arbre.csv", usecols=["haut_tot"])
-haut_tronc = pd.read_csv("Data_Arbre.csv", usecols=["haut_tronc"])
-
-diametre = pd.read_csv("Data_Arbre.csv", usecols=["tronc_diam"])
-age_estim = pd.read_csv("Data_Arbre.csv", usecols=["age_estim"])
-prec_estim = pd.read_csv("Data_Arbre.csv", usecols=["fk_prec_estim"])
+#Pour l'affichage des clusters :
+data_arbre_position = pd.read_csv("Data_Arbre.csv", usecols=["longitude", "latitude", "haut_tronc", "age_estim", "tronc_diam", "fk_prec_estim"])
 
 #Vérifier si tout est bien :
 
@@ -38,14 +33,6 @@ for i in range(len(haut_tronc)):
 #On a bien nos valeurs
 #print(var)
 """
-
-# ------------------------------------------------------------------------------
-# ------------------------------ Liste des tâches ------------------------------
-# ------------------------------------------------------------------------------
-
-#Récupérer la taille de chaque arbre : fait
-#Appliquer le clustering 2 et 3, regarder les résultats : fait
-#Afficher en fonction de la position : en cours
 
 # ------------------------------------------------------------------------------
 # ------------------------------ Afficher la data ------------------------------
@@ -95,13 +82,9 @@ for i in range(len(haut_tronc)):
 #print("Nombre de grand arbre : ", grand)
 """
 
-# -----------------------------------------------------------------------------------
-# ------------------------------ Affichage de la carte ------------------------------
-# -----------------------------------------------------------------------------------
-
-# ----- Afficher sur la ville l'emplacement des arbres -----
-
-import plotly.express as px
+# ------------------------------------------------------------------------------------------------------------
+# ------------------------------ Affichage de la carte avec les données de base ------------------------------
+# ------------------------------------------------------------------------------------------------------------
 
 """fig = px.scatter_mapbox(position,
                         lat="latitude",
@@ -120,143 +103,110 @@ fig.show()
 
 # ----- Kmeans -----
 
-import numpy as np
-
-import matplotlib.pyplot as plt
-from sklearn.cluster import KMeans
-
 n_clusters = 3
-model = KMeans(n_clusters=n_clusters, random_state=42).fit_predict(data_arbre)
 
-#Affichage en fonction de la position
+kmeans_labels = KMeans(n_clusters=n_clusters, random_state=42).fit_predict(data_arbre)
 
-"""colormap = np.array(['Red', 'Blue', 'Yellow'])
+# ----- Centroïdes : -----
+
+centroides = KMeans(n_clusters=n_clusters, random_state=42).fit_predict(data_arbre)
+
+# ----- Affichage des clusters sans la map : -----
+
+"""
+colormap = np.array(['Red', 'Blue', 'Yellow'])
 plt.scatter(longitude, latitude, c=colormap[model], s=40)
 plt.xlabel('Longitude (X)')
 plt.ylabel('Latitude (Y)')
 plt.title('3 Clusters en fonction de la position des arbres')
 
-plt.scatter([], [], c=colormap[0], label=f'Cluster 1')
-plt.scatter([], [], c=colormap[1], label=f'Cluster 2')
-plt.scatter([], [], c=colormap[2], label=f'Cluster 3')
-"""
-#Récupérer les clusters :
-
-center = KMeans(n_clusters=n_clusters, random_state=42).fit(data_arbre)
-centroides = center.cluster_centers_
-
-"""# Ajouter les centroïdes au plot
-plt.scatter(centroides[:, 0], centroides[:, 1], c='Black', marker='X', s=100, label='Centroides')
-
-# Ajouter une légende
 for i in range(n_clusters):
-    plt.scatter([], [], c=colormap[i])
+    plt.scatter([], [], c=colormap[i], label=f'Cluster {i+1}')
 
 plt.legend()
-plt.show()"""
+plt.show()
+"""
 
-# ----- Afficher sur la ville l'emplacement des arbres avec les clusters et les centroides -----
+# ----- Affichage des clusters avec la map : -----
 
-import plotly.express as px
-from sklearn.cluster import KMeans
+# On rajouter dans la data les clusters :
 
-# Effectuer le clustering
-model = KMeans(n_clusters=3, random_state=42).fit(data_arbre)
-data_arbre['cluster'] = model.labels_
+"""
+data_arbre_position['cluster'] = kmeans_labels
 
-# Récupérer les centroïdes
-centroides = pd.DataFrame(center.cluster_centers_, columns=["longitude", "latitude", "haut_tronc", "age_estim", "tronc_diam", "fk_prec_estim"])
-centroides['cluster'] = ['centroid'] * n_clusters  # Ajouter une étiquette pour les centroïdes
-
-
-# Tracer la carte avec Plotly Express
-fig = px.scatter_mapbox(data_arbre,
+fig = px.scatter_mapbox(data_arbre_position,
                         lat="latitude",
                         lon="longitude",
-                        color="cluster",  # Colorer par cluster
-                        zoom=10,  # Ajuster le niveau de zoom initial
-                        height=700,
-                        width=700)
-
-# Ajouter les centroïdes
-fig.add_trace(px.scatter_mapbox(centroides,
-                                lat="latitude",
-                                lon="longitude",
-                                color_discrete_sequence=["green"],
-                                height=700,
-                                width=700).data[0])
+                        color="cluster",
+                        color_discrete_sequence=["blue", "green", "red"],
+                        hover_data=["haut_tronc", "age_estim", "tronc_diam", "fk_prec_estim"],
+                        zoom=12,
+                        height=800,
+                        width=800)
 
 fig.update_layout(mapbox_style="open-street-map")
 fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
 
 fig.show()
+"""
 
 # -------------------------------------------------------------------------------------------------
 # ------------------------------ Apprentissage Non Supervisé : BIRCH ------------------------------
 # -------------------------------------------------------------------------------------------------
 
-# Explication :
-
-# Le but est de construire un arbre avec notre data. C'est à partir des feuilles que vont etre lu les centroïdes
-# Le centroïde sera soit le final, soit il sera donnée en entrée à un algo de regrouppement
-
 # ----- BIRCH -----
 
-"""from sklearn.cluster import Birch
+birch_labels = Birch(n_clusters=n_clusters).fit_predict(data_arbre)
 
-brc = Birch(n_clusters=3)
-brc.fit(data_arbre)
-labels = brc.predict(data_arbre)
-print(labels)"""
+# ----- Affichage des clusters avec la map : -----
 
-# ----- Afficher sur la ville l'emplacement des arbres avec les clusters -----
+"""
+data_arbre_position['cluster'] = birch_labels
 
-"""data_arbre['cluster'] = labels
-
-# Tracer la carte avec Plotly Express
-fig = px.scatter_mapbox(data_arbre,
+fig = px.scatter_mapbox(data_arbre_position,
                         lat="latitude",
                         lon="longitude",
-                        color="cluster",  # Colorer par cluster
-                        zoom=10,  # Ajuster le niveau de zoom initial
-                        height=700,
-                        width=700)
+                        color="cluster",
+                        color_discrete_sequence=["blue", "green", "red"],
+                        hover_data=["haut_tronc", "age_estim", "tronc_diam", "fk_prec_estim"],
+                        zoom=12,
+                        height=800,
+                        width=800)
 
 fig.update_layout(mapbox_style="open-street-map")
 fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
 
-fig.show()"""
+fig.show()
+"""
 
 # -------------------------------------------------------------------------------------------------------------------
 # ------------------------------ Apprentissage Non Supervisé : AgglomerativeClustering ------------------------------
 # -------------------------------------------------------------------------------------------------------------------
 
-# Explication :
-
 # ----- AgglomerativeClustering -----
 
-"""from sklearn.cluster import AgglomerativeClustering
-
-labels = AgglomerativeClustering(n_clusters=3).fit_predict(data_arbre)
-print(labels)"""
+agglomerative_clustering_labels = AgglomerativeClustering(n_clusters=n_clusters).fit_predict(data_arbre)
 
 #  ----- Afficher sur la ville l'emplacement des arbres avec les clusters -----
 
-"""data_arbre['cluster'] = labels
+"""
+data_arbre_position['cluster'] = agglomerative_clustering_labels
 
-# Tracer la carte avec Plotly Express
-fig = px.scatter_mapbox(data_arbre,
+fig = px.scatter_mapbox(data_arbre_position,
                         lat="latitude",
                         lon="longitude",
-                        color="cluster",  # Colorer par cluster
-                        zoom=10,  # Ajuster le niveau de zoom initial
-                        height=700,
-                        width=700)
+                        color="cluster",
+                        color_discrete_sequence=["blue", "green", "red"],
+                        hover_data=["haut_tronc", "age_estim", "tronc_diam", "fk_prec_estim"],
+                        zoom=12,
+                        height=800,
+                        width=800)
 
 fig.update_layout(mapbox_style="open-street-map")
 fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
 
-fig.show()"""
+fig.show()
+"""
 
 # -----------------------------------------------------------------------
 # ------------------------------ Métriques ------------------------------
