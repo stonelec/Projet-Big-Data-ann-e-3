@@ -6,7 +6,7 @@ from sklearn.model_selection import train_test_split
 
 grid_search_mode = 0            # 1 pour activer la recherche par grille, 0 pour désactiver
 bdd = 1                         # 1 pour AI_Patrimoine_Arboré_(RO), 0 pour Data_Arbre
-num_features = 2                # 2 pour ['tronc_diam', 'haut_tot', 'haut_tronc'], 1 pour 2 + [...,'remarquable','fk_pied'] et 0 pour 2 + [...,'feuillage','fk_revetement']
+num_features = 1                # 2 pour ['tronc_diam', 'haut_tot', 'haut_tronc'], 1 pour 2 + [...,'remarquable','fk_pied'] et 0 pour 2 + [...,'feuillage','fk_revetement']
 
 
 # Charger la base de données
@@ -158,8 +158,10 @@ print(f'Accuracy: {accuracy_mlp:.4f}')
 from sklearn.model_selection import cross_val_score
 
 scores_mlp = cross_val_score(mlp, X_train_scaled, y_train_classes, cv=5, scoring='accuracy')   # Calculer le score de validation croisée avec 5 valeurs croisées
-
 print(f'Score de validation croisée: {scores_mlp}')
+
+moyenne_scores_mlp = scores_mlp.mean()
+print(f'Moyenne des scores de validation croisée: {moyenne_scores_mlp:.4f}')
 
 # -------------------------------------------- RMSE -----------------------------------------------------------
 from sklearn.metrics import mean_squared_error
