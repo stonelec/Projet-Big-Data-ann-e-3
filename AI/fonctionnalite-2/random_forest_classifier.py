@@ -265,14 +265,14 @@ for idx, n_estimators in enumerate(range_n_estimators):
 
     plt.figure(figsize=(10, 6))
     for i in range(n_classes):
-        false_positive_rate, true_positive_rate, _ = roc_curve(y_test_bin[:, i], tab_y_prob_rf[idx][:, i])
-        roc_auc = auc(false_positive_rate, true_positive_rate)     # roc_auc = roc _ area under the curve
+        false_positive_rate_rf, true_positive_rate_rf, thresholds_rf = roc_curve(y_test_bin[:, i], tab_y_prob_rf[idx][:, i])
+        roc_auc = auc(false_positive_rate_rf, true_positive_rate_rf)     # roc_auc = roc _ area under the curve
 
-        tab_fpr_rf.append(false_positive_rate)
-        tab_tpr_rf.append(true_positive_rate)
+        tab_fpr_rf.append(false_positive_rate_rf)
+        tab_tpr_rf.append(true_positive_rate_rf)
 
         # Affichage de la courbe ROC pour chaque quantité d'arbres et pour chaque classe
-        plt.plot(false_positive_rate, true_positive_rate, lw=2, label=f'Classe {i} (AUC = {roc_auc:.2f})')
+        plt.plot(false_positive_rate_rf, true_positive_rate_rf, lw=2, label=f'Classe {i} (AUC = {roc_auc:.2f})')
     plt.plot([0, 1], [0, 1], color='navy', lw=2, linestyle='--')
     plt.xlim([0.0, 1.0])
     plt.ylim([0.0, 1.05])

@@ -274,7 +274,7 @@ for n_neighbors in range_n_neighbors:
 y_test_bin = label_binarize(y_test_classes, classes=[0, 1, 2, 3])
 n_classes = y_test_bin.shape[1]
 
-# Calculer les courbes ROC et l'AUC pour chaque nombre d'arbres et pour chaque classe
+# Calculer les courbes ROC et l'AUC pour chaque nombre d'arbres
 for n_neighbors in range_n_neighbors:
 
     tab_fpr_knn = []
@@ -282,23 +282,11 @@ for n_neighbors in range_n_neighbors:
 
     plt.figure(figsize=(10, 6))
     for i in range(n_classes):
-        false_positive_rate, true_positive_rate, _ = roc_curve(y_test_bin[:, i], tab_y_prob_knn[n_neighbors-2][:, i])
-        roc_auc = auc(false_positive_rate, true_positive_rate)  # roc_auc = roc _ area under the curve
+        false_positive_rate_knn, true_positive_rate_knn, thresholds_knn = roc_curve(y_test_bin[:, i], tab_y_prob_knn[n_neighbors - 2][:, i])
+        roc_auc = auc(false_positive_rate_knn, true_positive_rate_knn)  # roc_auc = roc _ area under the curve
 
-        tab_fpr_knn.append(false_positive_rate)
-        tab_tpr_knn.append(true_positive_rate)
-
-        # Affichage de la courbe ROC pour chaque quantité d'arbres et pour chaque classe
-        plt.plot(false_positive_rate, true_positive_rate, lw=2, label=f'Classe {i} (AUC = {roc_auc:.2f})')
-    plt.plot([0, 1], [0, 1], color='navy', lw=2, linestyle='--')
-    plt.xlim([0.0, 1.0])
-    plt.ylim([0.0, 1.05])
-    plt.xlabel('Taux de Faux Positifs')
-    plt.ylabel('Taux de Vrais Positifs')
-    plt.title(f'Courbe ROC pour le modèle K-Nearest Neighbors avec {n_neighbors} voisins, pour chaque classe')
-    plt.legend(loc='lower right')
-    plt.grid(True)
-    plt.show()
+        tab_fpr_knn.append(false_positive_rate_knn)
+        tab_tpr_knn.append(true_positive_rate_knn)
 
     # Affichage de la courbe ROC pour chaque quantité d'arbres
     # Combiner les courbes ROC pour une courbe globale
