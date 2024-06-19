@@ -3,26 +3,43 @@
 # ======================================================================================================================
 import pandas as pd
 from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import LabelEncoder
 
 grid_search_mode = 0            # 1 pour activer la recherche par grille, 0 pour désactiver
-bdd = 1                         # 1 pour AI_Patrimoine_Arboré_(RO), 0 pour Data_Arbre
+bdd = 0                         # 1 pour AI_Patrimoine_Arboré_(RO), 0 pour Data_Arbre
 num_features = 1                # 2 pour ['tronc_diam', 'haut_tot', 'haut_tronc'], 1 pour 2 + [...,'remarquable','fk_pied'] et 0 pour 2 + [...,'feuillage','fk_revetement']
 
 
 # Charger la base de données
 if bdd == 1:
     data = pd.read_csv('../AI_Patrimoine_Arboré_(RO).csv')
+
+    match num_features:
+        case 2:
+            features = ['tronc_diam', 'haut_tot', 'haut_tronc']
+        case 1:
+            features = ['tronc_diam', 'haut_tot', 'haut_tronc', 'remarquable', 'fk_pied']
+        case 0:
+            features = ['tronc_diam', 'haut_tot', 'haut_tronc', 'feuillage', 'fk_revetement']
 else:
     data = pd.read_csv('../Data_Arbre.csv')
 
-# Sélectionner les caractéristiques
-match num_features:
-    case 2:
-        features = ['tronc_diam', 'haut_tot', 'haut_tronc']
-    case 1:
-        features = ['tronc_diam', 'haut_tot', 'haut_tronc', 'remarquable', 'fk_pied']
-    case 0:
-        features = ['tronc_diam', 'haut_tot', 'haut_tronc', 'feuillage', 'fk_revetement']
+    # Créer un encodeur
+    label_encoder = LabelEncoder()
+
+    # Appliquer l'encodage
+    data['remarquable_encoded'] = label_encoder.fit_transform(data['remarquable'])
+    data['fk_pied_encoded'] = label_encoder.fit_transform(data['fk_pied'])
+    data['feuillage_encoded'] = label_encoder.fit_transform(data['feuillage'])
+    data['fk_revetement_encoded'] = label_encoder.fit_transform(data['fk_revetement'])
+
+    match num_features:
+        case 2:
+            features = ['tronc_diam', 'haut_tot', 'haut_tronc']
+        case 1:
+            features = ['tronc_diam', 'haut_tot', 'haut_tronc', 'remarquable_encoded', 'fk_pied_encoded']
+        case 0:
+            features = ['tronc_diam', 'haut_tot', 'haut_tronc', 'feuillage_encoded', 'fk_revetement_encoded']
 
 target = 'age_estim'
 
@@ -130,13 +147,13 @@ match bdd:
         match num_features:
             case 2:  # ['tronc_diam', 'haut_tot', 'haut_tronc']
                 #
-                mlp = MLPClassifier(random_state=42)
+                mlp = MLPClassifier(max_iter=500, random_state=42)
             case 1:  # ['tronc_diam', 'haut_tot', 'haut_tronc', 'remarquable', 'fk_pied']
                 #
-                mlp = MLPClassifier(random_state=42)
+                mlp = MLPClassifier(max_iter=500, random_state=42)
             case 0:  # ['tronc_diam', 'haut_tot', 'haut_tronc', 'feuillage', 'fk_revetement']
                 #
-                mlp = MLPClassifier(random_state=42)
+                mlp = MLPClassifier(max_iter=500, random_state=42)
 
 
 mlp.fit(X_train_scaled, y_train_classes)
