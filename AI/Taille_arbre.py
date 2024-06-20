@@ -25,32 +25,10 @@ from sklearn.metrics import davies_bouldin_score
 # ------------------------------ Préparation des données ------------------------------
 # -------------------------------------------------------------------------------------
 
-"""data = pd.read_csv("Data_Arbre.csv",
-                         usecols=["haut_tronc", "age_estim", "tronc_diam",
-                                  "fk_stadedev", "fk_port",
-                                  "fk_pied", "fk_revetement", "feuillage",
-                                  "remarquable"])
-
-# Créer un encodeur :
-label_encoder = LabelEncoder()
-
-# Appliquer l'encodage :
-data['fk_stadedev_encoded'] = label_encoder.fit_transform(data['fk_stadedev'])
-data['fk_port_encoded'] = label_encoder.fit_transform(data['fk_port'])
-data['fk_pied_encoded'] = label_encoder.fit_transform(data['fk_pied'])
-data['fk_revetement_encoded'] = label_encoder.fit_transform(data['fk_revetement'])
-data['feuillage_encoded'] = label_encoder.fit_transform(data['feuillage'])
-data['remarquable_encoded'] = label_encoder.fit_transform(data['remarquable'])
-
-data_arbre = data[["haut_tronc", "age_estim", "tronc_diam",
-                   "fk_stadedev_encoded",
-                   "fk_port_encoded", "fk_pied_encoded",
-                   "fk_revetement_encoded", "feuillage_encoded",
-                   "remarquable_encoded"]]"""
-
 data_arbre = pd.read_csv("Data_Arbre.csv", usecols=["haut_tronc", "age_estim", "tronc_diam"])
 
 data_arbre_position_notre_data = pd.read_csv("AI_Patrimoine_Arboré_(RO).csv", usecols=["X", "Y", "haut_tronc", "age_estim", "tronc_diam"])
+
 data_arbre_position_data_prof = pd.read_csv("Data_Arbre.csv", usecols=["longitude", "latitude", "haut_tronc", "age_estim", "tronc_diam"])
 
 # ------------------------------------------------------------------------------
@@ -171,10 +149,10 @@ def affichage_sans_map_notre_data(data_arbre, n_clusters):
 
 # ----- Affichage des clusters avec la map : -----
 
-def affichage_notre_data(data_arbre, n_clusters):
+def affichage_notre_data(n_clusters):
 
     #On récupère les clusters :
-    model = kmeans_apprentissage(data_arbre, n_clusters)
+    model = kmeans_apprentissage(data_arbre_position_notre_data, n_clusters)
 
     #On rajoute une colonne avec les clusters
     data_arbre_position_notre_data['cluster'] = model
@@ -201,7 +179,7 @@ def affichage_data_prof(n_clusters):
     #On rajoute une colonne avec les clusters
     data_arbre_position_data_prof['cluster'] = model
 
-    fig = px.scatter_mapbox(data_arbre_position_notre_data,
+    fig = px.scatter_mapbox(data_arbre_position_data_prof,
                             lat="latitude",
                             lon="longitude",
                             color="cluster",
