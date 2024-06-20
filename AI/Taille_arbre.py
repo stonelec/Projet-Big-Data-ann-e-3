@@ -1580,3 +1580,107 @@ match choix_data:
                                 print("Affichage graphique : ")
                                 affichage_graphique_davies(data_arbre)
 '''
+
+# --------------------------------------------------------------------------------
+# ------------------------------ Tout les résultats ------------------------------
+# --------------------------------------------------------------------------------
+
+deux_clusters = 2
+trois_clusters = 3
+
+data_arbre_notre = pd.read_csv("AI_Patrimoine_Arboré_(RO).csv", usecols=["haut_tronc", "age_estim", "tronc_diam"])
+data_arbre_prof = pd.read_csv("Data_Arbre.csv", usecols=["haut_tronc", "age_estim", "tronc_diam"])
+
+
+print("------------------------------------------------------------------------")
+print("------------------------------ Notre data ------------------------------")
+print("------------------------------------------------------------------------")
+
+print("---------- KMeans ----------")
+
+print("Pour 2 clusters : ")
+print("Silhouette Coefficient : ", sil_score(data_arbre_notre, kmeans_apprentissage(data_arbre_notre, deux_clusters)))
+print("Calinski-Harabasz Index : ", calinski_score(data_arbre_notre, kmeans_apprentissage(data_arbre_notre, deux_clusters)))
+print("Davies-Bouldin Index : ", davies_score(data_arbre_notre, kmeans_apprentissage(data_arbre_notre, deux_clusters)))
+
+print("-----------")
+
+print("Pour 3 clusters : ")
+print("Silhouette Coefficient : ", sil_score(data_arbre_notre, kmeans_apprentissage(data_arbre_notre, trois_clusters)))
+print("Calinski-Harabasz Index : ", calinski_score(data_arbre_notre, kmeans_apprentissage(data_arbre_notre, trois_clusters)))
+print("Davies-Bouldin Index : ", davies_score(data_arbre_notre, kmeans_apprentissage(data_arbre_notre, trois_clusters)))
+
+print("---------- BIRCH ----------")
+
+print("Pour 2 clusters : ")
+print("Silhouette Coefficient : ", sil_score(data_arbre_notre, birch_apprentissage(data_arbre_notre, deux_clusters)))
+print("Calinski-Harabasz Index : ", calinski_score(data_arbre_notre, birch_apprentissage(data_arbre_notre, deux_clusters)))
+print("Davies-Bouldin Index : ", davies_score(data_arbre_notre, birch_apprentissage(data_arbre_notre, deux_clusters)))
+
+print("-----------")
+
+print("Pour 3 clusters : ")
+print("Silhouette Coefficient : ", sil_score(data_arbre_notre, birch_apprentissage(data_arbre_notre, trois_clusters)))
+print("Calinski-Harabasz Index : ", calinski_score(data_arbre_notre, birch_apprentissage(data_arbre_notre, trois_clusters)))
+print("Davies-Bouldin Index : ", davies_score(data_arbre_notre, birch_apprentissage(data_arbre_notre, trois_clusters)))
+
+print("---------- AgglomerativeClustering ----------")
+
+print("Pour 2 clusters : ")
+print("Silhouette Coefficient : ", sil_score(data_arbre_notre, agglomerative_clustering_apprentissage(data_arbre_notre, deux_clusters)))
+print("Calinski-Harabasz Index : ", calinski_score(data_arbre_notre, agglomerative_clustering_apprentissage(data_arbre_notre, deux_clusters)))
+print("Davies-Bouldin Index : ", davies_score(data_arbre_notre, agglomerative_clustering_apprentissage(data_arbre_notre, deux_clusters)))
+
+print("-----------")
+
+print("Pour 3 clusters : ")
+print("Silhouette Coefficient : ", sil_score(data_arbre_notre, agglomerative_clustering_apprentissage(data_arbre_notre, trois_clusters)))
+print("Calinski-Harabasz Index : ", calinski_score(data_arbre_notre, agglomerative_clustering_apprentissage(data_arbre_notre, trois_clusters)))
+print("Davies-Bouldin Index : ", davies_score(data_arbre_notre, agglomerative_clustering_apprentissage(data_arbre_notre, trois_clusters)))
+
+print("--------------------------------------------------------------------------")
+print("------------------------------ Data fournit ------------------------------")
+print("--------------------------------------------------------------------------")
+
+print("---------- KMeans ----------")
+
+print("Pour 2 clusters : ")
+print("Silhouette Coefficient : ", sil_score(data_arbre_prof, kmeans_apprentissage(data_arbre_prof, deux_clusters)))
+print("Calinski-Harabasz Index : ", calinski_score(data_arbre_prof, kmeans_apprentissage(data_arbre_prof, deux_clusters)))
+print("Davies-Bouldin Index : ", davies_score(data_arbre_prof, kmeans_apprentissage(data_arbre_prof, deux_clusters)))
+
+print("-----------")
+
+print("Pour 3 clusters : ")
+print("Silhouette Coefficient : ", sil_score(data_arbre_prof, kmeans_apprentissage(data_arbre_prof, trois_clusters)))
+print("Calinski-Harabasz Index : ", calinski_score(data_arbre_prof, kmeans_apprentissage(data_arbre_prof, trois_clusters)))
+print("Davies-Bouldin Index : ", davies_score(data_arbre_prof, kmeans_apprentissage(data_arbre_prof, trois_clusters)))
+
+print("---------- BIRCH ----------")
+
+print("Pour 2 clusters : ")
+print("Silhouette Coefficient : ", sil_score(data_arbre_prof, birch_apprentissage(data_arbre_prof, deux_clusters)))
+print("Calinski-Harabasz Index : ", calinski_score(data_arbre_prof, birch_apprentissage(data_arbre_prof, deux_clusters)))
+print("Davies-Bouldin Index : ", davies_score(data_arbre_prof, birch_apprentissage(data_arbre_prof, deux_clusters)))
+
+print("-----------")
+
+print("Pour 3 clusters : ")
+print("Silhouette Coefficient : ", sil_score(data_arbre_prof, birch_apprentissage(data_arbre_prof, trois_clusters)))
+print("Calinski-Harabasz Index : ", calinski_score(data_arbre_prof, birch_apprentissage(data_arbre_prof, trois_clusters)))
+print("Davies-Bouldin Index : ", davies_score(data_arbre_prof, birch_apprentissage(data_arbre_prof, trois_clusters)))
+
+
+print("---------- AgglomerativeClustering ----------")
+
+print("Pour 2 clusters : ")
+print("Silhouette Coefficient : ", sil_score(data_arbre_prof, agglomerative_clustering_apprentissage(data_arbre_prof, deux_clusters)))
+print("Calinski-Harabasz Index : ", calinski_score(data_arbre_prof, agglomerative_clustering_apprentissage(data_arbre_prof, deux_clusters)))
+print("Davies-Bouldin Index : ", davies_score(data_arbre_prof, agglomerative_clustering_apprentissage(data_arbre_prof, deux_clusters)))
+
+print("-----------")
+
+print("Pour 3 clusters : ")
+print("Silhouette Coefficient : ", sil_score(data_arbre_prof, agglomerative_clustering_apprentissage(data_arbre_prof, trois_clusters)))
+print("Calinski-Harabasz Index : ", calinski_score(data_arbre_prof, agglomerative_clustering_apprentissage(data_arbre_prof, trois_clusters)))
+print("Davies-Bouldin Index : ", davies_score(data_arbre_prof, agglomerative_clustering_apprentissage(data_arbre_prof, trois_clusters)))
