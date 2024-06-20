@@ -2,63 +2,33 @@ import sys
 import pandas as pd
 from sklearn.cluster import KMeans
 
-from sklearn.metrics import silhouette_score
-from sklearn.metrics import calinski_harabasz_score
-from sklearn.metrics import davies_bouldin_score
+# Chargement des données
+data_arbre = pd.read_csv("../Data_Arbre.csv", usecols=["haut_tronc", "age_estim", "tronc_diam"])
 
-data_arbre = pd.read_csv("../Data_Arbre.csv", usecols=["longitude", "latitude", "haut_tronc", "age_estim", "tronc_diam", "fk_prec_estim" ])
+# Récupération des arguments d'entrée
+haut_tronc = float(sys.argv[1])
+age_estim = float(sys.argv[2])
+tronc_diam = float(sys.argv[3])
 
-print("-----------------------------------------------------")
-print("Calcul de kmeans avec comme nombre de clusters : ", 2) #int(sys.argv[1])
-print("-----------------------------------------------------")
+# Nombre de clusters (peut être modifié pour prendre en compte un argument en entrée)
+n_clusters = 3
 
-n_clusters = 3 #int(sys.argv[1])
+def kmeans_apprentissage(data, n_clusters):
+    kmeans = KMeans(n_clusters=n_clusters, random_state=42)
+    kmeans.fit(data)
+    return kmeans
 
-def calcul_kmeans(n):
+# Apprentissage du modèle KMeans
+kmeans_model = kmeans_apprentissage(data_arbre, n_clusters)
 
-    """model = KMeans(n_clusters=n, random_state=42).fit(data_arbre)
-    labels = model.predict(data_arbre)"""
+# Ajout des étiquettes de cluster aux données d'origine
+data_arbre['cluster'] = kmeans_model.labels_
 
-    from sklearn.cluster import AgglomerativeClustering
-    labels = AgglomerativeClustering(n_clusters=n).fit_predict(data_arbre)
+# Création d'un nouveau DataFrame pour le nouvel arbre
+new_tree = pd.DataFrame([[haut_tronc, age_estim, tronc_diam]], columns=["haut_tronc", "age_estim", "tronc_diam"])
 
-    return labels
+# Prédiction du cluster pour le nouvel arbre
+new_tree_cluster = kmeans_model.predict(new_tree)
 
-#Fonction calcul calcul kmeans :
-print(calcul_kmeans(n_clusters))
-
-print("-------------------------------------------------------")
-print("Méthode pour calculer le score : Silhouette Coefficient")
-print("-------------------------------------------------------")
-
-def score_silhouette_coefficient(n):
-
-    labels = calcul_kmeans(n_clusters)
-    return silhouette_score(data_arbre, labels)
-
-#Fonction calcul du score avec silhouette :
-print(score_silhouette_coefficient(n_clusters))
-
-print("--------------------------------------------------------")
-print("Méthode pour calculer le score : Calinski-Harabasz Index")
-print("--------------------------------------------------------")
-
-def score_calinski_harabasz(n):
-
-    labels = calcul_kmeans(n_clusters)
-    return calinski_harabasz_score(data_arbre, labels)
-
-#Fonction calcul du score avec calinski :
-print(score_calinski_harabasz(n_clusters))
-
-print("-----------------------------------------------------")
-print("Méthode pour calculer le score : Davies-Bouldin Index")
-print("-----------------------------------------------------")
-
-def score_davies_bouldin(n):
-
-    labels = calcul_kmeans(n_clusters)
-    return davies_bouldin_score(data_arbre, labels)
-
-#Fonction calcul du score avec davies kmeans :
-print(score_davies_bouldin(n_clusters))
+# Affichage du cluster du nouvel arbre
+print(f"Le nouvel arbre appartient au cluster : {new_tree_cluster[0]}")
