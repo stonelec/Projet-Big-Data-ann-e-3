@@ -4,23 +4,19 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
+grid_search_mode = 1  # 1 pour activer la recherche par grille, 0 pour désactiver
+bdd = 1  # 1 pour AI_Patrimoine_Arboré_(RO), 0 pour Data_Arbre
+num_features = 0  # 0 = dimensions + formes | 1 = dimensions
 
-grid_search_mode = 0            # 1 pour activer la recherche par grille, 0 pour désactiver
-bdd = 1                         # 1 pour AI_Patrimoine_Arboré_(RO), 0 pour Data_Arbre
-num_features = 1                # 2 pour ['tronc_diam', 'haut_tot', 'haut_tronc'], 1 pour 2 + [...,'remarquable','fk_pied'] et 0 pour 2 + [...,'feuillage','fk_revetement']
 
-
-# Charger la base de données
 if bdd == 1:
     data = pd.read_csv('../AI_Patrimoine_Arboré_(RO).csv')
-
+    # Sélectionner les caractéristiques
     match num_features:
-        case 2:
-            features = ['tronc_diam', 'haut_tot', 'haut_tronc']
-        case 1:
-            features = ['tronc_diam', 'haut_tot', 'haut_tronc', 'remarquable', 'fk_pied']
-        case 0:
-            features = ['tronc_diam', 'haut_tot', 'haut_tronc', 'feuillage', 'fk_revetement']
+        case 1:     #dimensions
+            features = ['haut_tot', 'haut_tronc', 'tronc_diam']
+        case 0      :#dimensions + formes
+            features = ['haut_tot', 'haut_tronc', 'tronc_diam', 'fk_port', 'feuillage']
 else:
     data = pd.read_csv('../Data_Arbre.csv')
 
@@ -28,20 +24,15 @@ else:
     label_encoder = LabelEncoder()
 
     # Appliquer l'encodage
-    data['remarquable_encoded'] = label_encoder.fit_transform(data['remarquable'])
-    data['fk_pied_encoded'] = label_encoder.fit_transform(data['fk_pied'])
+    data['fk_port_encoded'] = label_encoder.fit_transform(data['fk_port'])
     data['feuillage_encoded'] = label_encoder.fit_transform(data['feuillage'])
-    data['fk_revetement_encoded'] = label_encoder.fit_transform(data['fk_revetement'])
 
     match num_features:
-        case 2:
-            features = ['tronc_diam', 'haut_tot', 'haut_tronc']
-        case 1:
-            features = ['tronc_diam', 'haut_tot', 'haut_tronc', 'remarquable_encoded', 'fk_pied_encoded']
-        case 0:
-            features = ['tronc_diam', 'haut_tot', 'haut_tronc', 'feuillage_encoded', 'fk_revetement_encoded']
-
-target = 'age_estim'
+        case 1:      #dimensions
+            features = ['haut_tot', 'haut_tronc', 'tronc_diam']
+        case 0      :#dimensions + formes + sol
+            features = ['haut_tot', 'haut_tronc', 'tronc_diam', 'fk_port_encoded', 'feuillage_encoded']
+target = 'fk_arb_etat'
 
 # Filtrer les colonnes pertinentes
 X = data[features]
@@ -56,23 +47,22 @@ X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, random_
 # ======================================================================================================================
 import numpy as np
 
-# Définir les classes d'âge
-def age_class(age):
-    if age <= 10:
-        return 0  # Classe 0: [0, 10]
-    elif age <= 50:
-        return 1  # Classe 1: [10, 50]
-    elif age <= 100:
-        return 2  # Classe 2: [50, 100]
-    elif age <= 200:
-        return 3  # Classe 3: [100, 200]
+# Définir les classes etat
+def etat_class(etat):
+    if bdd == 1:
+        if etat == 3 or etat == 4:
+            return 1
+        else:
+            return 0
     else:
-        return 4  # Classe 4: > 200 (facultatif)
+        if etat == 'Essouché' or etat == 'Non essouché':
+            return 1
+        else:
+            return 0
 
 # Appliquer la fonction pour créer des labels
-y_train_classes = np.array([age_class(age) for age in Y_train])
-y_test_classes = np.array([age_class(age) for age in Y_test])
-
+y_train_classes = np.array([etat_class(etat) for etat in Y_train])
+y_test_classes = np.array([etat_class(etat) for etat in Y_test])
 
 # ======================================================================================================================
 # ============================================ Normalisation des données ==============================================
@@ -117,9 +107,17 @@ if grid_search_mode == 1:
     best_knn = grid_search.best_estimator_
     y_pred = best_knn.predict(X_test_scaled)
 
+    import pickle
+    # Sauvegardez le modèle dans un fichier
+    with open('best_rf.pickle', 'wb') as fichier:
+        pickle.dump(best_knn, fichier)
+
+
     # Évaluation des performances
     print("Classification Report:")
-    print(classification_report(y_test_classes, y_pred, target_names=['0-10', '10-50', '50-100', '100-200']))
+    print(classification_report(y_test_classes, y_pred, target_names=['1']))
+    print("")
+    print("")
 
 
 # ======================================================================================================================
@@ -129,25 +127,25 @@ if grid_search_mode == 1:
 match bdd:
     case 1: # AI_Patrimoine_Arboré_(RO)
         match num_features:
-            case 2: # ['tronc_diam', 'haut_tot', 'haut_tronc']
-            # best-param = {'algorithm': 'brute', 'n_neighbors': 11, 'p': 1, 'weights': 'uniform'}
+            case 2:
+                # best-param = {'algorithm': 'brute', 'n_neighbors': 11, 'p': 1, 'weights': 'uniform'}
                 knn = KNeighborsClassifier(algorithm='brute', n_neighbors=11, p=1, weights='uniform')
-            case 1: # ['tronc_diam', 'haut_tot', 'haut_tronc', 'remarquable', 'fk_pied']
+            case 1:
                 # {'algorithm': 'brute', 'n_neighbors': 14, 'p': 1, 'weights': 'distance'}
                 knn = KNeighborsClassifier(algorithm='brute', n_neighbors=14, p=1, weights='distance')
-            case 0: # ['tronc_diam', 'haut_tot', 'haut_tronc', 'feuillage', 'fk_revetement']
+            case 0:
                 # {'algorithm': 'ball_tree', 'n_neighbors': 4, 'p': 2, 'weights': 'uniform'}
                 knn = KNeighborsClassifier(algorithm='ball_tree', n_neighbors=4, p=2, weights='uniform')
 
     case 0: # Data_Arbre
         match num_features:
-            case 2:  # ['tronc_diam', 'haut_tot', 'haut_tronc']
+            case 2:
                 # best-param = {'algorithm': 'brute', 'n_neighbors': 11, 'p': 1, 'weights': 'uniform'}
                 knn = KNeighborsClassifier(algorithm='brute', n_neighbors=11, p=1, weights='uniform')
-            case 1:  # ['tronc_diam', 'haut_tot', 'haut_tronc', 'remarquable', 'fk_pied']
+            case 1:
                 # {'algorithm': 'brute', 'n_neighbors': 14, 'p': 1, 'weights': 'distance'}
                 knn = KNeighborsClassifier(algorithm='brute', n_neighbors=14, p=1, weights='distance')
-            case 0:  # ['tronc_diam', 'haut_tot', 'haut_tronc', 'feuillage', 'fk_revetement']
+            case 0:
                 # {'algorithm': 'ball_tree', 'n_neighbors': 4, 'p': 2, 'weights': 'uniform'}
                 knn = KNeighborsClassifier(algorithm='ball_tree', n_neighbors=4, p=2, weights='uniform')
 
@@ -192,8 +190,8 @@ print(conf_matrix_knn)
 
 plt.figure(figsize=(10, 6))
 sns.heatmap(conf_matrix_knn, annot=True, fmt='d', cmap='Blues',
-            xticklabels=['0-10', '10-50', '50-100', '100-200'],
-            yticklabels=['0-10', '10-50', '50-100', '100-200'])
+            xticklabels=['0', '1'],
+            yticklabels=['0', '1'])
 plt.xlabel('Prédictions')
 plt.ylabel('Vérités terrain')
 plt.title(f'Matrice de confusion pour K-Neasrest Neighbors - score = {accuracy_knn:.2f}')
@@ -219,7 +217,7 @@ from sklearn.preprocessing import label_binarize
 y_prob_knn = knn.predict_proba(X_test_scaled)
 
 # Binariser les classes pour chaque classe pour la courbe ROC
-y_test_bin = label_binarize(y_test_classes, classes=[0, 1, 2, 3])
+y_test_bin = label_binarize(y_test_classes, classes=[0, 1])
 n_classes = y_test_bin.shape[1]
 
 # Calculer les courbes ROC et l'AUC pour chaque nombre d'arbres et pour chaque classe
@@ -258,3 +256,5 @@ plt.show()
 
 print(f'AUC: {roc_auc_global:.4f}')
 
+
+k_nearest_neighbors()

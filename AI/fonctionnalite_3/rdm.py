@@ -171,14 +171,18 @@ for idx, n_estimators in enumerate(range_n_estimators):
 
     conf_matrix_rf = confusion_matrix(y_test_classes, tab_pred_rf[idx])
 
-
-    print(f'Matrice de confusion pour Random Forest avec n = {n_estimators}')
+    print('Matrice de confusion pour Multi Layer Perceptron')
     print(conf_matrix_rf)
 
     plt.figure(figsize=(10, 6))
-    # Affichage de la matrice de confusion avec ConfusionMatrixDisplay
-    ConfusionMatrixDisplay(conf_matrix_rf).plot()
+    sns.heatmap(conf_matrix_rf, annot=True, fmt='d', cmap='Blues',
+                xticklabels=['0', '1'],
+                yticklabels=['0', '1'])
+    plt.xlabel('Prédictions')
+    plt.ylabel('Vérités terrain')
+    plt.title(f'Matrice de confusion pour Random Forest - score = {accuracy_rf:.2f}')
     plt.show()
+
 
 
 

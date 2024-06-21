@@ -2,44 +2,27 @@
 # ============================================== Préparation des données ===============================================
 # ======================================================================================================================
 import pandas as pd
-import time
+pd.set_option("future.no_silent_downcasting", True)
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
+import numpy as np
+import sys
 
-print("Bienvenue dans le programme de prédiction de l'âge des arbres avec Random Forest Classifier !")
+grid_search_mode = 1  # 1 pour activer la recherche par grille, 0 pour désactiver
+bdd = 0  # 1 pour AI_Patrimoine_Arboré_(RO), 0 pour Data_Arbre
+num_features = 0  # 0 = dimensions + formes | 1 = dimensions
 
-print("Voulez-vous activer la recherche par grille pour trouver les meilleurs hyperparamètres ?")
-print("1 - Oui")
-print("0 - Non")
-grid_search_mode = int(input("Votre choix: "))
 
-print("Veuillez choisir la base de données à utiliser:")
-print("1 - AI_Patrimoine_Arboré_(RO)")
-print("0 - Data_Arbre")
-bdd = int(input("Votre choix: "))
 
-print("Veuillez choisir les caractéristiques à utiliser en entrée:")
-print("2 - ['tronc_diam', 'haut_tot', 'haut_tronc']")
-print("1 - ['tronc_diam', 'haut_tot', 'haut_tronc', 'remarquable', 'fk_pied']")
-print("0 - ['tronc_diam', 'haut_tot', 'haut_tronc', 'feuillage', 'fk_revetement']")
-num_features = int(input("Votre choix: "))
-
-print("Merci de patienter quelques instants...")
-time.sleep(2)
-print("")
-print("")
-
-# Charger la base de données
 if bdd == 1:
     data = pd.read_csv('../AI_Patrimoine_Arboré_(RO).csv')
 
+    # Sélectionner les caractéristiques
     match num_features:
-        case 2:
-            features = ['tronc_diam', 'haut_tot', 'haut_tronc']
-        case 1:
-            features = ['tronc_diam', 'haut_tot', 'haut_tronc', 'remarquable', 'fk_pied']
-        case 0:
-            features = ['tronc_diam', 'haut_tot', 'haut_tronc', 'feuillage', 'fk_revetement']
+        case 1:     #dimensions
+            features = ['haut_tot', 'haut_tronc', 'tronc_diam']
+        case 0      :#dimensions + formes + sol
+            features = ['haut_tot', 'haut_tronc', 'tronc_diam', 'fk_port', 'feuillage']
 else:
     data = pd.read_csv('../Data_Arbre.csv')
 
@@ -47,20 +30,15 @@ else:
     label_encoder = LabelEncoder()
 
     # Appliquer l'encodage
-    data['remarquable_encoded'] = label_encoder.fit_transform(data['remarquable'])
-    data['fk_pied_encoded'] = label_encoder.fit_transform(data['fk_pied'])
+    data['fk_port_encoded'] = label_encoder.fit_transform(data['fk_port'])
     data['feuillage_encoded'] = label_encoder.fit_transform(data['feuillage'])
-    data['fk_revetement_encoded'] = label_encoder.fit_transform(data['fk_revetement'])
 
     match num_features:
-        case 2:
-            features = ['tronc_diam', 'haut_tot', 'haut_tronc']
-        case 1:
-            features = ['tronc_diam', 'haut_tot', 'haut_tronc', 'remarquable_encoded', 'fk_pied_encoded']
-        case 0:
-            features = ['tronc_diam', 'haut_tot', 'haut_tronc', 'feuillage_encoded', 'fk_revetement_encoded']
-
-target = 'age_estim'
+        case 1:      #dimensions
+            features = ['haut_tot', 'haut_tronc', 'tronc_diam']
+        case 0      :#dimensions + formes
+            features = ['haut_tot', 'haut_tronc', 'tronc_diam', 'fk_port_encoded', 'feuillage_encoded']
+target = 'fk_arb_etat'
 
 # Filtrer les colonnes pertinentes
 X = data[features]
@@ -69,30 +47,26 @@ Y = data[target]
 # Diviser les données en ensembles d'entraînement et de test
 X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, random_state=42)
 
-
 # ======================================================================================================================
-# ============================================= Encodage des classes d'âge =============================================
+# ============================================= Encodage des classes etat =============================================
 # ======================================================================================================================
-import numpy as np
-
-# Définir les classes d'âge
-def age_class(age):
-    if age <= 10:
-        return 0  # Classe 0: [0, 10]
-    elif age <= 50:
-        return 1  # Classe 1: [10, 50]
-    elif age <= 100:
-        return 2  # Classe 2: [50, 100]
-    elif age <= 200:
-        return 3  # Classe 3: [100, 200]
+# Définir les classes etat
+def etat_class(etat):
+    if bdd == 1:
+        if etat == 3 or etat == 4:
+            return 1
+        else:
+            return 0
     else:
-        return 4  # Classe 4: > 200 (facultatif)
+        if etat == 'Essouché' or etat == 'Non essouché':
+            return 1
+        else:
+            return 0
+
 
 # Appliquer la fonction pour créer des labels
-y_train_classes = np.array([age_class(age) for age in Y_train])
-y_test_classes = np.array([age_class(age) for age in Y_test])
-
-
+y_train_classes = np.array([etat_class(etat) for etat in Y_train])
+y_test_classes = np.array([etat_class(etat) for etat in Y_test])
 # ======================================================================================================================
 # ============================================ Normalisation des données ==============================================
 # ======================================================================================================================
@@ -137,9 +111,13 @@ if grid_search_mode == 1:
     best_rf = grid_search.best_estimator_
     y_pred = best_rf.predict(X_test_scaled)
 
+
+
     # Évaluation des performances
     print("Classification Report:")
-    print(classification_report(y_test_classes, y_pred, target_names=['0-10', '10-50', '50-100', '100-200']))
+    print(classification_report(y_test_classes, y_pred, target_names=['1', '0']))
+    print("")
+    print("")
 
 
 # ======================================================================================================================
@@ -149,34 +127,29 @@ if grid_search_mode == 1:
 match bdd:
     case 1: # AI_Patrimoine_Arboré_(RO)
         match num_features:
-            case 2: # ['tronc_diam', 'haut_tot', 'haut_tronc']
-            # best-param = {'max_depth': 10, 'min_samples_leaf': 1, 'min_samples_split': 10, 'n_estimators': 100}
-                rf = RandomForestClassifier(max_depth=10, min_samples_leaf=1, min_samples_split=10, n_estimators=100, random_state=42)
-            case 1: # ['tronc_diam', 'haut_tot', 'haut_tronc', 'remarquable', 'fk_pied']
-                # {'max_depth': 20, 'min_samples_leaf': 1, 'min_samples_split': 10, 'n_estimators': 200}
-                rf = RandomForestClassifier(max_depth=20, min_samples_leaf=1, min_samples_split=10, n_estimators=200, random_state=42)
-            case 0: # ['tronc_diam', 'haut_tot', 'haut_tronc', 'feuillage', 'fk_revetement']
-                # {'max_depth': 10, 'min_samples_leaf': 1, 'min_samples_split': 10, 'n_estimators': 100}
-                rf = RandomForestClassifier(max_depth=10, min_samples_leaf=1, min_samples_split=10, n_estimators=100, random_state=42)
-
+            case 1:
+                #{'max_depth': 10, 'min_samples_leaf': 1, 'min_samples_split': 2, 'n_estimators': 200}
+                rf= RandomForestClassifier(max_depth=10, min_samples_leaf=1, min_samples_split=2, n_estimators=200, random_state=42)
+            case 0:
+                #{'max_depth': None, 'min_samples_leaf': 2, 'min_samples_split': 5, 'n_estimators': 100}
+                rf = RandomForestClassifier(max_depth=None, min_samples_leaf=2, min_samples_split=5, n_estimators=100, random_state=42)
     case 0: # Data_Arbre
         match num_features:
-            case 2:  # ['tronc_diam', 'haut_tot', 'haut_tronc']
-                # {'max_depth': 10, 'min_samples_leaf': 1, 'min_samples_split': 5, 'n_estimators': 50}
-                rf = RandomForestClassifier(max_depth=10, min_samples_leaf=1, min_samples_split=5, n_estimators=50, random_state=42)
-            case 1:  # ['tronc_diam', 'haut_tot', 'haut_tronc', 'remarquable', 'fk_pied']
-                # {'max_depth': 20, 'min_samples_leaf': 2, 'min_samples_split': 2, 'n_estimators': 50}
-                rf = RandomForestClassifier(max_depth=20, min_samples_leaf=2, min_samples_split=2, n_estimators=50, random_state=42)
-            case 0:  # ['tronc_diam', 'haut_tot', 'haut_tronc', 'feuillage', 'fk_revetement']
-                # {'max_depth': None, 'min_samples_leaf': 1, 'min_samples_split': 5, 'n_estimators': 300}
-                rf = RandomForestClassifier(max_depth=None, min_samples_leaf=1, min_samples_split=5, n_estimators=300, random_state=42)
-
+            case 1:
+                #{'max_depth': 10, 'min_samples_leaf': 2, 'min_samples_split': 2, 'n_estimators': 50}
+                rf = RandomForestClassifier(max_depth=10, min_samples_leaf=2, min_samples_split=2, n_estimators=50, random_state=42)
+            case 0:
+                #{'max_depth': None, 'min_samples_leaf': 2, 'min_samples_split': 2, 'n_estimators': 50}
+                rf = RandomForestClassifier(max_depth=None, min_samples_leaf=2, min_samples_split=2, n_estimators=50, random_state=42)
 rf.fit(X_train_scaled, y_train_classes)
 pred_rf = rf.predict(X_test_scaled)
+
 import pickle
-with open('f2_random_forest.pkl', 'wb') as fichier:
-    pickle.dump(rf, fichier)
-# ======================================================================================================================
+# Sauvegardez le modèle dans un fichier
+with open('f3_random_forest.pickle', 'wb') as fichier:
+    pickle.dump(pred_rf, fichier)
+
+# =============================-=========================================================================================
 # ============================================ Évaluation et visualisation =============================================
 # ======================================================================================================================
 import matplotlib.pyplot as plt
@@ -191,10 +164,8 @@ print(f'Accuracy: {accuracy_rf:.4f}')
 from sklearn.model_selection import cross_val_score
 
 scores_rf = cross_val_score(rf, X_train_scaled, y_train_classes, cv=5, scoring='accuracy')  # Calculer le score de validation croisée avec 5 valeurs croisées
-print(f'Score de validation croisée: {scores_rf}')
 
-moyenne_scores_rf = scores_rf.mean()
-print(f'Moyenne des scores de validation croisée: {moyenne_scores_rf:.4f}')
+print(f'Score de validation croisée: {scores_rf}')
 
 # -------------------------------------------------------- RMSE --------------------------------------------------------
 from sklearn.metrics import mean_squared_error
@@ -214,12 +185,14 @@ print(conf_matrix_rf)
 
 plt.figure(figsize=(10, 6))
 sns.heatmap(conf_matrix_rf, annot=True, fmt='d', cmap='Blues',
-            xticklabels=['0-10', '10-50', '50-100', '100-200'],
-            yticklabels=['0-10', '10-50', '50-100', '100-200'])
+            xticklabels=['0', '1'],
+            yticklabels=['0', '1'])
 plt.xlabel('Prédictions')
 plt.ylabel('Vérités terrain')
 plt.title(f'Matrice de confusion pour Random Forest - score = {accuracy_rf:.2f}')
 plt.show()
+
+
 
 # ------------------------------------------------- Précision et Rappel ------------------------------------------------
 from sklearn.metrics import precision_score, recall_score, f1_score
@@ -236,47 +209,28 @@ print(f'Précision: {precision_rf:.4f}, Rappel: {recall_rf:.4f}, F1-Score: {f1_r
 
 # ----------------------------------------------------- Courbe ROC -----------------------------------------------------
 from sklearn.metrics import roc_curve, auc
+import numpy as np
+import matplotlib.pyplot as plt
 from sklearn.preprocessing import label_binarize
 
-y_prob_rf = rf.predict_proba(X_test_scaled)
+# Prédire les probabilités avec le modèle Random Forest
+y_prob_rf = rf.predict_proba(X_test_scaled)[:, 1]  # Probabilité pour la classe positive
 
-# Binariser les classes pour chaque classe pour la courbe ROC
-y_test_bin = label_binarize(y_test_classes, classes=[0, 1, 2, 3])
-n_classes = y_test_bin.shape[1]
+# Calculer la courbe ROC et l'AUC
+fpr, tpr, thresholds = roc_curve(y_test_classes, y_prob_rf)
+roc_auc = auc(fpr, tpr)
 
-# Calculer les courbes ROC et l'AUC pour chaque nombre d'arbres et pour chaque classe
-tab_fpr_rf = []
-tab_tpr_rf = []
+# Affichage de la courbe ROC
 plt.figure(figsize=(10, 6))
-for i in range(n_classes):
-    false_positive_rate_mlp, true_positive_rate_mlp, thresholds_mlp = roc_curve(y_test_bin[:, i], y_prob_rf[:, i])
-    roc_auc = auc(false_positive_rate_mlp, true_positive_rate_mlp)  # roc_auc = roc _ area under the curve
-
-    tab_fpr_rf.append(false_positive_rate_mlp)
-    tab_tpr_rf.append(true_positive_rate_mlp)
-
-    # Combiner les courbes ROC pour une courbe globale
-fpr_global = np.unique(np.concatenate(tab_fpr_rf))
-tpr_global = np.zeros_like(fpr_global)
-
-for fpr_i, tpr_i in zip(tab_fpr_rf, tab_tpr_rf):
-    tpr_global += np.interp(fpr_global, fpr_i, tpr_i)
-
-tpr_global /= n_classes  # Moyenne des vrais positifs pour chaque taux de faux positifs
-
-roc_auc_global = auc(fpr_global, tpr_global)
-
-# Affichage de la courbe ROC pour chaque quantité d'arbres
-plt.plot(fpr_global, tpr_global, color='b', lw=2, label=f'ROC (AUC = {roc_auc_global:.2f})')
+plt.plot(fpr, tpr, color='b', lw=2, label=f'ROC (AUC = {roc_auc:.2f})')
 plt.plot([0, 1], [0, 1], color='navy', lw=2, linestyle='--')
 plt.xlim([0.0, 1.0])
 plt.ylim([0.0, 1.05])
 plt.xlabel('Taux de Faux Positifs')
 plt.ylabel('Taux de Vrais Positifs')
-plt.title(f'Courbe ROC pour le modèle Random Forest')
+plt.title('Courbe ROC pour le modèle Random Forest')
 plt.legend(loc='lower right')
 plt.grid(True)
 plt.show()
 
-print(f'AUC: {roc_auc_global:.4f}')
-
+print(f'AUC: {roc_auc:.4f}')

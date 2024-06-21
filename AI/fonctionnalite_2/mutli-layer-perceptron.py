@@ -178,6 +178,9 @@ match bdd:
 mlp.fit(X_train_scaled, y_train_classes)
 pred_mlp = mlp.predict(X_test_scaled)
 
+import pickle
+with open('f2_mutli_layer_perceptron.pkl', 'wb') as fichier:
+    pickle.dump(mlp, fichier)
 
 # ======================================================================================================================
 # ============================================ Évaluation et visualisation =============================================
