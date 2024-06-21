@@ -5,6 +5,7 @@
 import pandas as pd
 import numpy as np
 import time
+import pickle
 
 # Affichage :
 import plotly.express as px
@@ -46,10 +47,17 @@ plt.show()
 # --------------------------------------------------------------------------------------------------
 # ------------------------------ Apprentissage Non Supervisé : Kmeans ------------------------------
 # --------------------------------------------------------------------------------------------------
+def save_kmeans_apprentissage_fit(data_arbre, n_clusters):
+     KMeans(n_clusters=n_clusters, random_state=42).fit(data_arbre)
+
+    with open('f1_kmeans_apprentissage.pkl', 'wb') as fichier:
+        pickle.dump(KMeans, fichier)
+
+    return 0
+
 def kmeans_apprentissage(data_arbre, n_clusters):
     kmeans_labels = KMeans(n_clusters=n_clusters, random_state=42).fit_predict(data_arbre)
     return kmeans_labels
-
 
 def centroides_kmeans(data_arbre, n_clusters):
     centroides = KMeans(n_clusters=n_clusters, random_state=42).fit_predict(data_arbre)
