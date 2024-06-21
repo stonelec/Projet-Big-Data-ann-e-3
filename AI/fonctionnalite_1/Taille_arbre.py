@@ -173,10 +173,10 @@ def affichage_data_prof(n_clusters):
 
 
 print("Affichage avec les données fournit pour 2 clusters : ")
-#affichage_data_prof(2)
+affichage_data_prof(2)
 
 print("Affichage avec les données fournit pour 3 clusters : ")
-#affichage_data_prof(3)
+affichage_data_prof(3)
 
 
 # -----------------------------------------------------------------------
