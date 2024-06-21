@@ -8,10 +8,11 @@ from sklearn.preprocessing import LabelEncoder
 import numpy as np
 import sys
 
-grid_search_mode = 0  # 1 pour activer la recherche par grille, 0 pour désactiver
+
+grid_search_mode =  1 # 1 pour activer la recherche par grille, 0 pour désactiver
 bdd = 0  # 1 pour AI_Patrimoine_Arboré_(RO), 0 pour Data_Arbre
-algo = 2  # 0 pour Random Forest | 1 pour Multi Layer Perceptron | 2 pour K-Nearest Neighbors
-num_features = 2  # Nombre de caractéristiques à utiliser
+algo = 0  # 0 pour Random Forest | 1 pour Multi Layer Perceptron | 2 pour K-Nearest Neighbors
+num_features = 0  # Nombre de caractéristiques à utiliser
 
 
 if bdd == 1:
@@ -20,7 +21,7 @@ if bdd == 1:
     # Sélectionner les caractéristiques
     match num_features:
         case 0:
-            features = ['haut_tot', 'haut_tronc', 'tronc_diam', 'fk_port', 'feuillage', 'fk_pied', 'fk_revetement']
+            features = ['haut_tot', 'haut_tronc', 'tronc_diam', 'fk_port', 'feuillage', 'X', 'Y']
         case 1:
             features = ['haut_tot', 'haut_tronc', 'tronc_diam', 'fk_port', 'feuillage']
         case 2:
@@ -39,7 +40,7 @@ else:
 
     match num_features:
         case 0:
-            features = ['haut_tot', 'haut_tronc', 'tronc_diam', 'fk_port_encoded', 'feuillage_encoded', 'fk_pied_encoded', 'fk_revetement_encoded']
+            features = ['haut_tot', 'haut_tronc', 'tronc_diam', 'fk_port_encoded', 'feuillage_encoded', 'longitude', 'latitude']
         case 1:
             features = ['haut_tot', 'haut_tronc', 'tronc_diam', 'fk_port_encoded', 'feuillage_encoded']
         case 2:
@@ -97,28 +98,26 @@ best_rf = None
 
 if grid_search_mode == 1:
     # Définir les hyperparamètres à tester
+    param_grid = {}
     match algo:
         case 0:
             param_grid = {
-                'n_estimators': [50, 100, 200],
-                'max_depth': [None, 10, 20],
+                'n_estimators': [50, 100, 125, 150],
                 'min_samples_split': [2, 5, 10],
                 'min_samples_leaf': [1, 2, 4],
-                'bootstrap': [True, False]
             }
         case 1:
             param_grid = {
                 'hidden_layer_sizes': [(50,), (100,), (50, 50)],
-                'activation': ['relu', 'tanh'],
                 'solver': ['adam', 'lbfgs'],
-                'alpha': [0.0001, 0.001, 0.01],
-                'learning_rate': ['constant', 'invscaling', 'adaptive']
+                'learning_rate': ['constant', 'invscaling', 'adaptive'],
+                'max_iter': [500, 1000, 10000]
             }
         case 2:
             param_grid = {
-                'n_neighbors': [3, 5, 7],
-                'weights': ['uniform', 'distance'],
-                'algorithm': ['auto', 'ball_tree', 'kd_tree']
+                'n_neighbors': [3, 5, 7, 9],
+                'metric': ['euclidean', 'manhattan', 'minkowski'],
+                'weights': ['uniform', 'distance']
             }
 
     if algo == 0:
