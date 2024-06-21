@@ -48,7 +48,8 @@ plt.show()
 # ------------------------------ Apprentissage Non Supervisé : Kmeans ------------------------------
 # --------------------------------------------------------------------------------------------------
 def save_kmeans_apprentissage_fit(data_arbre, n_clusters):
-     KMeans(n_clusters=n_clusters, random_state=42).fit(data_arbre)
+
+    KMeans(n_clusters=n_clusters, random_state=42).fit(data_arbre)
 
     with open('f1_kmeans_apprentissage.pkl', 'wb') as fichier:
         pickle.dump(KMeans, fichier)
