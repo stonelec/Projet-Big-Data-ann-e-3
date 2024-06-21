@@ -49,12 +49,14 @@ plt.show()
 # --------------------------------------------------------------------------------------------------
 def save_kmeans_apprentissage_fit(data_arbre, n_clusters):
 
-    KMeans(n_clusters=n_clusters, random_state=42).fit(data_arbre)
+    kmeans = KMeans(n_clusters=n_clusters, random_state=42).fit(data_arbre)
 
     with open('f1_kmeans_apprentissage.pkl', 'wb') as fichier:
-        pickle.dump(KMeans, fichier)
+        pickle.dump(kmeans, fichier)
 
     return 0
+
+save_kmeans_apprentissage_fit(data_arbre, 2)
 
 def kmeans_apprentissage(data_arbre, n_clusters):
     kmeans_labels = KMeans(n_clusters=n_clusters, random_state=42).fit_predict(data_arbre)
@@ -173,10 +175,10 @@ def affichage_data_prof(n_clusters):
 
 
 print("Affichage avec les données fournit pour 2 clusters : ")
-affichage_data_prof(2)
+#affichage_data_prof(2)
 
 print("Affichage avec les données fournit pour 3 clusters : ")
-affichage_data_prof(3)
+#affichage_data_prof(3)
 
 
 # -----------------------------------------------------------------------
@@ -270,6 +272,7 @@ def affichage_graphique_davies(data_arbre):
 # ------------------------------ Menu ------------------------------
 # ------------------------------------------------------------------
 
+"""
 
 print("-------------------")
 print("Fonctionnalité 1 : ")
@@ -295,7 +298,7 @@ match choix_data:
     # Notre data
     case 0:
 
-        data_arbre = pd.read_csv("AI_Patrimoine_Arboré_(RO).csv", usecols=["haut_tronc", "age_estim", "tronc_diam"])
+        data_arbre = pd.read_csv("../AI_Patrimoine_Arboré_(RO).csv", usecols=["haut_tronc", "age_estim", "tronc_diam"])
         print("Vous avez choisi notre data")
 
         print("")
@@ -387,6 +390,9 @@ match choix_data:
                                 print("Affichage graphique : /!\\ Le temps peut être long /!\\")
                                 affichage_graphique_silhouette(data_arbre)
 
+                                #Pour les valeurs dans le pkl
+                                save_kmeans_apprentissage_fit(data_arbre, n_clusters)
+
                             # 3 clusters :
                             case 1:
 
@@ -402,6 +408,9 @@ match choix_data:
                                       methode, "pour", n_clusters, "clusters")
                                 print("Affichage graphique : /!\\ Le temps peut être long /!\\")
                                 affichage_graphique_silhouette(data_arbre)
+
+                                # Pour les valeurs dans le pkl
+                                save_kmeans_apprentissage_fit(data_arbre, n_clusters)
 
                     # Calinski-Harabasz Index
                     case 1:
@@ -445,6 +454,9 @@ match choix_data:
                                 print("Affichage graphique : ")
                                 affichage_graphique_calinksi(data_arbre)
 
+                                # Pour les valeurs dans le pkl
+                                save_kmeans_apprentissage_fit(data_arbre, n_clusters)
+
                             # 3 clusters :
                             case 1:
 
@@ -460,6 +472,9 @@ match choix_data:
                                       methode, "pour", n_clusters, "clusters")
                                 print("Affichage graphique : ")
                                 affichage_graphique_calinksi(data_arbre)
+
+                                # Pour les valeurs dans le pkl
+                                save_kmeans_apprentissage_fit(data_arbre, n_clusters)
 
                     # Davies-Bouldin Index
                     case 2:
@@ -504,6 +519,9 @@ match choix_data:
                                 print("Affichage graphique : ")
                                 affichage_graphique_davies(data_arbre)
 
+                                # Pour les valeurs dans le pkl
+                                save_kmeans_apprentissage_fit(data_arbre, n_clusters)
+
                             # 3 clusters :
                             case 1:
 
@@ -519,6 +537,9 @@ match choix_data:
                                       methode, "pour", n_clusters, "clusters")
                                 print("Affichage graphique : ")
                                 affichage_graphique_davies(data_arbre)
+
+                                # Pour les valeurs dans le pkl
+                                save_kmeans_apprentissage_fit(data_arbre, n_clusters)
 
             # Birch
             case 1:
@@ -928,7 +949,7 @@ match choix_data:
     # Data prof
     case 1:
 
-        data_arbre = pd.read_csv("Data_Arbre.csv", usecols=["haut_tronc", "age_estim", "tronc_diam"])
+        data_arbre = pd.read_csv("../Data_Arbre.csv", usecols=["haut_tronc", "age_estim", "tronc_diam"])
         print("Vous avez choisi la data qui nous a été fournit")
 
         print("")
@@ -1723,3 +1744,4 @@ match choix_affichage_tout:
     case 1:
 
         print("Merci à vous, FIN")
+"""

@@ -2,12 +2,10 @@ import sys
 import pickle
 import json
 caracteristiques = []
-for i in range(1,len(sys.argv)-1):
+for i in range(1, len(sys.argv)-1):
     #ajouter les features à la liste des caractéristiques
     caracteristiques.append(float(sys.argv[i]))
 methode = sys.argv[len(sys.argv)-1]
-
-
 
 #execution du fichier correspondant à la méthode de classification
 if(methode == "kmeans"):

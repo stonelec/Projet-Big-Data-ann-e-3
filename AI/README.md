@@ -25,6 +25,9 @@ Il faut mettre les données dans cet ordre :
 
 Exemple : python fonc1.py 2 50 170 3
 
+Attention, pour pouvoir utiliser le script, il faut faire une fois le menu avec la méthode kmeans.
+Le script ne marche qu'avec la méthode kmeans.
+
 # Fonctionnalité 2 :
 
 ## Age des arbres :
