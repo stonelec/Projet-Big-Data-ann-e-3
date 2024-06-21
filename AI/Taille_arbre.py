@@ -24,7 +24,7 @@ from sklearn.metrics import davies_bouldin_score
 # ------------------------------ Préparation des données ------------------------------
 # -------------------------------------------------------------------------------------
 
-data_arbre = pd.read_csv("Data_Arbre.csv", usecols=["haut_tronc", "age_estim", "tronc_diam"])
+data_arbre = pd.read_csv("AI_Patrimoine_Arboré_(RO).csv", usecols=["haut_tronc", "age_estim", "tronc_diam"])
 
 data_arbre_position_notre_data = pd.read_csv("AI_Patrimoine_Arboré_(RO).csv",
                                              usecols=["X", "Y", "haut_tronc", "age_estim", "tronc_diam"])
@@ -183,13 +183,15 @@ def affichage_data_prof(n_clusters):
     # On rajoute une colonne avec les clusters
     data_arbre_position_data_prof['cluster'] = model
 
+    data_arbre_position_data_prof['haut_tot'] = pd.read_csv("Data_Arbre.csv", usecols=["haut_tot"])
+
     fig = px.scatter_mapbox(data_arbre_position_data_prof,
                             lat="latitude",
                             lon="longitude",
                             color="cluster",
                             color_discrete_sequence=["blue", "green", "red"],
-                            hover_data=["haut_tronc", "age_estim", "tronc_diam"],
-                            zoom=12,
+                            hover_data=["haut_tronc", "age_estim", "tronc_diam", "haut_tot"],
+                            zoom=12.5,
                             height=800,
                             width=800)
 
@@ -199,11 +201,11 @@ def affichage_data_prof(n_clusters):
     fig.show()
 
 
-print("Affichage avec les données fournit pour 2 clusters : ")
-affichage_data_prof(2)
+#print("Affichage avec les données fournit pour 2 clusters : ")
+#affichage_data_prof(2)
 
-print("Affichage avec les données fournit pour 3 clusters : ")
-affichage_data_prof(3)
+#print("Affichage avec les données fournit pour 3 clusters : ")
+#affichage_data_prof(3)
 
 
 # -----------------------------------------------------------------------
@@ -236,7 +238,6 @@ def affichage_graphique_silhouette(data_arbre):
     plt.title('Silhouette Coefficient')
     plt.show()
 
-
 # ---------- Calinski-Harabasz Index ----------
 def calinski_score(data_arbre, model_apprentissage):
     return calinski_harabasz_score(data_arbre, model_apprentissage)
@@ -266,7 +267,6 @@ def affichage_graphique_calinksi(data_arbre):
     plt.title('Calinski-Harabasz Index')
     plt.show()
 
-
 # ---------- Davies-Bouldin Index ----------
 def davies_score(data_arbre, model_apprentissage):
     return davies_bouldin_score(data_arbre, model_apprentissage)
@@ -295,6 +295,7 @@ def affichage_graphique_davies(data_arbre):
     plt.title('Davies-Bouldin Index')
     plt.show()
 
+affichage_graphique_davies(data_arbre)
 
 # ------------------------------------------------------------------
 # ------------------------------ Menu ------------------------------
