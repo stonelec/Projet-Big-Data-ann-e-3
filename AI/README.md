@@ -21,9 +21,9 @@ Il faut mettre les données dans cet ordre :
 - 1er : haut_tronc
 - 2ᵉ : age_estim
 - 3ᵉ : tronc_diam
-- 4ᵉ : le nombre de clusters
+- 4ᵉ : la méthode
 
-Exemple : python fonc1.py 2 50 170 3
+Exemple : python fonc1.py 2 50 170 kmeans
 
 Attention, pour pouvoir utiliser le script, il faut faire une fois le menu avec la méthode kmeans.
 Le script ne marche qu'avec la méthode kmeans.
@@ -60,6 +60,8 @@ Il faut mettre les données dans cet ordre :
   - rf : Random Forest
   - knn : K-Nearest Neighbors
   - mlp : Multi-Layer Perceptron
+  - 
+- Attention, selon ce que vous prenez dans la fonctionnalité 2, en termes de features, il faudra rajouter des élements ou en supprimés
 Exemple : python fonc2.py 5 20 10 0 1 rf
 
 # Fonctionnalité 3 :
@@ -92,4 +94,5 @@ Il faut mettre les données dans cet ordre :
   - knn : K-Nearest Neighbors
   - mlp : Multi-Layer Perceptron
 
+Attention, selon ce que vous prenez dans la fonctionnalité 3, en termes de features, il faudra rajouter des élements ou en supprimés
 Exemple : python fonc3.py 5 20 10 0 1 1 rf
