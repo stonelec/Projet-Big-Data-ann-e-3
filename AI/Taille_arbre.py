@@ -43,44 +43,6 @@ haut_tot.hist(bins=50, figsize=(10, 10))
 plt.show()
 """
 
-# ---------------------------------------------------------------------------------
-# ------------------------------ Moyenne et médianne ------------------------------
-# ---------------------------------------------------------------------------------
-
-"""
-sum = 0
-indice = 0
-
-for i in range(len(haut_tronc)):
-
-    sum += int(haut_tronc[i])
-    indice += 1
-
-moyenne = sum/indice
-
-print("Moyenne ", moyenne)
-
-petit = 0
-grand = 0
-
-position_petit = []
-position_grand = []
-
-for i in range(len(haut_tronc)):
-
-    if(int(haut_tronc[i]) < moyenne):
-
-        petit += 1
-
-    else:
-
-        grand += 1
-
-#print("Nombre de petit arbre : ", petit)
-#print("Nombre de grand arbre : ", grand)
-"""
-
-
 # --------------------------------------------------------------------------------------------------
 # ------------------------------ Apprentissage Non Supervisé : Kmeans ------------------------------
 # --------------------------------------------------------------------------------------------------
@@ -201,11 +163,11 @@ def affichage_data_prof(n_clusters):
     fig.show()
 
 
-#print("Affichage avec les données fournit pour 2 clusters : ")
-#affichage_data_prof(2)
+print("Affichage avec les données fournit pour 2 clusters : ")
+affichage_data_prof(2)
 
-#print("Affichage avec les données fournit pour 3 clusters : ")
-#affichage_data_prof(3)
+print("Affichage avec les données fournit pour 3 clusters : ")
+affichage_data_prof(3)
 
 
 # -----------------------------------------------------------------------
@@ -295,13 +257,11 @@ def affichage_graphique_davies(data_arbre):
     plt.title('Davies-Bouldin Index')
     plt.show()
 
-affichage_graphique_davies(data_arbre)
-
 # ------------------------------------------------------------------
 # ------------------------------ Menu ------------------------------
 # ------------------------------------------------------------------
 
-"""
+
 print("-------------------")
 print("Fonctionnalité 1 : ")
 print("-------------------")
@@ -1753,4 +1713,4 @@ match choix_affichage_tout:
 
     case 1:
 
-        print("Merci à vous, FIN")"""
+        print("Merci à vous, FIN")
