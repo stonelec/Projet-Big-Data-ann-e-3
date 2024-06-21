@@ -24,12 +24,12 @@ from sklearn.metrics import davies_bouldin_score
 # ------------------------------ Préparation des données ------------------------------
 # -------------------------------------------------------------------------------------
 
-data_arbre = pd.read_csv("Data_Arbre.csv", usecols=["haut_tronc", "age_estim", "tronc_diam"])
+data_arbre = pd.read_csv("../AI_Patrimoine_Arboré_(RO).csv", usecols=["haut_tronc", "age_estim", "tronc_diam"])
 
-data_arbre_position_notre_data = pd.read_csv("AI_Patrimoine_Arboré_(RO).csv",
+data_arbre_position_notre_data = pd.read_csv("../AI_Patrimoine_Arboré_(RO).csv",
                                              usecols=["X", "Y", "haut_tronc", "age_estim", "tronc_diam"])
 
-data_arbre_position_data_prof = pd.read_csv("Data_Arbre.csv",
+data_arbre_position_data_prof = pd.read_csv("../Data_Arbre.csv",
                                             usecols=["longitude", "latitude", "haut_tronc", "age_estim", "tronc_diam"])
 
 # ------------------------------------------------------------------------------
@@ -42,44 +42,6 @@ data_arbre_position_data_prof = pd.read_csv("Data_Arbre.csv",
 haut_tot.hist(bins=50, figsize=(10, 10))
 plt.show()
 """
-
-# ---------------------------------------------------------------------------------
-# ------------------------------ Moyenne et médianne ------------------------------
-# ---------------------------------------------------------------------------------
-
-"""
-sum = 0
-indice = 0
-
-for i in range(len(haut_tronc)):
-
-    sum += int(haut_tronc[i])
-    indice += 1
-
-moyenne = sum/indice
-
-print("Moyenne ", moyenne)
-
-petit = 0
-grand = 0
-
-position_petit = []
-position_grand = []
-
-for i in range(len(haut_tronc)):
-
-    if(int(haut_tronc[i]) < moyenne):
-
-        petit += 1
-
-    else:
-
-        grand += 1
-
-#print("Nombre de petit arbre : ", petit)
-#print("Nombre de grand arbre : ", grand)
-"""
-
 
 # --------------------------------------------------------------------------------------------------
 # ------------------------------ Apprentissage Non Supervisé : Kmeans ------------------------------
@@ -183,13 +145,15 @@ def affichage_data_prof(n_clusters):
     # On rajoute une colonne avec les clusters
     data_arbre_position_data_prof['cluster'] = model
 
+    data_arbre_position_data_prof['haut_tot'] = pd.read_csv("../Data_Arbre.csv", usecols=["haut_tot"])
+
     fig = px.scatter_mapbox(data_arbre_position_data_prof,
                             lat="latitude",
                             lon="longitude",
                             color="cluster",
                             color_discrete_sequence=["blue", "green", "red"],
-                            hover_data=["haut_tronc", "age_estim", "tronc_diam"],
-                            zoom=12,
+                            hover_data=["haut_tronc", "age_estim", "tronc_diam", "haut_tot"],
+                            zoom=12.5,
                             height=800,
                             width=800)
 
@@ -236,7 +200,6 @@ def affichage_graphique_silhouette(data_arbre):
     plt.title('Silhouette Coefficient')
     plt.show()
 
-
 # ---------- Calinski-Harabasz Index ----------
 def calinski_score(data_arbre, model_apprentissage):
     return calinski_harabasz_score(data_arbre, model_apprentissage)
@@ -266,7 +229,6 @@ def affichage_graphique_calinksi(data_arbre):
     plt.title('Calinski-Harabasz Index')
     plt.show()
 
-
 # ---------- Davies-Bouldin Index ----------
 def davies_score(data_arbre, model_apprentissage):
     return davies_bouldin_score(data_arbre, model_apprentissage)
@@ -295,12 +257,11 @@ def affichage_graphique_davies(data_arbre):
     plt.title('Davies-Bouldin Index')
     plt.show()
 
-
 # ------------------------------------------------------------------
 # ------------------------------ Menu ------------------------------
 # ------------------------------------------------------------------
 
-"""
+
 print("-------------------")
 print("Fonctionnalité 1 : ")
 print("-------------------")
@@ -1752,4 +1713,4 @@ match choix_affichage_tout:
 
     case 1:
 
-        print("Merci à vous, FIN")"""
+        print("Merci à vous, FIN")

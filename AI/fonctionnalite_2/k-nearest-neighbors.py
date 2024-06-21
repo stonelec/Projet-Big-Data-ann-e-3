@@ -218,7 +218,7 @@ sns.heatmap(conf_matrix_knn, annot=True, fmt='d', cmap='Blues',
             yticklabels=['0-10', '10-50', '50-100', '100-200'])
 plt.xlabel('Prédictions')
 plt.ylabel('Vérités terrain')
-plt.title(f'Matrice de confusion pour K-Neasrest Neighbors - score = {accuracy_knn:.2f}')
+plt.title(f'Matrice de confusion pour K-Neasrest Neighbors - accuracy = {accuracy_knn:.2f}')
 plt.show()
 
 # ------------------------------------------------- Précision et Rappel ------------------------------------------------
