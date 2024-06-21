@@ -5,18 +5,17 @@
 import pandas as pd
 import numpy as np
 import time
-from sklearn.preprocessing import LabelEncoder
 
-#Affichage :
+# Affichage :
 import plotly.express as px
 import matplotlib.pyplot as plt
 
-#Méthodes
+# Méthodes
 from sklearn.cluster import KMeans
 from sklearn.cluster import Birch
 from sklearn.cluster import AgglomerativeClustering
 
-#Métriques :
+# Métriques :
 from sklearn.metrics import silhouette_score
 from sklearn.metrics import calinski_harabasz_score
 from sklearn.metrics import davies_bouldin_score
@@ -27,15 +26,17 @@ from sklearn.metrics import davies_bouldin_score
 
 data_arbre = pd.read_csv("Data_Arbre.csv", usecols=["haut_tronc", "age_estim", "tronc_diam"])
 
-data_arbre_position_notre_data = pd.read_csv("AI_Patrimoine_Arboré_(RO).csv", usecols=["X", "Y", "haut_tronc", "age_estim", "tronc_diam"])
+data_arbre_position_notre_data = pd.read_csv("AI_Patrimoine_Arboré_(RO).csv",
+                                             usecols=["X", "Y", "haut_tronc", "age_estim", "tronc_diam"])
 
-data_arbre_position_data_prof = pd.read_csv("Data_Arbre.csv", usecols=["longitude", "latitude", "haut_tronc", "age_estim", "tronc_diam"])
+data_arbre_position_data_prof = pd.read_csv("Data_Arbre.csv",
+                                            usecols=["longitude", "latitude", "haut_tronc", "age_estim", "tronc_diam"])
 
 # ------------------------------------------------------------------------------
 # ------------------------------ Afficher la data ------------------------------
 # ------------------------------------------------------------------------------
 
-#Regarder la taille des arbres en fonction de la fréquence des arbres
+# Regarder la taille des arbres en fonction de la fréquence des arbres
 
 """
 haut_tot.hist(bins=50, figsize=(10, 10))
@@ -79,34 +80,36 @@ for i in range(len(haut_tronc)):
 #print("Nombre de grand arbre : ", grand)
 """
 
+
 # --------------------------------------------------------------------------------------------------
 # ------------------------------ Apprentissage Non Supervisé : Kmeans ------------------------------
 # --------------------------------------------------------------------------------------------------
 def kmeans_apprentissage(data_arbre, n_clusters):
-
     kmeans_labels = KMeans(n_clusters=n_clusters, random_state=42).fit_predict(data_arbre)
     return kmeans_labels
 
-def centroides_kmeans(data_arbre, n_clusters):
 
+def centroides_kmeans(data_arbre, n_clusters):
     centroides = KMeans(n_clusters=n_clusters, random_state=42).fit_predict(data_arbre)
+
     return centroides
+
 
 # -------------------------------------------------------------------------------------------------
 # ------------------------------ Apprentissage Non Supervisé : BIRCH ------------------------------
 # -------------------------------------------------------------------------------------------------
 def birch_apprentissage(data_arbre, n_clusters):
-
     birch_labels = Birch(n_clusters=n_clusters).fit_predict(data_arbre)
     return birch_labels
+
 
 # -------------------------------------------------------------------------------------------------------------------
 # ------------------------------ Apprentissage Non Supervisé : AgglomerativeClustering ------------------------------
 # -------------------------------------------------------------------------------------------------------------------
 def agglomerative_clustering_apprentissage(data_arbre, n_clusters):
-
     agglomerative_clustering_labels = AgglomerativeClustering(n_clusters=n_clusters).fit_predict(data_arbre)
     return agglomerative_clustering_labels
+
 
 # -----------------------------------------------------------------------
 # ------------------------------ Affichage ------------------------------
@@ -147,14 +150,14 @@ def affichage_sans_map_notre_data(data_arbre, n_clusters):
     plt.legend()
     plt.show()"""
 
+
 # ----- Affichage des clusters avec la map : -----
 
 def affichage_notre_data(n_clusters):
-
-    #On récupère les clusters :
+    # On récupère les clusters :
     model = kmeans_apprentissage(data_arbre_position_notre_data, n_clusters)
 
-    #On rajoute une colonne avec les clusters
+    # On rajoute une colonne avec les clusters
     data_arbre_position_notre_data['cluster'] = model
 
     fig = px.scatter_mapbox(data_arbre_position_notre_data,
@@ -168,15 +171,16 @@ def affichage_notre_data(n_clusters):
                             width=800)
 
     fig.update_layout(mapbox_style="open-street-map")
-    fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
+    fig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
 
     fig.show()
-def affichage_data_prof(n_clusters):
 
-    #On récupère les clusters :
+
+def affichage_data_prof(n_clusters):
+    # On récupère les clusters :
     model = kmeans_apprentissage(data_arbre_position_data_prof, n_clusters)
 
-    #On rajoute une colonne avec les clusters
+    # On rajoute une colonne avec les clusters
     data_arbre_position_data_prof['cluster'] = model
 
     fig = px.scatter_mapbox(data_arbre_position_data_prof,
@@ -190,11 +194,17 @@ def affichage_data_prof(n_clusters):
                             width=800)
 
     fig.update_layout(mapbox_style="open-street-map")
-    fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
+    fig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
 
     fig.show()
 
+
+print("Affichage avec les données fournit pour 2 clusters : ")
+affichage_data_prof(2)
+
+print("Affichage avec les données fournit pour 3 clusters : ")
 affichage_data_prof(3)
+
 
 # -----------------------------------------------------------------------
 # ------------------------------ Métriques ------------------------------
@@ -202,17 +212,16 @@ affichage_data_prof(3)
 
 # ---------- Silhouette Coefficient ----------
 def sil_score(data_arbre, model_apprentissage):
-
     return silhouette_score(data_arbre, model_apprentissage)
-def affichage_graphique_silhouette(data_arbre):
 
+
+def affichage_graphique_silhouette(data_arbre):
     range_n_clusters = [2, 3, 4, 5, 6, 7, 8, 9, 10,
                         11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
                         21, 22, 23, 24, 25, 26, 27, 28, 29, 30]
     score = []
 
     for num_clusters in range_n_clusters:
-
         labels = KMeans(n_clusters=num_clusters, random_state=42).fit_predict(data_arbre)
         score.append(silhouette_score(data_arbre, labels))
 
@@ -227,21 +236,21 @@ def affichage_graphique_silhouette(data_arbre):
     plt.title('Silhouette Coefficient')
     plt.show()
 
+
 # ---------- Calinski-Harabasz Index ----------
 def calinski_score(data_arbre, model_apprentissage):
-
     return calinski_harabasz_score(data_arbre, model_apprentissage)
-def affichage_graphique_calinksi(data_arbre):
 
+
+def affichage_graphique_calinksi(data_arbre):
     range_n_clusters = [2, 3, 4, 5, 6, 7, 8, 9, 10,
                         11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
                         21, 22, 23, 24, 25, 26, 27, 28, 29, 30]
 
-    #On récupère le score ici et on le garde
+    # On récupère le score ici et on le garde
     score = []
 
     for num_clusters in range_n_clusters:
-
         # initialise kmeans
         labels = KMeans(n_clusters=num_clusters, random_state=42).fit_predict(data_arbre)
         score.append(calinski_harabasz_score(data_arbre, labels))
@@ -257,12 +266,13 @@ def affichage_graphique_calinksi(data_arbre):
     plt.title('Calinski-Harabasz Index')
     plt.show()
 
+
 # ---------- Davies-Bouldin Index ----------
 def davies_score(data_arbre, model_apprentissage):
-
     return davies_bouldin_score(data_arbre, model_apprentissage)
-def affichage_graphique_davies(data_arbre):
 
+
+def affichage_graphique_davies(data_arbre):
     range_n_clusters = [2, 3, 4, 5, 6, 7, 8, 9, 10,
                         11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
                         21, 22, 23, 24, 25, 26, 27, 28, 29, 30]
@@ -270,7 +280,6 @@ def affichage_graphique_davies(data_arbre):
     score = []
 
     for num_clusters in range_n_clusters:
-
         # initialise kmeans
         labels = KMeans(n_clusters=num_clusters, random_state=42).fit_predict(data_arbre)
         score.append(davies_bouldin_score(data_arbre, labels))
@@ -286,11 +295,12 @@ def affichage_graphique_davies(data_arbre):
     plt.title('Davies-Bouldin Index')
     plt.show()
 
+
 # ------------------------------------------------------------------
 # ------------------------------ Menu ------------------------------
 # ------------------------------------------------------------------
 
-'''
+"""
 print("-------------------")
 print("Fonctionnalité 1 : ")
 print("-------------------")
@@ -304,7 +314,6 @@ print("")
 choix_data = int(input("Votre choix : "))
 
 while choix_data != 0 and choix_data != 1:
-
     print("Erreur, veuillez entrer la valeur 0 ou 1 pour choisir le type de data que vous souhaitez : ")
     choix_data = int(input("Votre choix : "))
 
@@ -313,7 +322,7 @@ print("")
 
 match choix_data:
 
-    #Notre data
+    # Notre data
     case 0:
 
         data_arbre = pd.read_csv("AI_Patrimoine_Arboré_(RO).csv", usecols=["haut_tronc", "age_estim", "tronc_diam"])
@@ -339,7 +348,7 @@ match choix_data:
 
         match choix_apprentissage:
 
-            #KMeans
+            # KMeans
             case 0:
 
                 methode = "Kmeans"
@@ -366,7 +375,7 @@ match choix_data:
 
                 match choix_metrique:
 
-                    #Silhouette Coefficient
+                    # Silhouette Coefficient
                     case 0:
 
                         metrique = "Silhouette Coefficient"
@@ -392,7 +401,7 @@ match choix_data:
 
                         match choix_cluster:
 
-                            #2 clusters :
+                            # 2 clusters :
                             case 0:
 
                                 n_clusters = 2
@@ -403,11 +412,12 @@ match choix_data:
                                 print("")
 
                                 score = sil_score(data_arbre, kmeans_apprentissage(data_arbre, n_clusters))
-                                print("Le score pour la métrique", metrique, "est :", score, "avec la méthode", methode, "pour", n_clusters, "clusters")
+                                print("Le score pour la métrique", metrique, "est :", score, "avec la méthode", methode,
+                                      "pour", n_clusters, "clusters")
                                 print("Affichage graphique : /!\\ Le temps peut être long /!\\")
                                 affichage_graphique_silhouette(data_arbre)
 
-                            #3 clusters :
+                            # 3 clusters :
                             case 1:
 
                                 n_clusters = 3
@@ -423,7 +433,7 @@ match choix_data:
                                 print("Affichage graphique : /!\\ Le temps peut être long /!\\")
                                 affichage_graphique_silhouette(data_arbre)
 
-                    #Calinski-Harabasz Index
+                    # Calinski-Harabasz Index
                     case 1:
 
                         metrique = "Calinski-Harabasz Index"
@@ -481,8 +491,7 @@ match choix_data:
                                 print("Affichage graphique : ")
                                 affichage_graphique_calinksi(data_arbre)
 
-
-                    #Davies-Bouldin Index
+                    # Davies-Bouldin Index
                     case 2:
 
                         metrique = "Davies-Bouldin Index"
@@ -541,7 +550,7 @@ match choix_data:
                                 print("Affichage graphique : ")
                                 affichage_graphique_davies(data_arbre)
 
-            #Birch
+            # Birch
             case 1:
 
                 methode = "Birch"
@@ -744,7 +753,7 @@ match choix_data:
                                 print("Affichage graphique : ")
                                 affichage_graphique_davies(data_arbre)
 
-            #AgglomerativeClustering
+            # AgglomerativeClustering
             case 2:
 
                 methode = "AgglomerativeClustering"
@@ -946,7 +955,7 @@ match choix_data:
                                 print("Affichage graphique : ")
                                 affichage_graphique_davies(data_arbre)
 
-    #Data prof
+    # Data prof
     case 1:
 
         data_arbre = pd.read_csv("Data_Arbre.csv", usecols=["haut_tronc", "age_estim", "tronc_diam"])
@@ -1579,4 +1588,168 @@ match choix_data:
                                       methode, "pour", n_clusters, "clusters")
                                 print("Affichage graphique : ")
                                 affichage_graphique_davies(data_arbre)
-'''
+
+# --------------------------------------------------------------------------------
+# ------------------------------ Tout les résultats ------------------------------
+# --------------------------------------------------------------------------------
+
+print("")
+print("--------------------------------------------------------------------------")
+print("")
+
+print("Voulez-vous afficher toutes les valeurs : ")
+print("Oui : 0")
+print("Non : 1")
+
+choix_affichage_tout = int(input("Votre choix : "))
+
+while choix_affichage_tout != 0 and choix_affichage_tout != 1:
+    print("Erreur, veuillez entrer la valeur 0, 1 ou 2 pour choisir si vous affichez ou non : ")
+    choix_affichage_tout = int(input("Votre choix : "))
+
+time.sleep(2)
+print("")
+
+match choix_affichage_tout:
+
+    case 0:
+
+        deux_clusters = 2
+        trois_clusters = 3
+
+        data_arbre_notre = pd.read_csv("AI_Patrimoine_Arboré_(RO).csv",
+                                       usecols=["haut_tronc", "age_estim", "tronc_diam"])
+        data_arbre_prof = pd.read_csv("Data_Arbre.csv", usecols=["haut_tronc", "age_estim", "tronc_diam"])
+
+        print("------------------------------------------------------------------------")
+        print("------------------------------ Notre data ------------------------------")
+        print("------------------------------------------------------------------------")
+
+        print("---------- KMeans ----------")
+
+        print("Pour 2 clusters : ")
+        print("Silhouette Coefficient : ",
+              sil_score(data_arbre_notre, kmeans_apprentissage(data_arbre_notre, deux_clusters)))
+        print("Calinski-Harabasz Index : ",
+              calinski_score(data_arbre_notre, kmeans_apprentissage(data_arbre_notre, deux_clusters)))
+        print("Davies-Bouldin Index : ",
+              davies_score(data_arbre_notre, kmeans_apprentissage(data_arbre_notre, deux_clusters)))
+
+        print("-----------")
+
+        print("Pour 3 clusters : ")
+        print("Silhouette Coefficient : ",
+              sil_score(data_arbre_notre, kmeans_apprentissage(data_arbre_notre, trois_clusters)))
+        print("Calinski-Harabasz Index : ",
+              calinski_score(data_arbre_notre, kmeans_apprentissage(data_arbre_notre, trois_clusters)))
+        print("Davies-Bouldin Index : ",
+              davies_score(data_arbre_notre, kmeans_apprentissage(data_arbre_notre, trois_clusters)))
+
+        print("---------- BIRCH ----------")
+
+        print("Pour 2 clusters : ")
+        print("Silhouette Coefficient : ",
+              sil_score(data_arbre_notre, birch_apprentissage(data_arbre_notre, deux_clusters)))
+        print("Calinski-Harabasz Index : ",
+              calinski_score(data_arbre_notre, birch_apprentissage(data_arbre_notre, deux_clusters)))
+        print("Davies-Bouldin Index : ",
+              davies_score(data_arbre_notre, birch_apprentissage(data_arbre_notre, deux_clusters)))
+
+        print("-----------")
+
+        print("Pour 3 clusters : ")
+        print("Silhouette Coefficient : ",
+              sil_score(data_arbre_notre, birch_apprentissage(data_arbre_notre, trois_clusters)))
+        print("Calinski-Harabasz Index : ",
+              calinski_score(data_arbre_notre, birch_apprentissage(data_arbre_notre, trois_clusters)))
+        print("Davies-Bouldin Index : ",
+              davies_score(data_arbre_notre, birch_apprentissage(data_arbre_notre, trois_clusters)))
+
+        print("---------- AgglomerativeClustering ----------")
+
+        print("Pour 2 clusters : ")
+        print("Silhouette Coefficient : ",
+              sil_score(data_arbre_notre, agglomerative_clustering_apprentissage(data_arbre_notre, deux_clusters)))
+        print("Calinski-Harabasz Index : ",
+              calinski_score(data_arbre_notre, agglomerative_clustering_apprentissage(data_arbre_notre, deux_clusters)))
+        print("Davies-Bouldin Index : ",
+              davies_score(data_arbre_notre, agglomerative_clustering_apprentissage(data_arbre_notre, deux_clusters)))
+
+        print("-----------")
+
+        print("Pour 3 clusters : ")
+        print("Silhouette Coefficient : ",
+              sil_score(data_arbre_notre, agglomerative_clustering_apprentissage(data_arbre_notre, trois_clusters)))
+        print("Calinski-Harabasz Index : ", calinski_score(data_arbre_notre,
+                                                           agglomerative_clustering_apprentissage(data_arbre_notre,
+                                                                                                  trois_clusters)))
+        print("Davies-Bouldin Index : ",
+              davies_score(data_arbre_notre, agglomerative_clustering_apprentissage(data_arbre_notre, trois_clusters)))
+
+        print("--------------------------------------------------------------------------")
+        print("------------------------------ Data fournit ------------------------------")
+        print("--------------------------------------------------------------------------")
+
+        print("---------- KMeans ----------")
+
+        print("Pour 2 clusters : ")
+        print("Silhouette Coefficient : ",
+              sil_score(data_arbre_prof, kmeans_apprentissage(data_arbre_prof, deux_clusters)))
+        print("Calinski-Harabasz Index : ",
+              calinski_score(data_arbre_prof, kmeans_apprentissage(data_arbre_prof, deux_clusters)))
+        print("Davies-Bouldin Index : ",
+              davies_score(data_arbre_prof, kmeans_apprentissage(data_arbre_prof, deux_clusters)))
+
+        print("-----------")
+
+        print("Pour 3 clusters : ")
+        print("Silhouette Coefficient : ",
+              sil_score(data_arbre_prof, kmeans_apprentissage(data_arbre_prof, trois_clusters)))
+        print("Calinski-Harabasz Index : ",
+              calinski_score(data_arbre_prof, kmeans_apprentissage(data_arbre_prof, trois_clusters)))
+        print("Davies-Bouldin Index : ",
+              davies_score(data_arbre_prof, kmeans_apprentissage(data_arbre_prof, trois_clusters)))
+
+        print("---------- BIRCH ----------")
+
+        print("Pour 2 clusters : ")
+        print("Silhouette Coefficient : ",
+              sil_score(data_arbre_prof, birch_apprentissage(data_arbre_prof, deux_clusters)))
+        print("Calinski-Harabasz Index : ",
+              calinski_score(data_arbre_prof, birch_apprentissage(data_arbre_prof, deux_clusters)))
+        print("Davies-Bouldin Index : ",
+              davies_score(data_arbre_prof, birch_apprentissage(data_arbre_prof, deux_clusters)))
+
+        print("-----------")
+
+        print("Pour 3 clusters : ")
+        print("Silhouette Coefficient : ",
+              sil_score(data_arbre_prof, birch_apprentissage(data_arbre_prof, trois_clusters)))
+        print("Calinski-Harabasz Index : ",
+              calinski_score(data_arbre_prof, birch_apprentissage(data_arbre_prof, trois_clusters)))
+        print("Davies-Bouldin Index : ",
+              davies_score(data_arbre_prof, birch_apprentissage(data_arbre_prof, trois_clusters)))
+
+        print("---------- AgglomerativeClustering ----------")
+
+        print("Pour 2 clusters : ")
+        print("Silhouette Coefficient : ",
+              sil_score(data_arbre_prof, agglomerative_clustering_apprentissage(data_arbre_prof, deux_clusters)))
+        print("Calinski-Harabasz Index : ",
+              calinski_score(data_arbre_prof, agglomerative_clustering_apprentissage(data_arbre_prof, deux_clusters)))
+        print("Davies-Bouldin Index : ",
+              davies_score(data_arbre_prof, agglomerative_clustering_apprentissage(data_arbre_prof, deux_clusters)))
+
+        print("-----------")
+
+        print("Pour 3 clusters : ")
+        print("Silhouette Coefficient : ",
+              sil_score(data_arbre_prof, agglomerative_clustering_apprentissage(data_arbre_prof, trois_clusters)))
+        print("Calinski-Harabasz Index : ",
+              calinski_score(data_arbre_prof, agglomerative_clustering_apprentissage(data_arbre_prof, trois_clusters)))
+        print("Davies-Bouldin Index : ",
+              davies_score(data_arbre_prof, agglomerative_clustering_apprentissage(data_arbre_prof, trois_clusters)))
+
+    case 1:
+
+        print("Merci à vous, FIN")"""
