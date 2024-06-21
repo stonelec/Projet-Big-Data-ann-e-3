@@ -56,8 +56,6 @@ def save_kmeans_apprentissage_fit(data_arbre, n_clusters):
 
     return 0
 
-save_kmeans_apprentissage_fit(data_arbre, 2)
-
 def kmeans_apprentissage(data_arbre, n_clusters):
     kmeans_labels = KMeans(n_clusters=n_clusters, random_state=42).fit_predict(data_arbre)
     return kmeans_labels
@@ -271,9 +269,6 @@ def affichage_graphique_davies(data_arbre):
 # ------------------------------------------------------------------
 # ------------------------------ Menu ------------------------------
 # ------------------------------------------------------------------
-
-"""
-
 print("-------------------")
 print("Fonctionnalité 1 : ")
 print("-------------------")
@@ -1744,4 +1739,3 @@ match choix_affichage_tout:
     case 1:
 
         print("Merci à vous, FIN")
-"""
