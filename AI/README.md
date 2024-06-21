@@ -56,24 +56,24 @@ Il faut mettre les données dans cet ordre :
 - 3ᵉ : haut_tronc
 - 4ᵉ : feuillage
 - 5ᵉ : fk_revetement
-- 6ᵉ : méthode d'apprentissage (rf, knn ou mlp)
-
+- 6ᵉ : méthode d'apprentissage :
+  - rf : Random Forest
+  - knn : K-Nearest Neighbors
+  - mlp : Multi-Layer Perceptron
 Exemple : python fonc2.py 5 20 10 0 1 rf
 
 # Fonctionnalité 3 :
 
-## Taille des arbres :
+## Alerte pour les tempêtes :
 
-Tout d'abord, nous avons affiché les clusters sur une map (avec 2 clusters et 3 clusters) qui vont nous permettre de mieux visualiser.
+Nous avons fait un menu qui vous permet de choisir :
+- l'utilisation ou non du Grid Search
+- la méthode d'apprentissage
 
-Ensuite, nous avons fait un menu qui vous permet de choisir ce que vous voulez afficher, c'est-à-dire choisir :
+Vous n'avez pas la possibilité de modifier la base de données, car elle est déjà prédéfinie tout comme les features d'entrées.
 
-- Les données
-- La méthode d'apprentissage
-- La métrique
-- Le nombre de clusters
-
-À la fin, vous aurez le score de ce que vous avez choisi, ainsi qu'un graphique qui représente le score de 2 à 30 clusters pour une meilleure visualisation, avec la moyenne des scores.
+Il vous sera affiché dans la console l'accuracy du modèle, le score de validation croisée, la RMSE, la matrice de confusion, la précision, le rappel et le f1-score et l'AUC.
+De plus, vous aurez la matrice de confusion et un graphique qui représente la courbe ROC.
 
 ## Script :
 
@@ -87,6 +87,9 @@ Il faut mettre les données dans cet ordre :
 - 5ᵉ : feuillage
 - 6ᵉ : fk_pied
 - 7ᵉ : fk_revetement
-- 8ᵉ : méthode d'apprentissage
+- 8ᵉ : méthode d'apprentissage :
+  - rf : Random Forest
+  - knn : K-Nearest Neighbors
+  - mlp : Multi-Layer Perceptron
 
 Exemple : python fonc3.py 5 20 10 0 1 1 rf

@@ -14,7 +14,16 @@ bdd = 0  # 1 pour AI_Patrimoine_Arboré_(RO), 0 pour Data_Arbre
 algo = 0  # 0 pour Random Forest | 1 pour Multi Layer Perceptron | 2 pour K-Nearest Neighbors
 num_features = 0  # Nombre de caractéristiques à utiliser
 
-
+#menu pour choisir l'algorithme et le grid search
+print("Choisissez l'algorithme de classification:")
+print("0 - Random Forest")
+print("1 - Multi Layer Perceptron")
+print("2 - K-Nearest Neighbors")
+algo = int(input())
+print("Voulez-vous activer la recherche par grille ?")
+print("1 - Oui")
+print("0 - Non")
+grid_search_mode = int(input())
 if bdd == 1:
     data = pd.read_csv('../AI_Patrimoine_Arboré_(RO).csv')
 
