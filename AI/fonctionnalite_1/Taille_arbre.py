@@ -24,12 +24,12 @@ from sklearn.metrics import davies_bouldin_score
 # ------------------------------ Préparation des données ------------------------------
 # -------------------------------------------------------------------------------------
 
-data_arbre = pd.read_csv("AI_Patrimoine_Arboré_(RO).csv", usecols=["haut_tronc", "age_estim", "tronc_diam"])
+data_arbre = pd.read_csv("../AI_Patrimoine_Arboré_(RO).csv", usecols=["haut_tronc", "age_estim", "tronc_diam"])
 
-data_arbre_position_notre_data = pd.read_csv("AI_Patrimoine_Arboré_(RO).csv",
+data_arbre_position_notre_data = pd.read_csv("../AI_Patrimoine_Arboré_(RO).csv",
                                              usecols=["X", "Y", "haut_tronc", "age_estim", "tronc_diam"])
 
-data_arbre_position_data_prof = pd.read_csv("Data_Arbre.csv",
+data_arbre_position_data_prof = pd.read_csv("../Data_Arbre.csv",
                                             usecols=["longitude", "latitude", "haut_tronc", "age_estim", "tronc_diam"])
 
 # ------------------------------------------------------------------------------
@@ -145,7 +145,7 @@ def affichage_data_prof(n_clusters):
     # On rajoute une colonne avec les clusters
     data_arbre_position_data_prof['cluster'] = model
 
-    data_arbre_position_data_prof['haut_tot'] = pd.read_csv("Data_Arbre.csv", usecols=["haut_tot"])
+    data_arbre_position_data_prof['haut_tot'] = pd.read_csv("../Data_Arbre.csv", usecols=["haut_tot"])
 
     fig = px.scatter_mapbox(data_arbre_position_data_prof,
                             lat="latitude",

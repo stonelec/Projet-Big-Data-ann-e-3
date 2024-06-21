@@ -2,7 +2,7 @@ import sys
 import pickle
 import pandas as pd
 print("|=============================================================================|")
-print("|         Apprentissage supervisé : Système d'alerte pour les tempêtes        |")
+print("|         Apprentissage supervisé : Prédiction de l'âge d'un arbre            |")
 print("|.............................................................................|")
 print("|  - Features sélectionnés :                                                  |")
 caracteristiques = []

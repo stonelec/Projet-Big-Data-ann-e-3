@@ -218,7 +218,7 @@ sns.heatmap(conf_matrix_rf, annot=True, fmt='d', cmap='Blues',
             yticklabels=['0-10', '10-50', '50-100', '100-200'])
 plt.xlabel('Prédictions')
 plt.ylabel('Vérités terrain')
-plt.title(f'Matrice de confusion pour Random Forest - score = {accuracy_rf:.2f}')
+plt.title(f'Matrice de confusion pour Random Forest - accuracy = {accuracy_rf:.2f}')
 plt.show()
 
 # ------------------------------------------------- Précision et Rappel ------------------------------------------------
@@ -242,7 +242,7 @@ y_prob_rf = rf.predict_proba(X_test_scaled)
 
 # Binariser les classes pour chaque classe pour la courbe ROC
 y_test_bin = label_binarize(y_test_classes, classes=[0, 1, 2, 3])
-n_classes = y_test_bin.shape[1]
+n_classes = 4
 
 # Calculer les courbes ROC et l'AUC pour chaque nombre d'arbres et pour chaque classe
 tab_fpr_rf = []

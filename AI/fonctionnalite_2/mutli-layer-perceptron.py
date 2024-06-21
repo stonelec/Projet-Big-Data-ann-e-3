@@ -224,7 +224,7 @@ sns.heatmap(conf_matrix_mlp, annot=True, fmt='d', cmap='Blues',
             yticklabels=['0-10', '10-50', '50-100', '100-200'])
 plt.xlabel('Prédictions')
 plt.ylabel('Vérités terrain')
-plt.title(f'Matrice de confusion pour Multi Layer Perceptron - score = {accuracy_mlp:.2f}')
+plt.title(f'Matrice de confusion pour Multi Layer Perceptron - accuracy = {accuracy_mlp:.2f}')
 plt.show()
 
 
