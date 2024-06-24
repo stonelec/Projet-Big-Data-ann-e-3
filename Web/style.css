@@ -1,18 +1,28 @@
 /* style.css */
-.navbar-custom {
-    background-color: #6F8F72;
+/* =================================== NAVBAR =================================== */
+:root {
+    --dark-green: #6F8F72;
+    --light-green: #BFD3C1;
+    --brown: #504136;
+    --dark-beige: #BFB48F;
+    --light-beige: #F4F1DE;
 }
-
+.navbar-custom {
+    background-color: var(--dark-green);
+}
+.navbar-custom .collapse .navbar-nav {
+    font-size: 1.1rem; /* taille de la police */
+}
 .navbar-custom .navbar-nav .nav-link {
     color: #fff; /* blanc pour une meilleure visibilité */
 }
 
 .navbar-custom .navbar-brand img {
-    height: 40px; /* Ajustez la hauteur de l'image selon vos besoins */
+    height: 50px; /* Ajustez la hauteur de l'image selon vos besoins */
 }
 
 .navbar-custom .nav-link:hover {
-    color: #d3d3d3; /* couleur plus claire au survol */
+    color: var(--brown); /* couleur plus claire au survol */
 }
 
 .navbar-custom .navbar-toggler-icon {
@@ -25,7 +35,7 @@
 }
 
 .navbar-custom .dropdown-menu .dropdown-item:hover {
-    background-color: #6F8F72; /* même couleur que la navbar */
+    background-color: var(--dark-green); /* même couleur que la navbar */
     color: #fff; /* couleur du texte au survol */
 }
 
@@ -40,19 +50,27 @@
     align-items: center;
     justify-content: center;
     padding: 0.5rem;
-    background-color: #504136; /* couleur de fond pour l'icône */
+    background-color: var(--brown); /* couleur de fond pour l'icône */
     border-radius: 50%; /* rend l'icône circulaire */
     width: 48px; /* largeur pour le conteneur de l'icône */
     height: 48px; /* hauteur pour le conteneur de l'icône */
     margin-left: 10px; /* espace entre le dernier élément de la navbar et le bouton de compte */
 }
-
-.account-link:hover .account-icon {
-    fill: #d3d3d3; /* change la couleur de l'icône au survol */
+.nav-item .btn{
+    background-color: var(--brown);
+    border-color: var(--dark-green);
 }
+.nav-item .btn:hover {
+    background-color: #6d5746; /* marron plus clair au survol */
+    border-color: #6d5746;
 
-.account-icon {
-    fill: #ffffff; /* couleur de l'icône */
-    width: 32px; /* largeur de l'icône */
-    height: 32px; /* hauteur de l'icône */
+}
+/* =================================== FOOTER =================================== */
+.footer {
+    background-color: var(--dark-green); /* Light grey background */
+    color: white;
+    padding: 20px 0;
+}
+.footer-logo {
+    max-width: 150px; /* Adjust as needed */
 }
