@@ -1,0 +1,109 @@
+/* ----------------------------------------------------------------------- */
+/* ------------------------------ La page : ------------------------------ */
+/* ----------------------------------------------------------------------- */
+
+
+html, body {
+
+    height: 100%;
+
+}
+
+/* Création des grid pour délimiter les epsaces de la page*/
+
+.grid_page{
+
+    display: grid;
+    grid-template-rows: 5% 85% 10%;
+
+}
+
+/* ---------------------------------------------------------------------- */
+/* ------------------------------ Navbar : ------------------------------ */
+/* ---------------------------------------------------------------------- */
+
+.navbar_grid{
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    background-color: #6F8F72;
+
+}
+
+/* ----------------------------------------------------------------------------------------------- */
+/* ------------------------------ Elements aux centres de la page : ------------------------------ */
+/* ----------------------------------------------------------------------------------------------- */
+
+/*Texte centrale*/
+
+.centre_grid{
+
+    display: grid;
+
+}
+
+.texte_presentation{
+
+    display: flex;
+
+    flex-direction: column;
+    align-items: center;
+
+    padding-top: 1%;
+}
+
+.formulaire_connexion{
+
+    display: flex;
+
+    flex-direction: column;
+
+    margin-left: 35%;
+    margin-right: 35%;
+    margin-bottom: 5%;
+    margin-top: 2%;
+
+    padding: 3%;
+
+    border-bottom: solid grey;
+    border-left: solid grey;
+    border-right: solid grey;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+    border-radius: 10%;
+
+}
+
+/*Bouton se connecter*/
+
+.formulaire_connexion .btn {
+    background-color: #504136;
+    border-color: #504136;
+    color: white; /* Couleur du texte du bouton */
+}
+
+.formulaire_connexion .btn:hover {
+    background-color: #40332d; /* Couleur du bouton lors du survol */
+    border-color: #40332d; /* Couleur de la bordure lors du survol */
+}
+
+/* ---------------------------------------------------------------------------- */
+/* ------------------------------ Barre de fin : ------------------------------ */
+/* ---------------------------------------------------------------------------- */
+
+.barre_bas_grid{
+
+    display: flex;
+
+    flex-direction: column;
+
+    text-align: center;
+
+    font-size: small;
+    background-color: #6F8F72;
+    padding: 0;
+
+}
