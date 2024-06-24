@@ -60,5 +60,5 @@ VALUES
 
 INSERT INTO public.type_de_user (type_user)
 VALUES
-    ('Adminstrateur')
-    ('Utilisateur')
+    ('Adminstrateur'),
+    ('Utilisateur');
