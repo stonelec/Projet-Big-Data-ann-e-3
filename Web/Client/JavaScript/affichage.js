@@ -50,7 +50,7 @@ $(document).ready(function(){
 
             // Afficher le résultat dans votre page HTML
             $('.resultats').html(
-                '<p>Hauteur totale de l\'arbre est : ' +
+                '<p>Hauteur totale de est : ' +
                 response +
                 '</p>');
 
