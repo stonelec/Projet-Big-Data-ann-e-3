@@ -256,7 +256,7 @@ class Arbre {
         $statement = $db->prepare($request);
         $statement->execute();
 
-        return $statement->fetchAll(PDO::FETCH_ASSOC)[0];
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
 
