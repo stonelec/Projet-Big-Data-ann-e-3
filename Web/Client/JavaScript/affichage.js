@@ -33,7 +33,9 @@ $("#bouton_age").click(function (){
 
 $(document).ready(function(){
 
-    ajaxRequest('GET', 'PHP/request.php' + $id_arbre, function(response) {
+    let id_arbre = $('#data-container').data('id-arbre');
+
+    ajaxRequest('GET', 'PHP/request.php' + id_arbre, function(response) {
         console.log('Réponse du serveur : ', response);
     }, 'action=hauteur');
 
