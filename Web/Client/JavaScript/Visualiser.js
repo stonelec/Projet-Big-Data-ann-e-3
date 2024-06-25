@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // ================= Pour chaque attribut de l'arbre =================
             for (attribute in AttributeElement) {
                 const cell = document.createElement('td');
-                cell.textContent = data_arbres[id_arbre][attribute]; // Example cell content
+                cell.textContent = `Oui ${data_arbres[id_arbre][attribute]}`;
                 row.appendChild(cell);
 
                 // ================= Pour le dernier attribut =================
