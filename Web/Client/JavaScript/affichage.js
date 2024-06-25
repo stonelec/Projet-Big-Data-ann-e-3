@@ -50,21 +50,15 @@ $(document).ready(function(){
 });*/
 
 $(document).ready(function(){
-    // Gérer la soumission du formulaire
+
     $('#arbreForm').submit(function(event) {
         event.preventDefault(); // Empêcher la soumission du formulaire
 
-        // Récupérer l'ID de l'arbre saisi
         let id_arbre = $('#idArbre').val();
 
-        // Effectuer une requête AJAX avec l'ID de l'arbre
-        ajaxRequest('GET', 'PHP/request.php?action=hauteur&id=' + id_arbre, function(response) {
+        ajaxRequest('GET', '../PHP/request.php?action=hauteur&id=' + id_arbre, function(response) {
             console.log('Réponse du serveur : ', response);
             console.log("id de l'arbre : ", id_arbre);
-
-            // Afficher les informations de l'arbre
-            $('#arbreDetails').text(JSON.stringify(response));
-            $('#arbreInfo').show();
         });
     });
 });
