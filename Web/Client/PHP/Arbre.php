@@ -12,19 +12,11 @@ class Arbre {
      * @return mixed
      */
         $db = DB::connexion();
-        if (!$db) {
-            error_log('Failed to connect to the database.');
-            return ['error' => 'Failed to connect to the database.'];
-        }
 
-        $request = 'SELECT espece 
-                    FROM arbre 
-                    WHERE id_arbre=:id_arbre;';
-
+        $request = 'SELECT hauteur_tot FROM arbre WHERE id_arbre=:id_arbre;';
         $statement = $db->prepare($request);
-        $statement->bindParam(':id_arbre', $id_arbre);
+        $statement->bindParam(':id_arbre', $id_arbre, PDO::PARAM_INT);
         $statement->execute();
-
         $arbre = $statement->fetch()[0];
 
         // retourner la réponse JSON
@@ -250,7 +242,7 @@ class Arbre {
      */
         $db = DB::connexion();
 
-        $request = 'SELECT a.id_arbre, a.espece, ea.etat_arb, sd.stade_dev, tp.type_pied, tdp.type_port, a.remarquable, a.latitude, a.longitude, a.hauteur_tot, a.hauteur_tronc, a.diametre_tronc  
+        $request = 'SELECT id_arbre, espece, etat_arb, stade_dev, type_pied, type_port, remarquable, latitude, longitude, hauteur_tot, hauteur_tronc, diametre_tronc,  
                     FROM arbre a
                     JOIN etat_arbre ea ON a.id_etat_arb = ea.id_etat_arb
                     JOIN stade_de_dev sd ON a.id_stade_dev = sd.id_stade_dev
