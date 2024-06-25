@@ -30,6 +30,7 @@ function get($db, $requestRessource) {
 
         echo("Hello");
         $data = Arbre::getAll();
+        echo($data);
     }
     // Envoi de la réponse au client.
     header('Content-Type: application/json; charset=utf-8');
