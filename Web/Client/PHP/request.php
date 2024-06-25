@@ -1,7 +1,7 @@
 <?php
 
-require_once('./Arbre.php');
-require_once('./User.php');
+require_once('Arbre.php');
+require_once('User.php');
 
 // Récupérer la méthode de la requête
 $requestMethod = $_SERVER['REQUEST_METHOD'];

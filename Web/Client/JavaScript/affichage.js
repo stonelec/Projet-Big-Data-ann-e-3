@@ -56,7 +56,7 @@ $(document).ready(function(){
 
         let id_arbre = $('#idArbre').val();
 
-        ajaxRequest('GET', '../PHP/request.php?action=hauteur&id=' + id_arbre, function(response) {
+        ajaxRequest('GET', 'PHP/request.php?action=hauteur&id=' + id_arbre, function(response) {
             console.log('Réponse du serveur : ', response);
             console.log("id de l'arbre : ", id_arbre);
         });
