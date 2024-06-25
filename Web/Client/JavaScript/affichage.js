@@ -39,7 +39,6 @@ $(document).ready(function(){
 
     $('#arbreForm').submit(function(event) {
         event.preventDefault(); // Empêcher la soumission du formulaire
-        //document.getElementsByClassName("modif").innerHTML = id_arbre;
 
         let id_arbre = $('#idArbre').val();
 
@@ -50,10 +49,24 @@ $(document).ready(function(){
 
             // Afficher le résultat dans votre page HTML
             $('.resultats').html(
-                '<p>Hauteur totale de est : ' +
+                '<p>Hauteur totale est : ' +
                 response +
                 '</p>');
 
         });
+
+        ajaxRequest('GET', 'PHP/request.php?action=diametre&id=' + id_arbre, function(response) {
+
+            console.log("id de l'arbre : ", id_arbre);
+            console.log("Diametre de l'arbre : ", response);
+
+            // Afficher le résultat dans votre page HTML
+            $('.resultats').html(
+                '<p>Diametre totale est : ' +
+                response +
+                '</p>');
+
+        });
+
     });
 });
