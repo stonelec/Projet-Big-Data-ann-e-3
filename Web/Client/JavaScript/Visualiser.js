@@ -72,7 +72,6 @@ document.addEventListener('DOMContentLoaded', function() {
             const row = document.createElement('tr');
             // ================= Pour chaque attribut de l'arbre =================
             for (attribute in AttributeElement) {
-                echo(attribute);
                 const cell = document.createElement('td');
                 cell.textContent = data_arbres[id_arbre][attribute]; // Example cell content
                 row.appendChild(cell);
