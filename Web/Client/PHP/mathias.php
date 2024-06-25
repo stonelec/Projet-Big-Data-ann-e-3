@@ -24,6 +24,8 @@ switch ($requestMethod){
         delete($db, $requestRessource, $request);
 }
 // <<--------------------------// GET \\-------------------------->>
+
+$myDB = DB::connexion();
 function get($db, $requestRessource) {
 // ===================== Données des arbres =====================
     if($requestRessource == 'all_data') {

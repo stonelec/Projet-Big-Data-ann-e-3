@@ -255,7 +255,6 @@ class Arbre {
         ';
 
         $statement = $db->prepare($request);
-        $statement->bindParam(':id_arbre', $id_arbre);
         $statement->execute();
 
         return $statement->fetch();
