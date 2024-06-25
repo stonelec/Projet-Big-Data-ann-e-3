@@ -56,11 +56,12 @@ $(document).ready(function(){
 
         let id_arbre = $('#idArbre').val();
 
-        ajaxRequest('GET', 'PHP/request.php?action=hauteur&id=' + id_arbre, function() {
+        ajaxRequest('GET', 'PHP/request.php?action=hauteur&id=' + id_arbre, function(response) {
             console.log("id de l'arbre : ", id_arbre);
 
             // Afficher le résultat dans votre page HTML
-            $('#result').html('<p>Hauteur totale de l\'arbre : ' + data + '</p>');
+            $('#result').html(
+                '<p>Hauteur totale de l\'arbre : ' + response + '</p>');
         });
     });
 });
