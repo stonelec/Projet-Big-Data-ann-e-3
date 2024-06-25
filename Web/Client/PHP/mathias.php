@@ -29,7 +29,6 @@ function get($db, $requestRessource) {
     if($requestRessource == 'all_data') {
 
         echo("Hello");
-        $id_arbre = $_GET["id_arbre"];
         $data = Arbre::getAll();
     }
     // Envoi de la réponse au client.
