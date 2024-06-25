@@ -46,7 +46,7 @@ switch ($requestAction) {
         }
         break;
 
-    case 'hauteur_totale_arbre':
+    case 'hauteurtotale':
         // Vérifier si l'ID est fourni
         if ($id !== NULL) {
             $result = Arbre::getHauteurTot($id);
