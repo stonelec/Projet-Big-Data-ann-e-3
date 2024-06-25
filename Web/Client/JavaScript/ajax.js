@@ -1,8 +1,10 @@
 function ajaxRequest(type, url, callback, data=null){
     // Create XML HTTP request.
     let xhr = new XMLHttpRequest();
-    if (type === 'GET' && data != null)
+    if (type === 'GET' && data != null){
         url += '?' + data;
+    }
+
     xhr.open(type, url);
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
