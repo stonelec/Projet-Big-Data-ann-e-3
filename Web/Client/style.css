@@ -1,26 +1,21 @@
 /* style.css */
+
+/* =================================== GENERAL =================================== */
 @font-face {
-    font-family: 'Mariane';
-    font-weight: 400; /* Graisse : regular */
-    src: url('../fonts/Marianne-Regular.woff') format('woff');
-}
-@font-face {
-    font-family: 'Mariane';
-    font-weight: 400; /* Graisse : regular */
-    font-style: italic; /* Style : italique */
-    src: url('../fonts/Marianne-Light_Italic.woff') format('woff');
-}
-@font-face {
-    font-family: 'Mariane';
-    font-weight: 700; /* Graisse : bold */
-    src: url('../fonts/Marianne-Bold.woff') format('woff');
+    font-family: 'marianne-bold';
+    src: url('./fonts/marianne-bold-webfont.woff2') format('woff2'),
+    url('./fonts/marianne-bold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
 }
 
-body {
-    font-family: 'Mariane', sans-serif;
+@font-face {
+    font-family: 'marianne-regular';
+    src: url('./fonts/marianne-regular-webfont.woff2') format('woff2'),
+    url('./fonts/marianne-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
 }
-
-/* =================================== NAVBAR =================================== */
 :root {
     --dark-green: #6F8F72;
     --light-green: #BFD3C1;
@@ -28,6 +23,174 @@ body {
     --dark-beige: #BFB48F;
     --light-beige: #F4F1DE;
 }
+body {
+    font-family: 'marianne', 'marianne-bold', sans-serif;
+}
+html {
+    background: white;
+}
+@media (prefers-color-scheme: dark) {
+    html {
+        background: #222;
+    }
+}
+/* =================================== COMPOSANTS =================================== */
+/*------------------------boutons------------*/
+/*marron*/
+.btn-brown {
+    color: white;
+    background-color: var(--brown);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+.btn-brown:hover {
+    color: white;
+    background-color: var(--dark-beige); /* marron plus clair au survol */
+}
+.btn-brown:active {
+    color: var(--dark-beige);
+    background-color: var(--brown); /* marron plus foncé au clic */
+}
+
+/*vert*/
+.btn-green {
+    color: white;
+    background-color: var(--dark-green);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+.btn-green:hover {
+    color: white;
+    background-color: var(--light-green); /* marron plus clair au survol */
+}
+.btn-green:active {
+    color: var(--light-green);
+    background-color: var(--dark-green); /* marron plus foncé au clic */
+}
+/*------------------------titre------------*/
+/*titre haut de page*/
+.titre-page{
+    font-family: marianne-bold;
+    color: black;
+    font-size: 4rem;
+    text-align: center;
+}
+/*sous titre haut de page*/
+.sous-titre-page{
+    font-family: marianne-regular;
+    color: var(--dark-beige);
+    font-size: 0.9rem;
+    margin-top: -25px;
+    text-align: center;
+}
+/*------------------------cards------------*/
+.card-content .value {
+    color: #000;
+    float: right;
+}
+.card-content .item {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+}
+/*blanches*/
+.card-blanche {
+    width: 250px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    padding: 0 15px 10px 15px;
+    border-color: white;
+}
+.card-header-blanche {
+    width: 5rem;
+    background-color: white;
+    border-radius: 60px;
+    padding: 5px 10px 5px 10px;
+    font-weight: bold;
+    border-color: white;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+
+}
+.card-blanche-content .label {
+    color: var(--dark-beige);
+    font-weight: bold;
+}
+/*verte*/
+
+/*marron*/
+.card-marron {
+    width: 250px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    padding: 0 15px 10px 15px;
+    border-color: white;
+}
+.card-header-marron {
+    width: 5rem;
+    background-color: white;
+    border-radius: 60px;
+    padding: 5px 10px 5px 10px;
+    font-weight: bold;
+    border-color: white;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+
+}
+.card-content .label {
+    color: var(--dark-beige);
+    font-weight: bold;
+}
+/*result*/
+
+.card-resulte{
+    background-color:white;
+    width: 350px;
+    border-radius: 15px;
+    padding: 0 15px 10px 15px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    display: flex;
+    text-align: center;
+    flex: 1 1 0;
+}
+.card-header-resulte {
+    width: 5rem;
+    background-color: var(--dark-beige);
+    border-radius: 60px;
+    padding: 5px 10px 5px 10px;
+    font-weight: bold;
+    border-color: white;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+.card-data-resulte{
+    width: 100%;
+    padding: 0 15px 10px 15px;
+    display: flex;
+    background: black;
+}
+
+/*------------------------form------------*/
+/*indivudel*/
+.form-individual {
+    background-color: var(--dark-beige);
+    border-radius: 10px;
+    padding: 0 20px 0px 20px;
+    width: 250px; /* possibile de max-wicth */
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+.form-individual p {
+    margin: 15px 0 5px 0;
+    font-weight: bold;
+    font-size: 1rem;
+    text-align: left;
+}
+.form-individual select {
+    width: 100%;
+    padding: 4px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+/* =================================== NAVBAR =================================== */
+
 .navbar-custom {
     background-color: var(--dark-green);
 }
@@ -77,14 +240,18 @@ body {
     height: 48px; /* hauteur pour le conteneur de l'icône */
     margin-left: 10px; /* espace entre le dernier élément de la navbar et le bouton de compte */
 }
-.nav-item .btn{
-    background-color: var(--brown);
-    border-color: var(--dark-green);
+/* =================================== PAGE =================================== */
+.page {
+    display: grid;
+    grid-template-columns: 10% auto 10%;
+    margin: 15px 0;
+    height: auto;
 }
-.nav-item .btn:hover {
-    background-color: #6d5746; /* marron plus clair au survol */
-    border-color: #6d5746;
-
+.page .centre {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 /* =================================== FOOTER =================================== */
 .footer {
@@ -95,6 +262,7 @@ body {
 .footer-logo {
     max-width: 150px; /* Adjust as needed */
 }
+/*mathias*/
 
 
 /* ===================================== Grid ===================================== */
