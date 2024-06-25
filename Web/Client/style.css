@@ -95,3 +95,66 @@ body {
 .footer-logo {
     max-width: 150px; /* Adjust as needed */
 }
+
+
+/* ===================================== Grid ===================================== */
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 10% auto 10%;
+    padding: 10px;
+    margin-bottom: 2%;
+}
+
+.grid-item {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    font-size: 30px;
+    text-align: center;
+}
+
+/* ===================================== BOUTONS ===================================== */
+.btn-custom {
+    color: white;
+    border: 1px solid white;
+}
+
+.btn-selected {
+    background-color: var(--dark-green);
+}
+
+.btn-unselected {
+    background-color: var(--brown);
+}
+
+.hidden {
+    display: none;
+}
+
+.btn-tab-map {
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+/* Tableau */
+
+/* Ajoutez ces styles dans votre fichier CSS */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 16px;
+}
+
+td, th {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: center;
+}
+
+th {
+    background-color: var(--dark-green);
+    color: white;
+    font-size: 20px;
+}
