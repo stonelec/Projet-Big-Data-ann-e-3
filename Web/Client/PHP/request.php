@@ -4,13 +4,8 @@ require_once('./Arbre.php');
 require_once('./User.php');
 
 $requestMethod = $_SERVER['REQUEST_METHOD'];
-$request = substr($_SERVER['PATH_INFO'], 1);
-$request = explode('/', $request);
-$requestRessource = array_shift($request);
-
-$id = array_shift($request);
-if ($id == '')
-    $id = NULL;
+$requestRessource = isset($_GET['action']) ? $_GET['action'] : '';
+$id = isset($_GET['id']) ? $_GET['id'] : NULL;
 $result = null;
 
 switch ($requestRessource) {

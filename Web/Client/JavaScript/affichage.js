@@ -33,12 +33,16 @@ $("#bouton_deracinement").click(function (){
 
 });
 
+function test_reponse(response){
+
+    console.log('Réponse du serveur : ', response);
+
+}
+
 $(document).ready(function(){
 
-    let id_arbre = $('#data-container').data('id-arbre');
+    let id_arbre = $('.data-container').data('id_arbre');
 
-    ajaxRequest('GET', 'PHP/request.php?id=' + id_arbre, function(response) {
-        console.log('Réponse du serveur : ', response);
-    }, 'action=hauteur');
+    ajaxRequest('GET', 'PHP/request.php?id=' + id_arbre, test_reponse(response), 'action=hauteur');
 
 });
