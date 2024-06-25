@@ -14,6 +14,8 @@ $result = null;
 
 echo(Arbre::getHauteurTot(2));
 
+echo $requestRessource;
+
 switch ($requestRessource) {
     case 'hauteur':
         echo "HAUTEUR";
