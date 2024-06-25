@@ -21,7 +21,11 @@ class Arbre {
         $statement->bindParam(':id_arbre', $id_arbre);
         $statement->execute();
 
-        return $statement->fetch()[0];
+        $arbre = $statement->fetch()[0];
+
+        // retourner la réponse JSON
+        header('Content-Type: application/json');
+        echo json_encode($arbre);
     }
 
 
@@ -242,7 +246,7 @@ class Arbre {
      */
         $db = DB::connexion();
 
-        $request = 'SELECT espece, hauteur_tot, hauteur_tronc, diametre_tronc, remarquable, latitude, longitude, etat_arb, stade_dev, type_pied, type_port
+        $request = 'SELECT id_arbre, espece, etat_arb, stade_dev, type_pied, type_port, remarquable, latitude, longitude, hauteur_tot, hauteur_tronc, diametre_tronc,  
                     FROM arbre a
                     JOIN etat_arbre ea ON a.id_etat_arb = ea.id_etat_arb
                     JOIN stade_de_dev sd ON a.id_stade_dev = sd.id_stade_dev
