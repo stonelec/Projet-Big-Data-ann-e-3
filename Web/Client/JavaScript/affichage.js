@@ -20,7 +20,9 @@ $("#bouton_age").click(function (){
 
     )
 
-});$("#bouton_deracinement").click(function (){
+});
+
+$("#bouton_deracinement").click(function (){
 
     $('.prediction').html(
 
