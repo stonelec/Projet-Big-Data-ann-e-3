@@ -13,7 +13,7 @@ $id = isset($_GET['id']) ? $_GET['id'] : NULL;
 $result = null;
 
 switch ($requestAction) {
-    case 'hauteur':
+    case 'hauteur_tronc':
         // Vérifier si l'ID est fourni
         if ($id !== NULL) {
             $result = Arbre::getHauteurTronc($id);
@@ -46,11 +46,21 @@ switch ($requestAction) {
         }
         break;
 
+    case 'hauteur_totale_arbre':
+        // Vérifier si l'ID est fourni
+        if ($id !== NULL) {
+            $result = Arbre::getHauteurTot($id);
+            echo json_encode($result);
+        } else {
+            // Retourner une erreur si l'ID n'est pas fourni
+            echo json_encode(['error' => 'ID de l\'arbre manquant']);
+        }
+        break;
+
     default:
         // Retourner une erreur si l'action n'est pas reconnue
         echo json_encode(['error' => 'Action non reconnue']);
         break;
-
 
 }
 

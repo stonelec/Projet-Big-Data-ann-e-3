@@ -30,8 +30,12 @@ $("#bouton_deracinement").click(function (){
 
 });
 
+// ------------------------------------------------------------------------------
+// ------------------------------ AGE ESTIME ARBRE ------------------------------
+// ------------------------------------------------------------------------------
+
 // ----------------------------------------------------------------------------------
-// ------------------------------ HAUTEUR TOTALE ARBRE ------------------------------
+// ------------------------------ HAUTEUR TRONC ARBRE ------------------------------
 // ----------------------------------------------------------------------------------
 
 $(document).ready(function(){
@@ -42,13 +46,13 @@ $(document).ready(function(){
         let id_arbre = $('#idArbre').val();
         console.log("id de l'arbre : ", id_arbre);
 
-        ajaxRequest('GET', 'PHP/request.php?action=hauteur&id=' + id_arbre, function(response) {
+        ajaxRequest('GET', 'PHP/request.php?action=hauteur_tronc&id=' + id_arbre, function(response) {
 
-            console.log("Hauteur de l'arbre : ", response);
+            console.log("Hauteur du tronc : ", response);
 
             // Afficher le résultat dans votre page HTML
-            $('.hauteur_arbre').html(
-                '<p>Hauteur totale est : ' +
+            $('.hauteur_tronc_arbre').html(
+                '<p>Hauteur du tronc est : ' +
                 response +
                 '</p>');
 
@@ -82,7 +86,7 @@ $(document).ready(function(){
 });
 
 // -----------------------------------------------------------------------------
-// ------------------------------ LONGITUDE ARBRE ------------------------------
+// ------------------------------ COORDONNEES ARBRE ------------------------------
 // -----------------------------------------------------------------------------
 
 $(document).ready(function(){
@@ -94,7 +98,7 @@ $(document).ready(function(){
 
         ajaxRequest('GET', 'PHP/request.php?action=coordonnees&id=' + id_arbre, function(response) {
 
-            console.log("Longitude de l'arbre : ", response);
+            console.log("Coordonnées de l'arbre : ", response);
 
             // Afficher le résultat dans votre page HTML
             $('.coordonnees_arbre').html(
@@ -104,6 +108,31 @@ $(document).ready(function(){
                 '<p>' +
                 'Longitude totale est :' +
                 response[1] +
+                '</p>');
+
+        });
+    });
+});
+
+// -----------------------------------------------------------------------------
+// ------------------------------ HAUTEUR TOTALE ARBRE ------------------------------
+// -----------------------------------------------------------------------------
+
+$(document).ready(function(){
+
+    $('#arbreForm').submit(function(event) {
+
+        let id_arbre = $('#idArbre').val();
+        console.log("id de l'arbre : ", id_arbre);
+
+        ajaxRequest('GET', 'PHP/request.php?action=hauteur_totale&id=' + id_arbre, function(response) {
+
+            console.log("hauteur totale de l'arbre : ", response);
+
+            // Afficher le résultat dans votre page HTML
+            $('.hauteur_totale_arbre').html(
+                '<p> L\'hauteur totale est : ' +
+                response+
                 '</p>');
 
         });
