@@ -35,7 +35,7 @@ $(document).ready(function(){
 
     let id_arbre = $('#data-container').data('id-arbre');
 
-    ajaxRequest('GET', 'PHP/request.php' + id_arbre, function(response) {
+    ajaxRequest('GET', 'PHP/request.php?id=' + id_arbre, function(response) {
         console.log('Réponse du serveur : ', response);
     }, 'action=hauteur');
 
