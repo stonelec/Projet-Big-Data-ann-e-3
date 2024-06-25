@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // ================= Pour chaque attribut de l'arbre =================
             for (let id_cell = 0; id_cell < nb_elem; id_cell++) {
                 const cell = document.createElement('td');
-                cell.textContent = `Cell ${id_arbre + 1}-${id_cell + 1}`; // Example cell content
+                cell.textContent = data_arbres[id_arbre][id_cell]; // Example cell content
                 row.appendChild(cell);
             }
             tbody.appendChild(row);
