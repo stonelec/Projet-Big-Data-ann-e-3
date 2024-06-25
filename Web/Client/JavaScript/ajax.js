@@ -6,12 +6,14 @@ function ajaxRequest(type, url, callback, data=null){
     xhr.open(type, url);
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
+    console.log(xhr.status)
+
     // Add onload function.
     xhr.onload = () => {
         switch (xhr.status) {
             case 200:
             case 201:
-                console.log(xhr.responseText)
+                //console.log(xhr.responseText)
                 callback(JSON.parse(xhr.responseText));
                 break;
             default:
