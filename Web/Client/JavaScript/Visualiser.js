@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Create 5 rows
         const tbody = document.createElement('tbody');
         // ================= Pour chaque arbre de la database =================
-        for (let id_arbre = 0; id_arbre < 37; id_arbre++) {               // 37 --> car 36 arbres
+        for (let id_arbre = 1; id_arbre < 37; id_arbre++) {               // 37 --> car 36 arbres
             const row = document.createElement('tr');
             ajaxRequest('GET','../PHP/req.php/all_data/?id_arbre' + id_arbre, getAll);
             // ================= Pour chaque attribut de l'arbre =================
