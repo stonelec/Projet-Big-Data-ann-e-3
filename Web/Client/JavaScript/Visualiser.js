@@ -64,15 +64,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
         console.log(data_arbres[0]['espece']);
         let nb_arb = data_arbres.length;
-        let nb_elem = HeaderElement.length;
 
         // ================= Pour chaque arbre de la database =================
         for (let id_arbre = 0; id_arbre < nb_arb; id_arbre++) {               // 37 --> car 36 arbres
             const row = document.createElement('tr');
             // ================= Pour chaque attribut de l'arbre =================
-            for (let id_cell = 0; id_cell < nb_elem; id_cell++) {
+            for (attribute in HeaderElement) {
                 const cell = document.createElement('td');
-                cell.textContent = data_arbres[id_arbre][id_cell]; // Example cell content
+                cell.textContent = data_arbres[id_arbre][attribute]; // Example cell content
                 row.appendChild(cell);
             }
             tbody.appendChild(row);
