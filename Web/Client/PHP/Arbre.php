@@ -13,10 +13,14 @@ class Arbre {
      */
         $db = DB::connexion();
 
-        $request = 'SELECT hauteur_tot FROM arbre WHERE id_arbre=:id_arbre;';
+        $request = 'SELECT espece 
+                    FROM arbre 
+                    WHERE id_arbre=:id_arbre;';
+
         $statement = $db->prepare($request);
-        $statement->bindParam(':id_arbre', $id_arbre, PDO::PARAM_INT);
+        $statement->bindParam(':id_arbre', $id_arbre);
         $statement->execute();
+
         $arbre = $statement->fetch()[0];
 
         // retourner la réponse JSON
