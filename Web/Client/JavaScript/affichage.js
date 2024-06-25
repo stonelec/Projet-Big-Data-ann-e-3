@@ -48,7 +48,7 @@ $(document).ready(function(){
             console.log("Hauteur de l'arbre : ", response);
 
             // Afficher le résultat dans votre page HTML
-            $('.resultats').html(
+            $('.hauteur_arbre').html(
                 '<p>Hauteur totale est : ' +
                 response +
                 '</p>');
@@ -69,7 +69,7 @@ $(document).ready(function(){
             console.log("Diametre de l'arbre : ", response);
 
             // Afficher le résultat dans votre page HTML
-            $('.resultats').html(
+            $('.diametre_arbre').html(
                 '<p>Diametre totale est : ' +
                 response +
                 '</p>');
