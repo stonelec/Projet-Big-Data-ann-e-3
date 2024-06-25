@@ -53,7 +53,7 @@ $(document).ready(function(){
 
     $('#arbreForm').submit(function(event) {
         event.preventDefault(); // Empêcher la soumission du formulaire
-        document.getElementsByClassName(modif).innerHTML = id_arbre;
+        document.getElementsByClassName("modif").innerHTML = id_arbre;
 
         //let id_arbre = $('#idArbre').val();
 
