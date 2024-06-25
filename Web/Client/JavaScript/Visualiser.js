@@ -62,8 +62,8 @@ document.addEventListener('DOMContentLoaded', function() {
         // Create 5 rows
         const tbody = document.createElement('tbody');
 
-        let nb_arb = array.length(data_arbres);
-        let nb_elem = array.length(HeaderElement);
+        let nb_arb = data_arbres.length;
+        let nb_elem = HeaderElement.length;
 
         // ================= Pour chaque arbre de la database =================
         for (let id_arbre = 1; id_arbre < nb_arb; id_arbre++) {               // 37 --> car 36 arbres
