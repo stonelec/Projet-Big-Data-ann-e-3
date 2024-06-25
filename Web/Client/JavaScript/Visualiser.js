@@ -17,7 +17,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Afficher ou masquer les contenus en fonction du bouton cliqué
             if (button.querySelector('input').id === 'VisualiserTableau') {
-                afficherTableau();
+                ajaxRequest('GET', 'PHP/mathias.php/all_data', afficherTableau);
+                //afficherTableau();
+
                 document.getElementById('VisualisationTableau').style.display = 'block';
                 // Si vous avez un autre contenu pour la carte, vous pouvez le masquer ici
                 // document.getElementById('VisualisationCarte').style.display = 'none';
@@ -69,16 +71,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 row.appendChild(cell);
             }
             tbody.appendChild(row);
+
+
+
+
         }
         table.appendChild(tbody);
 
         container.appendChild(table);
     }
 });
-id_arbre = 1;
-ajaxRequest('GET', 'PHP/mathias.php/all_data/?id_arbre='+id_arbre, getAll);
-
-function getAll(id_arbre) {
-    // modifier le paragraph avec id=mathias pour mettre bravo dedans
-    document.getElementById('mathias').innerHTML = id_arbre;
-}

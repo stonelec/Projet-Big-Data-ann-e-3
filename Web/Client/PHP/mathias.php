@@ -30,7 +30,7 @@ function get($db, $requestRessource) {
 
         echo("Hello");
         $id_arbre = $_GET["id_arbre"];
-        $data = Arbre::getAll($id_arbre);
+        $data = Arbre::getAll();
     }
     // Envoi de la réponse au client.
     header('Content-Type: application/json; charset=utf-8');
