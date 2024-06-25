@@ -27,11 +27,14 @@
 
     <div class="prediction"></div>
 
-        <button type="button" class="btn btn-secondary" id="bouton_taille" value=" <?php echo $id_arbre ?>">Taille</button>
-        <button type="button" class="btn btn-secondary" id="bouton_age">Age</button>
-        <button type="button" class="btn btn-secondary" id="bouton_deracinement">Déracinement</button>
+    <button type="button" class="btn btn-secondary" id="bouton_taille">Taille</button>
+    <button type="button" class="btn btn-secondary" id="bouton_age">Age</button>
+    <button type="button" class="btn btn-secondary" id="bouton_deracinement">Déracinement</button>
 
     <!-- Inclure le JS -->
+
+    <div id="data-container" data-id-arbre="<?php echo $id_arbre; ?>"></div>
+
     <script src="JavaScript/affichage.js"></script>
     <script src="JavaScript/ajax.js"></script>
     <script src="scripts/jquery3.4.1.min.js"></script>
