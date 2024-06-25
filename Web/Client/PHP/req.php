@@ -32,6 +32,8 @@ switch ($requestMethod){
 function get($db, $requestRessource) {
 // ===================== Données des arbres =====================
     if($requestRessource == 'all_data') {
+
+        echo("Hello");
         $id_arbre = $_GET["id_arbre"];
         $data = Arbre::getAll($id_arbre);
     }
