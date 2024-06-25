@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function() {
         for (let id_arbre = 0; id_arbre < nb_arb; id_arbre++) {               // 37 --> car 36 arbres
             const row = document.createElement('tr');
             // ================= Pour chaque attribut de l'arbre =================
-            for (attribute in AttributeElement) {
+            for (attribute of AttributeElement) {
                 const cell = document.createElement('td');
                 cell.textContent = `${data_arbres[id_arbre][attribute]}`;
                 row.appendChild(cell);
