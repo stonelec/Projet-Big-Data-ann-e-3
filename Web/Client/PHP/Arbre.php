@@ -21,7 +21,7 @@ class Arbre {
         $statement->bindParam(':id_arbre', $id_arbre);
         $statement->execute();
 
-        $arbre = $statement->fetch()[0];
+        $arbre = $statement->fetchAll(PDO::FETCH_ASSOC);
 
         // retourner la réponse JSON
         header('Content-Type: application/json');
