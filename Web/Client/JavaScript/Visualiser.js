@@ -62,7 +62,6 @@ document.addEventListener('DOMContentLoaded', function() {
         // ================= Pour chaque arbre de la database =================
         for (let id_arbre = 1; id_arbre < 37; id_arbre++) {               // 37 --> car 36 arbres
             const row = document.createElement('tr');
-            ajaxRequest('GET','../PHP/req.php/all_data/?id_arbre' + id_arbre, getAll);
             // ================= Pour chaque attribut de l'arbre =================
             for (let id_cell = 0; id_cell < 10; id_cell++) {
                 const cell = document.createElement('td');
@@ -76,13 +75,3 @@ document.addEventListener('DOMContentLoaded', function() {
         container.appendChild(table);
     }
 });
-
-
-function getAll(infos_arbre) {
-    // ================= Pour chaque attribut de l'arbre =================
-    for (let id_elem = 0; j < 10; j++) {
-        const cell = document.createElement('td');
-        cell.textContent = infos_arbre[id_elem]; // Example cell content
-        row.appendChild(cell);
-    }
-}
