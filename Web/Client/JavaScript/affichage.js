@@ -45,6 +45,6 @@ $(document).ready(function(){
 
     let id_arbre = $('.data-container').data('id_arbre');
 
-    ajaxRequest('GET', 'PHP/request.php?id=' + id_arbre, test_reponse(), 'action=hauteur');
+    ajaxRequest('GET', 'PHP/request.php?action=hauteur&id=' + id_arbre, test_reponse());
 
 });
