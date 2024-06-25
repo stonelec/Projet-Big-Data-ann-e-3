@@ -1,4 +1,25 @@
 /* style.css */
+@font-face {
+    font-family: 'Mariane';
+    font-weight: 400; /* Graisse : regular */
+    src: url('../fonts/Marianne-Regular.woff') format('woff');
+}
+@font-face {
+    font-family: 'Mariane';
+    font-weight: 400; /* Graisse : regular */
+    font-style: italic; /* Style : italique */
+    src: url('../fonts/Marianne-Light_Italic.woff') format('woff');
+}
+@font-face {
+    font-family: 'Mariane';
+    font-weight: 700; /* Graisse : bold */
+    src: url('../fonts/Marianne-Bold.woff') format('woff');
+}
+
+body {
+    font-family: 'Mariane', sans-serif;
+}
+
 /* =================================== NAVBAR =================================== */
 :root {
     --dark-green: #6F8F72;
