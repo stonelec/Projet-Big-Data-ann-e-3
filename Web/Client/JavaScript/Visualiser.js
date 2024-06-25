@@ -76,7 +76,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 cell.textContent = data_arbres[id_arbre][attribute]; // Example cell content
                 row.appendChild(cell);
             }
-            row.appendChild("Prédire");
+            cell.textContent = "Prédire";
+            row.appendChild(cell);
             tbody.appendChild(row);
 
         }
