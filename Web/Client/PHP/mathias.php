@@ -29,10 +29,7 @@ $myDB = DB::connexion();
 function get($db, $requestRessource) {
 // ===================== Données des arbres =====================
     if($requestRessource == 'all_data') {
-
-        echo("Hello");
         $data = Arbre::getAll();
-        echo($data);
     }
     // Envoi de la réponse au client.
     header('Content-Type: application/json; charset=utf-8');

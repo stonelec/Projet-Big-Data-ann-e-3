@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Fonction pour afficher le tableau avec Bootstrap
-    function afficherTableau() {
+    function afficherTableau(data_arbres) {
         const container = document.getElementById('VisualisationTableau');
         container.innerHTML = ''; // On supprime le contenu existant
 
@@ -61,11 +61,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Create 5 rows
         const tbody = document.createElement('tbody');
+
+        let nb_arb = length(data_arbres);
+        let nb_elem = length(HeaderElement);
+
         // ================= Pour chaque arbre de la database =================
-        for (let id_arbre = 1; id_arbre < 5; id_arbre++) {               // 37 --> car 36 arbres
+        for (let id_arbre = 1; id_arbre < nb_arb; id_arbre++) {               // 37 --> car 36 arbres
             const row = document.createElement('tr');
             // ================= Pour chaque attribut de l'arbre =================
-            for (let id_cell = 0; id_cell < 10; id_cell++) {
+            for (let id_cell = 0; id_cell < nb_elem; id_cell++) {
                 const cell = document.createElement('td');
                 cell.textContent = `Cell ${id_arbre + 1}-${id_cell + 1}`; // Example cell content
                 row.appendChild(cell);

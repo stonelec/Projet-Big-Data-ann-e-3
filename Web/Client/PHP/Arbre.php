@@ -241,7 +241,6 @@ class Arbre {
     static function getAll(){
     /**
      * Fonction qui permet de récupérer toutes les informations
-     * @param $id_arbre
      * @return mixed
      */
         $db = DB::connexion();
