@@ -33,7 +33,7 @@ $("#bouton_age").click(function (){
 
 $(document).ready(function(){
 
-    ajaxRequest('GET', 'request.php', function(response) {
+    ajaxRequest('GET', 'PHP/request.php', function(response) {
         console.log('Réponse du serveur : ', response);
     }, 'action=hauteur');
 
