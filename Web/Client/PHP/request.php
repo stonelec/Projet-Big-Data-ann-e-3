@@ -7,7 +7,7 @@ require_once('User.php');
 $requestMethod = $_SERVER['REQUEST_METHOD'];
 
 // Récupérer les paramètres action et id depuis la requête GET
-$requestRessource = array_shift($request);
+$requestAction = isset($_GET['action']) ? $_GET['action'] : '';
 $id = isset($_GET['id']) ? $_GET['id'] : NULL;
 
 $result = null;
@@ -15,10 +15,10 @@ $result = null;
 echo(Arbre::getHauteurTot(2));
 
 echo ("TEST :");
-echo ($requestRessource);
+echo ($requestAction);
 echo ("-----");
 
-switch ($requestRessource) {
+switch ($requestAction) {
     case 'hauteur':
         echo "HAUTEUR";
         switch ($requestMethod) {
