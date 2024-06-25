@@ -1,43 +1,55 @@
-function ajaxRequest(type, url, callback, data=null){
-    // Create XML HTTP request.
-    let xhr = new XMLHttpRequest();
-    if (type === 'GET' && data != null)
-        url += '?' + data;
+function ajaxRequest(type, url, callback, data = null) {
+
+    let xhr;
+    console.log(data);
+
+    xhr = new XMLHttpRequest();
+
     xhr.open(type, url);
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
-    // Add onload function.
+    console.log(xhr.status)
+
     xhr.onload = () => {
         switch (xhr.status) {
+
             case 200:
+                console.log(xhr.responseText);
+                let resp = JSON.parse(xhr.responseText);
+                callback(resp);
+                break;
             case 201:
-                console.log(xhr.responseText)
-                callback(JSON.parse(xhr.responseText));
                 break;
             default:
-                httpErrors(xhr.status);
+                displayErrors(xhr.status);
         }
     };
 
-// Send XML HTTP request.
     xhr.send(data);
 
 }
-function httpErrors(errorCode){
-    console.log(errorCode)
 
-    let messages=
-        {
-            400:'Requête incorrecte',
-            401:'Authentifiez vous',
-            403:'Accès refusé',
-            404:'Page non trouvée',
-            500:'Erreur interne du serveur',
-            504:'Service indisponible'
 
-        };
-    if (errorCode in messages){
-        $('#errors').html('<i class="fa fa-exclamation-circle"></i> <strong>'+ messages[errorCode]+'</strong>');
+// Vérification et indentification des erreurs
+
+function displayErrors(errorCode)
+{
+    let messages = {
+        400: 'Requête incorrecte',
+        401: 'Authentifiez vous',
+        403: 'Accès refusé',
+        404: 'Page non trouvée',
+        500: 'Erreur interne du serveur',
+        503: 'Service indisponible'
+    };
+
+    if (errorCode in messages)
+    {
+        $('#errors').html('<strong>' + messages[errorCode] + '</strong>');
         $('#errors').show();
+        setTimeout(() =>
+        {
+            $('#errors').hide();
+        }, 5000);
     }
 }
