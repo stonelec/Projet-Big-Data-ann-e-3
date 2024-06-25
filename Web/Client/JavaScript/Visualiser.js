@@ -67,13 +67,15 @@ document.addEventListener('DOMContentLoaded', function() {
             "id_arbre", "espece", "etat_arb", "stade_dev", "type_pied", "type_port", "remarquable", "latitude", "longitude","id_arbre"
         ];
 
+        console.log(data_arbres[0]["id_arbre"])
+
         // ================= Pour chaque arbre de la database =================
         for (let id_arbre = 0; id_arbre < nb_arb; id_arbre++) {               // 37 --> car 36 arbres
             const row = document.createElement('tr');
             // ================= Pour chaque attribut de l'arbre =================
             for (attribute in AttributeElement) {
                 const cell = document.createElement('td');
-                cell.textContent = `Oui ${data_arbres[id_arbre][attribute]}`;
+                cell.textContent = `${data_arbres[id_arbre][attribute]}`;
                 row.appendChild(cell);
 
                 // ================= Pour le dernier attribut =================
