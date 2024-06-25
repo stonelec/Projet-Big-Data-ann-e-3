@@ -1,27 +1,42 @@
 <?php
-// Activer l'affichage des erreurs
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
-
-// Vérifier si le fichier Arbre.php existe et inclure
-if (file_exists('Arbre.php')) {
-    require_once('Arbre.php');
-} else {
-    die('Le fichier Arbre.php est introuvable.');
+require_once ('db.php');
+require_once ('User.php');
+require_once ('Arbre.php');
+// Connection à la database
+$db = DB::connexion();
+if (!$db)
+{
+    header('HTTP/1.1 503 Service Unavailable');
+    exit;
 }
+$requestMethod = $_SERVER['REQUEST_METHOD'];
+$request = substr($_SERVER['PATH_INFO'], 1);
+$request = explode('/', $request);
+$requestRessource = array_shift($request);
+switch ($requestMethod){
+    case "GET":
+        get($db, $requestRessource);
+    case "POST":
+        post($db, $requestRessource);
+    case "PUT":
+        put($db, $requestRessource);
+    case "DELETE":
+        delete($db, $requestRessource, $request);
+}
+// <<--------------------------// GET \\-------------------------->>
+function get($db, $requestRessource) {
+// ===================== Données des arbres =====================
+    if($requestRessource == 'all_data') {
 
-// Vérifier si la classe Arbre est définie
-if (class_exists('Arbre')) {
-    // Appeler la méthode getAll et vérifier le résultat
-    try {
-        $infos_arbre = Arbre::getAll(2);
-        echo '<pre>';
-        print_r($infos_arbre);
-        echo '</pre>';
-    } catch (Exception $e) {
-        echo 'Erreur : ' . $e->getMessage();
+        echo("Hello");
+        $id_arbre = $_GET["id_arbre"];
+        $data = Arbre::getAll($id_arbre);
     }
-} else {
-    die('La classe Arbre n\'est pas définie.');
+    // Envoi de la réponse au client.
+    header('Content-Type: application/json; charset=utf-8');
+    //header('Cache-control: no-store, no-cache, must-revalidate');
+    //header('Pragma: no-cache');
+    //header('HTTP/1.1 200 OK');
+    echo json_encode($data);
+    exit();
 }
-?>
