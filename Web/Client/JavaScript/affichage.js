@@ -61,7 +61,8 @@ $(document).ready(function(){
 
             // Afficher le résultat dans votre page HTML
             $('#result').html(
-                '<p>Hauteur totale de l\'arbre : ' + response + '</p>');
+                '<p>Hauteur totale de l\'arbre est : ' + response + '</p>');
+
         });
     });
 });
