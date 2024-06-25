@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
 
-    <title>Datarbuste</title>
+    <title>Datarbuste - Visualiser les données</title>
 
     <!-- Inclure Bootstrap CSS, ICONS & JS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
@@ -23,7 +23,7 @@
 <!-- =================================== NAVBAR ================================== -->
 <nav class="navbar navbar-expand-lg navbar-custom">
     <a class="navbar-brand" href="accueil.html">
-        <img src="Client/Images/logo_green_resize.png" alt="Home" class="d-inline-block align-top" style="height: 40px;">
+        <img src="Images/logo_green_resize.png" alt="Home" class="d-inline-block align-top" style="height: 40px;">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -55,7 +55,42 @@
         </li>
     </ul>
 </nav>
-<p>hey</p>
+
+
+<div class="grid-container">
+
+    <div class="grid-item">1</div>
+
+    <!-- ======================== VISUALISER LES DONNEES ========================-->
+    <div class="grid-item">
+        <h1> <bold>VISUALISER</bold> </h1>
+
+        <!-- Boutons choix Tableau // Carte -->
+        <div class="btn-group btn-tab-map btn-group-toggle" data-toggle="buttons">
+            <label class="btn btn-custom btn-unselected">
+                <input type="radio" name="options" id="VisualiserTableau" autocomplete="off"> Tableau
+            </label>
+            <label class="btn btn-custom btn-unselected">
+                <input type="radio" name="options" id="VisualiserCarte" autocomplete="off"> Carte
+            </label>
+        </div>
+
+        <!-- Div pour le tableau -->
+        <div id="VisualisationTableau" style="display: none">
+
+        </div>
+
+
+
+
+
+
+
+    </div>
+
+    <div class="grid-item">3</div>
+
+</div>
 
 
 
@@ -64,7 +99,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <img src="Client/Images/logo_green_resize.png" alt="Logo" class="footer-logo mb-2">
+                <img src="Images/logo_green_resize.png" alt="Logo" class="footer-logo mb-2">
             </div>
             <div class="col-12">
                 <p style="font-size: 1.2rem">Ethan LE PAN - Mathias PAITIER - Vincent ROCHER</p>
@@ -73,5 +108,10 @@
         </div>
     </div>
 </footer>
+
+
+<!-- ================================= JAVA SCRIPT ================================= -->
+<script src="JavaScript/Visualiser.js"></script>
+
 </body>
 </html>

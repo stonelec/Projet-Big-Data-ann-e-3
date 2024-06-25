@@ -2,7 +2,14 @@
 --        Script Postgre
 ------------------------------------------------------------
 
-
+-- Suppression des tables si elles existent
+DROP TABLE IF EXISTS public.arbre;
+DROP TABLE IF EXISTS public.user;
+DROP TABLE IF EXISTS public.type_de_user;
+DROP TABLE IF EXISTS public.type_de_port;
+DROP TABLE IF EXISTS public.type_de_pied;
+DROP TABLE IF EXISTS public.stade_de_dev;
+DROP TABLE IF EXISTS public.etat_arbre;
 
 ------------------------------------------------------------
 -- Table: etat_arbre
@@ -29,7 +36,7 @@ CREATE TABLE public.stade_de_dev(
 ------------------------------------------------------------
 CREATE TABLE public.type_de_pied(
                                     id_pied     SERIAL NOT NULL ,
-                                    type_pied   VARCHAR (20) NOT NULL  ,
+                                    type_pied   VARCHAR (50) NOT NULL  ,
                                     CONSTRAINT type_de_pied_PK PRIMARY KEY (id_pied)
 )WITHOUT OIDS;
 
@@ -39,7 +46,7 @@ CREATE TABLE public.type_de_pied(
 ------------------------------------------------------------
 CREATE TABLE public.type_de_port(
                                     id_port     SERIAL NOT NULL ,
-                                    type_port   VARCHAR (20) NOT NULL  ,
+                                    type_port   VARCHAR (50) NOT NULL  ,
                                     CONSTRAINT type_de_port_PK PRIMARY KEY (id_port)
 )WITHOUT OIDS;
 
