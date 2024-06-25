@@ -238,9 +238,9 @@ class Arbre {
     }
 
 
-    static function getAll($id_arbre){
+    static function getAll(){
     /**
-     * Fonction qui permet de récupérer toutes les informations d'un arbre
+     * Fonction qui permet de récupérer toutes les informations
      * @param $id_arbre
      * @return mixed
      */
@@ -251,8 +251,7 @@ class Arbre {
                     JOIN etat_arbre ea ON a.id_etat_arbre = ea.id_etat_arbre
                     JOIN stade_de_dev sd ON a.id_stade_dev = sd.id_stade_dev
                     JOIN type_de_pied tp ON a.id_pied = tp.id_pied
-                    JOIN type_de_port tdp ON a.id_port = tdp.id_port
-                    WHERE a.id_arbre = :id_arbre;
+                    JOIN type_de_port tdp ON a.id_port = tdp.id_port;
         ';
 
         $statement = $db->prepare($request);
