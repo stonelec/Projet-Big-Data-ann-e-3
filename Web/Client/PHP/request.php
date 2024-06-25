@@ -3,7 +3,7 @@
 require_once('Arbre.php');
 require_once('User.php');
 
-// Récupérer la méthode de la requête
+// Récupérer la méthode de la requête (GET, POST, etc.)
 $requestMethod = $_SERVER['REQUEST_METHOD'];
 
 // Récupérer les paramètres action et id depuis la requête GET
@@ -12,26 +12,19 @@ $id = isset($_GET['id']) ? $_GET['id'] : NULL;
 
 $result = null;
 
-echo(Arbre::getHauteurTot(2));
-
-echo ("TEST :");
+echo ("Test");
 echo ($requestAction);
 echo ("-----");
 
 switch ($requestAction) {
     case 'hauteur':
-        echo "HAUTEUR";
-        switch ($requestMethod) {
-            case "GET":
-                // Vérifier si l'ID est fourni
-                if ($id !== NULL) {
-                    $result = Arbre::getHauteurTot($id);
-                    echo json_encode($result);
-                } else {
-                    // Retourner une erreur si l'ID n'est pas fourni
-                    echo json_encode(['error' => 'ID de l\'arbre manquant']);
-                }
-                break;
+        // Vérifier si l'ID est fourni
+        if ($id !== NULL) {
+            $result = Arbre::getHauteurTot($id);
+            echo json_encode($result);
+        } else {
+            // Retourner une erreur si l'ID n'est pas fourni
+            echo json_encode(['error' => 'ID de l\'arbre manquant']);
         }
         break;
     default:
