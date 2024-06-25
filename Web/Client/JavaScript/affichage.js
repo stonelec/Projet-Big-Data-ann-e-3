@@ -65,8 +65,10 @@ $(document).ready(function(){
             document.getElementById("modif").innerHTML = id_arbre;
 
             // Afficher le résultat dans votre page HTML
-            $('#result').html(
-                '<p>Hauteur totale de l\'arbre est : ' + response + '</p>');
+            $('.result').html(
+                '<p>Hauteur totale de l\'arbre est : ' +
+                response +
+                '</p>');
 
         });
     });
