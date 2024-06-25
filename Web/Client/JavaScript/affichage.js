@@ -54,6 +54,12 @@ $(document).ready(function(){
                 '</p>');
 
         });
+    });
+});
+
+$(document).ready(function(){
+
+    $('#arbreForm').submit(function(event) {
 
         ajaxRequest('GET', 'PHP/request.php?action=diametre&id=' + id_arbre, function(response) {
 
@@ -66,6 +72,5 @@ $(document).ready(function(){
                 '</p>');
 
         });
-
     });
 });
