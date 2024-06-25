@@ -75,10 +75,10 @@ document.addEventListener('DOMContentLoaded', function() {
         container.appendChild(table);
     }
 });
-
+id_arbre = 1;
 ajaxRequest('GET', 'PHP/mathias.php/all_data/?id_arbre='+id_arbre, getAll);
 
-function getAll() {
+function getAll(id_arbre) {
     // modifier le paragraph avec id=mathias pour mettre bravo dedans
-    document.getElementById('mathias').innerHTML = 'bravo';
+    document.getElementById('mathias').innerHTML = id_arbre;
 }
