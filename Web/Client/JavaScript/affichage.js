@@ -61,6 +61,9 @@ $(document).ready(function(){
 
     $('#arbreForm').submit(function(event) {
 
+        let id_arbre = $('#idArbre').val();
+        console.log("id de l'arbre : ", id_arbre);
+
         ajaxRequest('GET', 'PHP/request.php?action=diametre&id=' + id_arbre, function(response) {
 
             console.log("Diametre de l'arbre : ", response);
