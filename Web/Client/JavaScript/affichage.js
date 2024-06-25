@@ -53,8 +53,9 @@ $(document).ready(function(){
 
     $('#arbreForm').submit(function(event) {
         event.preventDefault(); // Empêcher la soumission du formulaire
+        document.getElementsByClassName(modif).innerHTML = id_arbre;
 
-        let id_arbre = $('#idArbre').val();
+        //let id_arbre = $('#idArbre').val();
 
         ajaxRequest('GET', 'PHP/request.php?action=hauteur&id=' + id_arbre, function(response) {
             console.log("id de l'arbre : ", id_arbre);
