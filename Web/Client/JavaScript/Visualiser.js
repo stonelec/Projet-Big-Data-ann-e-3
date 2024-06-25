@@ -75,6 +75,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 const cell = document.createElement('td');
                 cell.textContent = data_arbres[id_arbre][attribute]; // Example cell content
                 row.appendChild(cell);
+
+                // ================= Pour le dernier attribut =================
+                // TO DO: Mettre un bouton pour prédire --> aucune idée de comment faire
             }
             tbody.appendChild(row);
 
