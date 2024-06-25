@@ -61,6 +61,7 @@ $(document).ready(function(){
 
             console.log("id de l'arbre : ", id_arbre);
             console.log("Hauteur de l'arbre : ", response);
+            console.log("NTM");
 
             document.getElementById("modif").innerHTML = id_arbre;
 
