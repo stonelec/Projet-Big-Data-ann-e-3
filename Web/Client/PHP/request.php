@@ -18,6 +18,7 @@ switch ($requestRessource) {
         switch ($requestMethod) {
             case "GET":
                 $result =  Arbre::getHauteurTot($id);
+                echo json_encode($result);
                 break;
         }
         break;
