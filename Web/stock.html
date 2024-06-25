@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+
+    <title>Datarbuste</title>
+
+    <!-- Inclure Bootstrap CSS, ICONS & JS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <!-- Inclure le CSS -->
+    <link href="Client/style.css" rel="stylesheet">
+
+</head>
+
+<body>
+<!-- =================================== NAVBAR ================================== -->
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <a class="navbar-brand" href="accueil.html">
+            <img src="Client/Images/logo_green_resize.png" alt="Home" class="d-inline-block align-top" style="height: 40px;">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="visualisation_arbre.html">Visualiser</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="ajout_arbre.html">Ajouter</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Prédire
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="#">Âge</a>
+                        <a class="dropdown-item" href="#">Taille</a>
+                        <a class="dropdown-item" href="#">Déraciner</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <button type="button" class="btn btn-brown shadow-none">Connexion</button>
+            </li>
+        </ul>
+    </nav>
+<!-- =================================== PAGE ================================== -->
+<div class="conteneur page">
+    <div class="box" style="background-color: blue"></div>
+    <div class="box centre">
+        <p class="titre-page">Stock</p>
+        <p class="sous-titre-page">Veuillez compléter ce formulaire <br>
+            pour ajouter un arbre à la base de données</p>
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-green shadow-none">Tableau</button>
+            <button type="button" class="btn btn-brown shadow-none">Carte</button>
+        </div>
+
+
+        <div class="card-blanche">
+            <div class="card-header-blanche">Infos</div>
+            <div class="card-content card-blanche-content">
+                <div class="item">
+                    <div class="label">Espece</div>
+                    <div class="value">1800</div>
+                </div>
+                <div class="item">
+                    <div class="label">Remarquable</div>
+                    <div class="value">NON</div>
+                </div>
+                <div class="item">
+                    <div class="label">Etat</div>
+                    <div class="value">EN PLACE</div>
+                </div>
+                <div class="item">
+                    <div class="label">Stade</div>
+                    <div class="value">adulte</div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="form-individual">
+            <div class="custom-card">
+                <p>Feuillage</p>
+                <select>
+                    <option>Please select</option>
+                    <option>Option 1</option>
+                    <option>Option 2</option>
+                    <option>Option 3</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-individual">
+            <div class="custom-card">
+                <p>ID</p>
+                <div class="d-flex flex-row mb-3">
+                    <input class="form-control " id="ID" aria-describedby="id arbre" placeholder="ID de l'arbre">
+                    <button class="btn  btn-brown shadow-none" type="submit">Prédire</button>
+                </div>
+            </div>
+        </div>
+        <button type="button" class="btn btn-brown">Ajouter l'arbre</button>
+
+
+        <div class="card-resulte">
+            <div class="card-header-resulte">Infos</div>
+            <div class="card-data-resulte">
+                <div style="background-color: #504136">Espece</div>
+                <div>1800</div>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="box" style="background-color: green"></div>
+</div>
+<!-- =================================== FOOTER ================================== -->
+<footer class="footer text-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <img src="Client/Images/logo_green_resize.png" alt="Logo" class="footer-logo mb-2">
+            </div>
+            <div class="col-12">
+                <p style="font-size: 1.2rem">Ethan LE PAN - Mathias PAITIER - Vincent ROCHER</p>
+                <a href="https://isen-nantes.fr" style="font-style: italic; font-size: 1rem; color: white">https://isen-nantes.fr</a>
+            </div>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
