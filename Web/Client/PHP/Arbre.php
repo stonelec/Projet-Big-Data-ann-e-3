@@ -12,6 +12,10 @@ class Arbre {
      * @return mixed
      */
         $db = DB::connexion();
+        if (!$db) {
+            error_log('Failed to connect to the database.');
+            return ['error' => 'Failed to connect to the database.'];
+        }
 
         $request = 'SELECT espece 
                     FROM arbre 
