@@ -43,7 +43,7 @@ function test_reponse(){
 
 $(document).ready(function(){
 
-    let id_arbre = $('.data-container').data('id_arbre');
+    let id_arbre = $('.id_arbre').data('data-id-arbre');
 
     ajaxRequest('GET', 'PHP/request.php?action=hauteur&id=' + id_arbre, test_reponse());
 

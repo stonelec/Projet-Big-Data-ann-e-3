@@ -31,9 +31,12 @@
     <button type="button" class="btn btn-secondary" id="bouton_age">Age</button>
     <button type="button" class="btn btn-secondary" id="bouton_deracinement">Déracinement</button>
 
-    <!-- Inclure le JS -->
+    <div class="mb-3">
+        <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
+        <textarea class="form-control id_arbre" id="exampleFormControlTextarea1" rows="1" data-id-arbre="<?php echo $id_arbre; ?>"></textarea>
+    </div>
 
-    <div class="data-container" data-id-arbre="<?php echo $id_arbre; ?>"></div>
+    <!-- Inclure le JS -->
 
     <script src="JavaScript/affichage.js"></script>
     <script src="JavaScript/ajax.js"></script>
