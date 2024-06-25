@@ -35,6 +35,8 @@ $("#bouton_deracinement").click(function (){
 
 function test_reponse(){
 
+    let id_arbre = $('.data-container').data('id_arbre');
+    console.log(id_arbre)
     console.log('CA MARCHE');
 
 }
