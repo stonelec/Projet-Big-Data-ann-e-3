@@ -41,10 +41,10 @@ $(document).ready(function(){
         event.preventDefault(); // Empêcher la soumission du formulaire
 
         let id_arbre = $('#idArbre').val();
+        console.log("id de l'arbre : ", id_arbre);
 
         ajaxRequest('GET', 'PHP/request.php?action=hauteur&id=' + id_arbre, function(response) {
 
-            console.log("id de l'arbre : ", id_arbre);
             console.log("Hauteur de l'arbre : ", response);
 
             // Afficher le résultat dans votre page HTML
@@ -57,7 +57,6 @@ $(document).ready(function(){
 
         ajaxRequest('GET', 'PHP/request.php?action=diametre&id=' + id_arbre, function(response) {
 
-            console.log("id de l'arbre : ", id_arbre);
             console.log("Diametre de l'arbre : ", response);
 
             // Afficher le résultat dans votre page HTML
