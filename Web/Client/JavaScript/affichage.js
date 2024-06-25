@@ -1,5 +1,5 @@
 /* Permet d'afficher les 3 pages différentes avec les boutons prédictions */
-/*
+
 $("#bouton_taille").click(function (){
 
     $('.prediction').html(
@@ -33,7 +33,6 @@ $("#bouton_deracinement").click(function (){
 
 });
 
-*/
 
 $(document).ready(function(){
 
