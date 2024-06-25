@@ -12,6 +12,8 @@ $id = isset($_GET['id']) ? $_GET['id'] : NULL;
 
 $result = null;
 
+echo(Arbre::getHauteurTot(2));
+
 switch ($requestRessource) {
     case 'hauteur':
         switch ($requestMethod) {
