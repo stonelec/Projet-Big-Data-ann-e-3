@@ -14,7 +14,7 @@ if ($id == '')
 $result = null;
 
 switch ($requestRessource) {
-    case 'historique':
+    case 'hauteur':
         switch ($requestMethod) {
             case "GET":
                 $result =  Arbre::getHauteurTot($id);
