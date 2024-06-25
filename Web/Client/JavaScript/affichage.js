@@ -98,9 +98,11 @@ $(document).ready(function(){
 
             // Afficher le résultat dans votre page HTML
             $('.coordonnees_arbre').html(
-                '<p>Logitude totale est : ' +
+                '<p>Latitude totale est : ' +
                 response[0] +
-                'Latitude totale est :' +
+                '</p>' +
+                '<p>' +
+                'Longitude totale est :' +
                 response[1] +
                 '</p>');
 
