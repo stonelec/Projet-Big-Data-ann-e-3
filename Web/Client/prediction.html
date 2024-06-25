@@ -21,25 +21,35 @@
 
 <body>
 
-    <div>
-        <p>test</p>
-    </div><
-
+    <!--
     <div class="prediction"></div>
 
     <button type="button" class="btn btn-secondary" id="bouton_taille">Taille</button>
     <button type="button" class="btn btn-secondary" id="bouton_age">Age</button>
     <button type="button" class="btn btn-secondary" id="bouton_deracinement">Déracinement</button>
 
-    <div class="mb-3">
-        <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
-        <textarea class="form-control id_arbre" id="exampleFormControlTextarea1" rows="1" data-id-arbre="<?php echo $id_arbre; ?>"></textarea>
+    -->
+
+    <div class="container">
+        <form id="arbreForm">
+            <div class="mb-3">
+                <label for="idArbre" class="form-label">ID de l'Arbre</label>
+                <input type="number" class="form-control" id="idArbre" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+        <!-- Div pour afficher les informations de l'arbre -->
+        <div id="arbreInfo" style="display: none;">
+            <h3>Informations de l'Arbre</h3>
+            <p id="arbreDetails"></p>
+        </div>
     </div>
 
     <!-- Inclure le JS -->
 
     <script src="JavaScript/affichage.js"></script>
     <script src="JavaScript/ajax.js"></script>
-    <script src="scripts/jquery3.4.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
 </body>
