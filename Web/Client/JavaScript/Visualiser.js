@@ -62,6 +62,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Create 5 rows
         const tbody = document.createElement('tbody');
 
+        console.log(data_arbres);
         let nb_arb = data_arbres.length;
         let nb_elem = HeaderElement.length;
 
