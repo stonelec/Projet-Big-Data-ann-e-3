@@ -7,7 +7,7 @@ require_once('User.php');
 $requestMethod = $_SERVER['REQUEST_METHOD'];
 
 // Récupérer les paramètres action et id depuis la requête GET
-$requestRessource = isset($_GET['action']) ? $_GET['action'] : '';
+$requestRessource = array_shift($request);
 $id = isset($_GET['id']) ? $_GET['id'] : NULL;
 
 $result = null;
