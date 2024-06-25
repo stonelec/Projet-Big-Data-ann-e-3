@@ -246,12 +246,12 @@ class Arbre {
      */
         $db = DB::connexion();
 
-        $request = 'SELECT a.id_arbre, a.espece, ea.etat_arb, sd.stade_dev, tp.type_pied, tdp.type_port, a.remarquable, a.latitude, a.longitude, a.hauteur_tot, a.hauteur_tronc, a.diametre_tronc  
+        $request = 'SELECT a.id_arbre, a.espece, ea.etat_arb, sd.stade_dev, tp.type_pied, tdp.type_port, a.remarquable, a.latitude, a.longitude, a.hauteur_tot, a.hauteur_tronc, a.diametre_tronc
                     FROM arbre a
-                    JOIN etat_arbre ea ON a.id_etat_arb = ea.id_etat_arb
+                    JOIN etat_arbre ea ON a.id_etat_arbre = ea.id_etat_arbre
                     JOIN stade_de_dev sd ON a.id_stade_dev = sd.id_stade_dev
                     JOIN type_de_pied tp ON a.id_pied = tp.id_pied
-                    JOIN type_de_port tdp ON a.id_type_port = tdp.id_type_port
+                    JOIN type_de_port tdp ON a.id_port = tdp.id_port
                     WHERE a.id_arbre = :id_arbre;
         ';
 
