@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         let nb_arb = data_arbres.length;
         const AttributeElement = [
-            "id_arbre", "espece", "etat_arb", "stade_dev", "type_pied", "type_port", "remarquable", "latitude", "longitude"
+            "id_arbre", "espece", "etat_arb", "stade_dev", "type_pied", "type_port", "remarquable", "latitude", "longitude","id_arbre"
         ];
 
         // ================= Pour chaque arbre de la database =================
@@ -76,8 +76,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 cell.textContent = data_arbres[id_arbre][attribute]; // Example cell content
                 row.appendChild(cell);
             }
-            cell.textContent = "Prédire";
-            row.appendChild(cell);
             tbody.appendChild(row);
 
         }
