@@ -62,22 +62,23 @@ document.addEventListener('DOMContentLoaded', function() {
         // Create 5 rows
         const tbody = document.createElement('tbody');
 
-        console.log(data_arbres[0]['espece']);
         let nb_arb = data_arbres.length;
+        const AttributeElement = [
+            "id_arbre", "espece", "etat_arb", "stade_dev", "type_pied", "type_port", "remarquable", "latitude", "longitude"
+        ];
 
         // ================= Pour chaque arbre de la database =================
         for (let id_arbre = 0; id_arbre < nb_arb; id_arbre++) {               // 37 --> car 36 arbres
             const row = document.createElement('tr');
             // ================= Pour chaque attribut de l'arbre =================
-            for (attribute in HeaderElement) {
+            for (attribute in AttributeElement) {
+                echo(attribute);
                 const cell = document.createElement('td');
                 cell.textContent = data_arbres[id_arbre][attribute]; // Example cell content
                 row.appendChild(cell);
             }
+            row.appendChild("Prédire");
             tbody.appendChild(row);
-
-
-
 
         }
         table.appendChild(tbody);
