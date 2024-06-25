@@ -4,7 +4,6 @@ $("#bouton_taille").click(function (){
 
     $('.prediction').html(
 
-        '<h2>Page de prédiction : </h2>'+
         '<p>Taille</p>'
 
     )
@@ -15,7 +14,6 @@ $("#bouton_age").click(function (){
 
     $('.prediction').html(
 
-        '<h2>Page de prédiction : </h2>'+
         '<p>Age</p>'
 
     )
@@ -26,7 +24,6 @@ $("#bouton_deracinement").click(function (){
 
     $('.prediction').html(
 
-        '<h2>Page de prédiction : </h2>'+
         '<p>Déracinement</p>'
 
     )
