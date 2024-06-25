@@ -16,7 +16,7 @@ switch ($requestAction) {
     case 'hauteur':
         // Vérifier si l'ID est fourni
         if ($id !== NULL) {
-            $result = Arbre::getHauteurTot($id);
+            $result = Arbre::getHauteurTronc($id);
             echo json_encode($result);
         } else {
             // Retourner une erreur si l'ID n'est pas fourni
@@ -28,6 +28,17 @@ switch ($requestAction) {
         // Vérifier si l'ID est fourni
         if ($id !== NULL) {
             $result = Arbre::getDiametre($id);
+            echo json_encode($result);
+        } else {
+            // Retourner une erreur si l'ID n'est pas fourni
+            echo json_encode(['error' => 'ID de l\'arbre manquant']);
+        }
+        break;
+
+    case 'coordonnees':
+        // Vérifier si l'ID est fourni
+        if ($id !== NULL) {
+            $result = Arbre::getCoordonnees($id);
             echo json_encode($result);
         } else {
             // Retourner une erreur si l'ID n'est pas fourni

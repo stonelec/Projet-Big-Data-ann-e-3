@@ -30,6 +30,9 @@ $("#bouton_deracinement").click(function (){
 
 });
 
+// ----------------------------------------------------------------------------------
+// ------------------------------ HAUTEUR TOTALE ARBRE ------------------------------
+// ----------------------------------------------------------------------------------
 
 $(document).ready(function(){
 
@@ -53,6 +56,10 @@ $(document).ready(function(){
     });
 });
 
+// ----------------------------------------------------------------------------
+// ------------------------------ DIAMETRE ARBRE ------------------------------
+// ----------------------------------------------------------------------------
+
 $(document).ready(function(){
 
     $('#arbreForm').submit(function(event) {
@@ -68,6 +75,33 @@ $(document).ready(function(){
             $('.diametre_arbre').html(
                 '<p>Diametre totale est : ' +
                 response +
+                '</p>');
+
+        });
+    });
+});
+
+// -----------------------------------------------------------------------------
+// ------------------------------ LONGITUDE ARBRE ------------------------------
+// -----------------------------------------------------------------------------
+
+$(document).ready(function(){
+
+    $('#arbreForm').submit(function(event) {
+
+        let id_arbre = $('#idArbre').val();
+        console.log("id de l'arbre : ", id_arbre);
+
+        ajaxRequest('GET', 'PHP/request.php?action=coordonnees&id=' + id_arbre, function(response) {
+
+            console.log("Longitude de l'arbre : ", response);
+
+            // Afficher le résultat dans votre page HTML
+            $('.coordonnees_arbre').html(
+                '<p>Logitude totale est : ' +
+                response[0] +
+                'Latitude totale est :' +
+                response[1] +
                 '</p>');
 
         });
