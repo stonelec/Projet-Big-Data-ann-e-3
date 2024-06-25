@@ -48,10 +48,8 @@ $(document).ready(function(){
             console.log("id de l'arbre : ", id_arbre);
             console.log("Hauteur de l'arbre : ", response);
 
-            document.getElementById("modif").innerHTML = id_arbre;
-
             // Afficher le résultat dans votre page HTML
-            $('.result').html(
+            $('.resultats').html(
                 '<p>Hauteur totale de l\'arbre est : ' +
                 response +
                 '</p>');
