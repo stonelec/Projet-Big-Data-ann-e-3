@@ -33,9 +33,9 @@ $("#bouton_deracinement").click(function (){
 
 });
 
-function test_reponse(response){
+function test_reponse(){
 
-    console.log('Réponse du serveur : ', response);
+    console.log('CA MARCHE');
 
 }
 
@@ -43,6 +43,6 @@ $(document).ready(function(){
 
     let id_arbre = $('.data-container').data('id_arbre');
 
-    ajaxRequest('GET', 'PHP/request.php?id=' + id_arbre, test_reponse(response), 'action=hauteur');
+    ajaxRequest('GET', 'PHP/request.php?id=' + id_arbre, test_reponse(), 'action=hauteur');
 
 });
