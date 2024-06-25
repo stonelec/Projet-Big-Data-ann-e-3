@@ -60,6 +60,7 @@ $(document).ready(function(){
         // Effectuer une requête AJAX avec l'ID de l'arbre
         ajaxRequest('GET', 'PHP/request.php?action=hauteur&id=' + id_arbre, function(response) {
             console.log('Réponse du serveur : ', response);
+            console.log("id de l'arbre : ", id_arbre);
 
             // Afficher les informations de l'arbre
             $('#arbreDetails').text(JSON.stringify(response));
