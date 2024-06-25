@@ -8,6 +8,8 @@ $requestRessource = isset($_GET['action']) ? $_GET['action'] : '';
 $id = isset($_GET['id']) ? $_GET['id'] : NULL;
 $result = null;
 
+echo "test";
+
 switch ($requestRessource) {
     case 'hauteur':
         switch ($requestMethod) {
