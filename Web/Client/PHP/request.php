@@ -16,6 +16,7 @@ echo(Arbre::getHauteurTot(2));
 
 switch ($requestRessource) {
     case 'hauteur':
+        echo "HAUTEUR";
         switch ($requestMethod) {
             case "GET":
                 // Vérifier si l'ID est fourni
