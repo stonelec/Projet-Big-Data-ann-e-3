@@ -15,17 +15,12 @@ $result = null;
 
 // ----- AVEC POST -----
 
-/*
+
 $requestAction_post = isset($_POST['action']) ? $_POST['action'] : '';
 
 echo "request post";
 echo ($requestAction_post);
-*/
 
-$action = isset($_GET['action']) ? $_GET['action'] : '';
-
-echo "Action reçue : ";
-echo $action;
 
 $id_user = 1; //On pourra le récupérer en changeant l'url
 $val_longitude = isset($_POST['val_longitude']) ? $_POST['val_longitude'] : NULL;
@@ -46,7 +41,7 @@ $val_feuillage = isset($_POST['val_feuillage']) ? $_POST['val_feuillage'] : NULL
 
 $val_age_estime = isset($_POST['val_age_estime']) ? $_POST['val_age_estime'] : NULL;
 $val_revetement = isset($_POST['val_revetement']) ? $_POST['val_revetement'] : NULL;
-/*
+
 switch ($requestMethod) {
 
     case 'GET':
@@ -119,5 +114,3 @@ switch ($requestMethod) {
         echo json_encode(['error' => 'Action non reconnue du POST']);
         break;
 }
-*/
-

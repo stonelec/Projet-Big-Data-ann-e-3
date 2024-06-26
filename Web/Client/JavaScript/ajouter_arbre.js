@@ -126,7 +126,7 @@ $(document).ready(function (){
 // -------------------------------------------------------------------------------------------------------
 // -------------------- Récupérer tous les élements pour les mettres dans les options --------------------
 //--------------------------------------------------------------------------------------------------------
-/*
+
 $(document).ready(function (){
 
     $('.form_ajouter_arbre').submit(function(event) {
@@ -168,7 +168,7 @@ $(document).ready(function (){
         console.log("Valeur feuillage : ", val_feuillage);
 
 
-        ajaxRequest('POST', 'PHP/request_post.php?action=ajouter_toutes_valeur' +
+        ajaxRequest('POST', 'PHP/request_post.php/ajouter_toutes_valeur/' +
             '&val_espece=' + val_espece + '&val_latitude=' + val_latitude +
             '&val_longitude=' + val_longitude + '&val_hauteur_totale=' + val_hauteur_totale +
             '&val_hauteur_tronc=' + val_hauteur_tronc + '&val_diametre_tronc=' + val_diametre_tronc +
@@ -183,25 +183,5 @@ $(document).ready(function (){
 
     });
 
-});*/
-
-$(document).ready(function (){
-
-    ajaxRequest('GET', 'PHP/request_post.php?action=ajouter_arbre_feuillage', function(response) {
-
-        //console.log("Feuillages : ")
-        //console.log(response)
-
-        for(let i=0; i<response.length; i++) {
-
-            option_feuillage += '<option>' + response[i].feuillage + '</option>';
-
-        }
-
-        $('#option_feuillage').html('<option selected disabled="disabled">Please select</option>' +
-            option_feuillage
-        );
-
-    });
-
 });
+
