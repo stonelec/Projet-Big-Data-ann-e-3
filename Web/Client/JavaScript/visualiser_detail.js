@@ -45,6 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let id_arbre = 5;
 
     ajaxRequest('GET', 'PHP/request.php?action=infos&id='+id_arbre, afficherInfos);
+    console.log("id de l'arbre : ", id_arbre);
     ajaxRequest('GET', 'PHP/request.php?action=visuel&id='+id_arbre, afficherVisuel);
     ajaxRequest('GET', 'PHP/request.php?action=dimensions&id='+id_arbre, afficherDimensions);
     ajaxRequest('GET', 'PHP/request.php?action=sol&id='+id_arbre, afficherSol);
