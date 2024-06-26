@@ -99,6 +99,7 @@ $(document).ready(function(){
         ajaxRequest('GET', 'PHP/request.php?action=coordonnees&id=' + id_arbre, function(response) {
 
             console.log("Coordonnées de l'arbre : ", response);
+            console.log("TESTEST")
 
             // Afficher le résultat dans votre page HTML
             $('.coordonnees_arbre').html(
