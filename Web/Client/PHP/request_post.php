@@ -15,10 +15,18 @@ $result = null;
 
 // ----- AVEC POST -----
 
+/*
 $requestAction_post = isset($_POST['action']) ? $_POST['action'] : '';
 
 echo "request post";
 echo ($requestAction_post);
+*/
+
+$postData = $_POST;
+
+// Afficher les données reçues
+echo "Données reçues via POST : ";
+print_r($postData);
 
 $id_user = 1; //On pourra le récupérer en changeant l'url
 $val_longitude = isset($_POST['val_longitude']) ? $_POST['val_longitude'] : NULL;
