@@ -31,11 +31,15 @@ echo "     ";
 
 // ----- On récupère des variables de POST -----
 
-$val_longitude = $_POST['val_longitude'];
+if($requestMethod == $_POST){
 
-echo "la longitude : ";
-echo json_encode($val_longitude);
-echo "     ";
+    $val_longitude = $_POST['val_longitude'];
+
+    echo "la longitude : ";
+    echo json_encode($val_longitude);
+    echo "     ";
+
+}
 
 /*
 if($requestMethod == $_POST){
