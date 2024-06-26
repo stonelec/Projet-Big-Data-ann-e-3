@@ -3,21 +3,10 @@
 require_once('Arbre.php');
 require_once('User.php');
 
-
-$action = $_GET['action'];
-
-// Vérifie si la variable 'action' est définie et n'est pas vide
-if (isset($action) && !empty($action)) {
-    // Utilise la valeur de 'action' comme nécessaire
-    echo "La valeur de 'action' est : " . $action;
-} else {
-    // Gère le cas où 'action' n'est pas défini ou est vide
-    echo "La variable 'action' n'est pas définie ou est vide.";
-}
-
-/*
 // Récupérer la méthode de la requête (GET, POST, etc.)
 $requestMethod = $_SERVER['REQUEST_METHOD'];
+
+echo ($requestMethod);
 
 // ----- AVEC GET -----
 
@@ -26,13 +15,8 @@ $id = isset($_GET['id']) ? $_GET['id'] : NULL;
 
 // ----- AVEC POST -----
 
-$requestAction_post = isset($_POST['action']) ? $_POST['action'] : '';
+$requestAction_post = isset($_GET['action']) ? $_GET['action'] : '';
 
-echo json_encode([
-
-    'Le requestAction_post : ' => $requestAction_post,
-
-]);
 
 $result = null;
 
@@ -128,4 +112,7 @@ switch ($requestMethod) {
     default:
         // Retourner une erreur si l'action n'est pas reconnue
         echo json_encode(['error' => 'IL EST PAS RENTRER DANS GET OU POST']);
-        break;*/
+        break;
+
+
+}
