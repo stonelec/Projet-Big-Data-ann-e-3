@@ -129,33 +129,64 @@ $(document).ready(function (){
 
         console.log("ENVOYER")
 
-        let val_ajout = []
-
         let val_espece = $('#espece').val();
-        val_ajout.push(val_espece);
-
         let val_latitude = $('#latitude').val();
-        val_ajout.push(val_latitude);
-
         let val_longitude = $('#longitude').val();
-        val_ajout.push(val_longitude);
-
         let val_hauteur_totale = $('#hauteur_total').val();
-        val_ajout.push(val_hauteur_totale);
-
         let val_hauteur_tronc = $('#hauteur_tronc').val();
-        val_ajout.push(val_hauteur_tronc);
-
         let val_diametre_tronc = $('#diametre_tronc').val();
-        val_ajout.push(val_diametre_tronc);
 
+        $('#option_etat').change(function (){
+
+            let val_etat = $(this).val();
+
+        });
+
+        $('#option_stade').change(function (){
+
+            let val_stade = $(this).val();
+
+        });
+
+        $('#option_pied').change(function (){
+
+            let val_pied = $(this).val();
+
+        });
+
+        $('#option_port').change(function (){
+
+            let val_port = $(this).val();
+
+        });
+
+        $('#option_feuillage').change(function (){
+
+            let val_feuillage = $(this).val();
+
+        });
+
+
+        //Pour afficher les différentes valeurs dans la console
         //console.log("Valeur espece : ", val_espece);
         //console.log("Valeur latitude : ", val_latitude);
         //console.log("Valeur longitude : ", val_longitude);
         //console.log("Valeur hauteur totale : ", val_hauteur_totale);
         //console.log("Valeur hauteur totale : ", val_hauteur_tronc);
         //console.log("Valeur hauteur totale : ", val_diametre_tronc);
-        console.log(val_ajout);
+        console.log("Valeur etat : ", val_etat);
+        console.log("Valeur stade : ", val_stade);
+        console.log("Valeur pied : ", val_pied);
+        console.log("Valeur port : ", val_port);
+        console.log("Valeur feuillage : ", val_feuillage);
+
+        /*
+        ajaxRequest('POST', 'PHP/request.php?action=ajouter_toutes_valeur', function(response) {
+
+            console.log("Toutes les valeurs ont été ajouté");
+
+        });*/
+
 
     });
 

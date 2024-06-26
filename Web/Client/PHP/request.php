@@ -135,6 +135,11 @@ switch ($requestAction) {
         echo json_encode($result);
         break;
 
+    case 'ajouter_toutes_valeur':
+        $result = Arbre::getAllFeuillage();
+        echo json_encode($result);
+        break;
+
 
 # =============================================================
 # ===================== visualiser_detail =====================
