@@ -127,6 +127,29 @@ switch ($requestAction) {
         }
         break;
 
+    case 'prediction_age':
+        // Vérifier si l'ID est fourni
+        if ($id !== NULL) {
+
+            $troncDiam = Arbre::getDiametre($id);
+            $hauteurTot = Arbre::getHauteurTot($id);
+            $hauteurTronc = Arbre::getHauteurTronc($id);
+            //$feuillage = Arbre::getFeuillage($id);
+            //$revet = Arbre::getRevetement($id);
+
+
+            //$command = escapeshellcmd('python3 fonc2.py ' . $troncDiam . ' ' . $hauteurTot . ' ' . $hauteurTronc . ' ' . $feuillage . ' ' . $revet . ' rf');
+            $command = escapeshellcmd('python3 fonc2.py ' . $troncDiam . ' ' . $hauteurTot . ' ' . $hauteurTronc . ' rf');
+
+            exec($command,$output, $result);
+
+            echo json_encode($result);
+        } else {
+            // Retourner une erreur si l'ID n'est pas fourni
+            echo json_encode(['error' => 'ID de l\'arbre manquant']);
+        }
+        break;
+
 # =============================================================
 # ===================== ajouter_arbre =====================
 # =============================================================
@@ -210,3 +233,4 @@ switch ($requestAction) {
         break;
 
 }
+
