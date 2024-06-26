@@ -76,7 +76,6 @@ else{
     //json_encode($val_revetement);
 
 }
-}
 
 switch ($requestMethod) {
 
