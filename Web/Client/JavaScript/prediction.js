@@ -1,8 +1,44 @@
+document.addEventListener('DOMContentLoaded', function() {
+    // Sélectionner tous les boutons du groupe
+    const buttons = document.querySelectorAll('.btn-tab-map .btn');
+
+    // Ajouter un gestionnaire d'événements à chaque bouton
+    buttons.forEach(button => {
+        button.addEventListener('click', function () {
+            // Réinitialiser toutes les classes pour tous les boutons
+            buttons.forEach(btn => {
+                btn.classList.remove('btn-selected');
+                btn.classList.add('btn-unselected');
+            });
+
+            // Ajouter la classe btn-selected au bouton cliqué
+            button.classList.add('btn-selected');
+            button.classList.remove('btn-unselected');
+
+            // Afficher ou masquer les contenus en fonction du bouton cliqué
+            if (button.querySelector('input').id === 'VisualiserTableau') {
+                ajaxRequest('GET', 'PHP/request_m.php/all_data', afficherTableau);
+                //afficherTableau();
+
+                document.getElementById('VisualisationTableau').style.display = 'block';
+                // Si vous avez un autre contenu pour la carte, vous pouvez le masquer ici
+                // document.getElementById('VisualisationCarte').style.display = 'none';
+            } else if (button.querySelector('input').id === 'VisualiserCarte') {
+                document.getElementById('VisualisationTableau').style.display = 'none';
+                // document.getElementById('VisualisationCarte').style.display = 'block';
+            }
+        });
+    });
+});
+
+
+
+
 // -----------------------------------------------------------------------------
 // ------------------------------ PAGE PREDICTION ------------------------------
 //------------------------------------------------------------------------------
 
-$("#bouton_taille").click(function (){
+$("#PredireTaille").click(function (){
 
     $('.prediction').html(
 
@@ -12,7 +48,7 @@ $("#bouton_taille").click(function (){
 
 });
 
-$("#bouton_age").click(function (){
+$("#PredireAge").click(function (){
 
     $('.prediction').html(
 
@@ -22,7 +58,7 @@ $("#bouton_age").click(function (){
 
 });
 
-$("#bouton_deracinement").click(function (){
+$("#PredireDeracinement").click(function (){
 
     $('.prediction').html(
 
