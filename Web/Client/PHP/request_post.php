@@ -21,7 +21,7 @@ $id = isset($_GET['id']) ? $_GET['id'] : NULL;
 
 // ----- AVEC POST -----
 
-echo "Version POST : ";
+echo "L'action : ";
 echo json_encode($requestAction);
 echo "     ";
 
