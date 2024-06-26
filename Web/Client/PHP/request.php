@@ -210,26 +210,3 @@ switch ($requestAction) {
         break;
 
 }
-
-// Récupérer les paramètres action et id depuis la requête GET
-$requestAction_post = isset($_POST['action']) ? $_POST['action'] : '';
-$val_etat = isset($_POST['val_etat']) ? $_POST['val_etat'] : NULL;
-$val_stade = isset($_POST['val_stade']) ? $_POST['val_stade'] : NULL;
-
-$result = null;
-
-switch ($requestAction_post){
-
-    case 'ajouter_toutes_valeur':
-        if($val_etat != NULL && $val_stade != NULL){
-            $result = Arbre::getHauteurTronc(2);
-            echo json_encode($result);
-        }
-        break;
-
-    default:
-        // Retourner une erreur si l'action n'est pas reconnue
-        echo json_encode(['error' => 'Action non reconnue']);
-        break;
-
-}
