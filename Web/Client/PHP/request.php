@@ -136,7 +136,7 @@ switch ($requestAction) {
             $troncDiam = Arbre::getDiametre($id);
             $hauteurTot = Arbre::getHauteurTot($id);
             $hauteurTronc = Arbre::getHauteurTronc($id);
-            $feuillage = Arbre::getFeuillage($id);
+            $feuillage = Arbre::getFeuillage_ID($id);
             $revet = Arbre::getRevetement($id);
 
             $command = 'cd ../../python/scripts && python3 fonc2.py '.$troncDiam.' '.$hauteurTot.' '.$hauteurTronc.' '.$feuillage.' '.$revet.' kmeans';
@@ -159,8 +159,8 @@ switch ($requestAction) {
             $hauteurTot = Arbre::getHauteurTot($id);
             $hauteurTronc = Arbre::getHauteurTronc($id);
             $troncDiam = Arbre::getDiametre($id);
-            $fkPort = Arbre::getPort($id);
-            $feuillage = Arbre::getFeuillage($id);
+            $fkPort = Arbre::getPort_ID($id);
+            $feuillage = Arbre::getFeuillage_ID($id);
             $X = Arbre::getCoordonnees($id)[0];
             $Y = Arbre::getCoordonnees($id)[1];
 

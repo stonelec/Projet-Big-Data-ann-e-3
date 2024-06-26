@@ -11,6 +11,7 @@ DROP TABLE IF EXISTS public.type_de_pied;
 DROP TABLE IF EXISTS public.stade_de_dev;
 DROP TABLE IF EXISTS public.etat_arbre;
 
+
 ------------------------------------------------------------
 -- Table: user
 ------------------------------------------------------------
@@ -85,11 +86,11 @@ CREATE TABLE public.arbre(
                              hauteur_tot      FLOAT  NOT NULL ,
                              hauteur_tronc    FLOAT  NOT NULL ,
                              diametre_tronc   FLOAT  NOT NULL ,
-                             remarquable      VARCHAR (3) NOT NULL ,
+                             remarquable      INT  NOT NULL ,
                              latitude         FLOAT  NOT NULL ,
                              longitude        FLOAT  NOT NULL ,
                              age_estim        INT  NOT NULL ,
-                             revetement       VARCHAR (3) NOT NULL ,
+                             revetement       INT  NOT NULL ,
                              id_user          INT  NOT NULL ,
                              id_etat_arbre    INT  NOT NULL ,
                              id_stade_dev     INT  NOT NULL ,
