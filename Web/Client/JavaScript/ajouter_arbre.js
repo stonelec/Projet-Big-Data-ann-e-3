@@ -48,7 +48,7 @@ $(document).ready(function (){
 
         }
 
-        $('#option_etat').html('<option>Please select</option>' +
+        $('#option_stade').html('<option>Please select</option>' +
             options
         );
 
