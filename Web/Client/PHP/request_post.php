@@ -70,7 +70,7 @@ else if($requestAction == "ajouter_toutes_valeur"){
     //$val_revetement = isset($_GET['val_revetement']) ? $_GET['val_revetement'] : NULL;
 
 
-    echo json_encode("Valeur : ", $val_latitude);
+    echo json_encode($val_latitude);
     //echo json_encode($val_hauteur_totale);
     //echo json_encode($val_hauteur_tronc);
     //echo json_encode($val_diametre_tronc);
