@@ -500,5 +500,25 @@ class Arbre {
 
     }
 
+    static function getAllStade(){
+
+        /**
+         * Fonction qui permet de récupérer le port d'un arbre
+         * @param $id_arbre
+         * @return mixed
+         */
+        $db = DB::connexion();
+
+        $request = 'SELECT stade_dev
+                    FROM stade_de_dev;
+        ';
+
+        $statement = $db->prepare($request);
+        $statement->execute();
+
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    }
+
 }
 ?>

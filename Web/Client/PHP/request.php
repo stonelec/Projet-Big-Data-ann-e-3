@@ -115,6 +115,11 @@ switch ($requestAction) {
         echo json_encode($result);
         break;
 
+    case 'ajouter_arbre_stade':
+        $result = Arbre::getAllStade();
+        echo json_encode($result);
+        break;
+
 # =============================================================
 # ===================== visualiser_detail =====================
 # =============================================================
