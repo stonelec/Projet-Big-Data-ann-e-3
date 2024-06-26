@@ -3,6 +3,25 @@
 require_once('Arbre.php');
 require_once('User.php');
 
+
+// Vérifie si des données ont été reçues en POST
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Récupère la valeur de 'action' envoyée en POST
+    $requestAction_post = isset($_POST['action']) ? $_POST['action'] : '';
+
+    // Retourne une réponse JSON avec la valeur de 'action'
+    echo json_encode([
+        'Le requestAction_post' => $requestAction_post,
+    ]);
+} else {
+    // Si la méthode n'est pas POST, retourne une erreur
+    echo json_encode([
+        'error' => 'IL EST PAS RENTRER DANS LE POST'
+    ]);
+}
+
+
+/*
 // Récupérer la méthode de la requête (GET, POST, etc.)
 $requestMethod = $_SERVER['REQUEST_METHOD'];
 
@@ -115,5 +134,5 @@ switch ($requestMethod) {
     default:
         // Retourner une erreur si l'action n'est pas reconnue
         echo json_encode(['error' => 'IL EST PAS RENTRER DANS GET OU POST']);
-        break;
+        break;*/
 }
