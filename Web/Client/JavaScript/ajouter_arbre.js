@@ -187,7 +187,7 @@ $(document).ready(function (){
 
 $(document).ready(function (){
 
-    ajaxRequest('GET', 'PHP/request_post.php', function(response) {
+    ajaxRequest('GET', 'PHP?action=request_post.php', function(response) {
         console.log("Toutes les valeurs ont été ajoutées");
         console.log("Réponse du serveur : ", response);
     });
