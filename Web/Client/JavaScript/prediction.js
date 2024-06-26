@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     const getButtonIds = () => {
-        const radioButtons = document.querySelectorAll('.btn-group-toggle input[type="radio"]');
+        const radioButtons = document.querySelectorAll('.btn-group-toggle btn-selected input[type="radio"]');
         return Array.from(radioButtons).map(button => button.id);
     };
 
