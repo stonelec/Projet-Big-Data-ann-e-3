@@ -140,10 +140,13 @@ $(document).ready(function (){
         let val_hauteur_totale = $('#hauteur_total').val();
         let val_hauteur_tronc = $('#hauteur_tronc').val();
         let val_diametre_tronc = $('#diametre_tronc').val();
+        let val_age_estime = $('#age_estime').val();
 
         let val_etat = $('#option_etat').val();
         let val_stade = $('#option_stade').val();
+        let val_remarquable = $('#option_remarquable').val();
         let val_pied = $('#option_pied').val();
+        let val_revetement = $('#option_revetement').val();
         let val_port = $('#option_port').val();
         let val_feuillage = $('#option_feuillage').val();
 
