@@ -90,6 +90,17 @@ switch ($requestAction) {
         }
         break;
 
+    case 'feuillage':
+            // Vérifier si l'ID est fourni
+            if ($id !== NULL) {
+                $result = Arbre::getFeuillage($id);
+                echo json_encode($result);
+            } else {
+                // Retourner une erreur si l'ID n'est pas fourni
+                echo json_encode(['error' => 'ID de l\'arbre manquant']);
+            }
+            break;
+
 # =============================================================
 # ===================== visualiser_detail =====================
 # =============================================================
