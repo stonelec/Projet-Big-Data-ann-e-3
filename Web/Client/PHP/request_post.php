@@ -37,6 +37,8 @@ $val_feuillage = isset($_POST['val_feuillage']) ? $_POST['val_feuillage'] : NULL
 $val_age_estime = isset($_POST['val_age_estime']) ? $_POST['val_age_estime'] : NULL;
 $val_revetement = isset($_POST['val_revetement']) ? $_POST['val_revetement'] : NULL;
 
+echo "JE RENTRE";
+
 switch ($requestMethod) {
 
     case 'GET':
