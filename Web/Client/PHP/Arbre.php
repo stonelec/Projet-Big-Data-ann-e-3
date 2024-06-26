@@ -420,7 +420,25 @@ class Arbre {
         }
     }
 
+    static function getAgeEstim($id_arbre){
+        /**
+         * Fonction qui permet de récupérer le port d'un arbre
+         * @param $id_arbre
+         * @return mixed
+         */
+        $db = DB::connexion();
 
+        $request = 'SELECT age_estim
+                    FROM arbre
+                    WHERE id_arbre = :id_arbre;
+        ';
+
+        $statement = $db->prepare($request);
+        $statement->bindParam(':id_arbre', $id_arbre);
+        $statement->execute();
+
+        return $statement->fetch()[0];
+    }
 
 }
 ?>

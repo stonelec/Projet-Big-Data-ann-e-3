@@ -142,6 +142,27 @@ $(document).ready(function(){
 // ----- AGE ESTIME ARBRE -----
 // ----------------------------
 
+$(document).ready(function(){
+
+    $('#arbreForm').submit(function(event) {
+
+        let id_arbre = $('#idArbre').val();
+        console.log("id de l'arbre : ", id_arbre);
+
+        ajaxRequest('GET', 'PHP/request.php?action=age_estim&id=' + id_arbre, function(response) {
+
+            console.log("Age estimé de l'arbre : ", response);
+
+            // Afficher le résultat dans votre page HTML
+            $('.age_estime_arbre').html(
+                '<p> L\'age estimé est : ' +
+                response +
+                '</p>');
+
+        });
+    });
+});
+
 // ----------------------
 // ----- PORT ARBRE -----
 // ----------------------
