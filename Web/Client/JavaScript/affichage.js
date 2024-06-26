@@ -241,3 +241,19 @@ $(document).ready(function(){
 // --------------------------------------------------------------------------------
 // ------------------------------ PAGE AJOUTER ARBRE ------------------------------
 //---------------------------------------------------------------------------------
+
+$(document).ready(function (){
+
+    ajaxRequest('GET', 'PHP/request.php?action=etat', function(response) {
+
+        console.log("Feuillage de l'arbre : ", response);
+        for(let i=0; i<length(response); i++){
+
+            console.log(response[i])
+
+        }
+
+    });
+
+
+});

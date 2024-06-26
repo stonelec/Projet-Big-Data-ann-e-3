@@ -478,7 +478,27 @@ class Arbre {
             $statement->execute();
 
             return $statement->fetch()[0];
-        }
+    }
+
+    static function getAllEtat(){
+
+        /**
+         * Fonction qui permet de récupérer le port d'un arbre
+         * @param $id_arbre
+         * @return mixed
+         */
+        $db = DB::connexion();
+
+        $request = 'SELECT etat_arb
+                    FROM etat_arbre;
+        ';
+
+        $statement = $db->prepare($request);
+        $statement->execute();
+
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    }
 
 }
 ?>

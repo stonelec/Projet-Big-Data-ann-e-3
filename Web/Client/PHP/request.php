@@ -13,6 +13,11 @@ $id = isset($_GET['id']) ? $_GET['id'] : NULL;
 $result = null;
 
 switch ($requestAction) {
+
+# =============================================================
+# ===================== prediction_arbre =====================
+# =============================================================
+
     case 'hauteur_tronc':
         // Vérifier si l'ID est fourni
         if ($id !== NULL) {
@@ -102,8 +107,24 @@ switch ($requestAction) {
             break;
 
 # =============================================================
+# ===================== ajouter_arbre =====================
+# =============================================================
+
+    case 'etat':
+        // Vérifier si l'ID est fourni
+        if ($id !== NULL) {
+            $result = Arbre::getAllEtat();
+            echo json_encode($result);
+        } else {
+            // Retourner une erreur si l'ID n'est pas fourni
+            echo json_encode(['error' => 'ID de l\'arbre manquant']);
+        }
+        break;
+
+# =============================================================
 # ===================== visualiser_detail =====================
 # =============================================================
+
     case 'infos':
         // Vérifier si l'ID est fourni
         if ($id !== NULL) {
@@ -147,7 +168,6 @@ switch ($requestAction) {
             echo json_encode(['error' => 'ID de l\'arbre manquant']);
         }
         break;
-
 
     default:
         // Retourner une erreur si l'action n'est pas reconnue
