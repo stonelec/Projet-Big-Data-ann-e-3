@@ -6,8 +6,6 @@ require_once('User.php');
 // Récupérer la méthode de la requête (GET, POST, etc.)
 $requestMethod = $_SERVER['REQUEST_METHOD'];
 
-echo ($requestMethod);
-
 // ----- AVEC GET -----
 
 $requestAction_get = isset($_GET['action']) ? $_GET['action'] : '';
@@ -16,7 +14,6 @@ $id = isset($_GET['id']) ? $_GET['id'] : NULL;
 // ----- AVEC POST -----
 
 $requestAction_post = isset($_GET['action']) ? $_GET['action'] : '';
-
 
 $result = null;
 
