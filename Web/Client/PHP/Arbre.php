@@ -620,7 +620,8 @@ class Arbre {
 
     }
 
-    static function addNewArbre($espece, $hauteur_tot, $hauteur_tronc, $diametre_tronc, $remarquable, $latitude, $longitude, $id_etat_arb, $id_stade_dev, $id_type_pied, $id_type_port){
+    static function addNewArbre($id_user, $val_longitude, $val_latitude, $val_hauteur_totale, $val_hauteur_tronc, $val_diametre_tronc, $val_etat, $val_stade,
+                                $val_port, $val_pied,$val_espece, $val_remarquable, $val_feuillage, $val_age_estim, $val_revetement){
         /**
          * Fonction qui permet d'ajouter un arbre
          * /!\ ATTENTION : Les FK sont des id et non les valeurs /!\
@@ -636,26 +637,32 @@ class Arbre {
          * @param $id_type_pied
          * @param $id_type_port
          */
-        if (!empty($espece) && !empty($hauteur_tot) && !empty($hauteur_tronc) && !empty($diametre_tronc) && !empty($remarquable) && !empty($latitude) && !empty($longitude) && !empty($id_etat_arb) && !empty($id_stade_dev) && !empty($id_type_pied) && !empty($id_type_port)) {
+        if (!empty($id_user) && !empty($val_longitude) && !empty($val_latitude) && !empty($val_hauteur_totale) && !empty($val_hauteur_tronc) && !empty($val_diametre_tronc) && !empty($val_etat) && !empty($val_stade) &&
+            !empty($val_port) && !empty($val_pied) && !empty($val_espece) && !empty($val_remarquable) && !empty($val_feuillage) && !empty($val_age_estim) && !empty($val_revetement)) {
             try {
                 $db = DB::connexion();
 
-                $request = 'INSERT INTO arbre(espece, hauteur_tot, hauteur_tronc, diametre_tronc, remarquable, latitude, longitude, id_etat_arb, id_stade_dev, id_pied, id_type_port)
-                    VALUES (:espece, :hauteur_tot, :hauteur_tronc, :diametre_tronc, :remarquable, :latitude, :longitude, :id_etat_arb, :id_stade_dev, :id_type_pied, :id_type_port);
+                $request = 'INSERT INTO arbre(id_user, val_longitude, val_latitude, val_hauteur_totale, val_hauteur_tronc, val_diametre_tronc, val_etat, val_stade, 
+                  val_port, val_pied, val_espece, val_remarquable, val_feuillage, val_age_estim, val_revetement)
+                    VALUES (:id_user, :longitude, :latitude, :hauteur_tot, :hauteur_tronc, :diametre_tronc, :id_etat_arbre, :id_stade_dev, :id_port, :id_pied, :espece, :remarquable, :id_feuillage, :age_estim, :revetement);
                 ';
 
                 $statement = $db->prepare($request);
-                $statement->bindParam(':espece', $espece);
-                $statement->bindParam(':hauteur_tot', $hauteur_tot);
-                $statement->bindParam(':hauteur_tronc', $hauteur_tronc);
-                $statement->bindParam(':diametre_tronc', $diametre_tronc);
-                $statement->bindParam(':remarquable', $remarquable);
-                $statement->bindParam(':latitude', $latitude);
-                $statement->bindParam(':longitude', $longitude);
-                $statement->bindParam(':id_etat_arb', $id_etat_arb);
-                $statement->bindParam(':id_stade_dev', $id_stade_dev);
-                $statement->bindParam(':id_type_pied', $id_type_pied);
-                $statement->bindParam(':id_type_port', $id_type_port);
+                $statement->bindParam(':id_user', $id_user);
+                $statement->bindParam(':longitude', $val_longitude);
+                $statement->bindParam(':latitude', $val_latitude);
+                $statement->bindParam(':hauteur_tot', $val_hauteur_totale);
+                $statement->bindParam(':hauteur_tronc', $val_hauteur_tronc);
+                $statement->bindParam(':diametre_tronc', $val_diametre_tronc);
+                $statement->bindParam(':id_etat_arbre', $val_etat);
+                $statement->bindParam(':id_stade_dev', $val_stade);
+                $statement->bindParam(':id_port', $val_port);
+                $statement->bindParam(':id_pied', $val_pied);
+                $statement->bindParam(':espece', $val_espece);
+                $statement->bindParam(':remarquable', $val_remarquable);
+                $statement->bindParam(':id_feuillage', $val_feuillage);
+                $statement->bindParam(':age_estim', $val_age_estim);
+                $statement->bindParam(':revetement', $val_revetement);
 
                 $statement->execute();
                 return "ok";
