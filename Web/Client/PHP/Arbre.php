@@ -620,5 +620,54 @@ class Arbre {
 
     }
 
+    static function addNewArbre($espece, $hauteur_tot, $hauteur_tronc, $diametre_tronc, $remarquable, $latitude, $longitude, $id_etat_arb, $id_stade_dev, $id_type_pied, $id_type_port){
+        /**
+         * Fonction qui permet d'ajouter un arbre
+         * /!\ ATTENTION : Les FK sont des id et non les valeurs /!\
+         * @param $espece
+         * @param $hauteur_tot
+         * @param $hauteur_tronc
+         * @param $diametre_tronc
+         * @param $remarquable
+         * @param $latitude
+         * @param $longitude
+         * @param $id_etat_arb
+         * @param $id_stade_dev
+         * @param $id_type_pied
+         * @param $id_type_port
+         */
+        if (!empty($espece) && !empty($hauteur_tot) && !empty($hauteur_tronc) && !empty($diametre_tronc) && !empty($remarquable) && !empty($latitude) && !empty($longitude) && !empty($id_etat_arb) && !empty($id_stade_dev) && !empty($id_type_pied) && !empty($id_type_port)) {
+            try {
+                $db = DB::connexion();
+
+                $request = 'INSERT INTO arbre(espece, hauteur_tot, hauteur_tronc, diametre_tronc, remarquable, latitude, longitude, id_etat_arb, id_stade_dev, id_pied, id_type_port)
+                    VALUES (:espece, :hauteur_tot, :hauteur_tronc, :diametre_tronc, :remarquable, :latitude, :longitude, :id_etat_arb, :id_stade_dev, :id_type_pied, :id_type_port);
+                ';
+
+                $statement = $db->prepare($request);
+                $statement->bindParam(':espece', $espece);
+                $statement->bindParam(':hauteur_tot', $hauteur_tot);
+                $statement->bindParam(':hauteur_tronc', $hauteur_tronc);
+                $statement->bindParam(':diametre_tronc', $diametre_tronc);
+                $statement->bindParam(':remarquable', $remarquable);
+                $statement->bindParam(':latitude', $latitude);
+                $statement->bindParam(':longitude', $longitude);
+                $statement->bindParam(':id_etat_arb', $id_etat_arb);
+                $statement->bindParam(':id_stade_dev', $id_stade_dev);
+                $statement->bindParam(':id_type_pied', $id_type_pied);
+                $statement->bindParam(':id_type_port', $id_type_port);
+
+                $statement->execute();
+                return "ok";
+            } catch (PDOException $e) {
+                error_log('Request error: ' . $e->getMessage());
+                return "error";
+            }
+        }
+        else {
+            return "error";
+        }
+    }
+
 }
 ?>
