@@ -370,7 +370,6 @@ class Arbre {
         return $statement->fetchAll(PDO::FETCH_ASSOC)[0];
     }
 
-
     static function addArbre($espece, $hauteur_tot, $hauteur_tronc, $diametre_tronc, $remarquable, $latitude, $longitude, $id_etat_arb, $id_stade_dev, $id_type_pied, $id_type_port){
     /**
      * Fonction qui permet d'ajouter un arbre
@@ -459,6 +458,7 @@ class Arbre {
 
         return $statement->fetch()[0];
     }
+
     static function getFeuillage($id_arbre){
             /**
              * Fonction qui permet de récupérer le port d'un arbre
@@ -579,6 +579,9 @@ class Arbre {
         return $statement->fetchAll(PDO::FETCH_ASSOC);
 
     }
+
+
+
 
 
 }
