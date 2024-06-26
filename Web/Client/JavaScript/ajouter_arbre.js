@@ -168,7 +168,7 @@ $(document).ready(function (){
         console.log("Valeur feuillage : ", val_feuillage);
 
 
-        ajaxRequest('POST', 'PHP/request_post.php/action=ajouter_toutes_valeur/' +
+        ajaxRequest('POST', 'PHP/request_post.php/ action=ajouter_toutes_valeur/' +
             '&val_espece=' + val_espece + '&val_latitude=' + val_latitude +
             '&val_longitude=' + val_longitude + '&val_hauteur_totale=' + val_hauteur_totale +
             '&val_hauteur_tronc=' + val_hauteur_tronc + '&val_diametre_tronc=' + val_diametre_tronc +
