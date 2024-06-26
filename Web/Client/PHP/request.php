@@ -137,7 +137,7 @@ switch ($requestAction) {
             $hauteurTot = Arbre::getHauteurTot($id);
             $hauteurTronc = Arbre::getHauteurTronc($id);
 
-            $command = 'cd ../../python/scripts && python3 fonc2.py '.$troncDiam.' '.$hauteurTot.' '.$hauteurTronc.' kmeans';
+            $command = 'cd ../../python/scripts && python3 fonc2.py '.$troncDiam.' '.$hauteurTot.' '.$hauteurTronc.' rf';
 
             exec($command,$output, $result);
 
@@ -163,7 +163,7 @@ switch ($requestAction) {
             $Y = Arbre::getCoordonnees($id)[1];
 
             // ['haut_tot', 'haut_tronc', 'tronc_diam', 'fk_port', 'feuillage', 'X', 'Y']
-            $command = 'cd ../../python/scripts && python3 fonc3.py '.$hauteurTot.' '.$hauteurTronc.' '.$troncDiam.' '.$fkPort.' '.$feuillage.' '.$X.' '.$Y.' kmeans';
+            $command = 'cd ../../python/scripts && python3 fonc3.py '.$hauteurTot.' '.$hauteurTronc.' '.$troncDiam.' '.$fkPort.' '.$feuillage.' '.$X.' '.$Y.' rf';
 
             exec($command,$output, $result);
 
