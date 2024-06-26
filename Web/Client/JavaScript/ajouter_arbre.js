@@ -132,22 +132,22 @@ $(document).ready(function (){
         let val_ajout = []
 
         let val_espece = $('#espece').val();
-        val_espece.append(val_ajout);
+        val_ajout.push(val_espece);
 
         let val_latitude = $('#latitude').val();
-        val_latitude.append(val_ajout);
+        val_ajout.push(val_latitude);
 
         let val_longitude = $('#longitude').val();
-        val_longitude.append(val_ajout);
+        val_ajout.push(val_longitude);
 
         let val_hauteur_totale = $('#hauteur_total').val();
-        val_hauteur_totale.append(val_ajout);
+        val_ajout.push(val_hauteur_totale);
 
         let val_hauteur_tronc = $('#hauteur_tronc').val();
-        val_hauteur_tronc.append(val_ajout);
+        val_ajout.push(val_hauteur_tronc);
 
         let val_diametre_tronc = $('#diametre_tronc').val();
-        val_diametre_tronc.append(val_ajout);
+        val_ajout.push(val_diametre_tronc);
 
         //console.log("Valeur espece : ", val_espece);
         //console.log("Valeur latitude : ", val_latitude);
