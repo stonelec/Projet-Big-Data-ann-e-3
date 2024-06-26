@@ -12,8 +12,6 @@ $id = isset($_GET['id']) ? $_GET['id'] : NULL;
 
 $result = null;
 
-echo "test";
-
 switch ($requestAction) {
     case 'hauteur_tronc':
         // Vérifier si l'ID est fourni
