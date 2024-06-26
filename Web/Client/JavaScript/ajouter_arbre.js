@@ -2,13 +2,13 @@
 // ------------------------------ PAGE AJOUTER ARBRE ------------------------------
 //---------------------------------------------------------------------------------
 
-// --------------------------
-// ----- Noms des etats -----
-// --------------------------
-
 $(document).ready(function (){
 
     let options;
+
+    // --------------------------
+    // ----- Noms des etats -----
+    // --------------------------
 
     ajaxRequest('GET', 'PHP/request.php?action=ajouter_arbre_etat', function(response) {
 
@@ -22,20 +22,14 @@ $(document).ready(function (){
         }
 
         $('#option_etat').html('<option selected disabled="disabled">Please select</option>' +
-        options
+            options
         );
 
     });
 
-});
-
-// --------------------------
-// ----- Noms des stades -----
-// --------------------------
-
-$(document).ready(function (){
-
-    let options;
+    // ---------------------------
+    // ----- Noms des stades -----
+    // ---------------------------
 
     ajaxRequest('GET', 'PHP/request.php?action=ajouter_arbre_stade', function(response) {
 
@@ -43,7 +37,7 @@ $(document).ready(function (){
         console.log(response)
 
         for(let i=0; i<response.length; i++) {
-            
+
             options += '<option>' + response[i].stade_dev + '</option>';
 
         }
@@ -54,15 +48,10 @@ $(document).ready(function (){
 
     });
 
-});
+    // --------------------------
+    // ----- Noms des pieds -----
+    // --------------------------
 
-// --------------------------
-// ----- Noms des pieds -----
-// --------------------------
-
-$(document).ready(function (){
-
-    let options;
 
     ajaxRequest('GET', 'PHP/request.php?action=ajouter_arbre_pied', function(response) {
 
@@ -81,15 +70,9 @@ $(document).ready(function (){
 
     });
 
-});
-
-// --------------------------
-// ----- Noms des ports -----
-// --------------------------
-
-$(document).ready(function (){
-
-    let options;
+    // --------------------------
+    // ----- Noms des ports -----
+    // --------------------------
 
     ajaxRequest('GET', 'PHP/request.php?action=ajouter_arbre_port', function(response) {
 
@@ -108,15 +91,9 @@ $(document).ready(function (){
 
     });
 
-});
-
-// -------------------------------
-// ----- Noms des feuillages -----
-// -------------------------------
-
-$(document).ready(function (){
-
-    let options;
+    // -------------------------------
+    // ----- Noms des feuillages -----
+    // -------------------------------
 
     ajaxRequest('GET', 'PHP/request.php?action=ajouter_arbre_feuillage', function(response) {
 
