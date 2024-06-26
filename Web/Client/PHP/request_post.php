@@ -71,6 +71,7 @@ if($requestMethod == $_POST){
 
 }
 
+echo json_encode("rien frere");
 
 //json_encode($val_latitude);
 //json_encode($val_hauteur_totale);
