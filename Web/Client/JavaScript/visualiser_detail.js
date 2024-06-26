@@ -2,10 +2,10 @@ function afficherInfos(data_infos) {
     const attributsInfos = [
         "espece", "remarquable", "etat_arb", "stade_dev"
     ];
-    console.log("Infos: "+data_infos)
+    console.log(data_infos)
 
     for (attribute of attributsInfos) {
-        document.getElementById(attribute).textContent = data_infos[attribute];
+        document.getElementById(attribute).textContent = data_infos[0][attribute];
     }
 }
 
