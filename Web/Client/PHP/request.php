@@ -130,6 +130,10 @@ switch ($requestAction) {
         echo json_encode($result);
         break;
 
+    case 'ajouter_arbre_feuillage':
+        $result = Arbre::getAllFeuillage();
+        echo json_encode($result);
+        break;
 # =============================================================
 # ===================== visualiser_detail =====================
 # =============================================================

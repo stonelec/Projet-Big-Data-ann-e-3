@@ -109,3 +109,30 @@ $(document).ready(function (){
     });
 
 });
+
+// -------------------------------
+// ----- Noms des feuillages -----
+// -------------------------------
+
+$(document).ready(function (){
+
+    let options;
+
+    ajaxRequest('GET', 'PHP/request.php?action=ajouter_arbre_feuillage', function(response) {
+
+        console.log("Feuillages : ")
+        console.log(response)
+
+        for(let i=0; i<response.length; i++) {
+
+            options += '<option>' + response[i].type_feuillage + '</option>';
+
+        }
+
+        $('#option_feuillage').html('<option selected disabled="disabled">Please select</option>' +
+            options
+        );
+
+    });
+
+});
