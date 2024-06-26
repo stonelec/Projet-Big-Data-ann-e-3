@@ -22,11 +22,10 @@ echo "request post";
 echo ($requestAction_post);
 */
 
-$postData = $_POST['action'];
+$action = isset($_POST['action']) ? $_POST['action'] : (isset($_GET['action']) ? $_GET['action'] : '');
 
-// Afficher les données reçues
-echo "Données reçues via POST : ";
-echo($postData);
+echo "Action reçue : ";
+echo $action;
 
 $id_user = 1; //On pourra le récupérer en changeant l'url
 $val_longitude = isset($_POST['val_longitude']) ? $_POST['val_longitude'] : NULL;
