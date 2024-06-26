@@ -540,6 +540,26 @@ class Arbre {
 
     }
 
+    static function getAllPort(){
+
+        /**
+         * Fonction qui permet de récupérer le port d'un arbre
+         * @param $id_arbre
+         * @return mixed
+         */
+        $db = DB::connexion();
+
+        $request = 'SELECT type_port
+                    FROM type_de_port;
+        ';
+
+        $statement = $db->prepare($request);
+        $statement->execute();
+
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    }
+
 
 }
 ?>

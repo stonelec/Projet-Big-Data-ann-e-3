@@ -125,6 +125,11 @@ switch ($requestAction) {
         echo json_encode($result);
         break;
 
+    case 'ajouter_arbre_port':
+        $result = Arbre::getAllPort();
+        echo json_encode($result);
+        break;
+
 # =============================================================
 # ===================== visualiser_detail =====================
 # =============================================================
