@@ -157,9 +157,13 @@ $(document).ready(function (){
         console.log("Valeur hauteur totale : ", val_hauteur_totale);
         console.log("Valeur hauteur totale : ", val_hauteur_tronc);
         console.log("Valeur hauteur totale : ", val_diametre_tronc);
+        console.log("Valeur age estimé : ", val_age_estime);
+
         console.log("Valeur etat : ", val_etat);
         console.log("Valeur stade : ", val_stade);
+        console.log("Valeur remarquable : ", val_remarquable);
         console.log("Valeur pied : ", val_pied);
+        console.log("Valeur revetement : ", val_revetement);
         console.log("Valeur port : ", val_port);
         console.log("Valeur feuillage : ", val_feuillage);
 
