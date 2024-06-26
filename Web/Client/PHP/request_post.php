@@ -4,32 +4,16 @@ require_once('Arbre.php');
 require_once('User.php');
 
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Vérifie si 'action' est défini dans les données POST
-    if (isset($_POST['action']) && $_POST['action'] === 'ajouter_toutes_valeur') {
-        // Ici vous pouvez ajouter votre logique pour traiter l'action 'ajouter_toutes_valeur'
-        // Par exemple, vous pouvez faire quelque chose comme ceci :
+$action = $_GET['action'];
 
-        // Récupérer d'autres données si nécessaire
-        // $param1 = $_POST['param1'];
-        // $param2 = $_POST['param2'];
-
-        // Exemple de réponse JSON
-        echo json_encode([
-            'success' => true,
-            'message' => 'Action ajoutée avec succès'
-        ]);
-    } else {
-        echo json_encode([
-            'error' => 'Action non spécifiée ou incorrecte'
-        ]);
-    }
+// Vérifie si la variable 'action' est définie et n'est pas vide
+if (isset($action) && !empty($action)) {
+    // Utilise la valeur de 'action' comme nécessaire
+    echo "La valeur de 'action' est : " . $action;
 } else {
-    echo json_encode([
-        'error' => 'Requête non autorisée'
-    ]);
+    // Gère le cas où 'action' n'est pas défini ou est vide
+    echo "La variable 'action' n'est pas définie ou est vide.";
 }
-
 
 /*
 // Récupérer la méthode de la requête (GET, POST, etc.)
