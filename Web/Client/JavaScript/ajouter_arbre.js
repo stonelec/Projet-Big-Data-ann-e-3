@@ -124,13 +124,6 @@ $(document).ready(function (){
 
 $(document).ready(function (){
 
-    let val_espece
-    let val_latitude
-    let val_longitude
-    let val_hauteur_totale
-    let val_hauteur_tronc
-    let val_diametre_tronc
-
     $('.form_ajouter_arbre').submit(function(event) {
         event.preventDefault(); // Empêcher la soumission du formulaire
 
@@ -139,6 +132,20 @@ $(document).ready(function (){
         let val_espece = $('#espece').val();
         console.log("Valeur espece : ", val_espece);
 
+        let val_latitude = $('#Latitude').val();
+        console.log("Valeur latitude : ", val_latitude);
+
+        let val_longitude = $('#Longitude').val();
+        console.log("Valeur longitude : ", val_longitude);
+
+        let val_hauteur_totale = $('#hauteur_total').val();
+        console.log("Valeur hauteur totale : ", val_hauteur_totale);
+
+        let val_hauteur_tronc = $('#hauteur_tronc').val();
+        console.log("Valeur hauteur totale : ", val_hauteur_tronc);
+
+        let val_diametre_tronc = $('#diametre_tronc').val();
+        console.log("Valeur hauteur totale : ", val_diametre_tronc);
     });
 
 });
