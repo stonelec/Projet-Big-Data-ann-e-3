@@ -6,6 +6,8 @@ require_once('User.php');
 // Récupérer la méthode de la requête (GET, POST, etc.)
 
 $requestMethod = $_SERVER['REQUEST_METHOD'];
+echo "RequestMethod : ";
+echo json_encode($requestMethod);
 
 $requestAction = isset($_GET['action']) ? $_GET['action'] : '';
 $id = isset($_GET['id']) ? $_GET['id'] : NULL;
@@ -37,22 +39,23 @@ if($requestMethod == $_POST){
     $val_revetement = isset($_GET['val_revetement']) ? $_GET['val_revetement'] : NULL;
 
 
-    //echo json_encode($val_latitude);
-    //json_encode($val_hauteur_totale);
-    //json_encode($val_hauteur_tronc);
-    //json_encode($val_diametre_tronc);
-    //json_encode($val_etat);
-    //json_encode($val_stade);
-    //json_encode($val_port);
-    //json_encode($val_pied);
-    //echo json_encode($val_espece);
-    //json_encode($val_remarquable);
-    //json_encode($val_feuillage);
-    //json_encode($val_age_estime);
-    //json_encode($val_revetement);
+    echo json_encode($val_latitude);
+    echo json_encode($val_hauteur_totale);
+    echo json_encode($val_hauteur_tronc);
+    echo json_encode($val_diametre_tronc);
+    echo json_encode($val_etat);
+    echo json_encode($val_stade);
+    echo json_encode($val_port);
+    echo json_encode($val_pied);
+    echo json_encode($val_espece);
+    echo json_encode($val_remarquable);
+    echo json_encode($val_feuillage);
+    echo json_encode($val_age_estime);
+    echo json_encode($val_revetement);
 
 }
 
+/*
 switch ($requestMethod) {
 
     case 'GET':
@@ -104,7 +107,7 @@ switch ($requestMethod) {
                 echo json_encode($result);
                 break;
 
-                /*
+
                 if($id_user != NULL && $val_longitude != NULL && $val_latitude != NULL && $val_hauteur_totale != NULL && $val_hauteur_tronc != NULL &&
                     $val_diametre_tronc != NULL && $val_etat != NULL && $val_stade != NULL && $val_port != NULL && $val_pied != NULL &&
                     $val_espece != NULL && $val_remarquable != NULL && $val_feuillage != NULL && $val_age_estime != NULL &&
@@ -121,7 +124,7 @@ switch ($requestMethod) {
                     echo json_encode($result);
                     break;
 
-                }*/
+                }
 
                 //$result = "C'est good tu peux pleurer";
                 //echo json_encode($result);
@@ -141,6 +144,6 @@ switch ($requestMethod) {
         break;
 
 }
-
+*/
 
 
