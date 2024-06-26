@@ -118,9 +118,9 @@ switch ($requestAction) {
 
             $command = escapeshellcmd('python3 fonc1.py ' . $hauteurTronc . ' ' . $ageEstim . ' ' . $troncDiam.' kmeans');
             // $command = " python3 fonc1.py 50 10 20 kmeans "
-            $result = exec($command);
+            exec($command,$output, $result);
 
-            echo json_encode($result);
+            echo json_encode($hauteurTronc);
         } else {
             // Retourner une erreur si l'ID n'est pas fourni
             echo json_encode(['error' => 'ID de l\'arbre manquant']);
