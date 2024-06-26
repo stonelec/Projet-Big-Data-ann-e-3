@@ -86,11 +86,7 @@ if($requestAction == "ajouter_toutes_valeur"){
 
 }
 
-else{
-
-    echo json_encode("erreur");
-
-}
+echo json_encode("erreur");
 
 /*
 switch ($requestMethod) {
