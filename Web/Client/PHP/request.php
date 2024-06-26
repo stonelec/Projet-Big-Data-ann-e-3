@@ -120,6 +120,7 @@ switch ($requestAction) {
             // $command = " python3 fonc1.py 50 10 20 kmeans "
             exec($command,$output, $result);
 
+
             echo json_encode($result);
         } else {
             // Retourner une erreur si l'ID n'est pas fourni
