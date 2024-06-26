@@ -11,16 +11,13 @@ $requestMethod = $_SERVER['REQUEST_METHOD'];
 $requestAction_get = isset($_GET['action']) ? $_GET['action'] : '';
 $id = isset($_GET['id']) ? $_GET['id'] : NULL;
 
-$result = null;
-
 // ----- AVEC POST -----
-
 
 $requestAction_post = isset($_POST['action']) ? $_POST['action'] : '';
 
-echo "request post";
-echo ($requestAction_post);
+$result = null;
 
+// ----- On récupère des variables de POST -----
 
 $id_user = 1; //On pourra le récupérer en changeant l'url
 $val_longitude = isset($_POST['val_longitude']) ? $_POST['val_longitude'] : NULL;
