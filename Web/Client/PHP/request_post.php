@@ -27,14 +27,21 @@ echo "L'action : ";
 echo json_encode($requestAction);
 echo "     ";
 
-$result = null;
+//$result = null;
 
 // ----- On récupère des variables de POST -----
 
+$val_longitude = $_POST['val_longitude'];
+
+echo "la longitude : ";
+echo json_encode($val_longitude);
+echo "     ";
+
+/*
 if($requestMethod == $_POST){
 
     $id_user = 1; //On pourra le récupérer en changeant l'url
-    $val_longitude = $_GET['val_longitude'];
+    //$val_longitude = $_POST['val_longitude'];
     $val_latitude = isset($_POST['val_latitude']) ? $_POST['val_latitude'] : NULL;
     $val_hauteur_totale = isset($_POST['val_hauteur_totale']) ? $_POST['val_hauteur_totale'] : NULL;
     $val_hauteur_tronc = isset($_POST['val_hauteur_tronc']) ? $_POST['val_hauteur_tronc'] : NULL;
@@ -58,6 +65,7 @@ if($requestMethod == $_POST){
     echo "     ";
 
 }
+*/
 
 //json_encode($val_latitude);
 //json_encode($val_hauteur_totale);
