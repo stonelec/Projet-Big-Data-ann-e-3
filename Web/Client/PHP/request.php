@@ -120,7 +120,6 @@ switch ($requestAction) {
             // $command = " python3 fonc1.py 50 10 20 kmeans "
             exec($command,$output, $result);
 
-            $result = file_get_contents('../../python/scripts/fonc1.json');
 
             echo json_encode($result);
         } else {
