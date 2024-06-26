@@ -304,7 +304,7 @@ class Arbre {
         $statement->bindParam(':id_arbre', $id_arbre);
         $statement->execute();
 
-        return $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $statement->fetchAll(PDO::FETCH_ASSOC)[0];
     }
 
     static function getDimensions_byID($id_arbre){
@@ -324,7 +324,7 @@ class Arbre {
         $statement->bindParam(':id_arbre', $id_arbre);
         $statement->execute();
 
-        return $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $statement->fetchAll(PDO::FETCH_ASSOC)[0];
     }
 
     static function getSol_byID($id_arbre) {
@@ -345,7 +345,7 @@ class Arbre {
         $statement->bindParam(':id_arbre', $id_arbre);
         $statement->execute();
 
-        return $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $statement->fetchAll(PDO::FETCH_ASSOC)[0];
     }
 
     static function getInfos_byID($id_arbre){
@@ -367,7 +367,7 @@ class Arbre {
         $statement->bindParam(':id_arbre', $id_arbre);
         $statement->execute();
 
-        return $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $statement->fetchAll(PDO::FETCH_ASSOC)[0];
     }
 
 
