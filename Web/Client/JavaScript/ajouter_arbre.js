@@ -187,8 +187,21 @@ $(document).ready(function (){
 
 $(document).ready(function (){
 
-    ajaxRequest('GET', 'PHP/request_post.php?action=test', function(response) {
-        console.log("Toutes les valeurs ont été ajoutées");
-        console.log("Réponse du serveur : ", response);
+    ajaxRequest('GET', 'PHP/request_post.php?action=ajouter_arbre_feuillage', function(response) {
+
+        //console.log("Feuillages : ")
+        //console.log(response)
+
+        for(let i=0; i<response.length; i++) {
+
+            option_feuillage += '<option>' + response[i].feuillage + '</option>';
+
+        }
+
+        $('#option_feuillage').html('<option selected disabled="disabled">Please select</option>' +
+            option_feuillage
+        );
+
     });
+
 });
