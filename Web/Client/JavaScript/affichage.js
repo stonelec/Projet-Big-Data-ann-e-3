@@ -250,12 +250,16 @@ $(document).ready(function (){
         for(let i=0; i<response.length; i++) {
 
             console.log(response[i])
-            $('#option_etat').html(
-                '<option>' +
-                response[i].name +
-                '</option>');
+            options += '<option>' + response[i].name + '</option>';
 
         }
+
+        $('#option_etat').html(
+            '<option>'+
+                'Please select'+
+            '</option>'+
+            options
+        );
 
     });
 
