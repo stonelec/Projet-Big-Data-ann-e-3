@@ -129,23 +129,34 @@ $(document).ready(function (){
 
         console.log("ENVOYER")
 
+        let val_ajout = []
+
         let val_espece = $('#espece').val();
-        console.log("Valeur espece : ", val_espece);
+        val_ajout.append(val_espece);
 
-        let val_latitude = $('#Latitude').val();
-        console.log("Valeur latitude : ", val_latitude);
+        let val_latitude = $('#latitude').val();
+        val_ajout.append(val_latitude);
 
-        let val_longitude = $('#Longitude').val();
-        console.log("Valeur longitude : ", val_longitude);
+        let val_longitude = $('#longitude').val();
+        val_ajout.append(val_longitude);
 
         let val_hauteur_totale = $('#hauteur_total').val();
-        console.log("Valeur hauteur totale : ", val_hauteur_totale);
+        val_ajout.append(val_hauteur_totale);
 
         let val_hauteur_tronc = $('#hauteur_tronc').val();
-        console.log("Valeur hauteur totale : ", val_hauteur_tronc);
+        val_ajout.append(val_hauteur_tronc);
 
         let val_diametre_tronc = $('#diametre_tronc').val();
-        console.log("Valeur hauteur totale : ", val_diametre_tronc);
+        val_ajout.append(val_diametre_tronc);
+
+        //console.log("Valeur espece : ", val_espece);
+        //console.log("Valeur latitude : ", val_latitude);
+        //console.log("Valeur longitude : ", val_longitude);
+        //console.log("Valeur hauteur totale : ", val_hauteur_totale);
+        //console.log("Valeur hauteur totale : ", val_hauteur_tronc);
+        //console.log("Valeur hauteur totale : ", val_diametre_tronc);
+        console.log(val_ajout);
+
     });
 
 });
