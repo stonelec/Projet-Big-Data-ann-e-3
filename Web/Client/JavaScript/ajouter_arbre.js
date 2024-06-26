@@ -21,7 +21,7 @@ $(document).ready(function (){
 
         }
 
-        $('#option_etat').html('<option>Please select</option>' +
+        $('#option_etat').html('<option disabled="disabled">Please select</option>' +
         options
         );
 
