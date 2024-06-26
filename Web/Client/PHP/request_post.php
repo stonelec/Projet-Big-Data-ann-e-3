@@ -51,7 +51,7 @@ else if($requestAction == "ajouter_toutes_valeur"){
 
     //$id_user = 1; //On pourra le récupérer en changeant l'url
     //$val_longitude = isset($_GET['$val_longitude']) ? $_GET['$val_longitude'] : NULL;
-    $val_latitude = isset($_GET['val_latitude']) ? $_GET['val_latitude'] : NULL;
+    $val_latitude = isset($_POST['val_latitude']) ? $_POST['val_latitude'] : NULL;
     //$val_hauteur_totale = isset($_GET['val_hauteur_totale']) ? $_GET['val_hauteur_totale'] : NULL;
     //$val_hauteur_tronc = isset($_GET['val_hauteur_tronc']) ? $_GET['val_hauteur_tronc'] : NULL;
     //$val_diametre_tronc = isset($_GET['val_diametre_tronc']) ? $_GET['val_diametre_tronc'] : NULL;
@@ -70,7 +70,7 @@ else if($requestAction == "ajouter_toutes_valeur"){
     //$val_revetement = isset($_GET['val_revetement']) ? $_GET['val_revetement'] : NULL;
 
 
-    echo json_encode($val_latitude);
+    echo json_encode("Valeur : ", $val_latitude);
     //echo json_encode($val_hauteur_totale);
     //echo json_encode($val_hauteur_tronc);
     //echo json_encode($val_diametre_tronc);
