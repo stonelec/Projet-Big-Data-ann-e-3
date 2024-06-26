@@ -14,8 +14,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     //let id_arbre = $('#idArbre').val();
     //console.log("id de l'arbre : ", id_arbre);
+    let id_arbre = 5;
 
-    ajaxRequest('GET', 'PHP/request.php?action=infos&id='+id_arbre, afficherTableau);
+    ajaxRequest('GET', 'PHP/request.php?action=infos&id='+id_arbre, afficherInfos);
 
 
 
