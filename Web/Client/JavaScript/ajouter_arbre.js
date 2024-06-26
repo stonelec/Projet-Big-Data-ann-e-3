@@ -169,12 +169,7 @@ $(document).ready(function (){
 
 
         ajaxRequest('POST', 'PHP/request_post.php?action=ajouter_toutes_valeur' +
-                    '&val_espece=' + val_espece + '&val_latitude=' + val_latitude +
-                    '&val_longitude=' + val_longitude + '&val_hauteur_totale=' + val_hauteur_totale +
-                    '&val_hauteur_tronc=' + val_hauteur_tronc + '&val_diametre_tronc=' + val_diametre_tronc +
-                    '&val_age_estime=' + val_age_estime + '&val_etat=' + val_etat + '&val_stade=' + val_stade +
-                    '&val_remarquable=' + val_remarquable + '&val_pied=' + val_pied + '&val_revetement=' + val_revetement +
-                    '&val_port=' + val_port + '&val_feuillage=' + val_feuillage,function(response) {
+                    '&val_espece=' + val_espece,function(response) {
 
             console.log("Toutes les valeurs ont été ajouté");
             console.log("Ca doit afficher la hauteur du tronc : ", response)

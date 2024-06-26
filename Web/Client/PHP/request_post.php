@@ -27,34 +27,35 @@ $id = isset($_GET['id']) ? $_GET['id'] : NULL;
 //echo json_encode($requestAction);
 //echo "     ";
 
-$result = null;
+//$result = null;
 
 // ----- On récupère des variables de POST -----
 
 
 if($requestMethod == $_POST){
 
-    $id_user = 1; //On pourra le récupérer en changeant l'url
+    //$id_user = 1; //On pourra le récupérer en changeant l'url
     //$val_longitude = $_POST['val_longitude'];
-    $val_latitude = isset($_POST['val_latitude']) ? $_POST['val_latitude'] : NULL;
-    $val_hauteur_totale = isset($_POST['val_hauteur_totale']) ? $_POST['val_hauteur_totale'] : NULL;
-    $val_hauteur_tronc = isset($_POST['val_hauteur_tronc']) ? $_POST['val_hauteur_tronc'] : NULL;
-    $val_diametre_tronc = isset($_POST['val_diametre_tronc']) ? $_POST['val_diametre_tronc'] : NULL;
+    //$val_latitude = isset($_POST['val_latitude']) ? $_POST['val_latitude'] : NULL;
+    //$val_hauteur_totale = isset($_POST['val_hauteur_totale']) ? $_POST['val_hauteur_totale'] : NULL;
+    //$val_hauteur_tronc = isset($_POST['val_hauteur_tronc']) ? $_POST['val_hauteur_tronc'] : NULL;
+    //$val_diametre_tronc = isset($_POST['val_diametre_tronc']) ? $_POST['val_diametre_tronc'] : NULL;
 
-    $val_etat = isset($_POST['val_etat']) ? $_POST['val_etat'] : NULL; //IL FAUT SON ID
-    $val_stade = isset($_POST['val_stade']) ? $_POST['val_stade'] : NULL; //IL FAUT SON ID
-    $val_port = isset($_POST['val_port']) ? $_POST['val_port'] : NULL; //IL FAUT SON ID
-    $val_pied = isset($_POST['val_pied']) ? $_POST['val_pied'] : NULL; //IL FAUT SON ID
+    //$val_etat = isset($_POST['val_etat']) ? $_POST['val_etat'] : NULL; //IL FAUT SON ID
+    //$val_stade = isset($_POST['val_stade']) ? $_POST['val_stade'] : NULL; //IL FAUT SON ID
+    //$val_port = isset($_POST['val_port']) ? $_POST['val_port'] : NULL; //IL FAUT SON ID
+    //$val_pied = isset($_POST['val_pied']) ? $_POST['val_pied'] : NULL; //IL FAUT SON ID
 
     $val_espece = isset($_POST['val_espece']) ? $_POST['val_espece'] : NULL;
-    $val_remarquable = isset($_POST['$val_remarquable']) ? $_POST['$val_remarquable'] : NULL;
+    //$val_remarquable = isset($_POST['$val_remarquable']) ? $_POST['$val_remarquable'] : NULL;
 
-    $val_feuillage = isset($_POST['val_feuillage']) ? $_POST['val_feuillage'] : NULL; //IL FAUT SON ID
+    //$val_feuillage = isset($_POST['val_feuillage']) ? $_POST['val_feuillage'] : NULL; //IL FAUT SON ID
 
-    $val_age_estime = isset($_POST['val_age_estime']) ? $_POST['val_age_estime'] : NULL;
-    $val_revetement = isset($_POST['val_revetement']) ? $_POST['val_revetement'] : NULL;
+    //$val_age_estime = isset($_POST['val_age_estime']) ? $_POST['val_age_estime'] : NULL;
+    //$val_revetement = isset($_POST['val_revetement']) ? $_POST['val_revetement'] : NULL;
 
-    json_encode($val_latitude);
+
+    //echo json_encode($val_latitude);
     //json_encode($val_hauteur_totale);
     //json_encode($val_hauteur_tronc);
     //json_encode($val_diametre_tronc);
@@ -62,7 +63,7 @@ if($requestMethod == $_POST){
     //json_encode($val_stade);
     //json_encode($val_port);
     //json_encode($val_pied);
-    //json_encode($val_espece);
+    echo json_encode($val_espece);
     //json_encode($val_remarquable);
     //json_encode($val_feuillage);
     //json_encode($val_age_estime);
