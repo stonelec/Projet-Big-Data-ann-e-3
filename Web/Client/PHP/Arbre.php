@@ -520,5 +520,26 @@ class Arbre {
 
     }
 
+    static function getAllPied(){
+
+        /**
+         * Fonction qui permet de récupérer le port d'un arbre
+         * @param $id_arbre
+         * @return mixed
+         */
+        $db = DB::connexion();
+
+        $request = 'SELECT type_pied
+                    FROM type_de_pied;
+        ';
+
+        $statement = $db->prepare($request);
+        $statement->execute();
+
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    }
+
+
 }
 ?>

@@ -120,6 +120,11 @@ switch ($requestAction) {
         echo json_encode($result);
         break;
 
+    case 'ajouter_arbre_pied':
+        $result = Arbre::getAllPied();
+        echo json_encode($result);
+        break;
+
 # =============================================================
 # ===================== visualiser_detail =====================
 # =============================================================
