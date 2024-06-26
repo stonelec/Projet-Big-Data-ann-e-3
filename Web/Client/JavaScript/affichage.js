@@ -155,12 +155,12 @@ $(document).ready(function(){
 
         ajaxRequest('GET', 'PHP/request.php?action=port&id=' + id_arbre, function(response) {
 
-            console.log("hauteur totale de l'arbre : ", response);
+            console.log("Port de l'arbre : ", response);
 
             // Afficher le résultat dans votre page HTML
             $('.port_arbre').html(
                 '<p> Le port est : ' +
-                response+
+                response +
                 '</p>');
 
         });
