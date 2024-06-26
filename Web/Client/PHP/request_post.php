@@ -4,7 +4,9 @@ require_once('Arbre.php');
 require_once('User.php');
 
 // Récupérer la méthode de la requête (GET, POST, etc.)
-$requestMethod = $_SERVER['REQUEST_METHOD'];
+//$requestMethod = $_SERVER['REQUEST_METHOD'];
+
+$requestMethod = $_POST;
 
 echo "La méthode : ";
 echo json_encode($requestMethod);
