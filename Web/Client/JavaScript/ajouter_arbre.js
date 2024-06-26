@@ -142,35 +142,35 @@ $(document).ready(function (){
         let val_port
         let val_feuillage
 
-        $('#option_etat').change(function (){
+        $('#option_etat').select(function (){
 
             val_etat = $(this).val();
             console.log("ETAT RENTRER");
 
         });
 
-        $('#option_stade').change(function (){
+        $('#option_stade').select(function (){
 
             val_stade = $(this).val();
             console.log("STADE RENTRER");
 
         });
 
-        $('#option_pied').change(function (){
+        $('#option_pied').select(function (){
 
             val_pied = $(this).val();
             console.log("PIED RENTRER");
 
         });
 
-        $('#option_port').change(function (){
+        $('#option_port').select(function (){
 
             val_port = $(this).val();
             console.log("PORT RENTRER");
 
         });
 
-        $('#option_feuillage').change(function (){
+        $('#option_feuillage').select(function (){
 
             val_feuillage = $(this).val();
             console.log("FEUILLAGE RENTRER");
