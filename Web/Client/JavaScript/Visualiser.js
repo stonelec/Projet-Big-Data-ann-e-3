@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Afficher ou masquer les contenus en fonction du bouton cliqué
             if (button.querySelector('input').id === 'VisualiserTableau') {
-                ajaxRequest('GET', 'PHP/request.php/all_data', afficherTableau);
+                ajaxRequest('GET', 'PHP/request_m.php/all_data', afficherTableau);
                 //afficherTableau();
 
                 document.getElementById('VisualisationTableau').style.display = 'block';
