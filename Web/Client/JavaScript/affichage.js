@@ -254,12 +254,7 @@ $(document).ready(function (){
 
         }
 
-        $('#option_etat').html(
-            '<option>'+
-                'Please select'+
-            '</option>'+
-            options
-        );
+        $('#option_etat').html(options);
 
     });
 
