@@ -17,7 +17,6 @@ $requestAction_post = isset($_POST['action']) ? $_POST['action'] : '';
 
 echo json_encode([
 
-    'Le requestServeur : ' => $requestMethod,
     'Le requestAction_post : ' => $requestAction_post,
 
 ]);
