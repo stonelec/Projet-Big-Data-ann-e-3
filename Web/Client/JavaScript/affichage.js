@@ -252,7 +252,7 @@ $(document).ready(function (){
             console.log(response[i])
             $('#option_etat').html(
                 '<option>' +
-                response[i] +
+                response[i].name +
                 '</option>');
 
         }
