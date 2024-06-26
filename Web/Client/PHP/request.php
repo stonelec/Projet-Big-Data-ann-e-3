@@ -116,7 +116,7 @@ switch ($requestAction) {
             $ageEstim = Arbre::getAgeEstim($id);
             $troncDiam = Arbre::getDiametre($id);
 
-            $command = escapeshellcmd('cd ../../python/scripts/ && python3 fonc1.py ' . $hauteurTronc . ' ' . $ageEstim . ' ' . $troncDiam.' kmeans');
+            $command = escapeshellcmd('cd ../../python/fonctionnalite_1/ && python3 fonc1.py ' . $hauteurTronc . ' ' . $ageEstim . ' ' . $troncDiam.' kmeans');
             // $command = " python3 fonc1.py 50 10 20 kmeans "
             exec($command,$output, $result);
 
