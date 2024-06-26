@@ -1,4 +1,32 @@
+let prediction = ""
+
+const updatePrediction = (newPred) => {
+    prediction = newPred;
+    console.log('Prédiction actuelle :', prediction);
+};
+
+const radioButtons = document.querySelectorAll('.btn-group-toggle input[type="radio"]');
+console.log(radioButtons);
+radioButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        // Définir l'état en fonction de l'ID du bouton cliqué
+        switch (button.id) {
+            case 'PredireTaille':
+                updatePrediction('PredictionTaille');
+                break;
+            case 'PredireAge':
+                updatePrediction('PredictionAge');
+                break;
+            case 'PredireDeracinement':
+                updatePrediction('PredictionDeracinement');
+                break;
+        }
+    });
+});
+
+
 document.addEventListener('DOMContentLoaded', function() {
+
     // Sélectionner tous les boutons du groupe
     const buttons = document.querySelectorAll('.btn-tab-map .btn');
 
@@ -15,59 +43,11 @@ document.addEventListener('DOMContentLoaded', function() {
             button.classList.add('btn-selected');
             button.classList.remove('btn-unselected');
 
-            // Afficher ou masquer les contenus en fonction du bouton cliqué
-            if (button.querySelector('input').id === 'VisualiserTableau') {
-                ajaxRequest('GET', 'PHP/request_m.php/all_data', afficherTableau);
-                //afficherTableau();
-
-                document.getElementById('VisualisationTableau').style.display = 'block';
-                // Si vous avez un autre contenu pour la carte, vous pouvez le masquer ici
-                // document.getElementById('VisualisationCarte').style.display = 'none';
-            } else if (button.querySelector('input').id === 'VisualiserCarte') {
-                document.getElementById('VisualisationTableau').style.display = 'none';
-                // document.getElementById('VisualisationCarte').style.display = 'block';
-            }
         });
     });
-});
 
-
-
-
-// -----------------------------------------------------------------------------
-// ------------------------------ PAGE PREDICTION ------------------------------
-//------------------------------------------------------------------------------
-
-$("#PredireTaille").click(function (){
-
-    $('.prediction').html(
-
-        '<p>Taille</p>'
-
-    )
 
 });
-
-$("#PredireAge").click(function (){
-
-    $('.prediction').html(
-
-        '<p>Age</p>'
-
-    )
-
-});
-
-$("#PredireDeracinement").click(function (){
-
-    $('.prediction').html(
-
-        '<p>Déracinement</p>'
-
-    )
-
-});
-
 
 $(document).ready(function(){
 
@@ -103,27 +83,11 @@ $(document).ready(function(){
 
         });
 
-
-
-    });
-});
-
-
-// -----------------------------
-// ----- COORDONNEES ARBRE -----
-// -----------------------------
-
-$(document).ready(function(){
-
-    $('#arbreForm').submit(function(event) {
-
-        let id_arbre = $('#idArbre').val();
-        console.log("id de l'arbre : ", id_arbre);
-
+// -------------------------------------------------------------------------
+// ----------------------- COORDONNEES ARBRE -------------------------------
+// -------------------------------------------------------------------------
         ajaxRequest('GET', 'PHP/request.php?action=coordonnees&id=' + id_arbre, function(response) {
-
             console.log("Coordonnées de l'arbre : ", response);
-
             // Afficher le résultat dans votre page HTML
             $('.coordonnees_arbre').html(
                 '<p>Latitude totale est : ' +
@@ -135,24 +99,12 @@ $(document).ready(function(){
                 '</p>');
 
         });
-    });
-});
 
-// --------------------------------
-// ----- HAUTEUR TOTALE ARBRE -----
-// --------------------------------
-
-$(document).ready(function(){
-
-    $('#arbreForm').submit(function(event) {
-
-        let id_arbre = $('#idArbre').val();
-        console.log("id de l'arbre : ", id_arbre);
-
+// ----------------------------------------------------------------------
+// ----------------------- HAUTEUR TOTALE -------------------------------
+// ----------------------------------------------------------------------
         ajaxRequest('GET', 'PHP/request.php?action=hauteurtotale&id=' + id_arbre, function(response) {
-
             console.log("hauteur totale de l'arbre : ", response);
-
             // Afficher le résultat dans votre page HTML
             $('.hauteur_totale_arbre').html(
                 '<p> L\'hauteur totale est : ' +
@@ -160,24 +112,12 @@ $(document).ready(function(){
                 '</p>');
 
         });
-    });
-});
 
-// ----------------------------
-// ----- AGE ESTIME ARBRE -----
-// ----------------------------
-
-$(document).ready(function(){
-
-    $('#arbreForm').submit(function(event) {
-
-        let id_arbre = $('#idArbre').val();
-        console.log("id de l'arbre : ", id_arbre);
-
+// -----------------------------------------------------------------
+// ----------------------- AGE ESTIM -------------------------------
+// -----------------------------------------------------------------
         ajaxRequest('GET', 'PHP/request.php?action=age_estim&id=' + id_arbre, function(response) {
-
             console.log("Age estimé de l'arbre : ", response);
-
             // Afficher le résultat dans votre page HTML
             $('.age_estime_arbre').html(
                 '<p> L\'age estimé est : ' +
@@ -185,24 +125,11 @@ $(document).ready(function(){
                 '</p>');
 
         });
-    });
-});
-
-// ----------------------
-// ----- PORT ARBRE -----
-// ----------------------
-
-$(document).ready(function(){
-
-    $('#arbreForm').submit(function(event) {
-
-        let id_arbre = $('#idArbre').val();
-        console.log("id de l'arbre : ", id_arbre);
-
+// -----------------------------------------------------------------
+// ----------------------- TYPE PORT -------------------------------
+// -----------------------------------------------------------------
         ajaxRequest('GET', 'PHP/request.php?action=port&id=' + id_arbre, function(response) {
-
             console.log("Port de l'arbre : ", response);
-
             // Afficher le résultat dans votre page HTML
             $('.port_arbre').html(
                 '<p> Le port est : ' +
@@ -210,24 +137,12 @@ $(document).ready(function(){
                 '</p>');
 
         });
-    });
-});
 
-// ----------------------------
-// ----- REVETEMENT ARBRE -----
-// ----------------------------
-
-$(document).ready(function(){
-
-    $('#arbreForm').submit(function(event) {
-
-        let id_arbre = $('#idArbre').val();
-        console.log("id de l'arbre : ", id_arbre);
-
+// ------------------------------------------------------------------
+// ----------------------- REVETEMENT -------------------------------
+// ------------------------------------------------------------------
         ajaxRequest('GET', 'PHP/request.php?action=revetement&id=' + id_arbre, function(response) {
-
             console.log("Revetement de l'arbre : ", response);
-
             // Afficher le résultat dans votre page HTML
             $('.revetement_arbre').html(
                 '<p> Le revetement est : ' +
@@ -235,24 +150,12 @@ $(document).ready(function(){
                 '</p>');
 
         });
-    });
-});
 
-// ---------------------------
-// ----- FEUILLAGE ARBRE -----
-// ---------------------------
-
-$(document).ready(function(){
-
-    $('#arbreForm').submit(function(event) {
-
-        let id_arbre = $('#idArbre').val();
-        console.log("id de l'arbre : ", id_arbre);
-
+// -----------------------------------------------------------------
+// ----------------------- FEUILLAGE -------------------------------
+// -----------------------------------------------------------------
         ajaxRequest('GET', 'PHP/request.php?action=feuillage&id=' + id_arbre, function(response) {
-
             console.log("Feuillage de l'arbre : ", response);
-
             // Afficher le résultat dans votre page HTML
             $('.feuillage_arbre').html(
                 '<p> Le feuillage est : ' +
@@ -260,5 +163,11 @@ $(document).ready(function(){
                 '</p>');
 
         });
+
+// ==============================================================================
+// ================================ PREDICTIONS =================================
+// ==============================================================================
+
+
     });
 });
