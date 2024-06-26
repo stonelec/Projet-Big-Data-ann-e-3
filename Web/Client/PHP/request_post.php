@@ -20,6 +20,7 @@ $requestAction_post = isset($_POST['action']) ? $_POST['action'] : '';
 $val_espece = isset($_POST['val_espece']) ? $_POST['val_espece'] : NULL;
 $val_latitude = isset($_POST['val_latitude']) ? $_POST['val_latitude'] : NULL;
 $val_longitude = isset($_POST['val_longitude']) ? $_POST['val_longitude'] : NULL;
+$val_hauteur_totale = isset($_POST['val_hauteur_totale']) ? $_POST['val_hauteur_totale'] : NULL;
 $val_hauteur_tronc = isset($_POST['val_hauteur_tronc']) ? $_POST['val_hauteur_tronc'] : NULL;
 $val_diametre_tronc = isset($_POST['val_diametre_tronc']) ? $_POST['val_diametre_tronc'] : NULL;
 $val_etat = isset($_POST['val_etat']) ? $_POST['val_etat'] : NULL;
@@ -63,9 +64,15 @@ switch ($requestMethod) {
                 echo json_encode($result);
                 break;
 
+            default:
+                // Retourner une erreur si l'action n'est pas reconnue
+                echo json_encode(['error' => 'Action non reconnue']);
+                break;
+
         }
         break;
 
+        /*
     case 'POST':
 
         switch ($requestAction_post){
@@ -74,8 +81,7 @@ switch ($requestMethod) {
 
                 if($val_espece != NULL && $val_latitude != NULL && $val_longitude != NULL && $val_hauteur_tronc != NULL && $val_diametre_tronc != NULL &&
                     $val_etat != NULL && $val_stade != NULL && $val_pied != NULL && $val_port != NULL && $val_feuillage != NULL){
-                    //$result = Arbre::addArbre();
-                    $result = Arbre::getHauteurTronc(2);
+                    $result = Arbre::addNewArbre($val_espece, $val_latitude, $val_longitude, $val_hauteur_tronc, $val_diametre_tronc, $val_etat, $val_stade, $val_pied, $val_port, $val_feuillage);
                     echo json_encode($result);
                 }
                 break;
@@ -86,8 +92,13 @@ switch ($requestMethod) {
                 break;
 
         }
-        break;
+        break;*/
 
+
+    default:
+        // Retourner une erreur si l'action n'est pas reconnue
+        echo json_encode(['error' => 'Action non reconnue']);
+        break;
 }
 
 
