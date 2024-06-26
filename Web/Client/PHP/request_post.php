@@ -7,7 +7,7 @@ require_once('User.php');
 //$requestMethod = $_SERVER['REQUEST_METHOD'];
 
 $requestMethod = $_SERVER['REQUEST_METHOD'];
-echo json_encode($requestMethod);
+//echo json_encode($requestMethod);
 
 //echo "La méthode : ";
 //echo json_encode($requestMethod);
@@ -31,6 +31,12 @@ $id = isset($_GET['id']) ? $_GET['id'] : NULL;
 
 // ----- On récupère des variables de POST -----
 
+if($requestMethod == $_GET){
+
+
+    echo json_encode("on s'en fou c'est le get");
+
+}
 
 if($requestMethod == $_POST){
 
@@ -71,7 +77,11 @@ if($requestMethod == $_POST){
 
 }
 
-//echo json_encode("rien frere");
+else{
+
+    echo json_encode("rien frere je sais plus quoi faire je sais pas je vais pleurer");
+
+}
 
 //json_encode($val_latitude);
 //json_encode($val_hauteur_totale);
