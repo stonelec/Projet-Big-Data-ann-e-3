@@ -15,6 +15,13 @@ $id = isset($_GET['id']) ? $_GET['id'] : NULL;
 
 $requestAction_post = isset($_POST['action']) ? $_POST['action'] : '';
 
+echo json_encode([
+
+    'Le requestServeur : ' => $requestMethod,
+    'Le requestAction_post : ' => $requestAction_post,
+
+]);
+
 $result = null;
 
 // ----- On récupère des variables de POST -----
