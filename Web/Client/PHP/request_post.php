@@ -6,10 +6,12 @@ require_once('User.php');
 // Récupérer la méthode de la requête (GET, POST, etc.)
 
 $requestMethod = $_SERVER['REQUEST_METHOD'];
-//echo "RequestMethod : ";
-echo json_encode($requestMethod);
+
+//TOUT EST BON ICI :
+//echo json_encode($requestMethod);
 
 $requestAction = isset($_GET['action']) ? $_GET['action'] : '';
+echo json_encode($requestAction);
 $id = isset($_GET['id']) ? $_GET['id'] : NULL;
 
 $result = null;
