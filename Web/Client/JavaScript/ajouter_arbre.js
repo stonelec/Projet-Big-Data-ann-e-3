@@ -14,7 +14,7 @@ $(document).ready(function (){
     // ----- Noms des etats -----
     // --------------------------
 
-    ajaxRequest('GET', 'PHP/request.php?action=ajouter_arbre_etat', function(response) {
+    ajaxRequest('GET', 'PHP/request_post.php?action=ajouter_arbre_etat', function(response) {
 
         //console.log("Etats : ")
         //console.log(response)
@@ -35,7 +35,7 @@ $(document).ready(function (){
     // ----- Noms des stades -----
     // ---------------------------
 
-    ajaxRequest('GET', 'PHP/request.php?action=ajouter_arbre_stade', function(response) {
+    ajaxRequest('GET', 'PHP/request_post.php?action=ajouter_arbre_stade', function(response) {
 
         //console.log("Stades : ")
         //console.log(response)
@@ -57,7 +57,7 @@ $(document).ready(function (){
     // --------------------------
 
 
-    ajaxRequest('GET', 'PHP/request.php?action=ajouter_arbre_pied', function(response) {
+    ajaxRequest('GET', 'PHP/request_post.php?action=ajouter_arbre_pied', function(response) {
 
         //console.log("Pieds : ")
         //console.log(response)
@@ -78,7 +78,7 @@ $(document).ready(function (){
     // ----- Noms des ports -----
     // --------------------------
 
-    ajaxRequest('GET', 'PHP/request.php?action=ajouter_arbre_port', function(response) {
+    ajaxRequest('GET', 'PHP/request_post.php?action=ajouter_arbre_port', function(response) {
 
         //console.log("Ports : ")
         //console.log(response)
@@ -99,7 +99,7 @@ $(document).ready(function (){
     // ----- Noms des feuillages -----
     // -------------------------------
 
-    ajaxRequest('GET', 'PHP/request.php?action=ajouter_arbre_feuillage', function(response) {
+    ajaxRequest('GET', 'PHP/request_post.php?action=ajouter_arbre_feuillage', function(response) {
 
         //console.log("Feuillages : ")
         //console.log(response)
@@ -156,7 +156,13 @@ $(document).ready(function (){
         //console.log("Valeur feuillage : ", val_feuillage);
 
 
-        ajaxRequest('POST', 'PHP/request.php?action=ajouter_toutes_valeur&val_etat=' + val_etat + '&val_stade=' + val_stade, function(response) {
+        ajaxRequest('POST', 'PHP/request_post.php/ action=ajouter_toutes_valeur' +
+            '&val_espece=' + val_espece + '&val_latitude=' + val_latitude +
+            '&val_longitude=' + val_longitude + '&val_hauteur_totale=' + val_hauteur_totale +
+            '&val_hauteur_tronc=' + val_hauteur_tronc + '&val_diametre_tronc=' + val_diametre_tronc +
+            '&val_etat=' + val_etat + '&val_stade=' + val_stade +
+            '&val_pied=' + val_pied + '&val_port=' + val_port +
+            '&val_feuillage=' + val_feuillage, function(response) {
 
             console.log("Toutes les valeurs ont été ajouté");
             console.log("Ca doit afficher la hauteur du tronc : ", response)
