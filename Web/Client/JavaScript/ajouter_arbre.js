@@ -125,7 +125,7 @@ $(document).ready(function (){
 
         for(let i=0; i<response.length; i++) {
 
-            options += '<option>' + response[i].type_feuillage + '</option>';
+            options += '<option>' + response[i].feuillage + '</option>';
 
         }
 
