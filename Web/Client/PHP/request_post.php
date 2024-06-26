@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 } else {
     // Si la méthode n'est pas POST, retourne une erreur
     echo json_encode([
-        'error' => 'IL EST PAS RENTRER DANS LE POST'
+        'error' => 'marche pas'
     ]);
 }
 
