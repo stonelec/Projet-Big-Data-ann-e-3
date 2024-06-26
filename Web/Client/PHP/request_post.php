@@ -38,7 +38,7 @@ if($requestMethod == $_GET){
 
 }
 
-else if($requestMethod == $_POST){
+else{
 
     //$id_user = 1; //On pourra le récupérer en changeant l'url
     //$val_longitude = $_POST['val_longitude'];
@@ -77,11 +77,6 @@ else if($requestMethod == $_POST){
 
 }
 
-else{
-
-    echo json_encode("lol");
-
-}
 
 //json_encode($val_latitude);
 //json_encode($val_hauteur_totale);
