@@ -168,7 +168,7 @@ $(document).ready(function (){
         //console.log("Valeur feuillage : ", val_feuillage);
 
 
-        ajaxRequest('POST', 'PHP/request_post.php?action=ajouter_toutes_valeur'+'&val_hauteur_totale=' + val_hauteur_totale,function(response)  {
+        ajaxRequest('POST', 'PHP/request_post.php?action=ajouter_toutes_valeur'+'&val_latitude=' + val_latitude,function(response)  {
 
             console.log(response);
             //console.log("Toutes les valeurs ont été ajouté");
