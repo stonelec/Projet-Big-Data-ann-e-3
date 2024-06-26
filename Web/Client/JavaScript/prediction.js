@@ -6,6 +6,7 @@ const updatePrediction = (newPred) => {
 };
 
 const radioButtons = document.querySelectorAll('.btn-group-toggle input[type="radio"]');
+console.log(radioButtons);
 radioButtons.forEach(button => {
     button.addEventListener('click', () => {
         // Définir l'état en fonction de l'ID du bouton cliqué
