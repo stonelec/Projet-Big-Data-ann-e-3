@@ -135,4 +135,3 @@ switch ($requestMethod) {
         // Retourner une erreur si l'action n'est pas reconnue
         echo json_encode(['error' => 'IL EST PAS RENTRER DANS GET OU POST']);
         break;*/
-}
