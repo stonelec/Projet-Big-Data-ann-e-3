@@ -17,7 +17,9 @@ $(document).ready(function (){
 
         }
 
-        $('#option_etat').html(options);
+        $('#option_etat').html('<option>Please select</option>' +
+        options
+        );
 
     });
 
