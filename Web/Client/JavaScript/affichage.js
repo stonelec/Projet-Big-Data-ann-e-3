@@ -49,7 +49,7 @@ $(document).ready(function(){
         let id_arbre = $('#idArbre').val();
         console.log("id de l'arbre : ", id_arbre);
 
-        ajaxRequest('GET', 'PHP/request.php?action=hauteur_tronc&id=' + id_arbre, function(response) {
+        ajaxRequest('GET', 'PHP/request_e.php?action=hauteur_tronc&id=' + id_arbre, function(response) {
 
             console.log("Hauteur du tronc : ", response);
 
@@ -74,7 +74,7 @@ $(document).ready(function(){
         let id_arbre = $('#idArbre').val();
         console.log("id de l'arbre : ", id_arbre);
 
-        ajaxRequest('GET', 'PHP/request.php?action=diametre&id=' + id_arbre, function(response) {
+        ajaxRequest('GET', 'PHP/request_e.php?action=diametre&id=' + id_arbre, function(response) {
 
             console.log("Diametre de l'arbre : ", response);
 
@@ -99,7 +99,7 @@ $(document).ready(function(){
         let id_arbre = $('#idArbre').val();
         console.log("id de l'arbre : ", id_arbre);
 
-        ajaxRequest('GET', 'PHP/request.php?action=coordonnees&id=' + id_arbre, function(response) {
+        ajaxRequest('GET', 'PHP/request_e.php?action=coordonnees&id=' + id_arbre, function(response) {
 
             console.log("Coordonnées de l'arbre : ", response);
 
@@ -128,7 +128,7 @@ $(document).ready(function(){
         let id_arbre = $('#idArbre').val();
         console.log("id de l'arbre : ", id_arbre);
 
-        ajaxRequest('GET', 'PHP/request.php?action=hauteurtotale&id=' + id_arbre, function(response) {
+        ajaxRequest('GET', 'PHP/request_e.php?action=hauteurtotale&id=' + id_arbre, function(response) {
 
             console.log("hauteur totale de l'arbre : ", response);
 
