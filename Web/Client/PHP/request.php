@@ -138,7 +138,7 @@ switch ($requestAction) {
             $revet = Arbre::getRevetement($id);
 
 
-            $command = escapeshellcmd('python3 fonc2.py ' . $troncDiam . ' ' . $hauteurTot . ' ' . $hauteurTronc . ' ' . $feuillage . ' ' . $revet . ' kmeans');
+            $command = escapeshellcmd('python3 fonc2.py ' . $troncDiam . ' ' . $hauteurTot . ' ' . $hauteurTronc . ' ' . $feuillage . ' ' . $revet . 'rf');
             // $command = " python3 fonc1.py 50 10 20 kmeans "
             exec($command,$output, $result);
 
