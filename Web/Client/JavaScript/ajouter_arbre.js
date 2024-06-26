@@ -1,6 +1,6 @@
-// --------------------------------------------------------------------------------
-// ------------------------------ PAGE AJOUTER ARBRE ------------------------------
-//---------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------------------------------------------------
+// -------------------- Récupérer tous les noms de la base de données pour les mettres dans les options --------------------
+//--------------------------------------------------------------------------------------------------------------------------
 
 $(document).ready(function (){
 
@@ -113,6 +113,25 @@ $(document).ready(function (){
         $('#option_feuillage').html('<option selected disabled="disabled">Please select</option>' +
             option_feuillage
         );
+
+    });
+
+});
+
+// -------------------------------------------------------------------------------------------------------
+// -------------------- Récupérer tous les élements pour les mettres dans les options --------------------
+//--------------------------------------------------------------------------------------------------------
+
+$(document).ready(function (){
+
+    let valeur_espece
+
+    $('.form_ajouter_arbre').submit(function(event) {
+        event.preventDefault(); // Empêcher la soumission du formulaire
+        console.log("APPYUER")
+
+        let valeur_espece = $('#espece').val();
+        console.log("Valeur espece : ", valeur_espece);
 
     });
 
