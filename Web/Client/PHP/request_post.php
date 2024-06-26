@@ -37,8 +37,6 @@ $val_feuillage = isset($_POST['val_feuillage']) ? $_POST['val_feuillage'] : NULL
 $val_age_estime = isset($_POST['val_age_estime']) ? $_POST['val_age_estime'] : NULL;
 $val_revetement = isset($_POST['val_revetement']) ? $_POST['val_revetement'] : NULL;
 
-echo "JE RENTRE";
-
 switch ($requestMethod) {
 
     case 'GET':
@@ -85,8 +83,6 @@ switch ($requestMethod) {
 
     case 'POST':
 
-        echo "JE RENTRE";
-
         switch ($requestAction_post){
 
             case 'ajouter_toutes_valeur':
@@ -95,7 +91,6 @@ switch ($requestMethod) {
                     $val_diametre_tronc != NULL && $val_etat != NULL && $val_stade != NULL && $val_port != NULL && $val_pied != NULL &&
                     $val_espece != NULL && $val_remarquable != NULL && $val_feuillage != NULL && $val_age_estime != NULL &&
                     $val_revetement != NULL){
-                    echo "JE RENTRE";
                     $result = Arbre::addNewArbre($id_user, $val_longitude, $val_latitude, $val_hauteur_totale, $val_hauteur_tronc, $val_diametre_tronc, $val_etat, $val_stade,
                                 $val_port, $val_pied, $val_espece, $val_remarquable, $val_feuillage, $val_age_estime, $val_revetement);
                     echo json_encode($result);
@@ -104,7 +99,7 @@ switch ($requestMethod) {
 
             default:
                 // Retourner une erreur si l'action n'est pas reconnue
-                echo json_encode(['error' => 'Action non reconnue']);
+                echo json_encode(['error' => 'Action non reconnue default']);
                 break;
 
         }
