@@ -137,47 +137,18 @@ $(document).ready(function (){
         let val_diametre_tronc = $('#diametre_tronc').val();
 
         let val_etat = $('#option_etat').val();
-        let val_stade
-        let val_pied
-        let val_port
-        let val_feuillage
-
-        $('#option_stade').change(function (){
-
-            val_stade = $(this).val();
-            console.log("STADE RENTRER");
-
-        });
-
-        $('#option_pied').change(function (){
-
-            val_pied = $(this).val();
-            console.log("PIED RENTRER");
-
-        });
-
-        $('#option_port').change(function (){
-
-            val_port = $(this).val();
-            console.log("PORT RENTRER");
-
-        });
-
-        $('#option_feuillage').change(function (){
-
-            val_feuillage = $(this).val();
-            console.log("FEUILLAGE RENTRER");
-
-        });
-
+        let val_stade = $('#option_stade').val();
+        let val_pied = $('#option_pied').val();
+        let val_port = $('#option_port').val();
+        let val_feuillage = $('#option_feuillage').val();
 
         //Pour afficher les différentes valeurs dans la console
-        //console.log("Valeur espece : ", val_espece);
-        //console.log("Valeur latitude : ", val_latitude);
-        //console.log("Valeur longitude : ", val_longitude);
-        //console.log("Valeur hauteur totale : ", val_hauteur_totale);
-        //console.log("Valeur hauteur totale : ", val_hauteur_tronc);
-        //console.log("Valeur hauteur totale : ", val_diametre_tronc);
+        console.log("Valeur espece : ", val_espece);
+        console.log("Valeur latitude : ", val_latitude);
+        console.log("Valeur longitude : ", val_longitude);
+        console.log("Valeur hauteur totale : ", val_hauteur_totale);
+        console.log("Valeur hauteur totale : ", val_hauteur_tronc);
+        console.log("Valeur hauteur totale : ", val_diametre_tronc);
         console.log("Valeur etat : ", val_etat);
         console.log("Valeur stade : ", val_stade);
         console.log("Valeur pied : ", val_pied);
