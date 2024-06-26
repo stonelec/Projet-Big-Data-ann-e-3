@@ -6,14 +6,17 @@ const updatePrediction = (newPred) => {
 };
 
 document.getElementById("PredireTaille").addEventListener("click", function() {
+    console.log("pipi");
     updatePrediction("PredictionTaille");
 });
 
 document.getElementById("PredireAge").addEventListener("click", function() {
+    console.log("caca");
     updatePrediction("PredictionAge");
 });
 
 document.getElementById("PredireDeracinement").addEventListener("click", function() {
+    console.log("prout");
     updatePrediction("PredictionDeracinement");
 });
 
