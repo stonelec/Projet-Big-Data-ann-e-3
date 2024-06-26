@@ -68,6 +68,17 @@ switch ($requestAction) {
         }
         break;
 
+    case 'age_estim':
+        // Vérifier si l'ID est fourni
+        if ($id !== NULL) {
+            $result = Arbre::getAgeEstim($id);
+            echo json_encode($result);
+        } else {
+            // Retourner une erreur si l'ID n'est pas fourni
+            echo json_encode(['error' => 'ID de l\'arbre manquant']);
+        }
+        break;
+
     case 'infos':
         // Vérifier si l'ID est fourni
         if ($id !== NULL) {
