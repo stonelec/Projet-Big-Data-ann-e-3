@@ -118,7 +118,7 @@ switch ($requestAction) {
 
             $command = escapeshellcmd('python3 fonc1.py ' . $hauteurTronc . ' ' . $ageEstim . ' ' . $troncDiam.' kmeans');
             // $command = " python3 fonc1.py 50 10 20 kmeans "
-            $result = exec($command);
+            exec($command,$output, $result);
 
             echo json_encode($result);
         } else {
