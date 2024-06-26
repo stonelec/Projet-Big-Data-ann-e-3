@@ -6,24 +6,24 @@ require_once('User.php');
 // Récupérer la méthode de la requête (GET, POST, etc.)
 $requestMethod = $_SERVER['REQUEST_METHOD'];
 
-//echo "La méthode : ";
-//echo json_encode($requestMethod);
-
-// ----- AVEC GET -----
+echo "La méthode : ";
+echo json_encode($requestMethod);
 
 $requestAction = isset($_GET['action']) ? $_GET['action'] : '';
 $id = isset($_GET['id']) ? $_GET['id'] : NULL;
 
+
+// ----- AVEC GET -----
+
 //echo "Version GET : ";
-//echo json_encode($requestAction_get);
+//echo json_encode($requestAction);
 
 // ----- AVEC POST -----
 
+echo "Version POST : ";
+echo json_encode($requestAction);
 
-//echo "Version POST : ";
-//echo json_encode($requestAction_get);
-
-//$result = null;
+$result = null;
 
 // ----- On récupère des variables de POST -----
 
@@ -47,7 +47,9 @@ $val_feuillage = isset($_POST['val_feuillage']) ? $_POST['val_feuillage'] : NULL
 $val_age_estime = isset($_POST['val_age_estime']) ? $_POST['val_age_estime'] : NULL;
 $val_revetement = isset($_POST['val_revetement']) ? $_POST['val_revetement'] : NULL;
 
-json_encode($val_longitude);
+echo "la longitude : ";
+echo json_encode($val_longitude);
+
 //json_encode($val_latitude);
 //json_encode($val_hauteur_totale);
 //json_encode($val_hauteur_tronc);
