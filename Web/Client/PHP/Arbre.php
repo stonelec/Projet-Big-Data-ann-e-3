@@ -448,10 +448,9 @@ class Arbre {
          */
         $db = DB::connexion();
 
-        $request = 'SELECT tf.feuillage
-                    FROM arbre a
-                    JOIN type_feuillage tf ON a.id_feuillage = tf.id_feuillage
-                    WHERE a.id_arbre = :id_arbre;
+        $request = 'SELECT revetement
+                    FROM arbre
+                    WHERE id_arbre = :id_arbre;
         ';
 
         $statement = $db->prepare($request);
@@ -460,6 +459,26 @@ class Arbre {
 
         return $statement->fetch()[0];
     }
+    static function getFeuillage($id_arbre){
+            /**
+             * Fonction qui permet de récupérer le port d'un arbre
+             * @param $id_arbre
+             * @return mixed
+             */
+            $db = DB::connexion();
+
+            $request = 'SELECT tf.feuillage
+                        FROM arbre a
+                        JOIN type_feuillage tf ON a.id_feuillage = tf.id_feuillage
+                        WHERE a.id_arbre = :id_arbre;
+            ';
+
+            $statement = $db->prepare($request);
+            $statement->bindParam(':id_arbre', $id_arbre);
+            $statement->execute();
+
+            return $statement->fetch()[0];
+        }
 
 }
 ?>
