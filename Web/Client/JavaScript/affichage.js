@@ -244,6 +244,8 @@ $(document).ready(function(){
 
 $(document).ready(function (){
 
+    let options;
+
     ajaxRequest('GET', 'PHP/request.php?action=etat', function(response) {
 
         console.log("Feuillage de l'arbre : ", response);
