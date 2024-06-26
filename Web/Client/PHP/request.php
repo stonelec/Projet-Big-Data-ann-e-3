@@ -156,12 +156,6 @@ switch ($requestAction) {
         echo json_encode($result);
         break;
 
-    case 'ajouter_toutes_valeur':
-        $result = Arbre::getAllFeuillage();
-        echo json_encode($result);
-        break;
-
-
 # =============================================================
 # ===================== visualiser_detail =====================
 # =============================================================
@@ -207,6 +201,29 @@ switch ($requestAction) {
         } else {
             // Retourner une erreur si l'ID n'est pas fourni
             echo json_encode(['error' => 'ID de l\'arbre manquant']);
+        }
+        break;
+
+    default:
+        // Retourner une erreur si l'action n'est pas reconnue
+        echo json_encode(['error' => 'Action non reconnue']);
+        break;
+
+}
+
+// Récupérer les paramètres action et id depuis la requête GET
+$requestAction_post = isset($_POST['action']) ? $_POST['action'] : '';
+$val_etat = isset($_POST['val_etat']) ? $_POST['val_etat'] : NULL;
+$val_stade = isset($_POST['val_stade']) ? $_POST['val_stade'] : NULL;
+
+$result = null;
+
+switch ($requestAction_post){
+
+    case 'ajouter_toutes_valeur':
+        if($val_etat != NULL && $val_stade != NULL){
+            $result = Arbre::getHauteurTronc(2);
+            echo json_encode($result);
         }
         break;
 

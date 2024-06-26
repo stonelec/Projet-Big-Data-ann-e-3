@@ -16,8 +16,8 @@ $(document).ready(function (){
 
     ajaxRequest('GET', 'PHP/request.php?action=ajouter_arbre_etat', function(response) {
 
-        console.log("Etats : ")
-        console.log(response)
+        //console.log("Etats : ")
+        //console.log(response)
 
         for(let i=0; i<response.length; i++) {
 
@@ -37,8 +37,8 @@ $(document).ready(function (){
 
     ajaxRequest('GET', 'PHP/request.php?action=ajouter_arbre_stade', function(response) {
 
-        console.log("Stades : ")
-        console.log(response)
+        //console.log("Stades : ")
+        //console.log(response)
 
         for(let i=0; i<response.length; i++) {
 
@@ -59,8 +59,8 @@ $(document).ready(function (){
 
     ajaxRequest('GET', 'PHP/request.php?action=ajouter_arbre_pied', function(response) {
 
-        console.log("Pieds : ")
-        console.log(response)
+        //console.log("Pieds : ")
+        //console.log(response)
 
         for(let i=0; i<response.length; i++) {
 
@@ -80,8 +80,8 @@ $(document).ready(function (){
 
     ajaxRequest('GET', 'PHP/request.php?action=ajouter_arbre_port', function(response) {
 
-        console.log("Ports : ")
-        console.log(response)
+        //console.log("Ports : ")
+        //console.log(response)
 
         for(let i=0; i<response.length; i++) {
 
@@ -101,8 +101,8 @@ $(document).ready(function (){
 
     ajaxRequest('GET', 'PHP/request.php?action=ajouter_arbre_feuillage', function(response) {
 
-        console.log("Feuillages : ")
-        console.log(response)
+        //console.log("Feuillages : ")
+        //console.log(response)
 
         for(let i=0; i<response.length; i++) {
 
@@ -143,24 +143,25 @@ $(document).ready(function (){
         let val_feuillage = $('#option_feuillage').val();
 
         //Pour afficher les différentes valeurs dans la console
-        console.log("Valeur espece : ", val_espece);
-        console.log("Valeur latitude : ", val_latitude);
-        console.log("Valeur longitude : ", val_longitude);
-        console.log("Valeur hauteur totale : ", val_hauteur_totale);
-        console.log("Valeur hauteur totale : ", val_hauteur_tronc);
-        console.log("Valeur hauteur totale : ", val_diametre_tronc);
-        console.log("Valeur etat : ", val_etat);
-        console.log("Valeur stade : ", val_stade);
-        console.log("Valeur pied : ", val_pied);
-        console.log("Valeur port : ", val_port);
-        console.log("Valeur feuillage : ", val_feuillage);
+        //console.log("Valeur espece : ", val_espece);
+        //console.log("Valeur latitude : ", val_latitude);
+        //console.log("Valeur longitude : ", val_longitude);
+        //console.log("Valeur hauteur totale : ", val_hauteur_totale);
+        //console.log("Valeur hauteur totale : ", val_hauteur_tronc);
+        //console.log("Valeur hauteur totale : ", val_diametre_tronc);
+        //console.log("Valeur etat : ", val_etat);
+        //console.log("Valeur stade : ", val_stade);
+        //console.log("Valeur pied : ", val_pied);
+        //console.log("Valeur port : ", val_port);
+        //console.log("Valeur feuillage : ", val_feuillage);
 
-        /*
-        ajaxRequest('POST', 'PHP/request.php?action=ajouter_toutes_valeur', function(response) {
+
+        ajaxRequest('POST', 'PHP/request.php?action=ajouter_toutes_valeur&val_etat=' + val_etat + '&val_stade=' + val_stade, function(response) {
 
             console.log("Toutes les valeurs ont été ajouté");
+            console.log("Ca doit afficher la hauteur du tronc : ", response)
 
-        });*/
+        });
 
 
     });
