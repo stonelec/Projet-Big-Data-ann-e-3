@@ -98,11 +98,6 @@ switch ($requestMethod) {
                 }
                 break;
 
-            default:
-                // Retourner une erreur si l'action n'est pas reconnue
-                echo json_encode(['error' => 'IL EST RENTRER DANS POST MAIS PAS DANS LE CASE']);
-                break;
-
         }
         break;
 
