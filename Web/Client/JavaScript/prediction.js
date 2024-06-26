@@ -12,12 +12,15 @@ radioButtons.forEach(button => {
         // Définir l'état en fonction de l'ID du bouton cliqué
         switch (button.id) {
             case 'PredireTaille':
+                console.log('Prédire la taille');
                 updatePrediction('PredictionTaille');
                 break;
             case 'PredireAge':
+                console.log('Prédire l\'âge');
                 updatePrediction('PredictionAge');
                 break;
             case 'PredireDeracinement':
+                console.log('Prédire le déracinement');
                 updatePrediction('PredictionDeracinement');
                 break;
         }
