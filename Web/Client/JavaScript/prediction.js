@@ -160,7 +160,7 @@ $(document).ready(function(){
         });
 
         ajaxRequest('GET', 'PHP/request.php?action=prediction_deracinement&id=' + id_arbre, function (response) {
-            console.log("Prediction de l'âge de l'arbre : ", response);
+            console.log("Prediction du déracinement de l'arbre : ", response);
             // Afficher le résultat dans votre page HTML
             $('.prediction3').html(
                 '<p> La prediction du déracinement est : ' +
