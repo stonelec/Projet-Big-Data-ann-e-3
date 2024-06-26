@@ -99,7 +99,6 @@ html {
 }
 /*blanches*/
 .card-blanche {
-    width: 250px;
     border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     padding: 0 15px 10px 15px;
@@ -107,7 +106,6 @@ html {
     background-color: white;
 }
 .card-header-blanche {
-    width: 5rem;
     background-color: white;
     border-radius: 60px;
     padding: 5px 10px 5px 10px;
@@ -119,6 +117,7 @@ html {
 .card-blanche-content .label {
     color: var(--dark-beige);
     font-weight: bold;
+    margin-right: 50px;
 }
 /*verte*/
 
