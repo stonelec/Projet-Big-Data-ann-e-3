@@ -13,6 +13,7 @@ $requestMethod = $_SERVER['REQUEST_METHOD'];
 $request = substr($_SERVER['PATH_INFO'], 1);
 $request = explode('/', $request);
 $requestRessource = array_shift($request);
+
 switch ($requestMethod){
     case "GET":
         get($db, $requestRessource);
@@ -31,6 +32,7 @@ function get($db, $requestRessource) {
     if($requestRessource == 'all_data') {
         $data = Arbre::getAll();
     }
+
     // Envoi de la réponse au client.
     header('Content-Type: application/json; charset=utf-8');
     //header('Cache-control: no-store, no-cache, must-revalidate');
