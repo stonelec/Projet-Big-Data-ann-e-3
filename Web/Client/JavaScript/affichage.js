@@ -102,7 +102,7 @@ $(document).ready(function(){
 
             // Afficher le résultat dans votre page HTML
             $('.coordonnees_arbre').html(
-                '<p>Latitude totale est : ' +
+                '<p>Latitude totale de ça genre c\'est trop bien est : ' +
                 response[0] +
                 '</p>' +
                 '<p>' +
