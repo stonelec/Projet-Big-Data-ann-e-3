@@ -136,41 +136,34 @@ $(document).ready(function (){
         let val_hauteur_tronc = $('#hauteur_tronc').val();
         let val_diametre_tronc = $('#diametre_tronc').val();
 
-        let val_etat
+        let val_etat = $('#option_etat').val();
         let val_stade
         let val_pied
         let val_port
         let val_feuillage
 
-        $('#option_etat').select(function (){
-
-            val_etat = $(this).val();
-            console.log("ETAT RENTRER");
-
-        });
-
-        $('#option_stade').select(function (){
+        $('#option_stade').change(function (){
 
             val_stade = $(this).val();
             console.log("STADE RENTRER");
 
         });
 
-        $('#option_pied').select(function (){
+        $('#option_pied').change(function (){
 
             val_pied = $(this).val();
             console.log("PIED RENTRER");
 
         });
 
-        $('#option_port').select(function (){
+        $('#option_port').change(function (){
 
             val_port = $(this).val();
             console.log("PORT RENTRER");
 
         });
 
-        $('#option_feuillage').select(function (){
+        $('#option_feuillage').change(function (){
 
             val_feuillage = $(this).val();
             console.log("FEUILLAGE RENTRER");
