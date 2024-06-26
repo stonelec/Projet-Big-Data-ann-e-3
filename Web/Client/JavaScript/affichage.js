@@ -192,6 +192,27 @@ $(document).ready(function(){
 // ----- REVETEMENT ARBRE -----
 // ----------------------------
 
+$(document).ready(function(){
+
+    $('#arbreForm').submit(function(event) {
+
+        let id_arbre = $('#idArbre').val();
+        console.log("id de l'arbre : ", id_arbre);
+
+        ajaxRequest('GET', 'PHP/request.php?action=revetement&id=' + id_arbre, function(response) {
+
+            console.log("Revetement de l'arbre : ", response);
+
+            // Afficher le résultat dans votre page HTML
+            $('.revetement_arbre').html(
+                '<p> Le revetement est : ' +
+                response +
+                '</p>');
+
+        });
+    });
+});
+
 // ---------------------------
 // ----- FEUILLAGE ARBRE -----
 // ---------------------------

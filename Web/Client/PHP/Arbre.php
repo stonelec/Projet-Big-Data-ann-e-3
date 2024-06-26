@@ -440,5 +440,26 @@ class Arbre {
         return $statement->fetch()[0];
     }
 
+    static function getRevetement($id_arbre){
+        /**
+         * Fonction qui permet de récupérer le port d'un arbre
+         * @param $id_arbre
+         * @return mixed
+         */
+        $db = DB::connexion();
+
+        $request = 'SELECT tp.type_feuillage
+                    FROM arbre a
+                    JOIN type_feuillage tp ON a.id_port = tp.id_revetement
+                    WHERE id_arbre = :id_arbre;
+        ';
+
+        $statement = $db->prepare($request);
+        $statement->bindParam(':id_arbre', $id_arbre);
+        $statement->execute();
+
+        return $statement->fetch()[0];
+    }
+
 }
 ?>
