@@ -155,7 +155,7 @@ $(document).ready(function (){
         //console.log("Valeur port : ", val_port);
         //console.log("Valeur feuillage : ", val_feuillage);
 
-        /*
+
         ajaxRequest('POST', 'PHP/request_post.php/ action=ajouter_toutes_valeur' +
             '&val_espece=' + val_espece + '&val_latitude=' + val_latitude +
             '&val_longitude=' + val_longitude + '&val_hauteur_totale=' + val_hauteur_totale +
@@ -167,8 +167,7 @@ $(document).ready(function (){
             console.log("Toutes les valeurs ont été ajouté");
             console.log("Ca doit afficher la hauteur du tronc : ", response)
 
-        });*/
-
+        });
 
     });
 
