@@ -34,7 +34,7 @@ $result = null;
 if($requestMethod == $_POST){
 
     $id_user = 1; //On pourra le récupérer en changeant l'url
-    $val_longitude = $_POST['val_longitude'];
+    $val_longitude = $_GET['val_longitude'];
     $val_latitude = isset($_POST['val_latitude']) ? $_POST['val_latitude'] : NULL;
     $val_hauteur_totale = isset($_POST['val_hauteur_totale']) ? $_POST['val_hauteur_totale'] : NULL;
     $val_hauteur_tronc = isset($_POST['val_hauteur_tronc']) ? $_POST['val_hauteur_tronc'] : NULL;
