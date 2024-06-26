@@ -8,6 +8,7 @@ $requestMethod = $_SERVER['REQUEST_METHOD'];
 
 echo "La méthode : ";
 echo json_encode($requestMethod);
+echo "     ";
 
 $requestAction = isset($_GET['action']) ? $_GET['action'] : '';
 $id = isset($_GET['id']) ? $_GET['id'] : NULL;
@@ -22,6 +23,7 @@ $id = isset($_GET['id']) ? $_GET['id'] : NULL;
 
 echo "Version POST : ";
 echo json_encode($requestAction);
+echo "     ";
 
 $result = null;
 
@@ -49,6 +51,7 @@ $val_revetement = isset($_POST['val_revetement']) ? $_POST['val_revetement'] : N
 
 echo "la longitude : ";
 echo json_encode($val_longitude);
+echo "     ";
 
 //json_encode($val_latitude);
 //json_encode($val_hauteur_totale);
