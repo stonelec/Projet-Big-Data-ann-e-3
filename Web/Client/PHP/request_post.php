@@ -12,6 +12,7 @@ $requestMethod = $_SERVER['REQUEST_METHOD'];
 
 $requestAction = isset($_GET['action']) ? $_GET['action'] : '';
 echo json_encode($requestAction);
+
 $id = isset($_GET['id']) ? $_GET['id'] : NULL;
 
 $result = null;
