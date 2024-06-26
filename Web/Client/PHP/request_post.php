@@ -6,28 +6,28 @@ require_once('User.php');
 // Récupérer la méthode de la requête (GET, POST, etc.)
 $requestMethod = $_SERVER['REQUEST_METHOD'];
 
-echo "La méthode : ";
-echo json_encode($requestMethod);
+//echo "La méthode : ";
+//echo json_encode($requestMethod);
 
 // ----- AVEC GET -----
 
 $requestAction_get = isset($_GET['action']) ? $_GET['action'] : '';
 $id = isset($_GET['id']) ? $_GET['id'] : NULL;
 
-echo "Version GET : ";
-echo json_encode($requestAction_get);
+//echo "Version GET : ";
+//echo json_encode($requestAction_get);
 
 // ----- AVEC POST -----
 
 $requestAction_post = isset($_GET['action']) ? $_GET['action'] : '';
 
-echo "Version POST : ";
-echo json_encode($requestAction_get);
+//echo "Version POST : ";
+//echo json_encode($requestAction_get);
 
 //$result = null;
 
 // ----- On récupère des variables de POST -----
-/*
+
 $id_user = 1; //On pourra le récupérer en changeant l'url
 $val_longitude = isset($_POST['val_longitude']) ? $_POST['val_longitude'] : NULL;
 $val_latitude = isset($_POST['val_latitude']) ? $_POST['val_latitude'] : NULL;
@@ -93,7 +93,7 @@ switch ($requestMethod) {
 
     case 'POST':
 
-        switch ($requestAction_post){
+        switch ($requestAction_get){
 
             case 'ajouter_toutes_valeur':
 
@@ -121,5 +121,5 @@ switch ($requestMethod) {
         break;
 
 }
-*/
+
 
