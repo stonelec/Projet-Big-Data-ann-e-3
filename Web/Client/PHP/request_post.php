@@ -84,13 +84,9 @@ switch ($requestMethod) {
 
     case 'POST':
 
-        echo json_encode(['error' => 'DANS LE CASE']);
-
         switch ($requestAction_post){
 
             case 'ajouter_toutes_valeur':
-
-                echo json_encode(['error' => 'DANS AJOUTER TOUTES LES VALEURS']);
 
                 if($id_user != NULL && $val_longitude != NULL && $val_latitude != NULL && $val_hauteur_totale != NULL && $val_hauteur_tronc != NULL &&
                     $val_diametre_tronc != NULL && $val_etat != NULL && $val_stade != NULL && $val_port != NULL && $val_pied != NULL &&
