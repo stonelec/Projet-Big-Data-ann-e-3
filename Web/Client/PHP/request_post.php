@@ -24,8 +24,7 @@ $requestAction_post = isset($_GET['action']) ? $_GET['action'] : '';
 echo "Version POST : ";
 echo json_encode($requestAction_get);
 
-
-$result = null;
+//$result = null;
 
 // ----- On récupère des variables de POST -----
 /*
