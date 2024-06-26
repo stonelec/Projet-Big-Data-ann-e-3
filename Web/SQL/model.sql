@@ -85,11 +85,11 @@ CREATE TABLE public.arbre(
                              hauteur_tot      FLOAT  NOT NULL ,
                              hauteur_tronc    FLOAT  NOT NULL ,
                              diametre_tronc   FLOAT  NOT NULL ,
-                             remarquable      BOOL  NOT NULL ,
+                             remarquable      VARCHAR (3) NOT NULL ,
                              latitude         FLOAT  NOT NULL ,
                              longitude        FLOAT  NOT NULL ,
                              age_estim        INT  NOT NULL ,
-                             revetement       BOOL  NOT NULL ,
+                             revetement       VARCHAR (3) NOT NULL ,
                              id_user          INT  NOT NULL ,
                              id_etat_arbre    INT  NOT NULL ,
                              id_stade_dev     INT  NOT NULL ,
@@ -105,3 +105,4 @@ CREATE TABLE public.arbre(
     ,CONSTRAINT arbre_type_de_port3_FK FOREIGN KEY (id_port) REFERENCES public.type_de_port(id_port)
     ,CONSTRAINT arbre_type_feuillage4_FK FOREIGN KEY (id_feuillage) REFERENCES public.type_feuillage(id_feuillage)
 )WITHOUT OIDS;
+

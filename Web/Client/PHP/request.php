@@ -136,14 +136,40 @@ switch ($requestAction) {
             $troncDiam = Arbre::getDiametre($id);
             $hauteurTot = Arbre::getHauteurTot($id);
             $hauteurTronc = Arbre::getHauteurTronc($id);
-            //$feuillage = Arbre::getFeuillage($id);
-            //$revet = Arbre::getRevetement($id);
+            $feuillage = Arbre::getFeuillage($id);
+            $revet = Arbre::getRevetement($id);
 
-
-            //$command = escapeshellcmd('python3 fonc2.py ' . $troncDiam . ' ' . $hauteurTot . ' ' . $hauteurTronc . ' ' . $feuillage . ' ' . $revet . ' rf');
-            $command = escapeshellcmd('python3 fonc2.py ' . $troncDiam . ' ' . $hauteurTot . ' ' . $hauteurTronc . ' rf');
+            $command = 'cd ../../python/scripts && python3 fonc2.py '.$troncDiam.' '.$hauteurTot.' '.$hauteurTronc.' '.$feuillage.' '.$revet.' kmeans';
 
             exec($command,$output, $result);
+
+            $result = file_get_contents('../../python/scripts/fonc2.json');
+
+            echo json_encode($result);
+        } else {
+            // Retourner une erreur si l'ID n'est pas fourni
+            echo json_encode(['error' => 'ID de l\'arbre manquant']);
+        }
+        break;
+
+    case 'prediction_deracinement':
+        // Vérifier si l'ID est fourni
+        if ($id !== NULL) {
+
+            $hauteurTot = Arbre::getHauteurTot($id);
+            $hauteurTronc = Arbre::getHauteurTronc($id);
+            $troncDiam = Arbre::getDiametre($id);
+            $fkPort = Arbre::getPort($id);
+            $feuillage = Arbre::getFeuillage($id);
+            $X = Arbre::getCoordonnees($id)[0];
+            $Y = Arbre::getCoordonnees($id)[1];
+
+            // ['haut_tot', 'haut_tronc', 'tronc_diam', 'fk_port', 'feuillage', 'X', 'Y']
+            $command = 'cd ../../python/scripts && python3 fonc3.py '.$hauteurTot.' '.$hauteurTronc.' '.$troncDiam.' '.$fkPort.' '.$feuillage.' '.$X.' '.$Y.' kmeans';
+
+            exec($command,$output, $result);
+
+            $result = file_get_contents('../../python/scripts/fonc3.json');
 
             echo json_encode($result);
         } else {
