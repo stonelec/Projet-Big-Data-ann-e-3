@@ -140,6 +140,7 @@ $(document).ready(function(){
 // ==============================================================================
 // ================================ PREDICTIONS =================================
 // ==============================================================================
+        /*
         ajaxRequest('GET', 'PHP/request.php?action=prediction_taille&id=' + id_arbre, function (response) {
             console.log("Prediction de la taille de l'arbre : ", response);
             // Afficher le résultat dans votre page HTML
@@ -148,5 +149,16 @@ $(document).ready(function(){
                 response +
                 '</p>');
         });
+        */
+
+        ajaxRequest('GET', 'PHP/request.php?action=prediction_age&id=' + id_arbre, function (response) {
+            console.log("Prediction de la taille de l'arbre : ", response);
+            // Afficher le résultat dans votre page HTML
+            $('.prediction').html(
+                '<p> La prediction de l\'âge est : ' +
+                response +
+                '</p>');
+        });
+
     });
 });
