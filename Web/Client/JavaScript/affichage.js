@@ -253,7 +253,7 @@ $(document).ready(function (){
         for(let i=0; i<response.length; i++) {
 
             console.log(response[i])
-            options += '<option>' + response[i].name + '</option>';
+            options += '<option>' + response[i].etat_arb + '</option>';
 
         }
 
