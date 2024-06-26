@@ -52,7 +52,7 @@ else{
     //$val_port = isset($_POST['val_port']) ? $_POST['val_port'] : NULL; //IL FAUT SON ID
     //$val_pied = isset($_POST['val_pied']) ? $_POST['val_pied'] : NULL; //IL FAUT SON ID
 
-    $val_espece = isset($_POST['val_espece']) ? $_POST['val_espece'] : NULL;
+    //$val_espece = isset($_POST['val_espece']) ? $_POST['val_espece'] : NULL;
     //$val_remarquable = isset($_POST['$val_remarquable']) ? $_POST['$val_remarquable'] : NULL;
 
     //$val_feuillage = isset($_POST['val_feuillage']) ? $_POST['val_feuillage'] : NULL; //IL FAUT SON ID
@@ -69,13 +69,16 @@ else{
     //json_encode($val_stade);
     //json_encode($val_port);
     //json_encode($val_pied);
-    echo json_encode($val_espece);
+    //echo json_encode($val_espece);
     //json_encode($val_remarquable);
     //json_encode($val_feuillage);
     //json_encode($val_age_estime);
     //json_encode($val_revetement);
 
 }
+
+$val_espece = isset($_POST['val_espece']) ? $_POST['val_espece'] : NULL;
+echo json_encode($val_espece);
 
 switch ($requestMethod) {
 
