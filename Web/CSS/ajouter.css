@@ -1,0 +1,35 @@
+.valeurs{
+    display: flex;
+    margin: 0 auto;
+    width: 50rem;
+
+}
+.valeurs .valeurs-gauche{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    height: 100%;
+    align-items: center;
+}
+
+.valeurs .valeurs-droite{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    height: 100%;
+    align-items: center;
+}
+.add-button{
+    display: flex;
+    justify-content: center;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+@media only screen and (max-width: 900px) {
+    .valeurs{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+}

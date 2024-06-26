@@ -15,7 +15,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
     <!-- Inclure le CSS -->
-    <link href="Client/style.css" rel="stylesheet">
+    <link href="CSS/style.css" rel="stylesheet">
 
 </head>
 
@@ -62,9 +62,11 @@
         <p class="titre-page">Stock</p>
         <p class="sous-titre-page">Veuillez compléter ce formulaire <br>
             pour ajouter un arbre à la base de données</p>
+
+
         <div class="btn-group" role="group" aria-label="Basic example">
-            <button type="button" class="btn btn-green shadow-none">Tableau</button>
-            <button type="button" class="btn btn-brown shadow-none">Carte</button>
+            <a type="button" class="btn btn-green shadow-none" href="">Tableau</a>
+            <a type="button" class="btn btn-brown shadow-none" href="">Carte</a>
         </div>
 
 
@@ -103,11 +105,12 @@
                 </select>
             </div>
         </div>
+
         <div class="form-individual">
             <div class="custom-card">
                 <p>ID</p>
                 <div class="d-flex flex-row mb-3">
-                    <input class="form-control " id="ID" aria-describedby="id arbre" placeholder="ID de l'arbre">
+                    <input class="form-control" id="ID" aria-describedby="id arbre" placeholder="ID de l'arbre">
                     <button class="btn  btn-brown shadow-none" type="submit">Prédire</button>
                 </div>
             </div>
@@ -116,12 +119,13 @@
 
 
         <div class="card-resulte">
-            <div class="card-header-resulte">Infos</div>
-            <div class="card-data-resulte">
-                <div style="background-color: #504136">Espece</div>
-                <div>1800</div>
+            <div class="card-header-resulte">
+                <div>Prédiction : </div>
             </div>
-
+            <div class="card-data-resulte">
+                <div>Espece</div>
+                <div style="color: #6F8F72; font-weight: bold;">1800</div>
+            </div>
         </div>
 
     </div>
