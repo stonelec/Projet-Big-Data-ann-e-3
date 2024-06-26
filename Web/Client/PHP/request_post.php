@@ -17,6 +17,7 @@ $result = null;
 
 $requestAction_post = isset($_POST['action']) ? $_POST['action'] : '';
 
+echo "request post";
 echo ($requestAction_post);
 
 $id_user = 1; //On pourra le récupérer en changeant l'url
