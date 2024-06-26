@@ -11,7 +11,7 @@ $requestMethod = $_SERVER['REQUEST_METHOD'];
 
 // ----- AVEC GET -----
 
-$requestAction_get = isset($_GET['action']) ? $_GET['action'] : '';
+$requestAction = isset($_GET['action']) ? $_GET['action'] : '';
 $id = isset($_GET['id']) ? $_GET['id'] : NULL;
 
 //echo "Version GET : ";
@@ -19,7 +19,6 @@ $id = isset($_GET['id']) ? $_GET['id'] : NULL;
 
 // ----- AVEC POST -----
 
-$requestAction_post = isset($_GET['action']) ? $_GET['action'] : '';
 
 //echo "Version POST : ";
 //echo json_encode($requestAction_get);
@@ -52,11 +51,7 @@ switch ($requestMethod) {
 
     case 'GET':
 
-        switch ($requestAction_get) {
-
-            # =========================================================
-            # ===================== ajouter_arbre =====================
-            # =========================================================
+        switch ($requestAction) {
 
             case 'ajouter_arbre_etat':
                 $result = Arbre::getAllEtat();
@@ -93,7 +88,7 @@ switch ($requestMethod) {
 
     case 'POST':
 
-        switch ($requestAction_get){
+        switch ($requestAction){
 
             case 'ajouter_toutes_valeur':
 
