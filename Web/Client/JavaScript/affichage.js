@@ -146,9 +146,34 @@ $(document).ready(function(){
 // ----- PORT ARBRE -----
 // ----------------------
 
+$(document).ready(function(){
+
+    $('#arbreForm').submit(function(event) {
+
+        let id_arbre = $('#idArbre').val();
+        console.log("id de l'arbre : ", id_arbre);
+
+        ajaxRequest('GET', 'PHP/request.php?action=port&id=' + id_arbre, function(response) {
+
+            console.log("hauteur totale de l'arbre : ", response);
+
+            // Afficher le résultat dans votre page HTML
+            $('.port_arbre').html(
+                '<p> Le port est : ' +
+                response+
+                '</p>');
+
+        });
+    });
+});
+
 // ----------------------------
 // ----- REVETEMENT ARBRE -----
 // ----------------------------
+
+// ---------------------------
+// ----- FEUILLAGE ARBRE -----
+// ---------------------------
 
 // --------------------------------------------------------------------------------
 // ------------------------------ PAGE AJOUTER ARBRE ------------------------------
