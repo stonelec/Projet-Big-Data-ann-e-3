@@ -5,26 +5,16 @@ const updatePrediction = (newPred) => {
     console.log('Prédiction actuelle :', prediction);
 };
 
-const radioButtons = document.querySelectorAll('.btn-group-toggle input[type="radio"]');
-console.log(radioButtons);
-radioButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        // Définir l'état en fonction de l'ID du bouton cliqué
-        switch (button.id) {
-            case 'PredireTaille':
-                console.log('Prédire la taille');
-                updatePrediction('PredictionTaille');
-                break;
-            case 'PredireAge':
-                console.log('Prédire l\'âge');
-                updatePrediction('PredictionAge');
-                break;
-            case 'PredireDeracinement':
-                console.log('Prédire le déracinement');
-                updatePrediction('PredictionDeracinement');
-                break;
-        }
-    });
+document.getElementById("PredireTaille").addEventListener("click", function() {
+    updatePrediction("PredictionTaille");
+});
+
+document.getElementById("PredireAge").addEventListener("click", function() {
+    updatePrediction("PredictionAge");
+});
+
+document.getElementById("PredireDeracinement").addEventListener("click", function() {
+    updatePrediction("PredictionDeracinement");
 });
 
 
