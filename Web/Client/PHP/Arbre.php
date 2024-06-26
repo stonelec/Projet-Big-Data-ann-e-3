@@ -224,9 +224,9 @@ class Arbre {
      */
         $db = DB::connexion();
 
-        $request = 'SELECT type_port 
+        $request = 'SELECT tdp.type_port
                     FROM arbre a
-                    JOIN type_de_port tp ON a.id_type_port = tp.id_type_port   
+                    JOIN type_de_port tdp ON a.id_port = tdp.id_port
                     WHERE a.id_arbre = :id_arbre;
         ';
 
@@ -245,18 +245,129 @@ class Arbre {
      */
         $db = DB::connexion();
 
-        $request = 'SELECT a.id_arbre, a.espece, ea.etat_arb, sd.stade_dev, tp.type_pied, tdp.type_port, a.remarquable, a.latitude, a.longitude, a.hauteur_tot, a.hauteur_tronc, a.diametre_tronc
+        $request = 'SELECT a.id_arbre, a.espece, ea.etat_arb, sd.stade_dev, tp.type_pied, tdp.type_port, a.remarquable, a.latitude, a.longitude, a.hauteur_tot, a.hauteur_tronc, a.diametre_tronc, tf_feuillage, a.age_estim
                     FROM arbre a
                     JOIN etat_arbre ea ON a.id_etat_arbre = ea.id_etat_arbre
                     JOIN stade_de_dev sd ON a.id_stade_dev = sd.id_stade_dev
                     JOIN type_de_pied tp ON a.id_pied = tp.id_pied
-                    JOIN type_de_port tdp ON a.id_port = tdp.id_port;
+                    JOIN type_de_port tdp ON a.id_port = tdp.id_port
+                    JOIN type_feuillage tf ON a.id_feuillage = tf.id_feuillage;
         ';
 
         $statement = $db->prepare($request);
         $statement->execute();
 
         return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    static function getAll_byID($id_arbre){
+        /**
+         * Fonction qui permet de récupérer toutes les informations
+         * @param $id_arbre
+         * @return mixed
+         */
+        $db = DB::connexion();
+
+        $request = 'SELECT a.id_arbre, a.espece, ea.etat_arb, sd.stade_dev, tp.type_pied, tdp.type_port, a.remarquable, a.latitude, a.longitude, a.hauteur_tot, a.hauteur_tronc, a.diametre_tronc, tf.feuillage, a.age_estim
+                    FROM arbre a
+                    JOIN etat_arbre ea ON a.id_etat_arbre = ea.id_etat_arbre
+                    JOIN stade_de_dev sd ON a.id_stade_dev = sd.id_stade_dev
+                    JOIN type_de_pied tp ON a.id_pied = tp.id_pied
+                    JOIN type_de_port tdp ON a.id_port = tdp.id_port
+                    JOIN type_feuillage tf ON a.id_feuillage = tf.id_feuillage
+                    WHERE a.id_arbre = :id_arbre;
+        ';
+
+        $statement = $db->prepare($request);
+        $statement->bindParam(':id_arbre', $id_arbre);
+        $statement->execute();
+
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    static function getVisuel_byID($id_arbre){
+        /**
+         * Fonction qui permet de récupérer le visuel d'un arbre : feuillage et port
+         * @param $id_arbre
+         * @return mixed
+         */
+        $db = DB::connexion();
+
+        $request = 'SELECT tf.feuillage, tp.type_port
+                    FROM arbre a 
+                    JOIN type_de_port tp ON a.id_port = tp.id_port
+                    JOIN type_feuillage tf ON a.id_feuillage = tf.id_feuillage
+                    WHERE id_arbre = :id_arbre;
+        ';
+
+        $statement = $db->prepare($request);
+        $statement->bindParam(':id_arbre', $id_arbre);
+        $statement->execute();
+
+        return $statement->fetch()[0];
+    }
+
+    static function getDimensions_byID($id_arbre){
+        /**
+         * Fonction qui permet de récupérer les dimensions d'un arbre
+         * @param $id_arbre
+         * @return mixed
+         */
+        $db = DB::connexion();
+
+        $request = 'SELECT hauteur_tronc, diametre_tronc, hauteur_tot
+                    FROM arbre 
+                    WHERE id_arbre = :id_arbre;
+        ';
+
+        $statement = $db->prepare($request);
+        $statement->bindParam(':id_arbre', $id_arbre);
+        $statement->execute();
+
+        return $statement->fetch();
+    }
+
+    static function getSol_byID($id_arbre) {
+        /**
+         * Fonction qui permet de récupérer le sol d'un arbre : Pied et Coordonnées
+         * @param $id_arbre
+         * @return mixed
+         */
+        $db = DB::connexion();
+
+        $request = 'SELECT tp.type_pied, longitude, latitude
+                    FROM arbre a 
+                    JOIN type_de_pied tp ON a.id_pied = tp.id_pied
+                    WHERE id_arbre = :id_arbre;
+        ';
+
+        $statement = $db->prepare($request);
+        $statement->bindParam(':id_arbre', $id_arbre);
+        $statement->execute();
+
+        return $statement->fetch()[0];
+    }
+
+    static function getInfos_byID($id_arbre){
+        /**
+         * Fonction qui permet de récupérer les informations d'un arbre : espece, remarquable, etat et stade de développement
+         * @param $id_arbre
+         * @return mixed
+         */
+        $db = DB::connexion();
+
+        $request = 'SELECT espece, remarquable, ea.etat_arb, sd.stade_dev
+                    FROM arbre a
+                    JOIN etat_arbre ea ON a.id_etat_arbre = ea.id_etat_arbre
+                    JOIN stade_de_dev sd ON a.id_stade_dev = sd.id_stade_dev
+                    WHERE id_arbre = :id_arbre;
+        ';
+
+        $statement = $db->prepare($request);
+        $statement->bindParam(':id_arbre', $id_arbre);
+        $statement->execute();
+
+        return $statement->fetch();
     }
 
 
