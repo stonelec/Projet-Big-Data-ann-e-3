@@ -7,6 +7,7 @@ require_once('User.php');
 //$requestMethod = $_SERVER['REQUEST_METHOD'];
 
 $requestMethod = $_SERVER['REQUEST_METHOD'];
+echo json_encode($requestMethod);
 
 //echo "La méthode : ";
 //echo json_encode($requestMethod);
@@ -14,8 +15,6 @@ $requestMethod = $_SERVER['REQUEST_METHOD'];
 
 $requestAction = isset($_GET['action']) ? $_GET['action'] : '';
 $id = isset($_GET['id']) ? $_GET['id'] : NULL;
-
-echo json_encode($requestAction);
 
 // ----- AVEC GET -----
 
