@@ -21,13 +21,33 @@ $result = null;
 
 // ----- On récupère des variables de POST -----
 
-if($requestMethod == $_GET){
+if($requestAction == "ajouter_arbre_etat"){
 
-    echo json_encode("GET good");
+    echo json_encode("GET ajouter_arbre_etat");
+
+}
+if($requestAction == "ajouter_arbre_stade"){
+
+    echo json_encode("GET ajouter_arbre_stade");
+
+}
+if($requestAction == "ajouter_arbre_pied"){
+
+    echo json_encode("GET ajouter_arbre_pied");
+
+}
+if($requestAction == "ajouter_arbre_port"){
+
+    echo json_encode("GET ajouter_arbre_port");
+
+}
+if($requestAction == "ajouter_arbre_feuillage"){
+
+    echo json_encode("GET ajouter_arbre_feuillage");
 
 }
 
-if($requestMethod == $_POST){
+if($requestAction == "ajouter_toutes_valeur"){
 
     //$id_user = 1; //On pourra le récupérer en changeant l'url
     //$val_longitude = isset($_GET['$val_longitude']) ? $_GET['$val_longitude'] : NULL;
@@ -63,6 +83,12 @@ if($requestMethod == $_POST){
     //echo json_encode($val_feuillage);
     //echo json_encode($val_age_estime);
     //echo json_encode($val_revetement);
+
+}
+
+else{
+
+    echo json_encode("erreur");
 
 }
 
