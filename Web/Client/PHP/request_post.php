@@ -17,6 +17,15 @@ $result = null;
 
 $requestAction_post = isset($_POST['action']) ? $_POST['action'] : '';
 
+
+echo "GET : ";
+echo ($requestAction_get);
+
+
+echo "POST : ";
+echo ($requestAction_post);
+
+/*
 $id_user = 1; //On pourra le récupérer en changeant l'url
 $val_longitude = isset($_POST['val_longitude']) ? $_POST['val_longitude'] : NULL;
 $val_latitude = isset($_POST['val_latitude']) ? $_POST['val_latitude'] : NULL;
@@ -109,5 +118,5 @@ switch ($requestMethod) {
         echo json_encode(['error' => 'Action non reconnue du POST']);
         break;
 }
-
+*/
 
