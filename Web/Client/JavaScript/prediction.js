@@ -11,13 +11,13 @@ radioButtons.forEach(button => {
         // Définir l'état en fonction de l'ID du bouton cliqué
         switch (button.id) {
             case 'PredireTaille':
-                updatePrediction('taille');
+                updatePrediction('PredictionTaille');
                 break;
             case 'PredireAge':
-                updatePrediction('age');
+                updatePrediction('PredictionAge');
                 break;
             case 'PredireDeracinement':
-                updatePrediction('deracinement');
+                updatePrediction('PredictionDeracinement');
                 break;
         }
     });
