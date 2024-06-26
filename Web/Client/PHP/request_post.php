@@ -48,19 +48,19 @@ $val_age_estime = isset($_POST['val_age_estime']) ? $_POST['val_age_estime'] : N
 $val_revetement = isset($_POST['val_revetement']) ? $_POST['val_revetement'] : NULL;
 
 json_encode($val_longitude);
-json_encode($val_latitude);
-json_encode($val_hauteur_totale);
-json_encode($val_hauteur_tronc);
-json_encode($val_diametre_tronc);
-json_encode($val_etat);
-json_encode($val_stade);
-json_encode($val_port);
-json_encode($val_pied);
-json_encode($val_espece);
-json_encode($val_remarquable);
-json_encode($val_feuillage);
-json_encode($val_age_estime);
-json_encode($val_revetement);
+//json_encode($val_latitude);
+//json_encode($val_hauteur_totale);
+//json_encode($val_hauteur_tronc);
+//json_encode($val_diametre_tronc);
+//json_encode($val_etat);
+//json_encode($val_stade);
+//json_encode($val_port);
+//json_encode($val_pied);
+//json_encode($val_espece);
+//json_encode($val_remarquable);
+//json_encode($val_feuillage);
+//json_encode($val_age_estime);
+//json_encode($val_revetement);
 
 
 /*
