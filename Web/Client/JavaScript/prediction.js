@@ -69,10 +69,6 @@ $("#PredireDeracinement").click(function (){
 });
 
 
-// -------------------------------
-// ----- HAUTEUR TRONC ARBRE -----
-// -------------------------------
-
 $(document).ready(function(){
 
     $('#arbreForm').submit(function(event) {
@@ -81,10 +77,11 @@ $(document).ready(function(){
         let id_arbre = $('#idArbre').val();
         console.log("id de l'arbre : ", id_arbre);
 
+// ---------------------------------------------------------------------------
+// ----------------------- HAUTEUR TRONC ARBRE -------------------------------
+// ---------------------------------------------------------------------------
         ajaxRequest('GET', 'PHP/request.php?action=hauteur_tronc&id=' + id_arbre, function(response) {
-
             console.log("Hauteur du tronc : ", response);
-
             // Afficher le résultat dans votre page HTML
             $('.hauteur_tronc_arbre').html(
                 '<p>Hauteur du tronc est : ' +
@@ -92,24 +89,12 @@ $(document).ready(function(){
                 '</p>');
 
         });
-    });
-});
 
-// --------------------------
-// ----- DIAMETRE ARBRE -----
-// --------------------------
-
-$(document).ready(function(){
-
-    $('#arbreForm').submit(function(event) {
-
-        let id_arbre = $('#idArbre').val();
-        console.log("id de l'arbre : ", id_arbre);
-
+// ----------------------------------------------------------------------------
+// ----------------------- DIAMETRE TRONC ARBRE -------------------------------
+// ----------------------------------------------------------------------------
         ajaxRequest('GET', 'PHP/request.php?action=diametre&id=' + id_arbre, function(response) {
-
             console.log("Diametre de l'arbre : ", response);
-
             // Afficher le résultat dans votre page HTML
             $('.diametre_arbre').html(
                 '<p>Diametre totale est : ' +
@@ -117,8 +102,12 @@ $(document).ready(function(){
                 '</p>');
 
         });
+
+
+
     });
 });
+
 
 // -----------------------------
 // ----- COORDONNEES ARBRE -----
