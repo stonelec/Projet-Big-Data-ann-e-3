@@ -22,7 +22,7 @@ echo "request post";
 echo ($requestAction_post);
 */
 
-$action = isset($_POST['action']) ? $_POST['action'] : (isset($_GET['action']) ? $_GET['action'] : '');
+$action = isset($_POST['action']) ? $_POST['action'] : '';
 
 echo "Action reçue : ";
 echo $action;

@@ -187,11 +187,8 @@ $(document).ready(function (){
 
 $(document).ready(function (){
 
-    ajaxRequest('POST', 'PHP/request_post.php?action=ajouter_toutes_valeur', function(response) {
-
-        console.log("Toutes les valeurs ont été ajouté");
-        console.log("Ca doit afficher la hauteur du tronc : ", response)
-
+    ajaxRequest('POST', 'PHP/request_post.php', function(response) {
+        console.log("Toutes les valeurs ont été ajoutées");
+        console.log("Réponse du serveur : ", response);
     });
-
 });
