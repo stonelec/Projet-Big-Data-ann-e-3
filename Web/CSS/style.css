@@ -3,22 +3,22 @@
 /* =================================== GENERAL =================================== */
 @font-face {
     font-family: 'marianne-bold';
-    src: url('./fonts/marianne-bold-webfont.woff2') format('woff2'),
-    url('./fonts/marianne-bold-webfont.woff') format('woff');
+    src: url('../Client/Fonts/marianne-bold-webfont.woff2') format('woff2'),
+    url('../Client/Fonts/marianne-bold-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'marianne-regular';
-    src: url('./fonts/marianne-regular-webfont.woff2') format('woff2'),
-    url('./fonts/marianne-regular-webfont.woff') format('woff');
+    src: url('../Client/Fonts/marianne-regular-webfont.woff2') format('woff2'),
+    url('../Client/Fonts/marianne-regular-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
 :root {
     --dark-green: #6F8F72;
-    --light-green: #BFD3C1;
+    --light-green: rgb(191, 211, 193);
     --brown: #504136;
     --dark-beige: #BFB48F;
     --light-beige: #F4F1DE;
@@ -35,6 +35,11 @@ html {
     }
 }
 /* =================================== COMPOSANTS =================================== */
+
+/* ------------------------ Espace en bas de page ------------------------ */
+.bottom-space{
+    margin-bottom: 7rem;
+}
 /*------------------------boutons------------*/
 /*marron*/
 .btn-brown {
@@ -72,14 +77,15 @@ html {
     color: black;
     font-size: 4rem;
     text-align: center;
+    margin-top: 3rem;
 }
 /*sous titre haut de page*/
 .sous-titre-page{
     font-family: marianne-regular;
-    color: var(--dark-beige);
-    font-size: 0.9rem;
-    margin-top: -25px;
+    color: var(--brown);
+    font-size: 1rem;
     text-align: center;
+    margin-top: 1.5rem;
 }
 /*------------------------cards------------*/
 .card-content .value {
@@ -98,6 +104,7 @@ html {
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     padding: 0 15px 10px 15px;
     border-color: white;
+    background-color: white;
 }
 .card-header-blanche {
     width: 5rem;
@@ -122,6 +129,7 @@ html {
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     padding: 0 15px 10px 15px;
     border-color: white;
+    background-color: var(--brown);
 }
 .card-header-marron {
     width: 5rem;
@@ -138,31 +146,32 @@ html {
     font-weight: bold;
 }
 /*result*/
-
 .card-resulte{
-    background-color:white;
+    background-color: rgb(255, 255, 255);
     width: 350px;
     border-radius: 15px;
-    padding: 0 15px 10px 15px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     display: flex;
     text-align: center;
-    flex: 1 1 0;
+    padding: 10px;
+    margin-top: 3.5rem;
+    margin-bottom: 10rem;
 }
 .card-header-resulte {
-    width: 5rem;
+    width: 12.5rem;
     background-color: var(--dark-beige);
-    border-radius: 60px;
-    padding: 5px 10px 5px 10px;
+    border-radius: 15px;
     font-weight: bold;
     border-color: white;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    align-items: center;
 }
 .card-data-resulte{
     width: 100%;
-    padding: 0 15px 10px 15px;
     display: flex;
-    background: black;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 15px 0 15px;
 }
 
 /*------------------------form------------*/
@@ -170,16 +179,17 @@ html {
 .form-individual {
     background-color: var(--dark-beige);
     border-radius: 10px;
-    padding: 0 20px 0px 20px;
+    padding: 5px 10px 10px 10px;
     width: 250px; /* possibile de max-wicth */
     text-align: center;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    margin-bottom: 1.7rem;
+    height: 100%;
 }
 .form-individual p {
-    margin: 15px 0 5px 0;
-    font-weight: bold;
     font-size: 1rem;
     text-align: left;
+    margin-bottom: 2px;
 }
 .form-individual select {
     width: 100%;
@@ -187,8 +197,18 @@ html {
     border: 1px solid #ced4da;
     border-radius: 5px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
+.form-individual .form-control{
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    height: 33px;
+    margin-bottom: 10px;
+}
+.form-individual button{
+    height: 35px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
 /* =================================== NAVBAR =================================== */
 
 .navbar-custom {
@@ -243,15 +263,25 @@ html {
 /* =================================== PAGE =================================== */
 .page {
     display: grid;
-    grid-template-columns: 10% auto 10%;
-    margin: 15px 0;
+    grid-template-columns: 8% 84% 8%;
+    margin-top: 15px;
     height: auto;
+    width: 100%;
+    background-image: url('../Client/Images/arbre_fond.svg');
+    background-size: 60rem;
+    background-repeat: no-repeat;
+    background-position: top center;
 }
 .page .centre {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+}
+@media only screen and (max-width: 768px) {
+    .page {
+        grid-template-columns: 10px auto 10px;
+    }
 }
 /* =================================== FOOTER =================================== */
 .footer {
