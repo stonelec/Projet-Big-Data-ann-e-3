@@ -6,11 +6,11 @@ require_once('User.php');
 // Récupérer la méthode de la requête (GET, POST, etc.)
 //$requestMethod = $_SERVER['REQUEST_METHOD'];
 
-$requestMethod = $_POST;
+$requestMethod = $_SERVER['REQUEST_METHOD'];
 
-echo "La méthode : ";
-echo json_encode($requestMethod);
-echo "     ";
+//echo "La méthode : ";
+//echo json_encode($requestMethod);
+//echo "     ";
 
 $requestAction = isset($_GET['action']) ? $_GET['action'] : '';
 $id = isset($_GET['id']) ? $_GET['id'] : NULL;
@@ -23,25 +23,15 @@ $id = isset($_GET['id']) ? $_GET['id'] : NULL;
 
 // ----- AVEC POST -----
 
-echo "L'action : ";
-echo json_encode($requestAction);
-echo "     ";
+//echo "L'action : ";
+//echo json_encode($requestAction);
+//echo "     ";
 
-//$result = null;
+$result = null;
 
 // ----- On récupère des variables de POST -----
 
-if($requestMethod == $_POST){
 
-    $val_longitude = $_POST['val_longitude'];
-
-    echo "la longitude : ";
-    echo json_encode($val_longitude);
-    echo "     ";
-
-}
-
-/*
 if($requestMethod == $_POST){
 
     $id_user = 1; //On pourra le récupérer en changeant l'url
@@ -64,12 +54,22 @@ if($requestMethod == $_POST){
     $val_age_estime = isset($_POST['val_age_estime']) ? $_POST['val_age_estime'] : NULL;
     $val_revetement = isset($_POST['val_revetement']) ? $_POST['val_revetement'] : NULL;
 
-    echo "la longitude : ";
-    echo json_encode($val_longitude);
-    echo "     ";
+    json_encode($val_latitude);
+    //json_encode($val_hauteur_totale);
+    //json_encode($val_hauteur_tronc);
+    //json_encode($val_diametre_tronc);
+    //json_encode($val_etat);
+    //json_encode($val_stade);
+    //json_encode($val_port);
+    //json_encode($val_pied);
+    //json_encode($val_espece);
+    //json_encode($val_remarquable);
+    //json_encode($val_feuillage);
+    //json_encode($val_age_estime);
+    //json_encode($val_revetement);
 
 }
-*/
+
 
 //json_encode($val_latitude);
 //json_encode($val_hauteur_totale);
