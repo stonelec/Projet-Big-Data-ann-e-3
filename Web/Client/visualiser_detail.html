@@ -64,20 +64,97 @@
     <!-- ======================== VISUALISER LES DONNEES ========================-->
     <div class="grid-item">
         <h1> <bold>VISUALISER</bold> </h1>
+        <br>
 
-        <!-- Boutons choix Tableau // Carte -->
-        <div class="btn-group btn-tab-map btn-group-toggle" data-toggle="buttons">
-            <label class="btn btn-custom btn-unselected">
-                <input type="radio" name="options" id="VisualiserTableau" autocomplete="off"> Tableau
-            </label>
-            <label class="btn btn-custom btn-unselected">
-                <input type="radio" name="options" id="VisualiserCarte" autocomplete="off"> Carte
-            </label>
+        <div class="container">
+            <form id="arbreForm">
+                <div class="mb-3">
+                    <label for="idArbre" class="form-label">ID de l'Arbre</label>
+                    <input type="number" class="form-control" id="idArbre" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
         </div>
 
-        <!-- Div pour le tableau -->
-        <div id="VisualisationTableau" style="display: none">
+        <br>
+        <div class="card-blanche">
+            <div class="card-header-blanche">Infos</div>
 
+            <div class="card-content card-blanche-content">
+                <div class="item">
+                    <div class="label">Espece</div>
+                    <div class="value" id="espece">Inconnu</div>
+                </div>
+                <div class="item">
+                    <div class="label">Remarquable</div>
+                    <div class="value" id="remarquable">Inconnu</div>
+                </div>
+                <div class="item">
+                    <div class="label">Etat</div>
+                    <div class="value" id="etat_arb">Inconnu</div>
+                </div>
+                <div class="item">
+                    <div class="label">Stade</div>
+                    <div class="value" id="stade_dev">Inconnu</div>
+                </div>
+
+            </div>
+        </div>
+        <br>
+        <div class="card-blanche">
+            <div class="card-header-blanche">Visuel</div>
+
+            <div class="card-content card-blanche-content">
+                <div class="item">
+                    <div class="label">Feuillage</div>
+                    <div class="value" id="feuillage">Inconnu</div>
+                </div>
+                <div class="item">
+                    <div class="label">Port</div>
+                    <div class="value" id="type_port">Inconnu</div>
+                </div>
+
+            </div>
+        </div>
+        <br>
+        <div class="card-blanche">
+            <div class="card-header-blanche">Dimensions</div>
+
+            <div class="card-content card-blanche-content">
+                <div class="item">
+                    <div class="label">Hauteur tronc</div>
+                    <div class="value" id="hauteur_tronc">Inconnu</div>
+                </div>
+                <div class="item">
+                    <div class="label">Diamètre tronc</div>
+                    <div class="value" id="diametre_tronc">Inconnu</div>
+                </div>
+                <div class="item">
+                    <div class="label">Hauteur totale</div>
+                    <div class="value" id="hauteur_tot">Inconnu</div>
+                </div>
+
+            </div>
+        </div>
+        <br>
+        <div class="card-blanche">
+            <div class="card-header-blanche">Sol</div>
+            <div class="card-content card-blanche-content">
+                <div class="item">
+                    <div class="label">Pied</div>
+                    <div class="value" id="type_pied">Inconnu</div>
+                </div>
+                <div class="item">
+                    <div class="label">Longitude</div>
+                    <div class="value" id="longitude">Inconnu</div>
+                </div>
+                <div class="item">
+                    <div class="label">Latitude</div>
+                    <div class="value" id="latitude">Inconnu</div>
+                </div>
+
+
+            </div>
         </div>
 
 
@@ -91,8 +168,6 @@
     <div class="grid-item">3</div>
 
 </div>
-
-<p id="mathias"> grosse merde </p>
 
 
 
@@ -113,7 +188,7 @@
 
 
 <!-- ================================= JAVA SCRIPT ================================= -->
-<script src="JavaScript/Visualiser.js"></script>
+<script src="JavaScript/visualiser_detail.js"></script>
 <script src="JavaScript/ajax.js"></script>
 </body>
 </html>
