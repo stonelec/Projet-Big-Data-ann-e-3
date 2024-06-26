@@ -15,6 +15,7 @@ $requestMethod = $_SERVER['REQUEST_METHOD'];
 $requestAction = isset($_GET['action']) ? $_GET['action'] : '';
 $id = isset($_GET['id']) ? $_GET['id'] : NULL;
 
+echo json_encode($requestAction);
 
 // ----- AVEC GET -----
 
@@ -71,7 +72,7 @@ if($requestMethod == $_POST){
 
 }
 
-echo json_encode("rien frere");
+//echo json_encode("rien frere");
 
 //json_encode($val_latitude);
 //json_encode($val_hauteur_totale);
