@@ -10,7 +10,7 @@ $requestMethod = $_SERVER['REQUEST_METHOD'];
 //TOUT EST BON ICI :
 //echo json_encode($requestMethod);
 
-$requestAction = isset($_GET['request']) ? $_GET['request'] : '';
+$requestAction = isset($_GET['action']) ? $_GET['action'] : '';
 
 //TOUT EST BON ICI :
 //echo json_encode($requestAction);
@@ -51,7 +51,7 @@ else if($requestAction == "ajouter_toutes_valeur"){
 
     //$id_user = 1; //On pourra le récupérer en changeant l'url
     //$val_longitude = isset($_GET['$val_longitude']) ? $_GET['$val_longitude'] : NULL;
-    $val_latitude = $_POST['val_latitude'];
+    $val_latitude = $_GET['val_latitude'];
     //$val_hauteur_totale = isset($_GET['val_hauteur_totale']) ? $_GET['val_hauteur_totale'] : NULL;
     //$val_hauteur_tronc = isset($_GET['val_hauteur_tronc']) ? $_GET['val_hauteur_tronc'] : NULL;
     //$val_diametre_tronc = isset($_GET['val_diametre_tronc']) ? $_GET['val_diametre_tronc'] : NULL;
