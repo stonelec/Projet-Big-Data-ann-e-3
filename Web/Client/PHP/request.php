@@ -111,14 +111,13 @@ switch ($requestAction) {
     case 'prediction_taille':
         // Vérifier si l'ID est fourni
         if ($id !== NULL) {
-            $scriptPath = '../../python/scripts/fonc1.py';
 
             $hauteurTronc = Arbre::getHauteurTronc($id);
             $ageEstim = Arbre::getAgeEstim($id);
             $troncDiam = Arbre::getDiametre($id);
 
-            $command = escapeshellcmd('python3 ' . $scriptPath . ' ' . $hauteurTronc . ' ' . $ageEstim . ' ' . $troncDiam.' kmeans');
-            // $command = " python3 ../../python/scripts/fonc1.py 50 10 20 kmeans "
+            $command = escapeshellcmd('python3 fonc1.py ' . $hauteurTronc . ' ' . $ageEstim . ' ' . $troncDiam.' kmeans');
+            // $command = " python3 fonc1.py 50 10 20 kmeans "
             $result = exec($command);
 
             echo json_encode($result);
