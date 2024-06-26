@@ -1,6 +1,6 @@
 <?php
 
-require_once "../../DB.php";
+require_once "db.php";
 /**
  * Class Arbre
  */
@@ -21,7 +21,11 @@ class Arbre {
         $statement->bindParam(':id_arbre', $id_arbre);
         $statement->execute();
 
-        return $statement->fetch()[0];
+        $arbre = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        // retourner la réponse JSON
+        header('Content-Type: application/json');
+        echo json_encode($arbre);
     }
 
 
@@ -234,28 +238,25 @@ class Arbre {
     }
 
 
-    static function getAll($id_arbre){
+    static function getAll(){
     /**
-     * Fonction qui permet de récupérer toutes les informations d'un arbre
-     * @param $id_arbre
+     * Fonction qui permet de récupérer toutes les informations
      * @return mixed
      */
         $db = DB::connexion();
 
-        $request = 'SELECT espece, hauteur_tot, hauteur_tronc, diametre_tronc, remarquable, latitude, longitude, etat_arb, stade_dev, type_pied, type_port
+        $request = 'SELECT a.id_arbre, a.espece, ea.etat_arb, sd.stade_dev, tp.type_pied, tdp.type_port, a.remarquable, a.latitude, a.longitude, a.hauteur_tot, a.hauteur_tronc, a.diametre_tronc
                     FROM arbre a
-                    JOIN etat_arbre ea ON a.id_etat_arb = ea.id_etat_arb
+                    JOIN etat_arbre ea ON a.id_etat_arbre = ea.id_etat_arbre
                     JOIN stade_de_dev sd ON a.id_stade_dev = sd.id_stade_dev
                     JOIN type_de_pied tp ON a.id_pied = tp.id_pied
-                    JOIN type_de_port tdp ON a.id_type_port = tdp.id_type_port
-                    WHERE a.id_arbre = :id_arbre;
+                    JOIN type_de_port tdp ON a.id_port = tdp.id_port;
         ';
 
         $statement = $db->prepare($request);
-        $statement->bindParam(':id_arbre', $id_arbre);
         $statement->execute();
 
-        return $statement->fetch();
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
 
@@ -307,7 +308,6 @@ class Arbre {
             return "error";
         }
     }
-
 
 
 

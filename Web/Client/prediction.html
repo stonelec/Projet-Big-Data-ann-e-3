@@ -21,14 +21,44 @@
 
 <body>
 
-    <div class="prediction"> </div>
 
-    <button type="button" class="btn btn-secondary" id="bouton_taille" value="<?php echo $id_arbre ?>">Taille</button>
+    <div class="prediction">
+        <h2>Page de prédiction : </h2>
+    </div>
+
+    <button type="button" class="btn btn-secondary" id="bouton_taille">Taille</button>
     <button type="button" class="btn btn-secondary" id="bouton_age">Age</button>
     <button type="button" class="btn btn-secondary" id="bouton_deracinement">Déracinement</button>
 
+    <br>
+
+    <div class="container">
+        <form id="arbreForm">
+            <div class="mb-3">
+                <label for="idArbre" class="form-label">ID de l'Arbre</label>
+                <input type="number" class="form-control" id="idArbre" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+        <!-- Div pour afficher les informations de l'arbre -->
+        <div id="arbreInfo" style="display: none;">
+            <h3>Informations de l'Arbre</h3>
+            <p id="arbreDetails"></p>
+        </div>
+    </div>
+
+    <!-- Pour l'affichage des données : -->
+
+    <div class="hauteur_tronc_arbre"></div>
+    <div class="diametre_arbre"></div>
+    <div class="coordonnees_arbre"></div>
+    <div class="hauteur_totale_arbre"></div>
+
     <!-- Inclure le JS -->
+
     <script src="JavaScript/affichage.js"></script>
     <script src="JavaScript/ajax.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
 </body>

@@ -17,7 +17,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Afficher ou masquer les contenus en fonction du bouton cliqué
             if (button.querySelector('input').id === 'VisualiserTableau') {
-                afficherTableau();
+                ajaxRequest('GET', 'PHP/request_m.php/all_data', afficherTableau);
+                //afficherTableau();
+
                 document.getElementById('VisualisationTableau').style.display = 'block';
                 // Si vous avez un autre contenu pour la carte, vous pouvez le masquer ici
                 // document.getElementById('VisualisationCarte').style.display = 'none';
@@ -34,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Fonction pour afficher le tableau avec Bootstrap
-    function afficherTableau() {
+    function afficherTableau(data_arbres) {
         const container = document.getElementById('VisualisationTableau');
         container.innerHTML = ''; // On supprime le contenu existant
 
@@ -59,14 +61,28 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Create 5 rows
         const tbody = document.createElement('tbody');
-        for (let i = 0; i < 5; i++) {
+
+        let nb_arb = data_arbres.length;
+        const AttributeElement = [
+            "id_arbre", "espece", "etat_arb", "stade_dev", "type_pied", "type_port", "remarquable", "latitude", "longitude","id_arbre"
+        ];
+
+        console.log(data_arbres[0]["id_arbre"])
+
+        // ================= Pour chaque arbre de la database =================
+        for (let id_arbre = 0; id_arbre < nb_arb; id_arbre++) {               // 37 --> car 36 arbres
             const row = document.createElement('tr');
-            for (let j = 0; j < 10; j++) {
+            // ================= Pour chaque attribut de l'arbre =================
+            for (attribute of AttributeElement) {
                 const cell = document.createElement('td');
-                cell.textContent = `Cell ${i + 1}-${j + 1}`; // Example cell content
+                cell.textContent = `${data_arbres[id_arbre][attribute]}`;
                 row.appendChild(cell);
+
+                // ================= Pour le dernier attribut =================
+                // TO DO: Mettre un bouton pour prédire --> aucune idée de comment faire
             }
             tbody.appendChild(row);
+
         }
         table.appendChild(tbody);
 
