@@ -110,8 +110,13 @@ switch ($requestAction) {
 # ===================== ajouter_arbre =====================
 # =============================================================
 
-    case 'etat':
+    case 'ajouter_arbre_etat':
         $result = Arbre::getAllEtat();
+        echo json_encode($result);
+        break;
+
+    case 'ajouter_arbre_stade':
+        $result = Arbre::getAllStade();
         echo json_encode($result);
         break;
 
