@@ -6,7 +6,7 @@ $(document).ready(function (){
 
     let options;
 
-    ajaxRequest('GET', 'PHP/request.php?action=etat', function(response) {
+    ajaxRequest('GET', 'PHP/request.php?action=ajouter_arbre_etat', function(response) {
 
         console.log("Feuillage de l'arbre : ", response);
         console.log("Affichage de la 1ère reponse : ", response[0])
