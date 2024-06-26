@@ -76,7 +76,7 @@ switch ($requestMethod) {
 
             default:
                 // Retourner une erreur si l'action n'est pas reconnue
-                echo json_encode(['error' => 'Action non reconnue du GET']);
+                echo json_encode(['error' => 'IL EST PAS RENTRER DANS LE GET']);
                 break;
 
         }
@@ -100,7 +100,7 @@ switch ($requestMethod) {
 
             default:
                 // Retourner une erreur si l'action n'est pas reconnue
-                echo json_encode(['error' => 'Action non reconnue default']);
+                echo json_encode(['error' => 'IL EST RENTRER DANS POST MAIS PAS DANS LE CASE']);
                 break;
 
         }
@@ -108,6 +108,6 @@ switch ($requestMethod) {
 
     default:
         // Retourner une erreur si l'action n'est pas reconnue
-        echo json_encode(['error' => 'Action non reconnue du POST']);
+        echo json_encode(['error' => 'IL EST PAS RENTRER DANS GET OU POST']);
         break;
 }
