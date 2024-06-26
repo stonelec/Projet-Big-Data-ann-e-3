@@ -17,15 +17,8 @@ $result = null;
 
 $requestAction_post = isset($_POST['action']) ? $_POST['action'] : '';
 
-
-echo "GET : ";
-echo ($requestAction_get);
-
-
-echo "POST : ";
 echo ($requestAction_post);
 
-/*
 $id_user = 1; //On pourra le récupérer en changeant l'url
 $val_longitude = isset($_POST['val_longitude']) ? $_POST['val_longitude'] : NULL;
 $val_latitude = isset($_POST['val_latitude']) ? $_POST['val_latitude'] : NULL;
@@ -45,7 +38,7 @@ $val_feuillage = isset($_POST['val_feuillage']) ? $_POST['val_feuillage'] : NULL
 
 $val_age_estime = isset($_POST['val_age_estime']) ? $_POST['val_age_estime'] : NULL;
 $val_revetement = isset($_POST['val_revetement']) ? $_POST['val_revetement'] : NULL;
-
+/*
 switch ($requestMethod) {
 
     case 'GET':
