@@ -15,53 +15,161 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
     <!-- Inclure le CSS -->
-    <link href="style.css" rel="stylesheet">
+    <link href="CSS/style.css" rel="stylesheet">
 
 </head>
 
 <body>
 
-    <div class="prediction">
-        <h2>Page de prédiction : </h2>
+<!-- =================================== NAVBAR ================================== -->
+<nav class="navbar navbar-expand-lg navbar-custom">
+    <a class="navbar-brand" href="accueil.html">
+        <img src="Images/logo_green_resize.png" alt="Home" class="d-inline-block align-top" style="height: 40px;">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="visualisation_arbre.html">Visualiser</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="ajout_arbre.html">Ajouter</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Prédire
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="#">Âge</a>
+                    <a class="dropdown-item" href="#">Taille</a>
+                    <a class="dropdown-item" href="#">Déraciner</a>
+                </div>
+            </li>
+        </ul>
     </div>
 
-    <button type="button" class="btn btn-secondary" id="bouton_taille">Taille</button>
-    <button type="button" class="btn btn-secondary" id="bouton_age">Age</button>
-    <button type="button" class="btn btn-secondary" id="bouton_deracinement">Déracinement</button>
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <button type="button" class="btn btn-primary">Connexion</button>
+        </li>
+    </ul>
+</nav>
 
-    <br>
 
+
+
+
+<div class="grid-container">
+
+    <div class="grid-item">1</div>
+
+    <!-- ======================== VISUALISER LES DONNEES ========================-->
+    <div class="grid-item">
+        <h1> <bold>VISUALISER</bold> </h1>
+
+        <!-- Boutons choix Tableau // Carte -->
+        <div class="btn-group btn-tab-map btn-group-toggle" data-toggle="buttons">
+            <label class="btn btn-custom btn-unselected">
+                <input type="radio" name="options" id="PredireTaille" autocomplete="off"> Taille
+            </label>
+            <label class="btn btn-custom btn-unselected">
+                <input type="radio" name="options" id="PredireAge" autocomplete="off"> Age
+            </label>
+            <label class="btn btn-custom btn-unselected">
+                <input type="radio" name="options" id="PredireDeracinement" autocomplete="off"> Déracinement
+            </label>
+        </div>
+
+        <!-- Div pour le formulaire d'entrée de l'id -->
+        <div class="container">
+            <form id="arbreForm">
+                <div class="mb-3">
+                    <label for="idArbre" class="form-label">ID de l'Arbre</label>
+                    <input type="number" class="form-control" id="idArbre" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+
+        <!-- Pour l'affichage des données : -->
+
+        <div class="hauteur_tronc_arbre"></div>
+        <div class="diametre_arbre"></div>
+        <div class="coordonnees_arbre"></div>
+        <div class="hauteur_totale_arbre"></div>
+        <div class="port_arbre"></div>
+        <div class="age_estime_arbre"></div>
+        <div class="revetement_arbre"></div>
+        <div class="feuillage_arbre"></div>
+
+        <!-- Résulatat de la prédiction -->
+        <div class="prédiction_taille"></div>
+
+
+
+
+
+
+
+
+    </div>
+
+    <div class="grid-item">3</div>
+
+</div>
+
+
+
+
+
+
+
+<div class="prediction">
+    <h2>Page de prédiction : </h2>
+</div>
+
+<button type="button" class="btn btn-secondary" id="bouton_taille">Taille</button>
+<button type="button" class="btn btn-secondary" id="bouton_age">Age</button>
+<button type="button" class="btn btn-secondary" id="bouton_deracinement">Déracinement</button>
+
+<br>
+
+<div class="container">
+
+
+    <!-- Div pour afficher les informations de l'arbre -->
+    <div id="arbreInfo" style="display: none;">
+        <h3>Informations de l'Arbre</h3>
+        <p id="arbreDetails"></p>
+    </div>
+</div>
+
+
+
+
+
+
+<!-- =================================== FOOTER ================================== -->
+<footer class="footer text-center">
     <div class="container">
-        <form id="arbreForm">
-            <div class="mb-3">
-                <label for="idArbre" class="form-label">ID de l'Arbre</label>
-                <input type="number" class="form-control" id="idArbre" required>
+        <div class="row">
+            <div class="col-12">
+                <img src="Images/logo_green_resize.png" alt="Logo" class="footer-logo mb-2">
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-
-        <!-- Div pour afficher les informations de l'arbre -->
-        <div id="arbreInfo" style="display: none;">
-            <h3>Informations de l'Arbre</h3>
-            <p id="arbreDetails"></p>
+            <div class="col-12">
+                <p style="font-size: 1.2rem">Ethan LE PAN - Mathias PAITIER - Vincent ROCHER</p>
+                <a href="https://isen-nantes.fr" style="font-style: italic; font-size: 1rem; color: white">https://isen-nantes.fr</a>
+            </div>
         </div>
     </div>
+</footer>
 
-    <!-- Pour l'affichage des données : -->
+<!-- Inclure le JS -->
 
-    <div class="hauteur_tronc_arbre"></div>
-    <div class="diametre_arbre"></div>
-    <div class="coordonnees_arbre"></div>
-    <div class="hauteur_totale_arbre"></div>
-    <div class="port_arbre"></div>
-    <div class="age_estime_arbre"></div>
-    <div class="revetement_arbre"></div>
-    <div class="feuillage_arbre"></div>
-
-    <!-- Inclure le JS -->
-
-    <script src="JavaScript/prediction.js"></script>
-    <script src="JavaScript/ajax.js"></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="JavaScript/prediction.js"></script>
+<script src="JavaScript/ajax.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
 </body>
