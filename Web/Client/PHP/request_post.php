@@ -101,6 +101,13 @@ switch ($requestMethod) {
                     echo json_encode($result);
                 }
 
+                else{
+
+                    $result = "Problème dans les variables";
+                    echo json_encode($result);
+
+                }
+
                 //$result = "C'est good tu peux pleurer";
                 //echo json_encode($result);
                 break;
