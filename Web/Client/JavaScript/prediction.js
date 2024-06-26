@@ -1,3 +1,29 @@
+let prediction = ""
+
+const updatePrediction = (newPred) => {
+    prediction = newPred;
+    console.log('Prédiction actuelle :', prediction);
+};
+
+const radioButtons = document.querySelectorAll('.btn-group-toggle input[type="radio"]');
+radioButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        // Définir l'état en fonction de l'ID du bouton cliqué
+        switch (button.id) {
+            case 'PredireTaille':
+                updatePrediction('taille');
+                break;
+            case 'PredireAge':
+                updatePrediction('age');
+                break;
+            case 'PredireDeracinement':
+                updatePrediction('deracinement');
+                break;
+        }
+    });
+});
+
+
 document.addEventListener('DOMContentLoaded', function() {
 
     // Sélectionner tous les boutons du groupe
@@ -21,42 +47,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 });
-
-$("#PredireTaille").click(function (){
-
-    console.log("Taille");
-
-    $('.prediction').html(
-
-        '<p>Taille</p>'
-
-    )
-
-});
-
-$("#PredireAge").click(function (){
-
-    console.log("Age");
-    $('.prediction').html(
-
-        '<p>Age</p>'
-
-    )
-
-});
-
-$("#PredireDeracinement").click(function (){
-
-    console.log("Deracinement");
-
-    $('.prediction').html(
-
-        '<p>Déracinement</p>'
-
-    )
-
-});
-
 
 $(document).ready(function(){
 
