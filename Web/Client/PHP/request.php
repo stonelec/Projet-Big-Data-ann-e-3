@@ -136,10 +136,8 @@ switch ($requestAction) {
             $troncDiam = Arbre::getDiametre($id);
             $hauteurTot = Arbre::getHauteurTot($id);
             $hauteurTronc = Arbre::getHauteurTronc($id);
-            $feuillage = Arbre::getFeuillage_ID($id);
-            $revet = Arbre::getRevetement($id);
 
-            $command = 'cd ../../python/scripts && python3 fonc2.py '.$troncDiam.' '.$hauteurTot.' '.$hauteurTronc.' '.$feuillage.' '.$revet.' kmeans';
+            $command = 'cd ../../python/scripts && python3 fonc2.py '.$troncDiam.' '.$hauteurTot.' '.$hauteurTronc.' kmeans';
 
             exec($command,$output, $result);
 
