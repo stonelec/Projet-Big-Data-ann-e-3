@@ -448,10 +448,10 @@ class Arbre {
          */
         $db = DB::connexion();
 
-        $request = 'SELECT tp.type_feuillage
+        $request = 'SELECT tf.feuillage
                     FROM arbre a
-                    JOIN type_feuillage tp ON a.id_port = tp.id_revetement
-                    WHERE id_arbre = :id_arbre;
+                    JOIN type_feuillage tf ON a.id_feuillage = tf.id_feuillage
+                    WHERE a.id_arbre = :id_arbre;
         ';
 
         $statement = $db->prepare($request);
