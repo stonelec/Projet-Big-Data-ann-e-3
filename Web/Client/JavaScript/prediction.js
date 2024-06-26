@@ -1,26 +1,3 @@
-let prediction = ""
-
-const updatePrediction = (newPred) => {
-    prediction = newPred;
-    console.log('Prédiction actuelle :', prediction);
-};
-
-(document.getElementById("PredireTaille")).addEventListener("click", function() {
-    console.log("pipi");
-    updatePrediction("PredictionTaille");
-});
-
-(document.getElementById("PredireAge")).addEventListener("click", function() {
-    console.log("caca");
-    updatePrediction("PredictionAge");
-});
-
-(document.getElementById("PredireDeracinement")).addEventListener("click", function() {
-    console.log("prout");
-    updatePrediction("PredictionDeracinement");
-});
-
-
 document.addEventListener('DOMContentLoaded', function() {
 
     // Sélectionner tous les boutons du groupe
@@ -56,7 +33,7 @@ $(document).ready(function(){
 // ---------------------------------------------------------------------------
 // ----------------------- HAUTEUR TRONC ARBRE -------------------------------
 // ---------------------------------------------------------------------------
-        ajaxRequest('GET', 'PHP/request.php?action=hauteur_tronc&id=' + id_arbre, function(response) {
+        ajaxRequest('GET', 'PHP/request.php?action=hauteur_tronc&id=' + id_arbre, function (response) {
             console.log("Hauteur du tronc : ", response);
             // Afficher le résultat dans votre page HTML
             $('.hauteur_tronc_arbre').html(
@@ -69,7 +46,7 @@ $(document).ready(function(){
 // ----------------------------------------------------------------------------
 // ----------------------- DIAMETRE TRONC ARBRE -------------------------------
 // ----------------------------------------------------------------------------
-        ajaxRequest('GET', 'PHP/request.php?action=diametre&id=' + id_arbre, function(response) {
+        ajaxRequest('GET', 'PHP/request.php?action=diametre&id=' + id_arbre, function (response) {
             console.log("Diametre de l'arbre : ", response);
             // Afficher le résultat dans votre page HTML
             $('.diametre_arbre').html(
@@ -82,7 +59,7 @@ $(document).ready(function(){
 // -------------------------------------------------------------------------
 // ----------------------- COORDONNEES ARBRE -------------------------------
 // -------------------------------------------------------------------------
-        ajaxRequest('GET', 'PHP/request.php?action=coordonnees&id=' + id_arbre, function(response) {
+        ajaxRequest('GET', 'PHP/request.php?action=coordonnees&id=' + id_arbre, function (response) {
             console.log("Coordonnées de l'arbre : ", response);
             // Afficher le résultat dans votre page HTML
             $('.coordonnees_arbre').html(
@@ -99,12 +76,12 @@ $(document).ready(function(){
 // ----------------------------------------------------------------------
 // ----------------------- HAUTEUR TOTALE -------------------------------
 // ----------------------------------------------------------------------
-        ajaxRequest('GET', 'PHP/request.php?action=hauteurtotale&id=' + id_arbre, function(response) {
+        ajaxRequest('GET', 'PHP/request.php?action=hauteurtotale&id=' + id_arbre, function (response) {
             console.log("hauteur totale de l'arbre : ", response);
             // Afficher le résultat dans votre page HTML
             $('.hauteur_totale_arbre').html(
                 '<p> L\'hauteur totale est : ' +
-                response+
+                response +
                 '</p>');
 
         });
@@ -112,7 +89,7 @@ $(document).ready(function(){
 // -----------------------------------------------------------------
 // ----------------------- AGE ESTIM -------------------------------
 // -----------------------------------------------------------------
-        ajaxRequest('GET', 'PHP/request.php?action=age_estim&id=' + id_arbre, function(response) {
+        ajaxRequest('GET', 'PHP/request.php?action=age_estim&id=' + id_arbre, function (response) {
             console.log("Age estimé de l'arbre : ", response);
             // Afficher le résultat dans votre page HTML
             $('.age_estime_arbre').html(
@@ -124,7 +101,7 @@ $(document).ready(function(){
 // -----------------------------------------------------------------
 // ----------------------- TYPE PORT -------------------------------
 // -----------------------------------------------------------------
-        ajaxRequest('GET', 'PHP/request.php?action=port&id=' + id_arbre, function(response) {
+        ajaxRequest('GET', 'PHP/request.php?action=port&id=' + id_arbre, function (response) {
             console.log("Port de l'arbre : ", response);
             // Afficher le résultat dans votre page HTML
             $('.port_arbre').html(
@@ -137,7 +114,7 @@ $(document).ready(function(){
 // ------------------------------------------------------------------
 // ----------------------- REVETEMENT -------------------------------
 // ------------------------------------------------------------------
-        ajaxRequest('GET', 'PHP/request.php?action=revetement&id=' + id_arbre, function(response) {
+        ajaxRequest('GET', 'PHP/request.php?action=revetement&id=' + id_arbre, function (response) {
             console.log("Revetement de l'arbre : ", response);
             // Afficher le résultat dans votre page HTML
             $('.revetement_arbre').html(
@@ -150,7 +127,7 @@ $(document).ready(function(){
 // -----------------------------------------------------------------
 // ----------------------- FEUILLAGE -------------------------------
 // -----------------------------------------------------------------
-        ajaxRequest('GET', 'PHP/request.php?action=feuillage&id=' + id_arbre, function(response) {
+        ajaxRequest('GET', 'PHP/request.php?action=feuillage&id=' + id_arbre, function (response) {
             console.log("Feuillage de l'arbre : ", response);
             // Afficher le résultat dans votre page HTML
             $('.feuillage_arbre').html(
@@ -163,7 +140,13 @@ $(document).ready(function(){
 // ==============================================================================
 // ================================ PREDICTIONS =================================
 // ==============================================================================
-
-
+        ajaxRequest('GET', 'PHP/request.php?action=prediction_taille&id=' + id_arbre, function (response) {
+            console.log("Prediction de la taille de l'arbre : ", response);
+            // Afficher le résultat dans votre page HTML
+            $('.prediction').html(
+                '<p> La prediction de la taille est : ' +
+                response +
+                '</p>');
+        });
     });
 });

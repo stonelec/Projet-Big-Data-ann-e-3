@@ -15,9 +15,10 @@ $result = null;
 switch ($requestAction) {
 
 # =============================================================
-# ===================== prediction_arbre =====================
+# ===================== prediction arbre ======================
 # =============================================================
 
+# ----------------------- Récupérer les infos -----------------------
     case 'hauteur_tronc':
         // Vérifier si l'ID est fourni
         if ($id !== NULL) {
@@ -96,15 +97,36 @@ switch ($requestAction) {
         break;
 
     case 'feuillage':
-            // Vérifier si l'ID est fourni
-            if ($id !== NULL) {
-                $result = Arbre::getFeuillage($id);
-                echo json_encode($result);
-            } else {
-                // Retourner une erreur si l'ID n'est pas fourni
-                echo json_encode(['error' => 'ID de l\'arbre manquant']);
-            }
-            break;
+        // Vérifier si l'ID est fourni
+        if ($id !== NULL) {
+            $result = Arbre::getFeuillage($id);
+            echo json_encode($result);
+        } else {
+            // Retourner une erreur si l'ID n'est pas fourni
+            echo json_encode(['error' => 'ID de l\'arbre manquant']);
+        }
+        break;
+
+# ----------------------- Prédire les infos -----------------------
+    case 'prediction_taille':
+        // Vérifier si l'ID est fourni
+        if ($id !== NULL) {
+            $scriptPath = '../../python/scripts/fonc1.py';
+
+            $hauteurTronc = Arbre::getHauteurTronc($id);
+            $ageEstim = Arbre::getAgeEstim($id);
+            $troncDiam = Arbre::getDiametre($id);
+
+            $command = escapeshellcmd('python3 ' . $scriptPath . ' ' . $hauteurTronc . ' ' . $ageEstim . ' ' . $troncDiam.' kmeans');
+            // $command = " python3 ../../python/scripts/fonc1.py 50 10 20 kmeans "
+            $result = exec($command);
+
+            echo json_encode($result);
+        } else {
+            // Retourner une erreur si l'ID n'est pas fourni
+            echo json_encode(['error' => 'ID de l\'arbre manquant']);
+        }
+        break;
 
 # =============================================================
 # ===================== ajouter_arbre =====================
