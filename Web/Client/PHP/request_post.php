@@ -46,6 +46,7 @@ switch ($requestAction_get) {
 
 }
 
+/*
 // Récupérer les paramètres action et id depuis la requête GET
 $requestAction_post = isset($_POST['action']) ? $_POST['action'] : '';
 
@@ -76,4 +77,5 @@ switch ($requestAction_post){
         break;
 
 }
+*/
 
