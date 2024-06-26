@@ -3,16 +3,16 @@
 /* =================================== GENERAL =================================== */
 @font-face {
     font-family: 'marianne-bold';
-    src: url('../Client/Fonts/marianne-bold-webfont.woff2') format('woff2'),
-    url('../Client/Fonts/marianne-bold-webfont.woff') format('woff');
+    src: url('../Fonts/marianne-bold-webfont.woff2') format('woff2'),
+    url('../Fonts/marianne-bold-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'marianne-regular';
-    src: url('../Client/Fonts/marianne-regular-webfont.woff2') format('woff2'),
-    url('../Client/Fonts/marianne-regular-webfont.woff') format('woff');
+    src: url('../Fonts/marianne-regular-webfont.woff2') format('woff2'),
+    url('../Fonts/marianne-regular-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
@@ -267,7 +267,7 @@ html {
     margin-top: 15px;
     height: auto;
     width: 100%;
-    background-image: url('../Client/Images/arbre_fond.svg');
+    background-image: url('../Images/arbre_fond.svg');
     background-size: 60rem;
     background-repeat: no-repeat;
     background-position: top center;
