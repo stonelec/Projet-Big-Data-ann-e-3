@@ -47,6 +47,9 @@ $val_feuillage = isset($_POST['val_feuillage']) ? $_POST['val_feuillage'] : NULL
 $val_age_estime = isset($_POST['val_age_estime']) ? $_POST['val_age_estime'] : NULL;
 $val_revetement = isset($_POST['val_revetement']) ? $_POST['val_revetement'] : NULL;
 
+echo json_encode($val_longitude);
+
+/*
 switch ($requestMethod) {
 
     case 'GET':
@@ -97,7 +100,7 @@ switch ($requestMethod) {
                 echo json_encode($result);
                 break;
 
-                /*
+
                 if($id_user != NULL && $val_longitude != NULL && $val_latitude != NULL && $val_hauteur_totale != NULL && $val_hauteur_tronc != NULL &&
                     $val_diametre_tronc != NULL && $val_etat != NULL && $val_stade != NULL && $val_port != NULL && $val_pied != NULL &&
                     $val_espece != NULL && $val_remarquable != NULL && $val_feuillage != NULL && $val_age_estime != NULL &&
@@ -114,7 +117,7 @@ switch ($requestMethod) {
                     echo json_encode($result);
                     break;
 
-                }*/
+                }
 
                 //$result = "C'est good tu peux pleurer";
                 //echo json_encode($result);
@@ -134,5 +137,5 @@ switch ($requestMethod) {
         break;
 
 }
-
+*/
 
