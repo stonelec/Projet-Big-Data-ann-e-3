@@ -71,9 +71,11 @@ switch ($requestMethod) {
         switch ($requestAction_post){
 
             case 'ajouter_toutes_valeur':
+
                 if($val_espece != NULL && $val_latitude != NULL && $val_longitude != NULL && $val_hauteur_tronc != NULL && $val_diametre_tronc != NULL &&
                     $val_etat != NULL && $val_stade != NULL && $val_pied != NULL && $val_port != NULL && $val_feuillage != NULL){
-                    $result = Arbre::addArbre();
+                    //$result = Arbre::addArbre();
+                    $result = Arbre::getHauteurTronc(2);
                     echo json_encode($result);
                 }
                 break;
