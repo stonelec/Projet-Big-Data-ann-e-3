@@ -91,7 +91,6 @@ switch ($requestMethod) {
         switch ($requestAction){
 
             case 'ajouter_toutes_valeur':
-
                 /*
                 if($id_user != NULL && $val_longitude != NULL && $val_latitude != NULL && $val_hauteur_totale != NULL && $val_hauteur_tronc != NULL &&
                     $val_diametre_tronc != NULL && $val_etat != NULL && $val_stade != NULL && $val_port != NULL && $val_pied != NULL &&
@@ -102,8 +101,9 @@ switch ($requestMethod) {
                     echo json_encode($result);
                 }*/
 
-                $result = "C'est good tu peux pleurer";
+                $result = "C'est good tu peux pleurer de joie";
                 echo json_encode($result);
+                break;
 
             default:
                 // Retourner une erreur si l'action n'est pas reconnue
