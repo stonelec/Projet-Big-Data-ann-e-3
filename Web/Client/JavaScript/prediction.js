@@ -1,13 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const getButtonIds = () => {
-        const radioButtons = document.querySelectorAll('.btn-group-toggle btn-selected input[type="radio"]');
-        return Array.from(radioButtons).map(button => button.id);
-    };
-
-    const ids = getButtonIds();
-    console.log(ids);
-
-
 
     // Sélectionner tous les boutons du groupe
     const buttons = document.querySelectorAll('.btn-tab-map .btn');
@@ -33,6 +24,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 $("#PredireTaille").click(function (){
 
+    console.log("Taille");
+
     $('.prediction').html(
 
         '<p>Taille</p>'
@@ -43,6 +36,7 @@ $("#PredireTaille").click(function (){
 
 $("#PredireAge").click(function (){
 
+    console.log("Age");
     $('.prediction').html(
 
         '<p>Age</p>'
@@ -52,6 +46,8 @@ $("#PredireAge").click(function (){
 });
 
 $("#PredireDeracinement").click(function (){
+
+    console.log("Deracinement");
 
     $('.prediction').html(
 
