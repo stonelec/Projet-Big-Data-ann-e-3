@@ -74,12 +74,11 @@ switch ($requestMethod) {
 
             default:
                 // Retourner une erreur si l'action n'est pas reconnue
-                echo json_encode(['error' => 'Action non reconnue']);
+                echo json_encode(['error' => 'Action non reconnue du GET']);
                 break;
 
         }
         break;
-
 
     case 'POST':
 
@@ -104,7 +103,6 @@ switch ($requestMethod) {
 
         }
         break;
-
 
     default:
         // Retourner une erreur si l'action n'est pas reconnue
