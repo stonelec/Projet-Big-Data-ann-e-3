@@ -90,10 +90,46 @@ switch ($requestAction) {
         }
         break;
 
+# =============================================================
+# ===================== visualiser_detail =====================
+# =============================================================
     case 'infos':
         // Vérifier si l'ID est fourni
         if ($id !== NULL) {
             $result = Arbre::getInfos_byID($id);
+            echo json_encode($result);
+        } else {
+            // Retourner une erreur si l'ID n'est pas fourni
+            echo json_encode(['error' => 'ID de l\'arbre manquant']);
+        }
+        break;
+
+    case 'visuel':
+        // Vérifier si l'ID est fourni
+        if ($id !== NULL) {
+            $result = Arbre::getVisuel_byID($id);
+            echo json_encode($result);
+        } else {
+            // Retourner une erreur si l'ID n'est pas fourni
+            echo json_encode(['error' => 'ID de l\'arbre manquant']);
+        }
+        break;
+
+    case 'dimensions':
+        // Vérifier si l'ID est fourni
+        if ($id !== NULL) {
+            $result = Arbre::getDimensions_byID($id);
+            echo json_encode($result);
+        } else {
+            // Retourner une erreur si l'ID n'est pas fourni
+            echo json_encode(['error' => 'ID de l\'arbre manquant']);
+        }
+        break;
+
+    case 'sol':
+        // Vérifier si l'ID est fourni
+        if ($id !== NULL) {
+            $result = Arbre::getSol_byID($id);
             echo json_encode($result);
         } else {
             // Retourner une erreur si l'ID n'est pas fourni
