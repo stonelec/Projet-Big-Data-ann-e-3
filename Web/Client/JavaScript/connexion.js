@@ -45,7 +45,7 @@ $(document).ready(function (){
         console.log("TEST");
         console.log(n);
 
-        for(let i=0; i<n ;i++){
+        for(let i=0; i<n+1 ;i++){
 
             console.log("RENTRER");
 
