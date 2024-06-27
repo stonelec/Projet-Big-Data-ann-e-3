@@ -8,18 +8,18 @@ require_once('User.php');
 $requestMethod = $_SERVER['REQUEST_METHOD'];
 
 //TOUT EST BON ICI :
-echo json_encode($requestMethod);
+//echo json_encode($requestMethod);
 
-/*
+
 $requestAction = isset($_GET['action']) ? $_GET['action'] : '';
 
 //TOUT EST BON ICI :
-//echo json_encode($requestAction);
+echo json_encode($requestAction);
 
 $id = isset($_GET['id']) ? $_GET['id'] : NULL;
 
 $result = null;
-*/
+
 // ----- On récupère des variables de POST -----
 
 //$requestAction_post=$_POST['ajouter_toutes_valeur'];
