@@ -53,9 +53,14 @@ function afficherTableau(data_arbres) {
     container.appendChild(table);
 }
 
-
-
-
+/*
+window.addEventListener("DOMContentLoaded", () => {
+    let btnTable = document.getElementById("btn-table");
+    let btnCarte = document.getElementById("btn-carte");
+    btnTable.addEventListener("click", () => {addTable()});
+    btnCarte.addEventListener("click", () => {addCarte()});
+});
+*/
 addTable();
 function addTable() {
     console.log("addTable");
@@ -173,7 +178,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Afficher ou masquer les contenus en fonction du bouton cliqué
             if (button.querySelector('input').id === 'VisualiserTableau') {
-
+                ajaxRequest('GET', 'PHP/request_m.php/all_data', afficherTableau);
                 //afficherTableau();
 
                 document.getElementById('VisualisationTableau').style.display = 'block';
