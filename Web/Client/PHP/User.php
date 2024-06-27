@@ -194,7 +194,6 @@ class User {
                     ';
 
         $statement = $db->prepare($request);
-        $statement->bindParam(':id_user', $id_user);
         $statement->execute();
 
         return $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -210,7 +209,6 @@ class User {
                     ';
 
         $statement = $db->prepare($request);
-        $statement->bindParam(':id_user', $id_user);
         $statement->execute();
 
         return $statement->fetchAll(PDO::FETCH_ASSOC);
