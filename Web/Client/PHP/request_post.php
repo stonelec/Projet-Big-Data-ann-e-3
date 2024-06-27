@@ -35,12 +35,28 @@ $result = null;
 
 // ----- On récupère des variables de POST -----
 
+if($requestMethod == 'GET'){
+
+    echo json_encode("GET");
+
+}
+if($requestMethod == 'POST'){
+
+    $val_longitude = $_POST['$val_longitude'];
+    echo json_encode($val_longitude);
+
+}
+else{
+
+    echo json_encode("pas get pas post");
+
+}
 
 
 //-------------------------------------------------------
+/*
 $id_user = 1; //On pourra le récupérer en changeant l'url
-$val_longitude = $_POST['$val_longitude'];
-echo json_encode($val_longitude);
+//$val_longitude = $_POST['$val_longitude'];
 $val_latitude = $_POST['val_latitude'];
 $val_hauteur_totale = $_POST['$val_hauteur_totale'];
 $val_hauteur_tronc = $_POST['val_hauteur_tronc'];
@@ -58,7 +74,7 @@ $val_feuillage = $_POST['val_hauteur_tronc']; //IL FAUT SON ID
 
 $val_age_estime = $_POST['val_hauteur_tronc'];
 $val_revetement = $_POST['val_hauteur_tronc'];
-
+*/
 
 //echo json_encode($val_latitude);
 //echo json_encode($val_hauteur_totale);
