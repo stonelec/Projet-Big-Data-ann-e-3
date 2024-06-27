@@ -94,24 +94,19 @@ switch ($requestMethod) {
 
             case 'ajouter_toutes_valeur':
 
-                if($id_user != NULL && $val_longitude != NULL && $val_latitude != NULL && $val_hauteur_totale != NULL && $val_hauteur_tronc != NULL &&
-                    $val_diametre_tronc != NULL && $val_etat != NULL && $val_stade != NULL && $val_port != NULL && $val_pied != NULL &&
-                    $val_espece != NULL && $val_remarquable != NULL && $val_feuillage != NULL && $val_age_estime != NULL &&
-                    $val_revetement != NULL){
+                if($val_etat != NULL){
 
                     echo json_encode("Rien n'est égal à 0");
-                    break;
                 }
 
                 else{
 
                     $result = "Problème dans les variables";
                     echo json_encode($result);
-                    break;
 
                 }
 
-                //break;
+                break;
 
             default:
                 echo json_encode("Error => Rentrer dans le POST mais pas dans le case");
