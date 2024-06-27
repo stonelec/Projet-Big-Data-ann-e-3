@@ -21,7 +21,9 @@ $result = null;
 
 // ----- On récupère des variables de POST -----
 
-if($requestAction == "ajouter_toutes_valeur"){
+$requestAction_post=$_POST['ajouter_toutes_valeur'];
+
+if($requestAction_post == "ajouter_toutes_valeur"){
 
     $id_user = 1; //On pourra le récupérer en changeant l'url
     $val_longitude = $_POST['$val_longitude'];
