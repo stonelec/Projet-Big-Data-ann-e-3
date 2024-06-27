@@ -106,8 +106,13 @@ function printOption() {
             const form_select = document.createElement('select');
             form_select.classList.add('form-select');
             form_select.setAttribute('aria-label', 'Default select example');
+            //<option selected disabled="disabled">Ordre</option>
+            const option_title = document.createElement('option');
+            option_title.selected = true;
+            option_title.disabled = true;
+            option_title.textContent = "Sélection";
 
-            for(let i=0; i<response.length; i++) {
+            for (let i = 0; i < response.length; i++) {
                 const option_etat = document.createElement('option');
                 option_etat.value = response[i].etat_arb;
                 option_etat.textContent = response[i].etat_arb;
