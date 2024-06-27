@@ -23,8 +23,30 @@ $result = null;
 
 $requestAction_post=$_POST['ajouter_toutes_valeur'];
 
-json_encode($requestAction_post);
+echo json_encode($requestAction_post);
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//-------------------------------------------------------
 $id_user = 1; //On pourra le récupérer en changeant l'url
 $val_longitude = $_POST['$val_longitude'];
 $val_latitude = $_POST['val_latitude'];
