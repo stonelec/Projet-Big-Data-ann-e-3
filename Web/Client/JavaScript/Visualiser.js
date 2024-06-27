@@ -279,7 +279,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const tbody = document.createElement('tbody');
         let nb_arb = data_arbres.length;
         const AttributeElement = [
-            "id_arbre", "espece", "etat_arb", "stade_dev", "type_pied", "type_port", "remarquable", "latitude", "longitude","id_arbre"
+            "id_arbre", "espece", "etat_arb", "stade_dev", "type_pied", "type_port", "remarquable", "latitude", "longitude","predire"
         ];
 
         console.log(data_arbres[0]["id_arbre"])
@@ -290,7 +290,12 @@ document.addEventListener('DOMContentLoaded', function() {
             // ================= Pour chaque attribut de l'arbre =================
             for (attribute of AttributeElement) {
                 const cell = document.createElement('td');
-                cell.textContent = `${data_arbres[id_arbre][attribute]}`;
+                if(attribute === "predire"){
+                    cell.textContent = `<div class="dropdown"><button class="dropbtn"><i class="bi bi-three-dots h6 "></i></button><div class="dropdown-content"><a href="#">Age</a><a href="#">Taille</a><a href="#">Déracinement</a></div></div>`;
+                }
+                else {
+                    cell.textContent = `${data_arbres[id_arbre][attribute]}`;
+                }
                 row.appendChild(cell);
                 // ================= Pour le dernier attribut =================
                 // TO DO: Mettre un bouton pour prédire --> aucune idée de comment faire
