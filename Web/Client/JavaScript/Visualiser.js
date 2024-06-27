@@ -71,34 +71,70 @@ function printOption() {
         );
     }
     if (colonne === "Port") {
-        document.getElementById("choix-option").insertAdjacentHTML(
-            "afterbegin",
-            `<select class="form-select" aria-label="Default select example">
-                     <option selected disabled="disabled">Ordre</option>
-                     <option value="1">oui</option>
-                     <option value="2">non</option>
-                  </select>`
-        );
+        ajaxRequest('GET', 'PHP/request_post.php?action=ajouter_arbre_port', function(response) {
+            const choix_option = document.getElementById('choix-option');
+            const form_select = document.createElement('select');
+            form_select.classList.add('form-select');
+            form_select.setAttribute('aria-label', 'Default select example');
+
+            const option_title = document.createElement('option');
+            option_title.selected = true;
+            option_title.disabled = true;
+            option_title.textContent = "Sélection du type de port";
+            form_select.appendChild(option_title);
+
+            for (let i = 0; i < response.length; i++) {
+                const option_port = document.createElement('option');
+                option_port.value = i;
+                option_port.textContent = response[i].type_port;
+                form_select.appendChild(option_port);
+            }
+            choix_option.appendChild(form_select);
+        });
     }
     if (colonne === "Pied") {
-        document.getElementById("choix-option").insertAdjacentHTML(
-            "afterbegin",
-            `<select class="form-select" aria-label="Default select example">
-                     <option selected disabled="disabled">Ordre</option>
-                     <option value="1">oui</option>
-                     <option value="2">non</option>
-                  </select>`
-        );
+        ajaxRequest('GET', 'PHP/request_post.php?action=ajouter_arbre_pied', function(response) {
+            const choix_option = document.getElementById('choix-option');
+            const form_select = document.createElement('select');
+            form_select.classList.add('form-select');
+            form_select.setAttribute('aria-label', 'Default select example');
+
+            const option_title = document.createElement('option');
+            option_title.selected = true;
+            option_title.disabled = true;
+            option_title.textContent = "Sélection du type de pied";
+            form_select.appendChild(option_title);
+
+            for (let i = 0; i < response.length; i++) {
+                const option_pied = document.createElement('option');
+                option_pied.value = i;
+                option_pied.textContent = response[i].type_pied;
+                form_select.appendChild(option_pied);
+            }
+            choix_option.appendChild(form_select);
+        });
     }
     if (colonne === "Stade") {
-        document.getElementById("choix-option").insertAdjacentHTML(
-            "afterbegin",
-            `<select class="form-select" aria-label="Default select example">
-                     <option selected disabled="disabled">Ordre</option>
-                     <option value="1">oui</option>
-                     <option value="2">non</option>
-                  </select>`
-        );
+        ajaxRequest('GET', 'PHP/request_post.php?action=ajouter_arbre_stade', function(response) {
+            const choix_option = document.getElementById('choix-option');
+            const form_select = document.createElement('select');
+            form_select.classList.add('form-select');
+            form_select.setAttribute('aria-label', 'Default select example');
+
+            const option_title = document.createElement('option');
+            option_title.selected = true;
+            option_title.disabled = true;
+            option_title.textContent = "Sélection du stade";
+            form_select.appendChild(option_title);
+
+            for (let i = 0; i < response.length; i++) {
+                const option_stade = document.createElement('option');
+                option_stade.value = i;
+                option_stade.textContent = response[i].stade_dev;
+                form_select.appendChild(option_stade);
+            }
+            choix_option.appendChild(form_select);
+        });
     }
     if (colonne === "Etat") {
         ajaxRequest('GET', 'PHP/request_post.php?action=ajouter_arbre_etat', function(response) {
@@ -106,16 +142,16 @@ function printOption() {
             const form_select = document.createElement('select');
             form_select.classList.add('form-select');
             form_select.setAttribute('aria-label', 'Default select example');
-            //<option selected disabled="disabled">Ordre</option>
+
             const option_title = document.createElement('option');
             option_title.selected = true;
             option_title.disabled = true;
-            option_title.textContent = "Sélection";
+            option_title.textContent = "Sélection de l'état";
             form_select.appendChild(option_title);
 
             for (let i = 0; i < response.length; i++) {
                 const option_etat = document.createElement('option');
-                option_etat.value = response[i].etat_arb;
+                option_etat.value = i;
                 option_etat.textContent = response[i].etat_arb;
                 form_select.appendChild(option_etat);
             }
