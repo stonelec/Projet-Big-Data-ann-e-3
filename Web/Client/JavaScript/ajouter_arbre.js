@@ -185,7 +185,7 @@ $(document).ready(function (){
             val_feuillage: val_feuillage
         };
 
-        data = '&action=ajouter_toutes_valeur' + '&val_espece=' + val_espece + '&val_latitude=' + val_latitude +
+        data = 'action=ajouter_toutes_valeur' + '&val_espece=' + val_espece + '&val_latitude=' + val_latitude +
             '&val_longitude=' + val_longitude + '&val_hauteur_totale=' + val_hauteur_totale +
             '&val_hauteur_tronc=' + val_hauteur_tronc + '&val_diametre_tronc=' + val_diametre_tronc +
             '&val_age_estime=' + val_age_estime + '&val_etat=' + val_etat + '&val_stade=' + val_stade +
