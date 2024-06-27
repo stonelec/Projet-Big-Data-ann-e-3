@@ -244,16 +244,17 @@ function afficherTableau(data_arbres) {
     const table = document.createElement('table');
     table.classList.add('table', 'table-bordered', 'table-striped', 'table-hover', 'table-light', 'bottom-space');
     const HeaderElement = [
-        "ID", "Espèce", "Etat", "Stade", "Pied", "Port", "Remarquable", "Hauteur", "Diamètre", "Prédire"
+        "ID", "Espèce", "Etat", "Stade", "Pied", "Port", "Remarquable", "Hauteur Totale", "Hauteur Tronc", "Diamètre", "Latitude", "Longitude","Prédire"
     ];
     // On créé le header du tableau
     const thead = document.createElement('thead');
     thead.style.position = 'sticky';
     thead.style.top = '0';
     const headRow = document.createElement('tr');
-    for (let j = 0; j < 10; j++) {
+
+    for (header of HeaderElement) {
         const th = document.createElement('th');
-        th.textContent = HeaderElement[j];
+        th.textContent = header;
         headRow.appendChild(th);
     }
     thead.appendChild(headRow);
@@ -262,7 +263,7 @@ function afficherTableau(data_arbres) {
     const tbody = document.createElement('tbody');
 
     const AttributeElement = [
-        "id_arbre", "espece", "etat_arb", "stade_dev", "type_pied", "type_port", "remarquable", "hauteur_tot", "diametre_tronc","predire"
+        "id_arbre", "espece", "etat_arb", "stade_dev", "type_pied", "type_port", "remarquable", "hauteur_tot", "hauteur_tronc", "diametre_tronc","longitude","latitude","predire"
     ];
 
     // ================= Pour chaque arbre de la database =================
@@ -343,7 +344,7 @@ function addCarte(mode) {
                 <button type="button" class="btn btn-brown shadow-none btn-sm" id="btn-cluster">Cluster</button>
             </div>
         </div>   
-        <div class="map-container bottom-space">
+        <div class="map-container big-bottom-space">
             <div id='myDiv' class="myDiv"><!-- Plotly chart will be drawn inside this DIV --></div>
         </div>`
     );

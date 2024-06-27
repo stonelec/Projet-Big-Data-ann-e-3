@@ -358,9 +358,9 @@ switch ($requestAction) {
     case 'prediction_toutes_taille':
         // Vérifier si l'ID est fourni
         $n_arbres = Arbre::getNbArbre();
-        $result = [];
+        $result = array();
         $id_hey = 0;
-        for ($id_hey = 1; $id_hey <= $n_arbres; $id_hey++) {
+        for ($id_hey = 1; $id_hey <= 20; $id_hey++) {
 
             $hauteurTronc = Arbre::getHauteurTronc($id_hey);
             $ageEstim = Arbre::getAgeEstim($id_hey);
@@ -368,12 +368,12 @@ switch ($requestAction) {
 
             $command = 'cd ../../python/scripts && python3 fonc1.py '.$hauteurTronc.' '.$ageEstim.' '.$troncDiam.' kmeans';
             // $command = " python3 fonc1.py 50 10 20 kmeans "
-            exec($command, $output, $result);
+            exec($command, $output, $resultCommand);
 
-            $resultJson = file_get_contents('../../python/scripts/fonc1.json');
-            $result[] = json_decode($resultJson, true); // Ajouter chaque résultat décodé au tableau
+            $resultNumber = (int)file_get_contents('../../python/scripts/fonc1.json');
+            $result[$id_hey-1] = $resultNumber;
         }
-        echo json_encode($n_arbres);
+        echo json_encode($result);
         break;
 
 
