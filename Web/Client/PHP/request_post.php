@@ -12,7 +12,7 @@ $requestMethod = $_SERVER['REQUEST_METHOD'];
 
 
 $requestAction = isset($_GET['action']) ? $_GET['action'] : '';
-$requestAction_post = $_POST['ajouter_toutes_valeur'];
+$requestAction_post = isset($_POST['action']) ? $_POST['action'] : '';
 
 //TOUT EST BON ICI :
 
