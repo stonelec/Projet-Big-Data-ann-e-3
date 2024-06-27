@@ -343,7 +343,7 @@ function addCarte(mode) {
                 <button type="button" class="btn btn-brown shadow-none btn-sm" id="btn-cluster">Cluster</button>
             </div>
         </div>   
-        <div class="map-container bottom-space">
+        <div class="map-container big-bottom-space">
             <div id='myDiv' class="myDiv"><!-- Plotly chart will be drawn inside this DIV --></div>
         </div>`
     );

@@ -26,44 +26,74 @@ d3.csv(
 
         if (mode === "cluster") {
             console.log("Clustering...");
-            ajaxRequest('GET', 'PHP/request.php?action=prediction_toutes_taille', function(response) {
-                /*console.log("Prediction de la taille de l'arbre pour ID", id, ":", response);*/
-                console.log("response");
-                console.log(response);
-            });
+                // Faire la requête AJAX pour obtenir la prédiction du cluster
+                ajaxRequest('GET', 'PHP/request.php?action=prediction_toutes_taille', function(response) {
+                    // Supposons que votre réponse soit un objet JSON avec une propriété 'cluster'
+
+                    // Vous pouvez également mettre à jour votre page HTML ici si nécessaire
+                    console.log("Prediction du cluster ", response);
+                    for (var i = 0; i < response.length; i++){
+                        rows[i].cluster = response[i];
+                    }
+                    console.log(rows);
+                    /*remove arbre sans cluster*/
+                    console.log("Remove arbre sans cluster");
+                    rows = rows.filter(row => row.cluster !== undefined);
+                    console.log(rows);
+                    var data = [
+                        {
+                            type: "scattermapbox",
+                            text: combineText(rows),
+                            lon: unpack(rows, "longitude"),
+                            lat: unpack(rows, "latitude"),
+                            marker: {
+                                color: rows.map(row => {
+                                    switch (row.cluster) {
+                                        case 0 : return "#6F8F72";
+                                        case 1 : return "#504136";
+                                        case 2 : return "#BFB48F";
+                                    }
+                                }),
+                                size: 5
+                            }
+                        }
+                    ];
+
+                    var layout = {
+                        dragmode: "zoom",
+                        mapbox: { style: "open-street-map", center: { lat: 49.847754, lon: 3.29704 }, zoom: 11.5 },
+                        margin: { r: 0, t: 0, b: 0, l: 0 }
+                    };
+
+                    Plotly.newPlot("myDiv", data, layout);
+
+                });
+        }else {
+            var data = [
+                {
+                    type: "scattermapbox",
+                    text: combineText(rows),
+                    lon: unpack(rows, "longitude"),
+                    lat: unpack(rows, "latitude"),
+                    marker: {
+                        color: rows.map(row => {
+                                return "#504136";
+                        }),
+                        size: 4
+                    }
+                }
+            ];
+
+            var layout = {
+                dragmode: "zoom",
+                mapbox: { style: "open-street-map", center: { lat: 49.847754, lon: 3.29704 }, zoom: 11.5 },
+                margin: { r: 0, t: 0, b: 0, l: 0 }
+            };
+
+            Plotly.newPlot("myDiv", data, layout);
         }
 
-        var data = [
-            {
-                type: "scattermapbox",
-                text: combineText(rows),
-                lon: unpack(rows, "longitude"),
-                lat: unpack(rows, "latitude"),
-                marker: {
-                    color: rows.map(row => {
-                        if (mode === "cluster") {
-                            switch (row.cluster) {
-                                case "0": return "blue";
-                                case "1": return "green";
-                                case "2": return "red";
-                                case undefined: return "yellow";
-                            }
-                        } else {
-                            return "green";
-                        }
-                    }),
-                    size: 4
-                }
-            }
-        ];
 
-        var layout = {
-            dragmode: "zoom",
-            mapbox: { style: "open-street-map", center: { lat: 49.847754, lon: 3.29704 }, zoom: 11.5 },
-            margin: { r: 0, t: 0, b: 0, l: 0 }
-        };
-
-        Plotly.newPlot("myDiv", data, layout);
     }
 );
 }

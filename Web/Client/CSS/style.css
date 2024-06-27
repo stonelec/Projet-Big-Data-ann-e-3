@@ -25,6 +25,10 @@
 }
 body {
     font-family: 'marianne', 'marianne-bold', sans-serif;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 html {
     background: white;
@@ -39,6 +43,9 @@ html {
 /* ------------------------ Espace en bas de page ------------------------ */
 .bottom-space{
     margin-bottom: 7rem;
+}
+.big-bottom-space{
+    margin-bottom: 30rem;
 }
 /*------------------------boutons------------*/
 /*marron*/
@@ -212,6 +219,9 @@ html {
 
 .navbar-custom {
     background-color: var(--dark-green);
+    position: fixed;
+    top: 0;
+    width: 100%;
 }
 .navbar-custom .collapse .navbar-nav {
     font-size: 1.1rem; /* taille de la police */
@@ -286,7 +296,10 @@ html {
 .footer {
     background-color: var(--dark-green); /* Light grey background */
     color: white;
-    padding: 20px 0;
+    padding: 20px;
+    position: relative;
+    width: 100%;
+    bottom: 0; left: 0; right: 0;
 }
 .footer-logo {
     max-width: 150px; /* Adjust as needed */
