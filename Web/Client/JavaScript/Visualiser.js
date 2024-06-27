@@ -54,12 +54,7 @@ function afficherTableau(data_arbres) {
 }
 
 
-window.addEventListener("DOMContentLoaded", () => {
-    let btnTable = document.getElementById("btn-table");
-    let btnCarte = document.getElementById("btn-carte");
-    btnTable.addEventListener("click", () => {ajaxRequest('GET', 'PHP/request_m.php/all_data', afficherTableau);});
-    btnCarte.addEventListener("click", () => {addCarte()});
-});
+
 
 addTable();
 function addTable() {
