@@ -108,9 +108,8 @@ switch ($requestMethod) {
                     echo json_encode($result);
 
                 }
-                break;*/
-
-            //break;
+                */
+                break;
 
             default:
                 echo json_encode("Error => Rentrer dans le POST mais pas dans le case");
