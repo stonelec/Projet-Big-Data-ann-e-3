@@ -175,22 +175,6 @@ $(document).ready(function (){
 
         ajaxRequest('POST', 'PHP/request_post.php',function(response)  {
 
-            console.log("Valeur espece : ", val_espece);
-            console.log("Valeur latitude : ", val_latitude);
-            console.log("Valeur longitude : ", val_longitude);
-            console.log("Valeur hauteur totale : ", val_hauteur_totale);
-            console.log("Valeur hauteur totale : ", val_hauteur_tronc);
-            console.log("Valeur hauteur totale : ", val_diametre_tronc);
-            console.log("Valeur age estimé : ", val_age_estime);
-
-            console.log("Valeur etat : ", val_etat);
-            console.log("Valeur stade : ", val_stade);
-            console.log("Valeur remarquable : ", val_remarquable);
-            console.log("Valeur pied : ", val_pied);
-            console.log("Valeur revetement : ", val_revetement);
-            console.log("Valeur port : ", val_port);
-            console.log("Valeur feuillage : ", val_feuillage);
-
             console.log(response);
 
         }, data);
