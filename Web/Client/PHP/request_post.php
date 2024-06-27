@@ -94,7 +94,7 @@ switch ($requestMethod) {
 
             case 'ajouter_toutes_valeur':
 
-                if($val_age_estime != NULL && $val_feuillage != NULL){
+                if($val_age_estime != NULL && $val_feuillage != NULL && $val_revetement != NULL){
 
                     echo json_encode("Rien n'est égal à 0");
                 }
