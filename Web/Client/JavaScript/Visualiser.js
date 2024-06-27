@@ -101,20 +101,21 @@ function printOption() {
         );
     }
     if (colonne === "Etat") {
-        const choix_option = document.getElementById('choix-option');
-        const select = document.createElement('select');
-        select.classList.add('form-select');
-        select.setAttribute('aria-label', 'Default select example');
+        ajaxRequest('GET', 'PHP/request_post.php?action=ajouter_arbre_etat', function(response) {
+            const choix_option = document.getElementById('choix-option');
+            const form_select = document.createElement('select');
+            form_select.classList.add('form-select');
+            form_select.setAttribute('aria-label', 'Default select example');
 
-        ajaxRequest('GET', 'PHP/request_post.php?action=ajouter_arbre_etat', function(etats) {
-            for(let i=0; i<etats.length; i++) {
-                const option = document.createElement('option');
-                option.textContent = etats[i].etat_arb;
+            for(let i=0; i<response.length; i++) {
+                const option_etat = document.createElement('option');
+                option_etat.value = response[i].etat_arb;
+                option_etat.textContent = response[i].etat_arb;
+                form_select.appendChild(option_etat);
             }
-
+            choix_option.appendChild(form_select);
         });
 
-        choix_option.appendChild(select);
     }
 }
 
