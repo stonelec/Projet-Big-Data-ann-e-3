@@ -7,7 +7,7 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 addTable();
 function addTable() {
-    console.log("addTable");
+    //console.log("addTable");
     let bt = document.getElementById("btn-table");
     let bc = document.getElementById("btn-carte");
     bt.style.backgroundColor = "#6F8F72";
@@ -46,10 +46,10 @@ function addTable() {
 
 }
 function printOption() {
-    console.log("printOption");
+    //console.log("printOption");
     let colonne = document.getElementById("choix-colonne").value;
-    console.log(colonne);
-    console.log("Remarquable");
+    //console.log(colonne);
+    //console.log("Remarquable");
     document.getElementById("choix-option").remove();
     document.getElementById("choix-colonne-div").insertAdjacentHTML(
         "afterend",
@@ -161,7 +161,7 @@ function printOption() {
 }
 
 function printTrier() {
-    console.log("printTrier");
+    //console.log("printTrier");
     document.getElementsByClassName("supr")[0].remove();
     document.getElementById("choix-option").insertAdjacentHTML(
         "afterend",
@@ -223,8 +223,8 @@ function afficherTableau(data_arbres) {
     const AttributeElement = [
         "id_arbre", "espece", "etat_arb", "stade_dev", "type_pied", "type_port", "remarquable", "latitude", "longitude","predire"
     ];
-    console.log("nb_arb :")
-    console.log(nb_arb)
+    //console.log("nb_arb :")
+    //console.log(nb_arb)
     // ================= Pour chaque arbre de la database =================
     for (let id_arbre = 0; id_arbre < nb_arb; id_arbre++) {
 
@@ -283,8 +283,8 @@ function afficherTableau(data_arbres) {
     container.appendChild(table);
 }
 function addCarte(mode) {
-    console.log("addCarte");
-    console.log(mode)
+    //console.log("addCarte");
+    //console.log(mode)
     let bt = document.getElementById("btn-table");
     let bc = document.getElementById("btn-carte");
     bt.style.backgroundColor = "#504136";
@@ -321,7 +321,7 @@ function addCarte(mode) {
 
 }
 function cleanPage(){
-    console.log("cleanPage");
+    //console.log("cleanPage");
     let sousTitre = document.getElementsByClassName("btn-group")[0];
     while (sousTitre.nextSibling) {
         sousTitre.nextSibling.remove();
