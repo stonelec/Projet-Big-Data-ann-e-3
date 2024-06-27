@@ -198,7 +198,7 @@ $(document).ready(function (){
             //console.log("Toutes les valeurs ont été ajouté");
             //console.log("Ca doit afficher la hauteur du tronc : ", response)
 
-        });
+        }, data);
 
     });
 

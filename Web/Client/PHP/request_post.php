@@ -12,17 +12,28 @@ $requestMethod = $_SERVER['REQUEST_METHOD'];
 
 
 $requestAction = isset($_GET['action']) ? $_GET['action'] : '';
+$requestAction_post = $_POST['ajouter_toutes_valeur'];
 
 //TOUT EST BON ICI :
-echo json_encode($requestAction);
+
+if($requestMethod == 'GET'){
+
+    echo json_encode($requestAction);
+
+}
+
+if($requestMethod == 'POST'){
+
+    echo json_encode($requestAction_post);
+
+}
+
 
 $id = isset($_GET['id']) ? $_GET['id'] : NULL;
 
 $result = null;
 
 // ----- On récupère des variables de POST -----
-
-//$requestAction_post=$_POST['ajouter_toutes_valeur'];
 
 
 /*
