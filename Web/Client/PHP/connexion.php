@@ -1,23 +1,15 @@
 <?php
 
 session_start();
+include('User.php');
 
-$name = $_POST['username'];
-$pwd = $_POST['password'];
+if($_SERVER['REQUEST_METHOD'] == $_POST){
 
-$username = 'user';
-$password = 'pass';
+    $email = $_POST['email'];
+    $password = $_POST['password'];
 
-// Vérifiez les informations d'identification de l'utilisateur
-if ($name == $username && $pwd == $password) {
-    $_SESSION['loggedin'] = true;
-    $_SESSION['username'] = $name;
-    header("Location: accueil.html");
-    exit;
+    $query = "SELECT * FROM users WHERE email = '$email' AND password = '$password'";
+
 }
 
-else {
-    $_SESSION['loggedin'] = false;
-    $error_message = "Nom d'utilisateur ou mot de passe incorrect.";
-}
 ?>
