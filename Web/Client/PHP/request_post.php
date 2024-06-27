@@ -145,7 +145,8 @@ switch ($requestMethod) {
                 echo json_encode($tab);
 
                 */
-                if($val_latitude != NULL){
+                if($val_hauteur_totale != NULL && $val_hauteur_tronc != NULL &&
+                    $val_diametre_tronc != NULL){
 
                     /*
                     $result = Arbre::addNewArbre($id_user, $val_longitude, $val_latitude, $val_hauteur_totale, $val_hauteur_tronc, $val_diametre_tronc, $val_etat, $val_stade,
