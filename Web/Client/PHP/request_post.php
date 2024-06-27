@@ -137,9 +137,9 @@ switch ($requestMethod) {
 
             case 'ajouter_toutes_valeur':
 
-                /*$tab = [$val_longitude, $val_latitude, $val_hauteur_totale, $val_hauteur_tronc, $val_diametre_tronc,
+                $tab = [$val_longitude, $val_latitude, $val_hauteur_totale, $val_hauteur_tronc, $val_diametre_tronc,
                         $val_etat,$val_stade,$val_port, $val_pied, $val_espece, $val_remarquable, $val_feuillage, $val_age_estime,
-                        $val_revetement];*/
+                        $val_revetement];
 
                 if($id_user != NULL && $val_longitude != NULL && $val_latitude != NULL && $val_hauteur_totale != NULL && $val_hauteur_tronc != NULL &&
                     $val_diametre_tronc != NULL && $val_etat != NULL && $val_stade != NULL && $val_port != NULL && $val_pied != NULL &&
@@ -152,13 +152,13 @@ switch ($requestMethod) {
                     echo json_encode($result);
                     */
 
-                    echo json_encode("toutes les valeurs sont bonnes : ");
+                    echo json_encode("toutes les valeurs sont bonnes : ", $tab);
 
                 }
 
                 else{
 
-                    echo json_encode("Problèmes dans les variables : ");
+                    echo json_encode("Problèmes dans les variables : ", $tab);
 
                 }
 
