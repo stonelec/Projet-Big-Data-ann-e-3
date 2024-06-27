@@ -20,7 +20,7 @@ $id = isset($_GET['id']) ? $_GET['id'] : NULL;
 $result = null;
 
 // ----- On récupère des variables de POST -----
-
+/*
 if($requestAction == "ajouter_toutes_valeur"){
 
     $id_user = 1; //On pourra le récupérer en changeant l'url
@@ -111,7 +111,7 @@ switch ($requestMethod) {
                 echo json_encode($result);
                 break;
 
-                /*
+
                 if($id_user != NULL && $val_longitude != NULL && $val_latitude != NULL && $val_hauteur_totale != NULL && $val_hauteur_tronc != NULL &&
                     $val_diametre_tronc != NULL && $val_etat != NULL && $val_stade != NULL && $val_port != NULL && $val_pied != NULL &&
                     $val_espece != NULL && $val_remarquable != NULL && $val_feuillage != NULL && $val_age_estime != NULL &&
@@ -132,7 +132,7 @@ switch ($requestMethod) {
 
                 //$result = "C'est good tu peux pleurer";
                 //echo json_encode($result);
-                //break;*/
+                //break;
 
             default:
                 // Retourner une erreur si l'action n'est pas reconnue
@@ -149,5 +149,5 @@ switch ($requestMethod) {
 
 }
 
-
+*/
 
