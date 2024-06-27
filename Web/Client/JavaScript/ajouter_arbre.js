@@ -125,7 +125,7 @@ $(document).ready(function (){
 // -------------------------------------------------------------------------------------------------------
 // -------------------- Récupérer tous les élements pour les mettres dans les options --------------------
 //--------------------------------------------------------------------------------------------------------
-/*
+
 $(document).ready(function (){
 
     $('.form_ajouter_arbre').submit(function(event) {
@@ -192,7 +192,7 @@ $(document).ready(function (){
             '&val_remarquable=' + val_remarquable + '&val_pied=' + val_pied + '&val_revetement=' + val_revetement +
             '&val_port=' + val_port + '&val_feuillage=' + val_feuillage;
 
-        ajaxRequest('POST', 'PHP/request_post.php',function(response)  {
+        ajaxRequest('POST', 'PHP/request_post.php?',function(response)  {
 
             console.log(response);
             //console.log("Toutes les valeurs ont été ajouté");
@@ -202,4 +202,4 @@ $(document).ready(function (){
 
     });
 
-});*/
+});
