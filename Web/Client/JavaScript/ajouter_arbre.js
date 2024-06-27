@@ -9,7 +9,6 @@ $(document).ready(function (){
     let option_pied;
     let option_port;
     let option_feuillage;
-    let option_remarquable;
 
     // --------------------------
     // ----- Noms des etats -----
