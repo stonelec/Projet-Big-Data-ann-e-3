@@ -3,11 +3,11 @@ console.log("prediction.js loaded")
 url_string = window.location.href;
 let url = new URL(url_string);
 let pred = url.searchParams.get("pred");
-let id = url.searchParams.get("id");
-console.log(id);
+let id_arbre = url.searchParams.get("id");
+console.log(id_arbre);
 console.log(pred);
 
-if(id == 0) {
+if(id_arbre == 0) {
     console.log("id non renseigné");
     if(pred === "age"){
         console.log("age");
