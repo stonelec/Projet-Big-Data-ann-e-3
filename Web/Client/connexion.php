@@ -1,15 +1,3 @@
-<?php
-
-session_start();
-
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
-require_once('PHP/Utilisateur.php');
-$result = Utilisateur::connexion_utilisateur();
-?>
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -31,12 +19,14 @@ $result = Utilisateur::connexion_utilisateur();
     <link href="CSS/connexion.css" rel="stylesheet">
 
     <!-- Inclure le JS -->
+    <script src="JavaScript/connexion.js"></script>
     <script src="JavaScript/ajax.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
 </head>
 
 <body>
+
 <!-- =================================== NAVBAR ================================== -->
 <nav class="navbar navbar-expand-lg navbar-custom">
     <a class="navbar-brand" href="accueil.html">
@@ -87,11 +77,6 @@ $result = Utilisateur::connexion_utilisateur();
                         <p>Vous n'avez pas de compte</p>
                         <a href="connexion.css">S'enregistrer</a>
                     </div>-->
-                    <?php
-                    if ($result == "E-Mail ou Mot de passe invalide !") {
-                        echo '<p id="erreur">' . $result . '</p>';
-                    }
-                    ?>
                 </form>
             </div>
         </div>
