@@ -4,40 +4,100 @@ require_once('Arbre.php');
 require_once('User.php');
 
 // Récupérer la méthode de la requête (GET, POST, etc.)
+
 $requestMethod = $_SERVER['REQUEST_METHOD'];
 
-// ----- AVEC GET -----
+//TOUT EST BON ICI :
+//echo json_encode($requestMethod);
 
-$requestAction_get = isset($_GET['action']) ? $_GET['action'] : '';
+$requestAction = isset($_GET['action']) ? $_GET['action'] : '';
+
+//TOUT EST BON ICI :
+//echo json_encode($requestAction);
+
 $id = isset($_GET['id']) ? $_GET['id'] : NULL;
 
 $result = null;
 
-// ----- AVEC POST -----
+// ----- On récupère des variables de POST -----
 
-$requestAction_post = isset($_POST['action']) ? $_POST['action'] : '';
+if($requestAction == "ajouter_arbre_etat"){
 
-$val_espece = isset($_POST['val_espece']) ? $_POST['val_espece'] : NULL;
-$val_latitude = isset($_POST['val_latitude']) ? $_POST['val_latitude'] : NULL;
-$val_longitude = isset($_POST['val_longitude']) ? $_POST['val_longitude'] : NULL;
-$val_hauteur_totale = isset($_POST['val_hauteur_totale']) ? $_POST['val_hauteur_totale'] : NULL;
-$val_hauteur_tronc = isset($_POST['val_hauteur_tronc']) ? $_POST['val_hauteur_tronc'] : NULL;
-$val_diametre_tronc = isset($_POST['val_diametre_tronc']) ? $_POST['val_diametre_tronc'] : NULL;
-$val_etat = isset($_POST['val_etat']) ? $_POST['val_etat'] : NULL;
-$val_stade = isset($_POST['val_stade']) ? $_POST['val_stade'] : NULL;
-$val_pied = isset($_POST['val_pied']) ? $_POST['val_pied'] : NULL;
-$val_port = isset($_POST['val_port']) ? $_POST['val_port'] : NULL;
-$val_feuillage = isset($_POST['val_feuillage']) ? $_POST['val_feuillage'] : NULL;
+    echo json_encode("GET ajouter_arbre_etat");
 
+}
+else if($requestAction == "ajouter_arbre_stade"){
+
+    echo json_encode("GET ajouter_arbre_stade");
+
+}
+else if($requestAction == "ajouter_arbre_pied"){
+
+    echo json_encode("GET ajouter_arbre_pied");
+
+}
+else if($requestAction == "ajouter_arbre_port"){
+
+    echo json_encode("GET ajouter_arbre_port");
+
+}
+else if($requestAction == "ajouter_arbre_feuillage"){
+
+    echo json_encode("GET ajouter_arbre_feuillage");
+
+}
+
+else if($requestAction == "ajouter_toutes_valeur"){
+
+    //$id_user = 1; //On pourra le récupérer en changeant l'url
+    //$val_longitude = isset($_GET['$val_longitude']) ? $_GET['$val_longitude'] : NULL;
+    $val_latitude = $_GET['val_latitude'];
+    //$val_hauteur_totale = isset($_GET['val_hauteur_totale']) ? $_GET['val_hauteur_totale'] : NULL;
+    //$val_hauteur_tronc = isset($_GET['val_hauteur_tronc']) ? $_GET['val_hauteur_tronc'] : NULL;
+    //$val_diametre_tronc = isset($_GET['val_diametre_tronc']) ? $_GET['val_diametre_tronc'] : NULL;
+
+    //$val_etat = isset($_GET['val_etat']) ? $_GET['val_etat'] : NULL; //IL FAUT SON ID
+    //$val_stade = isset($_GET['val_stade']) ? $_GET['val_stade'] : NULL; //IL FAUT SON ID
+    //$val_port = isset($_GET['val_port']) ? $_GET['val_port'] : NULL; //IL FAUT SON ID
+    //$val_pied = isset($_GET['val_pied']) ? $_GET['val_pied'] : NULL; //IL FAUT SON ID
+
+    //$val_espece = isset($_GET['val_espece']) ? $_GET['val_espece'] : NULL;
+    //$val_remarquable = isset($_GET['$val_remarquable']) ? $_GET['$val_remarquable'] : NULL;
+
+    //$val_feuillage = isset($_GET['val_feuillage']) ? $_GET['val_feuillage'] : NULL; //IL FAUT SON ID
+
+    //$val_age_estime = isset($_GET['val_age_estime']) ? $_GET['val_age_estime'] : NULL;
+    //$val_revetement = isset($_GET['val_revetement']) ? $_GET['val_revetement'] : NULL;
+
+
+    echo json_encode($val_latitude);
+    //echo json_encode($val_hauteur_totale);
+    //echo json_encode($val_hauteur_tronc);
+    //echo json_encode($val_diametre_tronc);
+    //echo json_encode($val_etat);
+    //echo json_encode($val_stade);
+    //echo json_encode($val_port);
+    //echo json_encode($val_pied);
+    //echo json_encode($val_espece);
+    //echo json_encode($val_remarquable);
+    //echo json_encode($val_feuillage);
+    //echo json_encode($val_age_estime);
+    //echo json_encode($val_revetement);
+
+}
+
+else{
+
+    echo json_encode("erreur");
+
+
+}
+/*
 switch ($requestMethod) {
 
     case 'GET':
 
-        switch ($requestAction_get) {
-
-            # =========================================================
-            # ===================== ajouter_arbre =====================
-            # =========================================================
+        switch ($requestAction) {
 
             case 'ajouter_arbre_etat':
                 $result = Arbre::getAllEtat();
@@ -66,39 +126,61 @@ switch ($requestMethod) {
 
             default:
                 // Retourner une erreur si l'action n'est pas reconnue
-                echo json_encode(['error' => 'Action non reconnue']);
+                echo json_encode(['error' => 'IL EST PAS RENTRER DANS LE GET']);
                 break;
 
         }
         break;
 
-        /*
+
     case 'POST':
 
-        switch ($requestAction_post){
+        switch ($requestAction){
 
             case 'ajouter_toutes_valeur':
 
-                if($val_espece != NULL && $val_latitude != NULL && $val_longitude != NULL && $val_hauteur_tronc != NULL && $val_diametre_tronc != NULL &&
-                    $val_etat != NULL && $val_stade != NULL && $val_pied != NULL && $val_port != NULL && $val_feuillage != NULL){
-                    $result = Arbre::addNewArbre($val_espece, $val_latitude, $val_longitude, $val_hauteur_tronc, $val_diametre_tronc, $val_etat, $val_stade, $val_pied, $val_port, $val_feuillage);
-                    echo json_encode($result);
-                }
+                $result = Arbre::addNewArbre($id_user, $val_longitude, $val_latitude, $val_hauteur_totale, $val_hauteur_tronc, $val_diametre_tronc, $val_etat, $val_stade,
+                    $val_port, $val_pied, $val_espece, $val_remarquable, $val_feuillage, $val_age_estime, $val_revetement);
+                echo json_encode($result);
                 break;
+
+
+                if($id_user != NULL && $val_longitude != NULL && $val_latitude != NULL && $val_hauteur_totale != NULL && $val_hauteur_tronc != NULL &&
+                    $val_diametre_tronc != NULL && $val_etat != NULL && $val_stade != NULL && $val_port != NULL && $val_pied != NULL &&
+                    $val_espece != NULL && $val_remarquable != NULL && $val_feuillage != NULL && $val_age_estime != NULL &&
+                    $val_revetement != NULL){
+                    $result = Arbre::addNewArbre($id_user, $val_longitude, $val_latitude, $val_hauteur_totale, $val_hauteur_tronc, $val_diametre_tronc, $val_etat, $val_stade,
+                                $val_port, $val_pied, $val_espece, $val_remarquable, $val_feuillage, $val_age_estime, $val_revetement);
+                    echo json_encode($result);
+                    break;
+                }
+
+                else{
+
+                    $result = "Problème dans les variables";
+                    echo json_encode($result);
+                    break;
+
+                }
+
+                //$result = "C'est good tu peux pleurer";
+                //echo json_encode($result);
+                //break;
 
             default:
                 // Retourner une erreur si l'action n'est pas reconnue
-                echo json_encode(['error' => 'Action non reconnue']);
+                echo json_encode(['error' => 'IL EST RENTRER DANS POST MAIS PAS DANS LE CASE']);
                 break;
 
         }
-        break;*/
-
+        break;
 
     default:
         // Retourner une erreur si l'action n'est pas reconnue
-        echo json_encode(['error' => 'Action non reconnue']);
+        echo json_encode(['error' => 'IL EST PAS RENTRER DANS GET OU POST']);
         break;
+
 }
+*/
 
 
