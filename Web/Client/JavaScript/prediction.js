@@ -128,23 +128,23 @@ function addResult(){
                 <div class="card-content card-blanche-content">
                     <div class="item">
                         <div class="label">Feuillage</div>
-                        <div class="value_feuillage">1800</div>
+                        <div class="value_feuillage_age"></div>
                     </div>
                     <div class="item">
                         <div class="label">Hauteur tronc</div>
-                        <div class="value">NON</div>
+                        <div class="value_hauteur_tronc_age"></div>
                     </div>
                     <div class="item">
                         <div class="label">Diamètre tronc</div>
-                        <div class="value">EN PLACE</div>
+                        <div class="value_diametre_tronc_age"></div>
                     </div>
                     <div class="item">
-                        <div class="label">Hauteur total</div>
-                        <div class="value">adulte</div>
+                        <div class="label">Hauteur totale</div>
+                        <div class="value_hauteur_totale_age"></div>
                     </div>
                     <div class="item">
-                        <div class="label">Revetement</div>
-                        <div class="value">adulte</div>
+                        <div class="label">Revêtement</div>
+                        <div class="value_revetement_age"></div>
                     </div>
                 </div>
             </div>`
@@ -157,23 +157,56 @@ function addResult(){
             </div>
             <div class="card-data-resulte">
                 <div>Age</div>
-                <div style="color: #6F8F72; font-weight: bold;">1800</div>
+                <div class="prediction1" style="color: #6F8F72; font-weight: bold;"></div>
             </div>
         </div>`
         );
-
+// =============================== Modification des infos ======== Requêtes AJAX ===============================
+// -------------------------------------------------- Feuillage ------------------------------------------------
         ajaxRequest('GET', 'PHP/request.php?action=feuillage&id=' + id, function (response) {
             console.log("Feuillage de l'arbre : ", response);
             // Afficher le résultat dans votre page HTML
-            $('.value_feuillage').html(
-                '<p> Le feuillage est : ' +
-                response +
-                '</p>');
-
+            $('.value_feuillage_age').html(
+                '<p>' + response + '</p>');
         });
+// -------------------------------------------------- Hauteur tronc ------------------------------------------------
+        ajaxRequest('GET', 'PHP/request.php?action=hauteur_tronc&id=' + id, function (response) {
+            console.log("Hauteur du tronc : ", response);
+            // Afficher le résultat dans votre page HTML
+            $('.value_hauteur_tronc_age').html(
+                '<p>' + response + '</p>');
+        });
+// -------------------------------------------------- Diamètre tronc ------------------------------------------------
+        ajaxRequest('GET', 'PHP/request.php?action=diametre&id=' + id, function (response) {
+            console.log("Diametre de l'arbre : ", response);
+            // Afficher le résultat dans votre page HTML
+            $('.value_diametre_tronc_age').html(
+                '<p>' + response + '</p>');
+        });
+// -------------------------------------------------- Hauteur totale ------------------------------------------------
+        ajaxRequest('GET', 'PHP/request.php?action=hauteurtotale&id=' + id, function (response) {
+            console.log("hauteur totale de l'arbre : ", response);
+            // Afficher le résultat dans votre page HTML
+            $('.value_hauteur_totale_age').html(
+                '<p>' + response + '</p>');
+        });
+// -------------------------------------------------- Revêtement ------------------------------------------------
+        ajaxRequest('GET', 'PHP/request.php?action=revetement&id=' + id, function (response) {
+            console.log("Revetement de l'arbre : ", response);
+            // Afficher le résultat dans votre page HTML
+            $('.value_revetement_age').html(
+                '<p>' + response + '</p>');
+        });
+// -------------------------------------------------- Prédiction Age ------------------------------------------------
+        ajaxRequest('GET', 'PHP/request.php?action=prediction_taille&id=' + id, function (response) {
+            console.log("Prediction de la taille de l'arbre : ", response);
+            // Afficher le résultat dans votre page HTML
+            $('.prediction1').html(
+                '<p>' + response + '</p>');
+        });
+    }
 
-
-    }else if(pred == "taille"){
+    else if(pred == "taille"){
         console.log("result : taille");
         document.getElementById("affichage-top").insertAdjacentHTML(
             "beforeend",
