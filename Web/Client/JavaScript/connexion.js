@@ -16,7 +16,7 @@ $(document).ready(function (){
         let data_mail = []
         let data_mot_de_passe = []
 
-        ajaxRequest('GET', 'PHP/request_connexion.php?action=recuperer_email',function(response)  {
+        ajaxRequest('GET', 'PHP/request.php?action=recuperer_email',function(response)  {
 
             console.log(response);
 
@@ -28,7 +28,7 @@ $(document).ready(function (){
 
         });
 
-        ajaxRequest('GET', 'PHP/request_connexion.php?action=recuperer_mot_de_passe',function(response)  {
+        ajaxRequest('GET', 'PHP/request.php?action=recuperer_mot_de_passe',function(response)  {
 
             console.log(response);
 

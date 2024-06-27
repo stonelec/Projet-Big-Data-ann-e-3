@@ -129,6 +129,18 @@ switch ($requestAction) {
         }
         break;
 
+    //----- CONNEXION -----
+
+    case 'recuperer_email' :
+        $result = User::getAllMail();
+        echo json_encode($result);
+        break;
+
+    case 'recuperer_mot_de_passe' :
+        $result = User::getAllMotDePasse();
+        echo json_encode($result);
+        break;
+
 # ----------------------- Prédire les infos -----------------------
     case 'prediction_taille':
         // Vérifier si l'ID est fourni
