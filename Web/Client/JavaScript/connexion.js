@@ -16,52 +16,53 @@ $(document).ready(function (){
         let data_mail = []
         let data_mot_de_passe = []
 
-        ajaxRequest('GET', 'PHP/request.php?action=recuperermail',function(response)  {
+        ajaxRequest('GET', 'PHP/request.php?action=recuperermail',function(response_mail)  {
 
-            console.log(response);
+            console.log(response_mail);
 
-            for(let i=0; i<response.length; i++){
+            for(let i=0; i<response_mail.length; i++){
 
-                data_mail[i] = response[i].email_user;
+                data_mail[i] = response_mail[i];
 
             }
+
+            ajaxRequest('GET', 'PHP/request.php?action=recuperermdp',function(response_mdp)  {
+
+                console.log(response_mdp);
+
+                for(let i=0; i<response_mdp.length; i++){
+
+                    data_mot_de_passe[i] = response_mdp[i];
+
+                }
+
+                let n = data_mail.length;
+
+                console.log("TEST");
+                console.log(n);
+
+                for(let i=0; i<n+1 ;i++){
+
+                    console.log("RENTRER");
+
+                    if(val_email === data_mail[i].mail_user && mot_de_passe === data_mot_de_passe[i].password_user){
+
+                        console.log("VALID");
+
+                    }
+
+                    else {
+
+                        console.log("ERREUR");
+
+                    }
+
+                }
+
+            });
 
         });
 
-        ajaxRequest('GET', 'PHP/request.php?action=recuperermdp',function(response)  {
-
-            console.log(response);
-
-            for(let i=0; i<response.length; i++){
-
-                data_mot_de_passe[i] = response[i].password_user;
-
-            }
-
-        });
-
-        let n = data_mail.length;
-
-        console.log("TEST");
-        console.log(n);
-
-        for(let i=0; i<n+1 ;i++){
-
-            console.log("RENTRER");
-
-            if(val_email === data_mail[i] && mot_de_passe === data_mot_de_passe[i]){
-
-                console.log("VALID");
-
-            }
-
-            else {
-
-                console.log("ERREUR");
-
-            }
-
-        }
 
 
     });
