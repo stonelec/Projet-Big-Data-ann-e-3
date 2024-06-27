@@ -244,7 +244,7 @@ function afficherTableau(data_arbres) {
     const table = document.createElement('table');
     table.classList.add('table', 'table-bordered', 'table-striped', 'table-hover', 'table-light', 'bottom-space');
     const HeaderElement = [
-        "ID", "Espèce", "Etat", "Stade", "Pied", "Port", "Remarquable", "Hauteur", "Diamètre", "Prédire"
+        "ID", "Espèce", "Etat", "Stade", "Pied", "Port", "Remarquable", "Hauteur", "Diamètre", "Latitude", "Longitude","Prédire"
     ];
     // On créé le header du tableau
     const thead = document.createElement('thead');
@@ -262,7 +262,7 @@ function afficherTableau(data_arbres) {
     const tbody = document.createElement('tbody');
 
     const AttributeElement = [
-        "id_arbre", "espece", "etat_arb", "stade_dev", "type_pied", "type_port", "remarquable", "hauteur_tot", "diametre_tronc","predire"
+        "id_arbre", "espece", "etat_arb", "stade_dev", "type_pied", "type_port", "remarquable", "hauteur_tot", "diametre_tronc","longitude","latitude","predire"
     ];
 
     // ================= Pour chaque arbre de la database =================
