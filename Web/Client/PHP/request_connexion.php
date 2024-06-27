@@ -22,16 +22,15 @@ switch ($requestAction) {
     case 'recuperer_email':
         $result = User::getAllMail();
         echo json_encode($result);
-        break;
+
 
     case 'recuperer_mot_de_passe':
         $result = User::getAllMotDePasse();
         echo json_encode($result);
-        break;
 
-    default:
-        echo json_encode("Dans get mais pas dans action");
-        break;
+
+    break;
+
 }
 
 /*
