@@ -27,7 +27,7 @@ else if($requestMethod == 'POST'){
     $id_user = 1; //On pourra le récupérer en changeant l'url
     $val_longitude = isset($_POST['val_longitude']) ? $_POST['val_longitude'] : '';
     $val_latitude = isset($_POST['val_latitude']) ? $_POST['val_latitude'] : '';
-    $val_hauteur_totale = isset($_POST['$al_hauteur_totale']) ? $_POST['val_hauteur_totale'] : '';
+    $val_hauteur_totale = isset($_POST['val_hauteur_totale']) ? $_POST['val_hauteur_totale'] : '';
     $val_hauteur_tronc = isset($_POST['val_hauteur_tronc']) ? $_POST['val_hauteur_tronc'] : '';
     $val_diametre_tronc = isset($_POST['val_diametre_tronc']) ? $_POST['val_diametre_tronc'] : '';
 
