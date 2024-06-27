@@ -442,3 +442,10 @@ window.addEventListener("DOMContentLoaded", () => {
     btnSubmit.addEventListener("click", submit);
 });
 
+function data_age(id_arbre){
+
+    ajaxRequest('GET', 'PHP/request.php?action=hauteur_tronc&id=' + id_arbre, function (response) {
+        console.log("Infos de l'arbre : ", response);
+        // Afficher le résultat dans votre page HTML
+    });
+}
