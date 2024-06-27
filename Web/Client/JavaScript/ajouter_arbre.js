@@ -116,6 +116,23 @@ $(document).ready(function (){
 
     });
 
+    ajaxRequest('GET', 'PHP/request_post.php?action=ajouter_arbre_espece', function(response) {
+
+        //console.log("Especes : ")
+        console.log(response)
+
+        for(let i=0; i<response.length; i++) {
+
+            option_especes += '<option value="'+ response[i] +'"></option>';
+
+        }
+
+        $('#espece_list').html('<option selected disabled="disabled">Sélectionner</option>' +
+            option_especes
+        );
+
+    });
+
     // --------------------------------
     // ----- Noms des revetements -----
     // --------------------------------

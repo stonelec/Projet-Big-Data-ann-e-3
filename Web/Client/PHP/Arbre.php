@@ -544,11 +544,6 @@ class Arbre {
 
     static function getAllEtat(){
 
-        /**
-         * Fonction qui permet de récupérer le port d'un arbre
-         * @param $id_arbre
-         * @return mixed
-         */
         $db = DB::connexion();
 
         $request = 'SELECT etat_arb
@@ -564,11 +559,6 @@ class Arbre {
 
     static function getAllStade(){
 
-        /**
-         * Fonction qui permet de récupérer le port d'un arbre
-         * @param $id_arbre
-         * @return mixed
-         */
         $db = DB::connexion();
 
         $request = 'SELECT stade_dev
@@ -584,11 +574,6 @@ class Arbre {
 
     static function getAllPied(){
 
-        /**
-         * Fonction qui permet de récupérer le port d'un arbre
-         * @param $id_arbre
-         * @return mixed
-         */
         $db = DB::connexion();
 
         $request = 'SELECT type_pied
@@ -604,11 +589,6 @@ class Arbre {
 
     static function getAllPort(){
 
-        /**
-         * Fonction qui permet de récupérer le port d'un arbre
-         * @param $id_arbre
-         * @return mixed
-         */
         $db = DB::connexion();
 
         $request = 'SELECT type_port
@@ -624,15 +604,25 @@ class Arbre {
 
     static function getAllFeuillage(){
 
-        /**
-         * Fonction qui permet de récupérer le port d'un arbre
-         * @param $id_arbre
-         * @return mixed
-         */
         $db = DB::connexion();
 
         $request = 'SELECT feuillage
                     FROM type_feuillage;
+        ';
+
+        $statement = $db->prepare($request);
+        $statement->execute();
+
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    }
+
+    static function getAllEspece(){
+
+        $db = DB::connexion();
+
+        $request = 'SELECT DISTINCT  espece
+                    FROM arbre;
         ';
 
         $statement = $db->prepare($request);

@@ -123,6 +123,11 @@ switch ($requestMethod) {
                 echo json_encode($result);
                 break;
 
+            case 'ajouter_arbre_espece':
+                $result = Arbre::getAllEspece();
+                echo json_encode($result);
+                break;
+
             default:
                 // Retourner une erreur si l'action n'est pas reconnue
                 echo json_encode("Error => Rentrer dans le GET mais pas dans le case");
