@@ -101,6 +101,7 @@ function printOption() {
         );
     }
     if (colonne === "Etat") {
+        const choix_option = document.getElementById('choix-option');
         const select = document.createElement('select');
         select.classList.add('form-select');
         select.setAttribute('aria-label', 'Default select example');
@@ -112,6 +113,8 @@ function printOption() {
             }
 
         });
+
+        choix_option.appendChild(select);
     }
 }
 
