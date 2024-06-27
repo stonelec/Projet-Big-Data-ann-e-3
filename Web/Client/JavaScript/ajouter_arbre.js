@@ -185,8 +185,14 @@ $(document).ready(function (){
             val_feuillage: val_feuillage
         };
 
+        data = 'action=ajouter_toutes_valeur' + '&val_espece=' + val_espece + '&val_latitude=' + val_latitude +
+            '&val_longitude=' + val_longitude + '&val_hauteur_totale=' + val_hauteur_totale +
+            '&val_hauteur_tronc=' + val_hauteur_tronc + '&val_diametre_tronc=' + val_diametre_tronc +
+            '&val_age_estime=' + val_age_estime + '&val_etat=' + val_etat + '&val_stade=' + val_stade +
+            '&val_remarquable=' + val_remarquable + '&val_pied=' + val_pied + '&val_revetement=' + val_revetement +
+            '&val_port=' + val_port + '&val_feuillage=' + val_feuillage;
 
-        ajaxRequest('POST', 'PHP/request_post.php?action=ajouter_toutes_valeur',function(response)  {
+        ajaxRequest('POST', 'PHP/request_post.php',function(response)  {
 
             console.log(response);
             //console.log("Toutes les valeurs ont été ajouté");
@@ -197,3 +203,11 @@ $(document).ready(function (){
     });
 
 });
+/*
+*
+* '&val_espece=' + val_espece + '&val_latitude=' + val_latitude +
+            '&val_longitude=' + val_longitude + '&val_hauteur_totale=' + val_hauteur_totale +
+            '&val_hauteur_tronc=' + val_hauteur_tronc + '&val_diametre_tronc=' + val_diametre_tronc +
+            '&val_age_estime=' + val_age_estime + '&val_etat=' + val_etat + '&val_stade=' + val_stade +
+            '&val_remarquable=' + val_remarquable + '&val_pied=' + val_pied + '&val_revetement=' + val_revetement +
+            '&val_port=' + val_port + '&val_feuillage=' + val_feuillage, */
