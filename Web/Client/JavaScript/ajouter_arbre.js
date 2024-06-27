@@ -9,7 +9,7 @@ $(document).ready(function (){
     let option_pied;
     let option_port;
     let option_feuillage;
-    let options = [];
+    let option_especes;
 
     // --------------------------
     // ----- Noms des etats -----
@@ -126,18 +126,42 @@ $(document).ready(function (){
         console.log("Especes : ")
         console.log(response)
 
-        // Stocker les options dans le tableau 'options'
-        options = response.map(item => item.espece);
+        let option = []
 
-        // Initialement, ajouter toutes les options à la datalist
-        updateDatalist(options);
+        for(let i=0; i<response.length; i++) {
+
+            option_especes += '<option value="'+ response[i].espece +'"></option>';
+            option[i] = response[i].espece;
+
+        }
+
+        $('#espece_list').html('<option selected disabled="disabled">Sélectionner</option>');
+
+        option.forEach(option =>{
+
+            let datalist = document.getElementById('espece_list');
+            let element_de_option = document.createElement('option');
+            element_de_option.value = option;
+            datalist.push(element_de_option);
+
+
+        });
+
+        document.getElementById('espece').addEventListener('input', function() {
+            const value = this.value.toLowerCase();
+
+            // Filtrer les options en fonction de la valeur de l'entrée
+            const filteredOptions = options.filter(option => option.toLowerCase().startsWith(value));
+
+            // Mettre à jour le datalist avec les options filtrées
+            updateDatalist(filteredOptions);
+        });
 
     });
 
+
     // Fonction pour mettre à jour le datalist
     function updateDatalist(filteredOptions) {
-        const datalist = document.getElementById('espece_list');
-        datalist.innerHTML = '<option selected disabled="disabled">Sélectionner</option>';
 
         filteredOptions.forEach(option => {
             const optionElement = document.createElement('option');
@@ -156,7 +180,6 @@ $(document).ready(function (){
         // Mettre à jour le datalist avec les options filtrées
         updateDatalist(filteredOptions);
     });
-
     // --------------------------------
     // ----- Noms des revetements -----
     // --------------------------------
