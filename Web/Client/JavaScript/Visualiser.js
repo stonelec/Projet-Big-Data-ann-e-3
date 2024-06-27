@@ -7,7 +7,7 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 addTable();
 function addTable() {
-    console.log("addTable");
+    //console.log("addTable");
     let bt = document.getElementById("btn-table");
     let bc = document.getElementById("btn-carte");
     bt.style.backgroundColor = "#6F8F72";
@@ -46,10 +46,10 @@ function addTable() {
 
 }
 function printOption() {
-    console.log("printOption");
+    //console.log("printOption");
     let colonne = document.getElementById("choix-colonne").value;
-    console.log(colonne);
-    console.log("Remarquable");
+    //console.log(colonne);
+    //console.log("Remarquable");
     document.getElementById("choix-option").remove();
     document.getElementById("choix-colonne-div").insertAdjacentHTML(
         "afterend",
@@ -64,33 +64,187 @@ function printOption() {
         document.getElementById("choix-option").insertAdjacentHTML(
             "afterbegin",
             `<select class="form-select" aria-label="Default select example">
-                     <option selected disabled="disabled">Ordre</option>
+                     <option selected disabled="disabled">Sélection du caractère remarquable</option>
                      <option value="1">oui</option>
-                     <option value="2">non</option>
+                     <option value="0">non</option>
                   </select>`
         );
     }
+    if (colonne === "Port") {
+        ajaxRequest('GET', 'PHP/request_post.php?action=ajouter_arbre_port', function(response) {
+            const choix_option = document.getElementById('choix-option');
+            const form_select = document.createElement('select');
+            form_select.classList.add('form-select');
+            form_select.setAttribute('aria-label', 'Default select example');
+
+            const option_title = document.createElement('option');
+            option_title.selected = true;
+            option_title.disabled = true;
+            option_title.textContent = "Sélection du type de port";
+            form_select.appendChild(option_title);
+
+            for (let i = 0; i < response.length; i++) {
+                const option_port = document.createElement('option');
+                option_port.value = i;
+                option_port.textContent = response[i].type_port;
+                form_select.appendChild(option_port);
+            }
+            choix_option.appendChild(form_select);
+        });
+    }
+    if (colonne === "Pied") {
+        ajaxRequest('GET', 'PHP/request_post.php?action=ajouter_arbre_pied', function(response) {
+            const choix_option = document.getElementById('choix-option');
+            const form_select = document.createElement('select');
+            form_select.classList.add('form-select');
+            form_select.setAttribute('aria-label', 'Default select example');
+
+            const option_title = document.createElement('option');
+            option_title.selected = true;
+            option_title.disabled = true;
+            option_title.textContent = "Sélection du type de pied";
+            form_select.appendChild(option_title);
+
+            for (let i = 0; i < response.length; i++) {
+                const option_pied = document.createElement('option');
+                option_pied.value = i;
+                option_pied.textContent = response[i].type_pied;
+                form_select.appendChild(option_pied);
+            }
+            choix_option.appendChild(form_select);
+        });
+    }
+    if (colonne === "Stade") {
+        ajaxRequest('GET', 'PHP/request_post.php?action=ajouter_arbre_stade', function(response) {
+            const choix_option = document.getElementById('choix-option');
+            const form_select = document.createElement('select');
+            form_select.classList.add('form-select');
+            form_select.setAttribute('aria-label', 'Default select example');
+
+            const option_title = document.createElement('option');
+            option_title.selected = true;
+            option_title.disabled = true;
+            option_title.textContent = "Sélection du stade";
+            form_select.appendChild(option_title);
+
+            for (let i = 0; i < response.length; i++) {
+                const option_stade = document.createElement('option');
+                option_stade.value = i;
+                option_stade.textContent = response[i].stade_dev;
+                form_select.appendChild(option_stade);
+            }
+            choix_option.appendChild(form_select);
+        });
+    }
+    if (colonne === "Etat") {
+        ajaxRequest('GET', 'PHP/request_post.php?action=ajouter_arbre_etat', function(response) {
+            const choix_option = document.getElementById('choix-option');
+            const form_select = document.createElement('select');
+            form_select.classList.add('form-select');
+            form_select.setAttribute('aria-label', 'Default select example');
+
+            const option_title = document.createElement('option');
+            option_title.selected = true;
+            option_title.disabled = true;
+            option_title.textContent = "Sélection de l'état";
+            form_select.appendChild(option_title);
+
+            for (let i = 0; i < response.length; i++) {
+                const option_etat = document.createElement('option');
+                option_etat.value = i;
+                option_etat.textContent = response[i].etat_arb;
+                form_select.appendChild(option_etat);
+            }
+            choix_option.appendChild(form_select);
+        });
+    }
 }
+
 function printTrier() {
-    console.log("printTrier");
+    //console.log("printTrier");
     document.getElementsByClassName("supr")[0].remove();
     document.getElementById("choix-option").insertAdjacentHTML(
         "afterend",
         `<button type="button" class="btn btn-brown shadow-none btn-sm supr">Trier</button>`
     );
-
-
-
-
 }
+
+document.addEventListener('click', function(event) {
+    if (event.target.matches('.supr')) {
+
+        let colonne = document.getElementById("choix-colonne").value;
+        let option = document.getElementsByClassName("form-select")[1].value;
+        option = parseInt(option);
+        option = option + 1;
+
+        console.log(colonne);
+        console.log(option);
+
+        cleanPage();
+
+        document.getElementById("contenu").insertAdjacentHTML(
+            "beforebegin",
+            `<div class="tri-stock">
+                <div class="tri">
+                    <div>
+                        Sélectionner le tri :
+                    </div>
+                    <div id="choix-colonne-div"> <!--dibv set juste pour l'espacement-->
+                        <select class="form-select" aria-label="Default select example" id="choix-colonne">
+                            <option selected disabled="disabled">Colonne</option>
+                            <option value="Etat">Etat</option>
+                            <option value="Stade">Stade</option>
+                            <option value="Pied">Pied</option>
+                            <option value="Port">Port</option>
+                            <option value="Remarquable">Remarquable</option>
+                        </select>
+                    </div>
+                    <div id="choix-option">
+
+                    </div>
+                     <button type="button" class="btn btn-brown shadow-none btn-sm supr" hidden></button>
+                </div>
+            </div>`
+        );
+
+
+        let url = "";
+        if (colonne === "Remarquable") {
+            url = "PHP/request.php?action=all_data_remarquable&id=" + option;
+        }
+        if (colonne === "Port") {
+            url = "PHP/request.php?action=all_data_port&id=" + option;
+        }
+        if (colonne === "Pied") {
+            url = "PHP/request.php?action=all_data_pied&id=" + option;
+        }
+        if (colonne === "Stade") {
+            url = "PHP/request.php?action=all_data_stade&id=" + option;
+        }
+        if (colonne === "Etat") {
+            url = "PHP/request.php?action=all_data_etat&id=" + option;
+        }
+        ajaxRequest('GET', url, afficherTableau);
+
+        let colonnne = document.getElementById("choix-colonne");
+        colonnne.addEventListener("click", () => {printOption()});
+    }
+});
+
 function afficherTableau(data_arbres) {
+
+    console.log(data_arbres)
+    let nb_arb = data_arbres.length;
+    console.log("nb_arb :")
+    console.log(nb_arb)
+
     const container = document.getElementById('contenu');
     container.innerHTML = ''; // On supprime le contenu existant
     // On créé le tableau
     const table = document.createElement('table');
     table.classList.add('table', 'table-bordered', 'table-striped', 'table-hover', 'table-light', 'bottom-space');
     const HeaderElement = [
-        "ID", "Espèce", "Etat", "Stade", "Pied", "Port", "Remarquable", "Latitude", "Longitude", "Prédire"
+        "ID", "Espèce", "Etat", "Stade", "Pied", "Port", "Remarquable", "Hauteur", "Diamètre", "Prédire"
     ];
     // On créé le header du tableau
     const thead = document.createElement('thead');
@@ -106,12 +260,11 @@ function afficherTableau(data_arbres) {
     table.appendChild(thead);
     // Create 5 rows
     const tbody = document.createElement('tbody');
-    let nb_arb = data_arbres.length;
+
     const AttributeElement = [
-        "id_arbre", "espece", "etat_arb", "stade_dev", "type_pied", "type_port", "remarquable", "latitude", "longitude","predire"
+        "id_arbre", "espece", "etat_arb", "stade_dev", "type_pied", "type_port", "remarquable", "hauteur_tot", "diametre_tronc","predire"
     ];
-    console.log("nb_arb :")
-    console.log(nb_arb)
+
     // ================= Pour chaque arbre de la database =================
     for (let id_arbre = 0; id_arbre < nb_arb; id_arbre++) {
 
@@ -172,8 +325,8 @@ function afficherTableau(data_arbres) {
     container.appendChild(table);
 }
 function addCarte(mode) {
-    console.log("addCarte");
-    console.log(mode)
+    //console.log("addCarte");
+    //console.log(mode)
     let bt = document.getElementById("btn-table");
     let bc = document.getElementById("btn-carte");
     bt.style.backgroundColor = "#504136";
@@ -210,7 +363,7 @@ function addCarte(mode) {
 
 }
 function cleanPage(){
-    console.log("cleanPage");
+    //console.log("cleanPage");
     let sousTitre = document.getElementsByClassName("btn-group")[0];
     while (sousTitre.nextSibling) {
         sousTitre.nextSibling.remove();

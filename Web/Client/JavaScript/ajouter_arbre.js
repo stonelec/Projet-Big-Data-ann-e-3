@@ -9,7 +9,7 @@ $(document).ready(function (){
     let option_pied;
     let option_port;
     let option_feuillage;
-    let options = [];
+    let option_especes;
 
     // --------------------------
     // ----- Noms des etats -----
@@ -121,45 +121,46 @@ $(document).ready(function (){
     // ----- Noms des especes -----
     // -------------------------------
 
+    //C'est ici qu'on va stocker les options :
+    let options = []
+
     ajaxRequest('GET', 'PHP/request_post.php?action=ajouter_arbre_espece', function(response) {
 
         console.log("Especes : ")
         console.log(response)
 
-        // Stocker les options dans le tableau 'options'
-        options = response.map(item => item.espece);
+        for(let i=0; i<response.length; i++) {
 
-        // Initialement, ajouter toutes les options à la datalist
-        updateDatalist(options);
+            option_especes += '<option value="'+ response[i].espece +'"></option>';
+            options[i] = response[i].espece;
+
+        }
+
+        tableau_list_options(options);
 
     });
 
     // Fonction pour mettre à jour le datalist
-    function updateDatalist(filteredOptions) {
+    function tableau_list_options(option_selctionne) {
+
         const datalist = document.getElementById('espece_list');
         datalist.innerHTML = '<option selected disabled="disabled">Sélectionner</option>';
 
-        filteredOptions.forEach(option => {
-            const optionElement = document.createElement('option');
-            optionElement.value = option;
-            datalist.appendChild(optionElement);
+        option_selctionne.forEach(option => {
+            const element_option = document.createElement('option');
+            element_option.value = option;
+            datalist.appendChild(element_option);
         });
+
     }
 
-    // Ajouter un écouteur d'événements à l'élément input
     document.getElementById('espece').addEventListener('input', function() {
         const value = this.value;
 
-        // Filtrer les options en fonction de la valeur de l'entrée
-        const filteredOptions = options.filter(option => option.startsWith(value));
+        const new_option = options.filter(option => option.startsWith(value));
+        tableau_list_options(new_option);
 
-        // Mettre à jour le datalist avec les options filtrées
-        updateDatalist(filteredOptions);
     });
-
-    // --------------------------------
-    // ----- Noms des revetements -----
-    // --------------------------------
 
 });
 
