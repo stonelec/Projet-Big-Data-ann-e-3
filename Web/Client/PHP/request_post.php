@@ -40,7 +40,7 @@ if($requestMethod == 'GET'){
     echo json_encode("GET");
 
 }
-if($requestMethod == 'POST'){
+else if($requestMethod == 'POST'){
 
     $val_longitude = $_POST['$val_longitude'];
     echo json_encode($val_longitude);
