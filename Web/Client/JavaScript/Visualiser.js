@@ -39,7 +39,6 @@ function addTable() {
             </div>`
     );
     ajaxRequest('GET', 'PHP/request.php?action=all_data', afficherTableau);
-    //  ajaxRequest('GET', 'PHP/request_m.php/all_data', afficherTableau);
     let colonnne = document.getElementById("choix-colonne");
     colonnne.addEventListener("click", () => {printOption()});
 
@@ -178,8 +177,8 @@ document.addEventListener('click', function(event) {
         option = parseInt(option);
         option = option + 1;
 
-        console.log(colonne);
-        console.log(option);
+        //console.log(colonne);
+        //console.log(option);
 
         cleanPage();
 
