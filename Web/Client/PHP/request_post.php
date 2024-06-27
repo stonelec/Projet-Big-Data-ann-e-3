@@ -93,7 +93,7 @@ switch ($requestMethod) {
         switch ($requestAction_post){
 
             case 'ajouter_toutes_valeur':
-                echo json_encode($val_longitude);
+                echo json_encode($val_pied);
                 break;
 
             default:
