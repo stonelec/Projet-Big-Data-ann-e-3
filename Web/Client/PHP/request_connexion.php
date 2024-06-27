@@ -17,6 +17,23 @@ $requestAction = isset($_GET['action']) ? $_GET['action'] : '';
 
 echo json_encode($requestAction);
 
+switch ($requestAction) {
+
+    case 'recuperer_email':
+        $result = User::getAllMail();
+        echo json_encode($result);
+        break;
+
+    case 'recuperer_mot_de_passe':
+        $result = User::getAllMotDePasse();
+        echo json_encode($result);
+        break;
+
+    default:
+        echo json_encode("Dans get mais pas dans action");
+        break;
+}
+
 /*
 switch ($requestMethod){
 
