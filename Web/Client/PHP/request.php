@@ -2,6 +2,7 @@
 
 require_once('Arbre.php');
 require_once('User.php');
+require_once('Utilisateur.php');
 
 // Récupérer la méthode de la requête (GET, POST, etc.)
 $requestMethod = $_SERVER['REQUEST_METHOD'];
@@ -142,6 +143,7 @@ switch ($requestAction) {
         break;
 
 # ----------------------- Prédire les infos -----------------------
+
     case 'prediction_taille':
         // Vérifier si l'ID est fourni
         if ($id !== NULL) {

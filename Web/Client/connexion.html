@@ -27,11 +27,6 @@
 
 <body>
 
-<?php
-require_once ('PHP/Users.php');
-$result=Users::connexion();
-?>
-
 <!-- =================================== NAVBAR ================================== -->
 <nav class="navbar navbar-expand-lg navbar-custom">
     <a class="navbar-brand" href="accueil.html">
@@ -45,8 +40,6 @@ $result=Users::connexion();
             <li class="nav-item">
                 <a style="color: white;">Connexion</a>
             </li>
-
-
         </ul>
     </div>
 
@@ -70,14 +63,14 @@ $result=Users::connexion();
             <p class="connexion-titre">Connectez - vous<br> à votre compte</p>
             <p class="connexion-sous-titre">Bon retour ! <br> Merci de renseigner les informations.</p>
             <div class="connexion-form bottom-space">
-                <form class="form_connexion">
+                <form class="form_connexion" method="post" id="LoginForm">
                     <div class="mb-3">
                         <label for="inputEmail" class="form-label">Email</label>
-                        <input type="email" class="form-control email" id="inputEmail" placeholder="name@example.com">
+                        <input type="email" class="form-control mail" id="inputEmail" placeholder="name@example.com" name="mail">
                     </div>
                     <div class="mb-3">
                         <label for="inputPassword5" class="form-label">Mot de passe</label>
-                        <input type="password" id="inputPassword5" class="form-control mot_de_passe" aria-describedby="passwordHelpBlock">
+                        <input type="password" id="inputPassword5" class="form-control mot_de_passe" aria-describedby="passwordHelpBlock" name="password">
                     </div>
                     <button type="submit" class="btn btn-primary btn-brown">Se connecter</button>
                     <!-- <div class="register">
