@@ -94,7 +94,7 @@ switch ($requestMethod) {
 
             case 'ajouter_toutes_valeur':
 
-                if($val_longitude != NULL){
+                if($val_etat != NULL){
 
                     echo json_encode("Rien n'est égal à 0");
                 }
