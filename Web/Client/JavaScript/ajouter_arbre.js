@@ -9,6 +9,7 @@ $(document).ready(function (){
     let option_pied;
     let option_port;
     let option_feuillage;
+    let option_especes;
 
     // --------------------------
     // ----- Noms des etats -----
@@ -112,6 +113,27 @@ $(document).ready(function (){
 
         $('#option_feuillage').html('<option selected disabled="disabled">Sélectionner</option>' +
             option_feuillage
+        );
+
+    });
+
+    // -------------------------------
+    // ----- Noms des especes -----
+    // -------------------------------
+
+    ajaxRequest('GET', 'PHP/request_post.php?action=ajouter_arbre_espece', function(response) {
+
+        console.log("Especes : ")
+        console.log(response)
+
+        for(let i=0; i<response.length; i++) {
+
+            option_especes += '<option value="'+ response[i].espece +'"></option>';
+
+        }
+
+        $('#espece_list').html('<option selected disabled="disabled">Sélectionner</option>' +
+            option_especes
         );
 
     });

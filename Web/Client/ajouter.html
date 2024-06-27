@@ -1,6 +1,3 @@
-<?php
-    session_start();
-?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -83,7 +80,9 @@
                     <div class="form-individual">
                         <div class="custom-card">
                             <p>Espece</p>
-                            <input type="text" class="form-control" id="espece" aria-describedby="...">
+                            <input type="text" list="espece_list" class="form-control" id="espece" aria-describedby="...">
+                            <datalist id="espece_list">
+                            </datalist>
                         </div>
                     </div>
                     <div class="form-individual">
@@ -163,11 +162,6 @@
                 <button type="submit" class="btn btn-brown">Ajouter l'arbre</button>
             </div>
         </form>
-        <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
-        <!-- Formulaire pour ajouter un arbre -->
-        <?php else: ?>
-        <p class="sous-titre-page bottom-space text-danger">Vous devez être connecté pour ajouter un arbre.</p>
-        <?php endif; ?>
     </div>
     <div class="box"></div>
 </div>
