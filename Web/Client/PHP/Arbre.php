@@ -193,7 +193,6 @@ class Arbre {
         return $statement->fetch()[0];
     }
 
-
     static function getPied($id_arbre){
     /**
      * Fonction qui permet de récupérer le pied d'un arbre
@@ -215,6 +214,25 @@ class Arbre {
         return $statement->fetch()[0];
     }
 
+    static function getPied_ID($id_arbre){
+        /**
+         * Fonction qui permet de récupérer le pied d'un arbre
+         * @param $id_arbre
+         * @return mixed
+         */
+        $db = DB::connexion();
+
+        $request = 'SELECT id_pied 
+                    FROM arbre 
+                    WHERE id_arbre = :id_arbre;
+        ';
+
+        $statement = $db->prepare($request);
+        $statement->bindParam(':id_arbre', $id_arbre);
+        $statement->execute();
+
+        return $statement->fetch()[0];
+    }
 
     static function getPort($id_arbre){
     /**

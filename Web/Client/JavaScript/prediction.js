@@ -206,7 +206,6 @@ function addResult(){
                 $('.value_revetement_age').html(
                     '<p>' + response + '</p>');
             }
-
         });
 // -------------------------------------------------- Prédiction Age ------------------------------------------------
         ajaxRequest('GET', 'PHP/request.php?action=prediction_taille&id=' + id, function (response) {
@@ -309,36 +308,32 @@ function addResult(){
                 <div class="card-header-blanche">Infos</div>
                 <div class="card-content card-blanche-content">
                     <div class="item">
-                        <div class="label">Feuillage</div>
-                        <div class="value">1800</div>
+                        <div class="label">Hauteur totale</div>
+                        <div class="value_hauteur_tot_deracinement"></div>
                     </div>
                     <div class="item">
                         <div class="label">Hauteur tronc</div>
-                        <div class="value">NON</div>
+                        <div class="value_hauteur_tronc_deracinement"></div>
                     </div>
                     <div class="item">
                         <div class="label">Diamètre tronc</div>
-                        <div class="value">EN PLACE</div>
+                        <div class="value_diametre_deracinement"></div>
                     </div>
                     <div class="item">
-                        <div class="label">Hauteur total</div>
-                        <div class="value">adulte</div>
+                        <div class="label">Type de port</div>
+                        <div class="value_port_deracinement"></div>
                     </div>
                     <div class="item">
-                        <div class="label">Revetement</div>
-                        <div class="value">adulte</div>
+                        <div class="label">Feuillage</div>
+                        <div class="value_feuillage_deracinement"></div>
                     </div>
                     <div class="item">
-                        <div class="label">Port</div>
-                        <div class="value">adulte</div>
+                        <div class="label">Type de pied</div>
+                        <div class="value_pied_deracinement"></div>
                     </div>
                     <div class="item">
-                        <div class="label">Latitude</div>
-                        <div class="value">adulte</div>
-                    </div>
-                    <div class="item">
-                        <div class="label">Longitude</div>
-                        <div class="value">adulte</div>
+                        <div class="label">Revêtement</div>
+                        <div class="value_revet_deracinement"></div>
                     </div>
                 </div>
             </div>`
@@ -351,12 +346,87 @@ function addResult(){
             </div>
             <div class="card-data-resulte">
                 <div>Déraciné</div>
-                <div style="color: #6F8F72; font-weight: bold;">1800</div>
+                <div class="prediction3" style="color: #6F8F72; font-weight: bold;">1800</div>
             </div>
         </div>`
         );
+// =============================== Modification des infos ======== Requêtes AJAX ===============================
+// -------------------------------------------------- Hauteur totale ------------------------------------------------
+        ajaxRequest('GET', 'PHP/request.php?action=hauteurtotale&id=' + id, function (response) {
+            console.log("hauteur totale de l'arbre : ", response);
+            // Afficher le résultat dans votre page HTML
+            $('.value_hauteur_totale_deracinement').html(
+                '<p>' + response + '</p>');
+        });
+// -------------------------------------------------- Hauteur tronc ------------------------------------------------
+        ajaxRequest('GET', 'PHP/request.php?action=hauteur_tronc&id=' + id, function (response) {
+            console.log("Hauteur du tronc : ", response);
+            // Afficher le résultat dans votre page HTML
+            $('.value_hauteur_tronc_deracinement').html(
+                '<p>' + response + '</p>');
+        });
+// -------------------------------------------------- Diamètre tronc ------------------------------------------------
+        ajaxRequest('GET', 'PHP/request.php?action=diametre&id=' + id, function (response) {
+            console.log("Diametre de l'arbre : ", response);
+            // Afficher le résultat dans votre page HTML
+            $('.value_diametre_deracinement').html(
+                '<p>' + response + '</p>');
+        });
+// -------------------------------------------------- Port ------------------------------------------------
+        ajaxRequest('GET', 'PHP/request.php?action=port&id=' + id, function (response) {
+            console.log("Port de l'arbre : ", response);
+            // Afficher le résultat dans votre page HTML
+            $('.value_port_deracinement').html(
+                '<p>' + response + '</p>');
+        });
+// -------------------------------------------------- Feuillage ------------------------------------------------
+        ajaxRequest('GET', 'PHP/request.php?action=feuillage&id=' + id, function (response) {
+            console.log("Feuillage de l'arbre : ", response);
+            // Afficher le résultat dans votre page HTML
+            $('.value_feuillage_deracinement').html(
+                '<p>' + response + '</p>');
+        });
+// -------------------------------------------------- Pied ------------------------------------------------
+        ajaxRequest('GET', 'PHP/request.php?action=pied&id=' + id, function (response) {
+            console.log("Port de l'arbre : ", response);
+            // Afficher le résultat dans votre page HTML
+            $('.value_pied_deracinement').html(
+                '<p>' + response + '</p>');
+        });
+// -------------------------------------------------- Revêtement ------------------------------------------------
+        ajaxRequest('GET', 'PHP/request.php?action=revetement&id=' + id, function (response) {
+            console.log("Revetement de l'arbre : ", response);
+            // Afficher le résultat dans votre page HTML
+            if(response == "0"){
+                $('.value_revetement_age').html(
+                    '<p> Non </p>');
+            }
+            else if (response == "1"){
+                $('.value_revetement_age').html(
+                    '<p> Oui </p>');
+            }
+            else {
+                $('.value_revetement_age').html(
+                    '<p>' + response + '</p>');
+            }
+        });
+// --------------------------------------------- Prédiction Deracinement -------------------------------------------
+        ajaxRequest('GET', 'PHP/request.php?action=prediction_deracinement&id=' + id, function (response) {
+            console.log("Prediction du déracinement de l'arbre : ", response);
+            // Afficher le résultat dans votre page HTML
+            if(response == "0"){
+                $('.prediction3').html('Non déraciné');
+            }
+            else if (response == "1"){
+                $('.prediction3').html('Déraciné');
+            }
+            else {
+                $('.prediction3').html(response);
+            }
+        });
+    }
 
-    }else {
+    else {
         console.log("Erreur : paramètre de prédiction non reconnu");
     }
 }

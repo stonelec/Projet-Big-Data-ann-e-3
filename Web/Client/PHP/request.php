@@ -74,6 +74,17 @@ switch ($requestAction) {
         }
         break;
 
+    case 'pied':
+        // Vérifier si l'ID est fourni
+        if ($id !== NULL) {
+            $result = Arbre::getPied($id);
+            echo json_encode($result);
+        } else {
+            // Retourner une erreur si l'ID n'est pas fourni
+            echo json_encode(['error' => 'ID de l\'arbre manquant']);
+        }
+        break;
+
     case 'age_estim':
         // Vérifier si l'ID est fourni
         if ($id !== NULL) {
@@ -170,11 +181,11 @@ switch ($requestAction) {
             $troncDiam = Arbre::getDiametre($id);
             $fkPort = Arbre::getPort_ID($id);
             $feuillage = Arbre::getFeuillage_ID($id);
-            $X = Arbre::getCoordonnees($id)[0];
-            $Y = Arbre::getCoordonnees($id)[1];
+            $fkPied = Arbre::getPied_ID($id);
+            $fkRevet = Arbre::getRevetement($id);
 
             // ['haut_tot', 'haut_tronc', 'tronc_diam', 'fk_port', 'feuillage', 'X', 'Y']
-            $command = 'cd ../../python/scripts && python3 fonc3.py '.$hauteurTot.' '.$hauteurTronc.' '.$troncDiam.' '.$fkPort.' '.$feuillage.' '.$X.' '.$Y.' rf';
+            $command = 'cd ../../python/scripts && python3 fonc3.py '.$hauteurTot.' '.$hauteurTronc.' '.$troncDiam.' '.$fkPort.' '.$feuillage.' '.$fkPied.' '.$fkRevet.' rf';
 
             exec($command,$output, $result);
 
