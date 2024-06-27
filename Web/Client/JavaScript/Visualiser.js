@@ -174,6 +174,9 @@ document.addEventListener('click', function(event) {
 
         let colonne = document.getElementById("choix-colonne").value;
         let option = document.getElementsByClassName("form-select")[1].value;
+        option = parseInt(option);
+        option = option + 1;
+
         console.log(colonne);
         console.log(option);
 
