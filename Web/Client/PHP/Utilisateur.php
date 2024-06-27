@@ -16,7 +16,7 @@ class Utilisateur{
 
             if ($file == 'Login.php'){
 
-                header('Location: ../Accueil.php');
+                header('Location: ../accueil.html');
 
             }
             return $_SESSION['user'];
@@ -44,7 +44,7 @@ class Utilisateur{
             //On regarde si les 2 mots de passe sont les mêmes :
             if (password_verify($_POST['password'], $result['password_user']) && !empty($result)){
                 $_SESSION['user'] = $result['id_user'];
-                header('Location: ../Accueil.php');
+                header('Location: ../accueil.html');
             } else {    //sinon
                 return "E-Mail ou Mot de passe invalide !";
             }
