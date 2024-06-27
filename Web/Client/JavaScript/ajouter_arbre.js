@@ -121,68 +121,49 @@ $(document).ready(function (){
     // ----- Noms des especes -----
     // -------------------------------
 
+
+    //C'est ici qu'on va stocker les options :
+    let options = []
+
     ajaxRequest('GET', 'PHP/request_post.php?action=ajouter_arbre_espece', function(response) {
 
         console.log("Especes : ")
         console.log(response)
 
-        let option = []
-
         for(let i=0; i<response.length; i++) {
 
             option_especes += '<option value="'+ response[i].espece +'"></option>';
-            option[i] = response[i].espece;
+            options[i] = response[i].espece;
 
         }
 
-        $('#espece_list').html('<option selected disabled="disabled">Sélectionner</option>');
-
-        option.forEach(option =>{
-
-            let datalist = document.getElementById('espece_list');
-            let element_de_option = document.createElement('option');
-            element_de_option.value = option;
-            datalist.push(element_de_option);
-
-
-        });
-
-        document.getElementById('espece').addEventListener('input', function() {
-            const value = this.value.toLowerCase();
-
-            // Filtrer les options en fonction de la valeur de l'entrée
-            const filteredOptions = options.filter(option => option.toLowerCase().startsWith(value));
-
-            // Mettre à jour le datalist avec les options filtrées
-            updateDatalist(filteredOptions);
-        });
+        updateDatalist(options);
 
     });
 
 
     // Fonction pour mettre à jour le datalist
-    function updateDatalist(filteredOptions) {
+    function updateDatalist(option_selctionne) {
 
-        filteredOptions.forEach(option => {
-            const optionElement = document.createElement('option');
-            optionElement.value = option;
-            datalist.appendChild(optionElement);
+        const datalist = document.getElementById('espece_list');
+        datalist.innerHTML = '<option selected disabled="disabled">Sélectionner</option>';
+
+        option_selctionne.forEach(option => {
+            const element_option = document.createElement('option');
+            element_option.value = option;
+            datalist.appendChild(element_option);
         });
+
     }
 
-    // Ajouter un écouteur d'événements à l'élément input
+
     document.getElementById('espece').addEventListener('input', function() {
         const value = this.value;
 
-        // Filtrer les options en fonction de la valeur de l'entrée
-        const filteredOptions = options.filter(option => option.startsWith(value));
+        const new_option = option.filter(option => option.startsWith(value));
+        updateDatalist(new_option);
 
-        // Mettre à jour le datalist avec les options filtrées
-        updateDatalist(filteredOptions);
     });
-    // --------------------------------
-    // ----- Noms des revetements -----
-    // --------------------------------
 
 });
 
