@@ -42,8 +42,8 @@ if($requestMethod == 'GET'){
 }
 else if($requestMethod == 'POST'){
 
-    $val_longitude = $_POST['$val_longitude'];
-    echo json_encode($val_longitude);
+    $val_espece = isset($_POST['val_espece']) ? $_POST['val_espece'] : '';
+    echo json_encode($val_espece);
 
 }
 else{
