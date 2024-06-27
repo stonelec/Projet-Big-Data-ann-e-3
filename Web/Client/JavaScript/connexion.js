@@ -10,7 +10,7 @@ $(document).ready(function (){
 
         console.log("ENVOYER")
 
-        let val_email = $('.mail').val();
+        let val_email = $('#mail').val();
         let mot_de_passe = $('.mot_de_passe').val();
 
         console.log(val_email);
