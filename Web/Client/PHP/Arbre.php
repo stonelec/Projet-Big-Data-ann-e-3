@@ -680,17 +680,17 @@ class Arbre {
 
     }
 
-    static function recupIdPort($id_val_stade){
+    static function recupIdPort($id_val_port){
 
         $db = DB::connexion();
 
-        $request = 'SELECT id_stade_dev
-                    FROM stade_de_dev
-                    WHERE stade_dev= :id_val_stade;
+        $request = 'SELECT id_port
+                    FROM type_de_port
+                    WHERE type_port= :id_val_port;
         ';
 
         $statement = $db->prepare($request);
-        $statement->bindParam(':id_val_stade', $id_val_stade);
+        $statement->bindParam(':id_val_port', $id_val_port);
         $statement->execute();
 
         return $statement->fetchAll(PDO::FETCH_ASSOC);

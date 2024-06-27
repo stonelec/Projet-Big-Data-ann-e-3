@@ -35,7 +35,6 @@ else if($requestMethod == 'POST'){
     //Il faut que quand on commence à rentrer des lettres il y a des propositions
     $val_espece = isset($_POST['val_espece']) ? $_POST['val_espece'] : '';
 
-
     $id_val_etat = isset($_POST['val_etat']) ? $_POST['val_etat'] : '';
     $val_etat = Arbre::recupIdEtat($id_val_etat);
 
@@ -44,7 +43,6 @@ else if($requestMethod == 'POST'){
 
     $id_val_port = isset($_POST['val_port']) ? $_POST['val_port'] : '';
     $val_port = Arbre::recupIdPort($id_val_port);
-
 
     $id_val_pied = isset($_POST['val_pied']) ? $_POST['val_pied'] : '';
     $val_pied = Arbre::recupIdPied($id_val_pied);
