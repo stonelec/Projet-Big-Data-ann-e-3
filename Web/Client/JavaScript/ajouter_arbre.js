@@ -192,7 +192,7 @@ $(document).ready(function (){
             '&val_remarquable=' + val_remarquable + '&val_pied=' + val_pied + '&val_revetement=' + val_revetement +
             '&val_port=' + val_port + '&val_feuillage=' + val_feuillage;
 
-        ajaxRequest('POST', 'PHP/request_post.php?',function(response)  {
+        ajaxRequest('POST', 'PHP/request_post.php',function(response)  {
 
             console.log(response);
             //console.log("Toutes les valeurs ont été ajouté");
