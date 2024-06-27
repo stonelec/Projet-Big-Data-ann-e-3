@@ -30,8 +30,6 @@
 
 </head>
 
-<body>
-
 <?php
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -41,6 +39,8 @@ require_once('PHP/Utilisateur.php');
 $result = Utilisateur::connexion_utilisateur();
 ?>
 
+
+<body>
 <!-- =================================== NAVBAR ================================== -->
 <nav class="navbar navbar-expand-lg navbar-custom">
     <a class="navbar-brand" href="accueil.html">
