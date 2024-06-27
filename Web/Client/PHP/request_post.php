@@ -15,6 +15,7 @@ $result = null;
 // ---------- On récupère des variables de GET et de POST ----------
 
 $requestAction_get = isset($_GET['action']) ? $_GET['action'] : '';
+$requestAction_post = isset($_POST['action']) ? $_POST['action'] : '';
 
 if($requestMethod == 'GET'){
 
@@ -22,8 +23,6 @@ if($requestMethod == 'GET'){
 
 }
 else if($requestMethod == 'POST'){
-
-    $requestAction_post = isset($_POST['action']) ? $_POST['action'] : '';
 
     $id_user = 1; //On pourra le récupérer en changeant l'url
     $val_longitude = isset($_POST['val_longitude']) ? $_POST['val_longitude'] : '';
@@ -88,26 +87,23 @@ switch ($requestMethod) {
         }
         break;
 
-
     case 'POST':
 
         switch ($requestAction_post){
 
             case 'ajouter_toutes_valeur':
-
                 echo json_encode($val_longitude);
                 break;
 
             default:
-                // Retourner une erreur si l'action n'est pas reconnue
-                echo json_encode(['error' => 'IL EST RENTRER DANS POST MAIS PAS DANS LE CASE']);
+                echo json_encode("Rentre dans le bon switch mais il entre pas dans le bon case");
                 break;
 
         }
+        break;
 
     default:
-        // Retourner une erreur si l'action n'est pas reconnue
-        echo json_encode(['error' => 'IL EST PAS RENTRER DANS GET OU POST']);
+        echo json_encode("PAS DANS LE GET NI DANS LE POST");
         break;
 
 }
