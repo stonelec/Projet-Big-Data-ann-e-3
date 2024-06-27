@@ -94,6 +94,9 @@ switch ($requestMethod) {
 
             case 'ajouter_toutes_valeur':
 
+                echo json_encode($val_longitude);
+
+                /*
                 if($val_longitude != NULL){
 
                     echo json_encode("Rien n'est égal à 0");
@@ -105,7 +108,7 @@ switch ($requestMethod) {
                     echo json_encode($result);
 
                 }
-                break;
+                break;*/
 
             //break;
 
