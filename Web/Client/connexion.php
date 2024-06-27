@@ -85,18 +85,17 @@ $result = Utilisateur::connexion_utilisateur();
                         <p>Vous n'avez pas de compte</p>
                         <a href="connexion.css">S'enregistrer</a>
                     </div>-->
-
-                    <?php
-                        if ($result == "E-Mail ou Mot de passe invalide !") {
-                            echo '<p id="erreur">' . $result . '</p>';
-                    }
-                    ?>
                 </form>
             </div>
         </div>
 
     </div>
     <div class="box"></div>
+    <?php
+    if ($result == "E-Mail ou Mot de passe invalide !") {
+        echo '<p id="erreur">' . $result . '</p>';
+    }
+    ?>
 </div>
 <!-- =================================== FOOTER ================================== -->
 <footer class="footer text-center">
