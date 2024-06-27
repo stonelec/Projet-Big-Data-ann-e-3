@@ -14,9 +14,10 @@ $result = null;
 
 // ---------- On récupère des variables de GET et de POST ----------
 
+$requestAction_get = isset($_GET['action']) ? $_GET['action'] : '';
+
 if($requestMethod == 'GET'){
 
-    $requestAction_get = isset($_GET['action']) ? $_GET['action'] : '';
     $id = isset($_GET['id']) ? $_GET['id'] : NULL;
 
 }
@@ -47,7 +48,6 @@ else if($requestMethod == 'POST'){
 }
 
 // -------------------------------------------------------
-
 
 switch ($requestMethod) {
 
@@ -95,33 +95,8 @@ switch ($requestMethod) {
 
             case 'ajouter_toutes_valeur':
 
-                //$result = Arbre::addNewArbre($id_user, $val_longitude, $val_latitude, $val_hauteur_totale, $val_hauteur_tronc, $val_diametre_tronc, $val_etat, $val_stade,
-                //    $val_port, $val_pied, $val_espece, $val_remarquable, $val_feuillage, $val_age_estime, $val_revetement);
                 echo json_encode($val_longitude);
                 break;
-
-                /*
-                if($id_user != NULL && $val_longitude != NULL && $val_latitude != NULL && $val_hauteur_totale != NULL && $val_hauteur_tronc != NULL &&
-                    $val_diametre_tronc != NULL && $val_etat != NULL && $val_stade != NULL && $val_port != NULL && $val_pied != NULL &&
-                    $val_espece != NULL && $val_remarquable != NULL && $val_feuillage != NULL && $val_age_estime != NULL &&
-                    $val_revetement != NULL){
-                    $result = Arbre::addNewArbre($id_user, $val_longitude, $val_latitude, $val_hauteur_totale, $val_hauteur_tronc, $val_diametre_tronc, $val_etat, $val_stade,
-                                $val_port, $val_pied, $val_espece, $val_remarquable, $val_feuillage, $val_age_estime, $val_revetement);
-                    echo json_encode($result);
-                    break;
-                }
-
-                else{
-
-                    $result = "Problème dans les variables";
-                    echo json_encode($result);
-                    break;
-
-                }
-
-                //$result = "C'est good tu peux pleurer";
-                //echo json_encode($result);
-                //break;*/
 
             default:
                 // Retourner une erreur si l'action n'est pas reconnue
@@ -129,14 +104,13 @@ switch ($requestMethod) {
                 break;
 
         }
-        break;
 
     default:
         // Retourner une erreur si l'action n'est pas reconnue
         echo json_encode(['error' => 'IL EST PAS RENTRER DANS GET OU POST']);
         break;
 
-//}
+}
 
 
 
