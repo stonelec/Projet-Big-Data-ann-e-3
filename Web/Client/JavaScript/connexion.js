@@ -42,7 +42,8 @@ $(document).ready(function (){
 
                 for(let i=0; i<n+1 ;i++){
 
-                    console.log("RENTRER");
+                    console.log(data_mail[i].mail_user);
+                    console.log(data_mot_de_passe[i].password_user);
 
                     if(val_email === data_mail[i].mail_user && mot_de_passe === data_mot_de_passe[i].password_user){
 
