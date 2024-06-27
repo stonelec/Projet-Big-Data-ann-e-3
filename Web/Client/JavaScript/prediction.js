@@ -194,15 +194,37 @@ function addResult(){
         ajaxRequest('GET', 'PHP/request.php?action=revetement&id=' + id, function (response) {
             console.log("Revetement de l'arbre : ", response);
             // Afficher le résultat dans votre page HTML
-            $('.value_revetement_age').html(
-                '<p>' + response + '</p>');
+            if(response == "0"){
+                $('.value_revetement_age').html(
+                    '<p> Non </p>');
+            }
+            else if (response == "1"){
+                $('.value_revetement_age').html(
+                    '<p> Oui </p>');
+            }
+            else {
+                $('.value_revetement_age').html(
+                    '<p>' + response + '</p>');
+            }
+
         });
 // -------------------------------------------------- Prédiction Age ------------------------------------------------
         ajaxRequest('GET', 'PHP/request.php?action=prediction_taille&id=' + id, function (response) {
             console.log("Prediction de la taille de l'arbre : ", response);
             // Afficher le résultat dans votre page HTML
-            $('.prediction1').html(
-                '<p>' + response + '</p>');
+            if(response == "0"){
+                $('.prediction1').html('entre 0 et 10 ans');
+            }
+            else if (response == "1"){
+                $('.prediction1').html('entre 10 et 50 ans');
+            }
+            else if (response == "2"){
+                $('.prediction1').html('entre 50 et 100 ans');
+            }
+            else if (response == "3"){
+                $('.prediction1').html('entre 100 et 200 ans');
+            }
+
         });
     }
 
