@@ -1,6 +1,6 @@
 import asyncio
 import asyncpg              # pip install asyncpg
-from pandas import read_csv
+from pandas import read_csv # pip install pandas
 
 async def main():
     csv_data = read_csv('Data_Arbre.csv', encoding='utf-8')
