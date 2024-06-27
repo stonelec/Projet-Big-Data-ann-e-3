@@ -38,7 +38,8 @@ function addTable() {
                 </div>
             </div>`
     );
-    ajaxRequest('GET', 'PHP/request_m.php/all_data', afficherTableau);
+    ajaxRequest('GET', 'PHP/request.php?action=all_data', afficherTableau);
+    //  ajaxRequest('GET', 'PHP/request_m.php/all_data', afficherTableau);
     let colonnne = document.getElementById("choix-colonne");
     colonnne.addEventListener("click", () => {printOption()});
 
