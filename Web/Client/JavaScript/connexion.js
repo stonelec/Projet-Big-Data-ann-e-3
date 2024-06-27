@@ -22,17 +22,26 @@ $(document).ready(function (){
 
             let n = data_mail.length;
 
+            for(let i=0; i<n; i++){
+
+                data_mail[i] = response_mail[i];
+
+            }
+
             ajaxRequest('GET', 'PHP/request.php?action=recuperermdp',function(response_mdp)  {
 
                 console.log(response_mdp);
 
-                for(let i=0; i<n; i++){
+                for(let i=0; i<n ; i++){
 
                     data_mot_de_passe[i] = response_mdp[i];
-                    data_mail[i] = response_mail[i];
 
-                    console.log(data_mail[i].email_user);
-                    console.log(data_mot_de_passe[i].password_user);
+                }
+
+                for(let i=0; i<n; i++){
+
+                    //console.log(data_mail[i].email_user);
+                    //console.log(data_mot_de_passe[i].password_user);
 
                     if(val_email === data_mail[i].email_user && mot_de_passe === data_mot_de_passe[i].password_user){
 
