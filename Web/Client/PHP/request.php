@@ -2,6 +2,7 @@
 
 require_once('Arbre.php');
 require_once('User.php');
+require_once('Utilisateur.php');
 
 // Récupérer la méthode de la requête (GET, POST, etc.)
 $requestMethod = $_SERVER['REQUEST_METHOD'];
@@ -141,7 +142,15 @@ switch ($requestAction) {
         echo json_encode($result);
         break;
 
+    case 'id_du_user' :
+        $mail = isset($_GET['email']) ? $_GET['email'] : NULL;
+        $password = isset($_GET['mot_de_passe']) ? $_GET['mot_de_passe'] : NULL;
+        $result = User::getId($mail,$password);
+        echo json_encode($result);
+        break;
+
 # ----------------------- Prédire les infos -----------------------
+
     case 'prediction_taille':
         // Vérifier si l'ID est fourni
         if ($id !== NULL) {

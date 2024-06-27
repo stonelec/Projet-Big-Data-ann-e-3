@@ -5,7 +5,7 @@ require_once('db.php');
 
 class Utilisateur{
 
-    static function connexion_utilisateur(){
+    static function connexion_utilisateur($mail, $password){
 
         //Fichier où se trouve l'utilisateur
         $path = explode('/', $_SERVER['PHP_SELF']);
@@ -24,14 +24,14 @@ class Utilisateur{
         }
 
         //S'il a rentré les deux champs
-        if (!empty($_POST['mail']) && !empty($_POST['password'])) {
+        if (!empty($mail) && !empty($password)) {
             try {
 
                 $db = DB::connexion();
                 $statement = $db->prepare('SELECT id_user, password_user FROM public.user WHERE mail_user=:mail');
 
                 //on récupère le mot de passe associé au mail
-                $statement->bindParam(':mail', $_POST['mail']);
+                $statement->bindParam(':mail', $mail);
                 $statement->execute();
                 $result = $statement->fetch(PDO::FETCH_ASSOC);
 
@@ -43,7 +43,7 @@ class Utilisateur{
             }
 
             //On regarde si les 2 mots de passe sont les mêmes :
-            if (password_verify($_POST['password'], $result['password_user']) && !empty($result)){
+            if (password_verify($password, $result['password_user']) && !empty($result)){
                 $_SESSION['user'] = $result['id_user'];
                 header('Location: accueil.html');
                 exit();

@@ -13,10 +13,38 @@ $(document).ready(function (){
         let val_email = $('.mail').val();
         let mot_de_passe = $('.mot_de_passe').val();
 
-        console.log(val_email);
-        console.log(mot_de_passe);
+        let login = [val_email,mot_de_passe];
+
+        ajaxRequest('GET', 'PHP/request.php?action=id_du_user&email=' + val_email + "&mot_de_passe=" + mot_de_passe, function (response){
+
+            if(response == null){
+
+                console.log("L'id : ");
+                console.log(response);
+                //Ecrire dans la page qu'il y a une erreur
 
 
+            }
+            else{
+
+                console.log("L'id : ");
+                console.log(response);
+                //Faire une autre ajaxRequest ou cette fois on va appeler la fonction des sessions
+                //pour stocker l'id de la session
+
+            }
+
+        });
+
+        //console.log(val_email);
+        //console.log(mot_de_passe);
+
+        /*
+        ajaxRequest('GET', 'PHP/request.php?action=verif&login=' + login, function (response){
+
+            console.log(response);
+
+        })*/
 
         /*
 
