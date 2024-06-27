@@ -20,7 +20,10 @@ $(document).ready(function (){
 
             console.log(response_mail);
 
-            for(let i=0; i<response_mail.length; i++){
+            let n = data_mail.length;
+
+
+            for(let i=0; i<n+1; i++){
 
                 data_mail[i] = response_mail[i];
 
@@ -36,10 +39,6 @@ $(document).ready(function (){
 
                 }
 
-                let n = data_mail.length;
-
-                console.log("TEST");
-                console.log(n);
 
                 for(let i=0; i<n+1 ;i++){
 
