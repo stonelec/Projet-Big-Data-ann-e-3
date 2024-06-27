@@ -210,19 +210,19 @@ document.addEventListener('click', function(event) {
 
         let url = "";
         if (colonne === "Remarquable") {
-            url = "PHP/request.php/all_data_remarquable?id=" + option;
+            url = "PHP/request.php?action=all_data_remarquable&id=" + option;
         }
         if (colonne === "Port") {
-            url = "PHP/request.php/all_data_port?id=" + option;
+            url = "PHP/request.php?action=all_data_port&id=" + option;
         }
         if (colonne === "Pied") {
-            url = "PHP/request.php/all_data_pied?id=" + option;
+            url = "PHP/request.php?action=all_data_pied&id=" + option;
         }
         if (colonne === "Stade") {
-            url = "PHP/request.php/all_data_stade?id=" + option;
+            url = "PHP/request.php?action=all_data_stade&id=" + option;
         }
         if (colonne === "Etat") {
-            url = "PHP/request.php/all_data_etat?id=" + option;
+            url = "PHP/request.php?action=all_data_etat&id=" + option;
         }
         ajaxRequest('GET', url, afficherTableau);
 
