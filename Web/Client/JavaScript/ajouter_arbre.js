@@ -128,7 +128,7 @@ $(document).ready(function (){
 
         for(let i=0; i<response.length; i++) {
 
-            option_especes += '<option value="'+ response[i] +'"></option>';
+            option_especes += '<option value="'+ response[i].espece +'"></option>';
 
         }
 
