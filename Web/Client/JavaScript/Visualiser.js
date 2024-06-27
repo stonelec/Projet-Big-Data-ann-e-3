@@ -187,8 +187,9 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log(data_arbres[0]["id_arbre"])
 
         // ================= Pour chaque arbre de la database =================
-        for (let id_arbre = 0; id_arbre < nb_arb; id_arbre++) {               // 37 --> car 36 arbres
+        for (let id_arbre = 0; id_arbre < nb_arb; id_arbre++) {
             const row = document.createElement('tr');
+            row.href = "visualiser_detail.php";
             // ================= Pour chaque attribut de l'arbre =================
             for (attribute of AttributeElement) {
                 const cell = document.createElement('td');
