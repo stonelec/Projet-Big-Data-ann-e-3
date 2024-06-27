@@ -19,23 +19,18 @@ $requestAction = isset($_GET['action']) ? $_GET['action'] : '';
 switch ($requestAction) {
 
     case 'recuperer_email':
-        try {
-            $result = User::getAllMail();
-            echo json_encode($result);
-        } catch (Exception $e) {
-            error_log($e->getMessage());
-            echo json_encode(["error" => "An error occurred"]);
-        }
+        $result = User::getAllMail();
+        echo json_encode($result);
         break;
 
+
     case 'recuperer_mot_de_passe':
-        try {
-            $result = User::getAllMotDePasse();
-            echo json_encode($result);
-        } catch (Exception $e) {
-            error_log($e->getMessage());
-            echo json_encode(["error" => "An error occurred"]);
-        }
+        $result = User::getAllMotDePasse();
+        echo json_encode($result);
+        break;
+
+    default:
+        echo json_encode("marche pas");
         break;
 
 }
