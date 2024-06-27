@@ -19,7 +19,6 @@
     <link href="CSS/connexion.css" rel="stylesheet">
 
     <!-- Inclure le JS -->
-    <script src="JavaScript/connexion.js"></script>
     <script src="JavaScript/ajax.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
@@ -49,8 +48,6 @@ $result = Utilisateur::connexion_utilisateur();
             <li class="nav-item">
                 <a style="color: white;">Connexion</a>
             </li>
-
-
         </ul>
     </div>
 
