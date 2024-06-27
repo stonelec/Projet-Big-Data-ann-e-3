@@ -49,7 +49,7 @@ $(document).ready(function (){
 
             console.log("RENTRER");
 
-            if(val_email === data_mail[i] && mot_de_passe === data_mot_de_passe[i]){
+            if(val_email === data_mail[i].email_user && mot_de_passe === data_mot_de_passe[i].password_user){
 
                 console.log("VALID");
 
