@@ -111,6 +111,7 @@ function printOption() {
             option_title.selected = true;
             option_title.disabled = true;
             option_title.textContent = "Sélection";
+            form_select.appendChild(option_title);
 
             for (let i = 0; i < response.length; i++) {
                 const option_etat = document.createElement('option');
@@ -120,7 +121,6 @@ function printOption() {
             }
             choix_option.appendChild(form_select);
         });
-
     }
 }
 
