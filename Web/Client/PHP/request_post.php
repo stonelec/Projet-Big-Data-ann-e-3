@@ -104,13 +104,13 @@ switch ($requestMethod) {
 
     case 'POST':
 
-        switch ($requestAction){
+        switch ($requestAction_post){
 
             case 'ajouter_toutes_valeur':
 
-                $result = Arbre::addNewArbre($id_user, $val_longitude, $val_latitude, $val_hauteur_totale, $val_hauteur_tronc, $val_diametre_tronc, $val_etat, $val_stade,
-                    $val_port, $val_pied, $val_espece, $val_remarquable, $val_feuillage, $val_age_estime, $val_revetement);
-                echo json_encode($result);
+                //$result = Arbre::addNewArbre($id_user, $val_longitude, $val_latitude, $val_hauteur_totale, $val_hauteur_tronc, $val_diametre_tronc, $val_etat, $val_stade,
+                //    $val_port, $val_pied, $val_espece, $val_remarquable, $val_feuillage, $val_age_estime, $val_revetement);
+                echo json_encode($val_longitude);
                 break;
 
                 /*
