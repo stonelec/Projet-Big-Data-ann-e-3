@@ -232,6 +232,12 @@ document.addEventListener('click', function(event) {
 });
 
 function afficherTableau(data_arbres) {
+
+    console.log(data_arbres)
+    let nb_arb = data_arbres.length;
+    console.log("nb_arb :")
+    console.log(nb_arb)
+
     const container = document.getElementById('contenu');
     container.innerHTML = ''; // On supprime le contenu existant
     // On créé le tableau
@@ -254,12 +260,11 @@ function afficherTableau(data_arbres) {
     table.appendChild(thead);
     // Create 5 rows
     const tbody = document.createElement('tbody');
-    let nb_arb = data_arbres.length;
+
     const AttributeElement = [
         "id_arbre", "espece", "etat_arb", "stade_dev", "type_pied", "type_port", "remarquable", "latitude", "longitude","predire"
     ];
-    console.log("nb_arb :")
-    console.log(nb_arb)
+
     // ================= Pour chaque arbre de la database =================
     for (let id_arbre = 0; id_arbre < nb_arb; id_arbre++) {
 
