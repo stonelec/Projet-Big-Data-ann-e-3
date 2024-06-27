@@ -275,5 +275,24 @@ class User {
 
     }
 
+    static function getId($mail, $password){
+
+        $db = DB::connexion();
+
+        $request = 'SELECT id_user
+                    FROM public.user   
+                    WHERE email_user = :mail AND password_user = :password;';
+
+        $statement = $db->prepare($request);
+
+        $statement->bindParam(':mail', $mail);
+        $statement->bindParam(':password', $password);
+        $statement = $db->prepare($request);
+        $statement->execute();
+
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    }
+
 }
 ?>

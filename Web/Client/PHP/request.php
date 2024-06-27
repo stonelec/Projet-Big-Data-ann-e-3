@@ -11,6 +11,9 @@ $requestMethod = $_SERVER['REQUEST_METHOD'];
 $requestAction = isset($_GET['action']) ? $_GET['action'] : '';
 $id = isset($_GET['id']) ? $_GET['id'] : NULL;
 
+$mail = isset($_GET['email']) ? $_GET['email'] : NULL;
+$password = isset($_GET['mot_de_passe']) ? $_GET['mot_de_passe'] : NULL;
+
 $result = null;
 
 switch ($requestAction) {
@@ -139,6 +142,11 @@ switch ($requestAction) {
 
     case 'recuperermdp' :
         $result = User::getAllMotDePasse();
+        echo json_encode($result);
+        break;
+
+    case 'id_du_user' :
+        $result = User::getId($mail,$password);
         echo json_encode($result);
         break;
 
