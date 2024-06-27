@@ -71,6 +71,69 @@ VALUES
 ------------------------------------------------------------
 -- Ajout des arbres depuis un fichier CSV
 ------------------------------------------------------------
+
+CREATE TEMP TABLE temp_arbre (
+                                 longitude FLOAT,
+                                 latitude FLOAT,
+                                 clc_quartier VARCHAR(100),
+                                 clc_secteur VARCHAR(100),
+                                 haut_tot FLOAT,
+                                 haut_tronc FLOAT,
+                                 tronc_diam FLOAT,
+                                 fk_arb_etat VARCHAR(50),
+                                 fk_stadedev VARCHAR(50),
+                                 fk_port VARCHAR(50),
+                                 fk_pied VARCHAR(50),
+                                 fk_situation VARCHAR(50),
+                                 fk_revetement VARCHAR(50),
+                                 age_estim FLOAT,
+                                 fk_prec_estim FLOAT,
+                                 clc_nbr_diag FLOAT,
+                                 fk_nomtech VARCHAR(50),
+                                 villeca VARCHAR(50),
+                                 feuillage VARCHAR(50),
+                                 remarquable VARCHAR(10)
+);
+
+-- Importer les données depuis le fichier CSV
+COPY temp_arbre
+    FROM 'Data_Arbre.csv'
+    DELIMITER ','
+    CSV HEADER;
+
+INSERT INTO arbre (longitude, latitude, hauteur_tot, hauteur_tronc, diametre_tronc, id_etat_arbre, id_stade_dev, id_port, id_pied, id_user, espece, remarquable, id_feuillage, age_estim, revetement)
+SELECT
+    longitude,
+    latitude,
+    haut_tot,
+    haut_tronc,
+    tronc_diam,
+    ea.id_etat_arbre,
+    sd.id_stade_dev,
+    tp.id_port,
+    tpied.id_pied,
+    1, -- Assumons que l'utilisateur par défaut a l'ID 1
+    fk_nomtech AS espece,
+    CASE WHEN remarquable = 'Oui' THEN 1 ELSE 0 END AS remarquable,
+    tf.id_feuillage,
+    age_estim,
+    CASE WHEN fk_revetement = 'Non' THEN 0 ELSE 1 END AS revetement
+FROM temp_arbre ta
+LEFT JOIN etat_arbre ea ON ea.etat_arb = ta.fk_arb_etat
+LEFT JOIN stade_de_dev sd ON sd.stade_dev = ta.fk_stadedev
+LEFT JOIN type_de_port tp ON tp.type_port = ta.fk_port
+LEFT JOIN type_de_pied tpied ON tpied.type_pied = ta.fk_pied
+LEFT JOIN type_feuillage tf ON tf.feuillage = ta.feuillage;
+
+
+
+
+
+
+
+
+
+/*
 INSERT INTO public.arbre (id_user,longitude, latitude, hauteur_tot, hauteur_tronc, diametre_tronc, id_etat_arbre, id_stade_dev, id_port, id_pied, espece, remarquable, id_feuillage, age_estim, revetement)
 VALUES
     (1, '3.2932636093638927', '49.84050020512298', 6.0, 2.0, 37.0, 2, 1, 3, 5, 'QUERUB', 0,1,150,0),
@@ -110,3 +173,4 @@ VALUES
     (1, '3.252117065240142', '49.82967930289011', 9.0, 2.0, 110.0, 2, 2, 10, 5, 'TILCOR', 0,1,50,0),
     (1, '3.252003672805389', '49.82963609667133', 9.0, 3.0, 115.0, 2, 2, 10, 5, 'TILCOR', 0,1,50,0);
 
+*/
