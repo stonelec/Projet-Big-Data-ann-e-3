@@ -8,7 +8,7 @@ require_once('User.php');
 $requestMethod = $_SERVER['REQUEST_METHOD'];
 
 //TOUT EST BON ICI :
-//echo json_encode($requestMethod);
+echo json_encode($requestMethod);
 
 $requestAction = isset($_GET['action']) ? $_GET['action'] : '';
 
@@ -23,23 +23,6 @@ $result = null;
 
 $requestAction_post=$_POST['ajouter_toutes_valeur'];
 
-if($requestMethod == '$_GET'){
-
-    echo json_encode("GET");
-
-}
-
-if($requestMethod == '$_POST'){
-
-    echo json_encode("POST");
-
-}
-
-else{
-
-    echo json_encode("Pas de get ni de post");
-
-}
 
 
 
