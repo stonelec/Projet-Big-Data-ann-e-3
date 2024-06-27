@@ -15,7 +15,7 @@ $result = null;
 
 $requestAction = isset($_GET['action']) ? $_GET['action'] : '';
 //echo json_encode($requestAction);
-
+/*
 switch ($requestAction) {
 
     case 'recuperer_email':
@@ -33,7 +33,26 @@ switch ($requestAction) {
         echo json_encode("marche pas");
         break;
 
+}*/
+
+switch ($requestAction){
+
+    case 'recuperer_email':
+        $result = User::getAllMail();
+        echo json_encode($result);
+        break;
+
+    case 'recuperer_mot_de_passe':
+        $result = User::getAllMotDePasse();
+        echo json_encode($result);
+        break;
+
+    default:
+        echo json_encode("Error => Rentrer dans le GET mais pas dans le case");
+        break;
+
 }
+
 
 /*
 switch ($requestMethod){
