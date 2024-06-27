@@ -66,10 +66,66 @@ function printOption() {
             `<select class="form-select" aria-label="Default select example">
                      <option selected disabled="disabled">Ordre</option>
                      <option value="1">oui</option>
+                     <option value="0">non</option>
+                  </select>`
+        );
+    }
+    if (colonne === "Port") {
+        document.getElementById("choix-option").insertAdjacentHTML(
+            "afterbegin",
+            `<select class="form-select" aria-label="Default select example">
+                     <option selected disabled="disabled">Ordre</option>
+                     <option value="1">oui</option>
                      <option value="2">non</option>
                   </select>`
         );
     }
+    if (colonne === "Pied") {
+        document.getElementById("choix-option").insertAdjacentHTML(
+            "afterbegin",
+            `<select class="form-select" aria-label="Default select example">
+                     <option selected disabled="disabled">Ordre</option>
+                     <option value="1">oui</option>
+                     <option value="2">non</option>
+                  </select>`
+        );
+    }
+    if (colonne === "Stade") {
+        document.getElementById("choix-option").insertAdjacentHTML(
+            "afterbegin",
+            `<select class="form-select" aria-label="Default select example">
+                     <option selected disabled="disabled">Ordre</option>
+                     <option value="1">oui</option>
+                     <option value="2">non</option>
+                  </select>`
+        );
+    }
+    if (colonne === "Etat") {
+        ajaxRequest('GET', 'PHP/request_post.php?action=ajouter_arbre_etat', function(response) {
+            const choix_option = document.getElementById('choix-option');
+            const form_select = document.createElement('select');
+            form_select.classList.add('form-select');
+            form_select.setAttribute('aria-label', 'Default select example');
+            //<option selected disabled="disabled">Ordre</option>
+            const option_title = document.createElement('option');
+            option_title.selected = true;
+            option_title.disabled = true;
+            option_title.textContent = "Sélection";
+            form_select.appendChild(option_title);
+
+            for (let i = 0; i < response.length; i++) {
+                const option_etat = document.createElement('option');
+                option_etat.value = response[i].etat_arb;
+                option_etat.textContent = response[i].etat_arb;
+                form_select.appendChild(option_etat);
+            }
+            choix_option.appendChild(form_select);
+        });
+    }
+}
+
+function printDetailOption(detail_option) {
+
 }
 function printTrier() {
     console.log("printTrier");
