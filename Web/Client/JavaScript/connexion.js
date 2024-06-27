@@ -13,9 +13,15 @@ $(document).ready(function (){
         let val_email = $('.email').val();
         let mot_de_passe = $('.mot_de_passe').val();
 
+        console.log(val_email);
+        console.log(mot_de_passe);
+
+
+
+        /*
+
         let data_mail = []
         let data_mot_de_passe = []
-
         ajaxRequest('GET', 'PHP/request.php?action=recuperermail',function(response_mail)  {
 
             console.log(response_mail);
@@ -48,7 +54,7 @@ $(document).ready(function (){
 
             });
 
-        });
+        });*/
 
 
 
