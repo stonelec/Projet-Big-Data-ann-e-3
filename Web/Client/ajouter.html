@@ -1,3 +1,6 @@
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -159,8 +162,12 @@
             <div class="add-button">
                 <button type="submit" class="btn btn-brown">Ajouter l'arbre</button>
             </div>
-            <p class="sous-titre-page bottom-space">Vous devez être connecté pour ajouter un arbre</p>
         </form>
+        <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
+        <!-- Formulaire pour ajouter un arbre -->
+        <?php else: ?>
+        <p class="sous-titre-page bottom-space text-danger">Vous devez être connecté pour ajouter un arbre.</p>
+        <?php endif; ?>
     </div>
     <div class="box"></div>
 </div>
