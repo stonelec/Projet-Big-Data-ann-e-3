@@ -1,7 +1,13 @@
 <?php
 
- session_start();
+session_start();
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+require_once('PHP/Utilisateur.php');
+$result = Utilisateur::connexion_utilisateur();
 ?>
 
 <!DOCTYPE html>
@@ -29,16 +35,6 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
 </head>
-
-<?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
-require_once('PHP/Utilisateur.php');
-$result = Utilisateur::connexion_utilisateur();
-?>
-
 
 <body>
 <!-- =================================== NAVBAR ================================== -->
