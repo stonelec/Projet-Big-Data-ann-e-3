@@ -22,7 +22,7 @@ $(document).ready(function (){
 
             for(let i=0; i<response.length; i++){
 
-                data_mail[i] = response[i];
+                data_mail[i] = response[i].email_user;
 
             }
 
@@ -34,7 +34,7 @@ $(document).ready(function (){
 
             for(let i=0; i<response.length; i++){
 
-                data_mot_de_passe[i] = response[i];
+                data_mot_de_passe[i] = response[i].password_user;
 
             }
 
@@ -49,7 +49,7 @@ $(document).ready(function (){
 
             console.log("RENTRER");
 
-            if(val_email === data_mail[i].email_user && mot_de_passe === data_mot_de_passe[i].password_user){
+            if(val_email === data_mail[i] && mot_de_passe === data_mot_de_passe[i]){
 
                 console.log("VALID");
 
