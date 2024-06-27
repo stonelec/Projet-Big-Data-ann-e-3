@@ -138,25 +138,22 @@ switch ($requestMethod) {
 
             case 'ajouter_toutes_valeur':
 
-
+                /*
                 $tab = [$val_longitude, $val_latitude, $val_hauteur_totale, $val_hauteur_tronc, $val_diametre_tronc,
                     $val_etat,$val_stade,$val_port, $val_pied, $val_espece, $val_remarquable, $val_feuillage, $val_age_estime,
                     $val_revetement];
 
-                echo json_encode($tab);
+                echo json_encode($tab);*/
 
 
-                /*
                 if($id_user != NULL && $val_longitude != NULL && $val_latitude != NULL && $val_hauteur_totale != NULL && $val_hauteur_tronc != NULL &&
                     $val_diametre_tronc != NULL && $val_etat != NULL && $val_stade != NULL && $val_port != NULL && $val_pied != NULL &&
                     $val_espece != NULL && $val_remarquable != NULL && $val_feuillage != NULL && $val_age_estime != NULL &&
                     $val_revetement != NULL){
 
-                    //$result = Arbre::addNewArbre($id_user, $val_longitude, $val_latitude, $val_hauteur_totale, $val_hauteur_tronc, $val_diametre_tronc, $val_etat, $val_stade,
-                    //    $val_port, $val_pied, $val_espece, $val_remarquable, $val_feuillage, $val_age_estime, $val_revetement);
-                    //echo json_encode($result);
-
-                    echo json_encode("Pas de valeur null");
+                    $result = Arbre::addNewArbre($id_user, $val_longitude, $val_latitude, $val_hauteur_totale, $val_hauteur_tronc, $val_diametre_tronc, $val_etat, $val_stade,
+                        $val_port, $val_pied, $val_espece, $val_remarquable, $val_feuillage, $val_age_estime, $val_revetement);
+                    echo json_encode($result);
 
                 }
 
@@ -165,7 +162,7 @@ switch ($requestMethod) {
                     $result = "Problème dans les variables";
                     echo json_encode($result);
 
-                } */
+                }
 
                 break;
 
