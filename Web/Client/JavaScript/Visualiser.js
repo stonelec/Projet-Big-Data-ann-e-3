@@ -189,7 +189,6 @@ document.addEventListener('DOMContentLoaded', function() {
         // ================= Pour chaque arbre de la database =================
         for (let id_arbre = 0; id_arbre < nb_arb; id_arbre++) {
             const row = document.createElement('tr');
-            row.href = "visualiser_detail.php";
             // ================= Pour chaque attribut de l'arbre =================
             for (attribute of AttributeElement) {
                 const cell = document.createElement('td');
@@ -220,7 +219,19 @@ document.addEventListener('DOMContentLoaded', function() {
                     dropdown.appendChild(dropdownContent);
                     cell.appendChild(dropdown);
 
-                } else {
+                }
+                else if (attribute === "remarquable") {
+                    if (data_arbres[id_arbre][attribute] === "1") {
+                        cell.textContent = "Oui";
+                    } else {
+                        cell.textContent = "Non";
+                    }
+                }
+                else if (attribute === "id_arbre") {
+                    cell.textContent = `${data_arbres[id_arbre][attribute]}`;
+                    cell.href = "visualiser_detail.html";
+                }
+                else {
                     cell.textContent = `${data_arbres[id_arbre][attribute]}`;
                 }
                 row.appendChild(cell);
