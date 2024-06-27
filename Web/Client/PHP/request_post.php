@@ -94,7 +94,7 @@ switch ($requestMethod) {
 
             case 'ajouter_toutes_valeur':
 
-                echo json_encode($val_longitude);
+                echo json_encode($val_longitude, $val_latitude);
 
                 /*
                 if($id_user != NULL && $val_longitude != NULL && $val_latitude != NULL && $val_hauteur_totale != NULL && $val_hauteur_tronc != NULL &&
