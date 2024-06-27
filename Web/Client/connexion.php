@@ -27,13 +27,13 @@
 
 <body>
 
-<?php
-    require_once ('Utilisateur.php');
-    $result=Utilisateur::connexion_utilisateur();
-?>
-
 <!-- =================================== NAVBAR ================================== -->
 <nav class="navbar navbar-expand-lg navbar-custom">
+    <?php
+    require_once ('Utilisateur.php');
+    $result=Utilisateur::connexion_utilisateur();
+    ?>
+
     <a class="navbar-brand" href="accueil.html">
         <img src="Images/logo_green_resize.png" alt="Home" class="d-inline-block align-top" style="height: 40px;">
     </a>
