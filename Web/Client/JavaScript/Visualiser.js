@@ -169,30 +169,60 @@ function printTrier() {
     );
 }
 
-// On écoute le bouton supr
 document.addEventListener('click', function(event) {
     if (event.target.matches('.supr')) {
+        cleanPage();
+
+        document.getElementById("contenu").insertAdjacentHTML(
+            "beforebegin",
+            `<div class="tri-stock">
+                <div class="tri">
+                    <div>
+                        Sélectionner le tri :
+                    </div>
+                    <div id="choix-colonne-div"> <!--dibv set juste pour l'espacement-->
+                        <select class="form-select" aria-label="Default select example" id="choix-colonne">
+                            <option selected disabled="disabled">Colonne</option>
+                            <option value="Etat">Etat</option>
+                            <option value="Stade">Stade</option>
+                            <option value="Pied">Pied</option>
+                            <option value="Port">Port</option>
+                            <option value="Remarquable">Remarquable</option>
+                        </select>
+                    </div>
+                    <div id="choix-option">
+
+                    </div>
+                     <button type="button" class="btn btn-brown shadow-none btn-sm supr" hidden></button>
+                </div>
+            </div>`
+        );
+
+
         let colonne = document.getElementById("choix-colonne").value;
         let option = document.getElementsByClassName("form-select")[1].value;
         console.log(colonne);
         console.log(option);
         let url = "";
         if (colonne === "Remarquable") {
-            //url = "PHP/request_m.php/all_data_remarquable?remarquable=" + option;
+            url = "PHP/request.php/all_data_remarquable?id=" + option;
         }
         if (colonne === "Port") {
-            //url = "PHP/request_m.php/all_data_port?port=" + option;
+            url = "PHP/request.php/all_data_port?id=" + option;
         }
         if (colonne === "Pied") {
-            //url = "PHP/request_m.php/all_data_pied?pied=" + option;
+            url = "PHP/request.php/all_data_pied?id=" + option;
         }
         if (colonne === "Stade") {
-            //url = "PHP/request_m.php/all_data_stade?stade=" + option;
+            url = "PHP/request.php/all_data_stade?id=" + option;
         }
         if (colonne === "Etat") {
-            //url = "PHP/request_m.php/all_data_etat?etat=" + option;
+            url = "PHP/request.php/all_data_etat?id=" + option;
         }
-        //ajaxRequest('GET', url, afficherTableau);
+        ajaxRequest('GET', url, afficherTableau);
+
+        let colonnne = document.getElementById("choix-colonne");
+        colonnne.addEventListener("click", () => {printOption()});
     }
 });
 
