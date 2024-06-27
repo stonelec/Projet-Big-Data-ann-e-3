@@ -236,20 +236,16 @@ function addResult(){
                 <div class="card-header-blanche">Infos</div>
                 <div class="card-content card-blanche-content">
                     <div class="item">
-                        <div class="label">Age</div>
-                        <div class="value">1800</div>
+                        <div class="label">Hauteur tronc</div>
+                        <div class="value_hauteur_taille"></div>
                     </div>
                     <div class="item">
                         <div class="label">Diamètre tronc</div>
-                        <div class="value">EN PLACE</div>
+                        <div class="value_diametre_taille"></div>
                     </div>
                     <div class="item">
-                        <div class="label">Latitude</div>
-                        <div class="value">adulte</div>
-                    </div>
-                    <div class="item">
-                        <div class="label">Longitude</div>
-                        <div class="value">adulte</div>
+                        <div class="label">Age</div>
+                        <div class="value_age_taille"></div>
                     </div>
                 </div>
             </div>`
@@ -262,12 +258,50 @@ function addResult(){
             </div>
             <div class="card-data-resulte">
                 <div>Taille</div>
-                <div style="color: #6F8F72; font-weight: bold;">1800</div>
+                <div class="prediction2" style="color: #6F8F72; font-weight: bold;"></div>
             </div>
         </div>`
         );
+// =============================== Modification des infos ======== Requêtes AJAX ===============================
+// -------------------------------------------------- Hauteur tronc ------------------------------------------------
+        ajaxRequest('GET', 'PHP/request.php?action=hauteur_tronc&id=' + id, function (response) {
+            console.log("Hauteur du tronc : ", response);
+            // Afficher le résultat dans votre page HTML
+            $('.value_hauteur_taille').html(
+                '<p>' + response + '</p>');
+        });
+// -------------------------------------------------- Diamètre tronc ------------------------------------------------
+        ajaxRequest('GET', 'PHP/request.php?action=diametre&id=' + id, function (response) {
+            console.log("Diametre de l'arbre : ", response);
+            // Afficher le résultat dans votre page HTML
+            $('.value_diametre_taille').html(
+                '<p>' + response + '</p>');
+        });
+// -------------------------------------------------- Age estimé ------------------------------------------------
+        ajaxRequest('GET', 'PHP/request.php?action=age_estim&id=' + id, function (response) {
+            console.log("Age estimé de l'arbre : ", response);
+            // Afficher le résultat dans votre page HTML
+            $('.value_age_taille').html(
+                '<p>' + response + '</p>');
+        });
 
-    }else if(pred == "deraciner"){
+// -------------------------------------------------- Prédiction Age ------------------------------------------------
+        ajaxRequest('GET', 'PHP/request.php?action=prediction_taille&id=' + id, function (response) {
+            console.log("Prediction de la taille de l'arbre : ", response);
+            // Afficher le résultat dans votre page HTML
+            if(response == "0"){
+                $('.prediction2').html('Moyen');
+            }
+            else if(response == "1"){
+                $('.prediction2').html('Petit');
+            }
+            else if(response == "2"){
+                $('.prediction2').html('Grand');
+            }
+        });
+    }
+
+    else if(pred == "deraciner"){
         console.log("result : deraciner");
         document.getElementById("affichage-top").insertAdjacentHTML(
             "beforeend",
