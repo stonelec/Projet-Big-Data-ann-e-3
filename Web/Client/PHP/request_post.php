@@ -19,7 +19,7 @@ if($requestMethod == 'GET'){
     $requestAction_get = isset($_GET['action']) ? $_GET['action'] : '';
     $id = isset($_GET['id']) ? $_GET['id'] : NULL;
 
-    echo json_encode($requestAction_get);
+    echo json_encode('SUper cool le get');
 
 }
 else if($requestMethod == 'POST'){
@@ -46,7 +46,7 @@ else if($requestMethod == 'POST'){
     $val_age_estime = $_POST['val_hauteur_tronc'];
     $val_revetement = $_POST['val_hauteur_tronc'];
 
-    echo json_encode($requestAction_post);
+    echo json_encode("LE REVETEMENT : ", $val_revetement);
 
 }
 else{
