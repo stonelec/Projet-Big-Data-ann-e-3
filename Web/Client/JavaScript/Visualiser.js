@@ -66,10 +66,57 @@ function printOption() {
             `<select class="form-select" aria-label="Default select example">
                      <option selected disabled="disabled">Ordre</option>
                      <option value="1">oui</option>
+                     <option value="0">non</option>
+                  </select>`
+        );
+    }
+    if (colonne === "Port") {
+        document.getElementById("choix-option").insertAdjacentHTML(
+            "afterbegin",
+            `<select class="form-select" aria-label="Default select example">
+                     <option selected disabled="disabled">Ordre</option>
+                     <option value="1">oui</option>
                      <option value="2">non</option>
                   </select>`
         );
     }
+    if (colonne === "Pied") {
+        document.getElementById("choix-option").insertAdjacentHTML(
+            "afterbegin",
+            `<select class="form-select" aria-label="Default select example">
+                     <option selected disabled="disabled">Ordre</option>
+                     <option value="1">oui</option>
+                     <option value="2">non</option>
+                  </select>`
+        );
+    }
+    if (colonne === "Stade") {
+        document.getElementById("choix-option").insertAdjacentHTML(
+            "afterbegin",
+            `<select class="form-select" aria-label="Default select example">
+                     <option selected disabled="disabled">Ordre</option>
+                     <option value="1">oui</option>
+                     <option value="2">non</option>
+                  </select>`
+        );
+    }
+    if (colonne === "Etat") {
+        const select = document.createElement('select');
+        select.classList.add('form-select');
+        select.setAttribute('aria-label', 'Default select example');
+
+        ajaxRequest('GET', 'PHP/request_post.php?action=ajouter_arbre_etat', function(etats) {
+            for(let i=0; i<etats.length; i++) {
+                const option = document.createElement('option');
+                option.textContent = etats[i].etat_arb;
+            }
+
+        });
+    }
+}
+
+function printDetailOption(detail_option) {
+
 }
 function printTrier() {
     console.log("printTrier");
