@@ -7,7 +7,7 @@ require_once('User.php');
 $requestMethod = $_SERVER['REQUEST_METHOD'];
 
 //TOUT EST BON ICI :
-echo json_encode($requestMethod);
+//echo json_encode($requestMethod);
 
 $result = null;
 
@@ -15,7 +15,7 @@ $result = null;
 
 $requestAction = isset($_GET['action']) ? $_GET['action'] : '';
 
-/*
+
 switch ($requestMethod){
 
     case 'GET':
@@ -41,4 +41,4 @@ switch ($requestMethod){
         echo json_encode("Pas dans le get");
         break;
 
-}*/
+}
