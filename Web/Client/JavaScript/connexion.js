@@ -40,6 +40,19 @@ $(document).ready(function (){
 
         });
 
+        let n = data_mail.length;
+
+        for(let i=0; i<n ;i++){
+
+            if(val_email === data_mail[i].email_user && mot_de_passe === data_mot_de_passe[i].password_user){
+
+                console.log("VALID")
+
+            }
+
+        }
+
+
     });
 
 });
