@@ -14,16 +14,16 @@ $result = null;
 // ---------- On récupère des variables de GET et de POST ----------
 
 $requestAction = isset($_GET['action']) ? $_GET['action'] : '';
-echo json_encode($requestAction);
-/*
+//echo json_encode($requestAction);
+
 switch ($requestAction){
 
-    case 'recuperer_email':
+    case 'recuperer_email' :
         $result = User::getAllMail();
         echo json_encode($result);
         break;
 
-    case 'recuperer_mot_de_passe':
+    case 'recuperer_mot_de_passe' :
         $result = User::getAllMotDePasse();
         echo json_encode($result);
         break;
@@ -33,7 +33,7 @@ switch ($requestAction){
         break;
 
 }
-*/
+
 
 /*
 switch ($requestMethod){
