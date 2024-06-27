@@ -3,11 +3,11 @@ console.log("prediction.js loaded")
 url_string = window.location.href;
 let url = new URL(url_string);
 let pred = url.searchParams.get("pred");
-let id = url.searchParams.get("id");
-console.log(id);
+let id_arbre = url.searchParams.get("id");
+console.log(id_arbre);
 console.log(pred);
 
-if(id == 0) {
+if(id_arbre == 0) {
     console.log("id non renseigné");
     if(pred === "age"){
         console.log("age");
@@ -128,7 +128,7 @@ function addResult(){
                 <div class="card-content card-blanche-content">
                     <div class="item">
                         <div class="label">Feuillage</div>
-                        <div class="value">1800</div>
+                        <div class="value_feuillage">1800</div>
                     </div>
                     <div class="item">
                         <div class="label">Hauteur tronc</div>
@@ -161,6 +161,18 @@ function addResult(){
             </div>
         </div>`
         );
+
+        ajaxRequest('GET', 'PHP/request.php?action=feuillage&id=' + id_arbre, function (response) {
+            console.log("Feuillage de l'arbre : ", response);
+            // Afficher le résultat dans votre page HTML
+            $('.value_feuillage').html(
+                '<p> Le feuillage est : ' +
+                response +
+                '</p>');
+
+        });
+
+
     }else if(pred == "taille"){
         console.log("result : taille");
         document.getElementById("affichage-top").insertAdjacentHTML(
