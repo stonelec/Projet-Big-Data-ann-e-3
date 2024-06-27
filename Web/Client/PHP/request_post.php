@@ -46,7 +46,7 @@ else if($requestMethod == 'POST'){
     $val_age_estime = $_POST['val_hauteur_tronc'];
     $val_revetement = $_POST['val_hauteur_tronc'];
 
-    echo json_encode("LE REVETEMENT : ", $val_revetement);
+    echo json_encode($val_revetement);
 
 }
 else{
