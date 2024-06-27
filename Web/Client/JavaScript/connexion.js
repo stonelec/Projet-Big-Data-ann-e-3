@@ -40,8 +40,8 @@ $(document).ready(function (){
 
                 for(let i=0; i<n; i++){
 
-                    //console.log(data_mail[i].email_user);
-                    //console.log(data_mot_de_passe[i].password_user);
+                    console.log(data_mail[i].email_user);
+                    console.log(data_mot_de_passe[i].password_user);
 
                     if(val_email === data_mail[i].email_user && mot_de_passe === data_mot_de_passe[i].password_user){
 
