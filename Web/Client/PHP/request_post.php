@@ -94,6 +94,9 @@ switch ($requestMethod) {
 
             case 'ajouter_toutes_valeur':
 
+                echo json_encode($val_longitude, $val_latitude);
+
+                /*
                 if($id_user != NULL && $val_longitude != NULL && $val_latitude != NULL && $val_hauteur_totale != NULL && $val_hauteur_tronc != NULL &&
                     $val_diametre_tronc != NULL && $val_etat != NULL && $val_stade != NULL && $val_port != NULL && $val_pied != NULL &&
                     $val_espece != NULL && $val_remarquable != NULL && $val_feuillage != NULL && $val_age_estime != NULL &&
@@ -107,7 +110,7 @@ switch ($requestMethod) {
                     $result = "Problème dans les variables";
                     echo json_encode($result);
 
-                }
+                }*/
 
                 break;
 
