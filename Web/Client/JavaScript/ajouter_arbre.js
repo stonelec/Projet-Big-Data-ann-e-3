@@ -125,7 +125,7 @@ $(document).ready(function (){
 // -------------------------------------------------------------------------------------------------------
 // -------------------- Récupérer tous les élements pour les mettres dans les options --------------------
 //--------------------------------------------------------------------------------------------------------
-
+/*
 $(document).ready(function (){
 
     $('.form_ajouter_arbre').submit(function(event) {
@@ -198,16 +198,8 @@ $(document).ready(function (){
             //console.log("Toutes les valeurs ont été ajouté");
             //console.log("Ca doit afficher la hauteur du tronc : ", response)
 
-        }, data);
+        });
 
     });
 
-});
-/*
-*
-* '&val_espece=' + val_espece + '&val_latitude=' + val_latitude +
-            '&val_longitude=' + val_longitude + '&val_hauteur_totale=' + val_hauteur_totale +
-            '&val_hauteur_tronc=' + val_hauteur_tronc + '&val_diametre_tronc=' + val_diametre_tronc +
-            '&val_age_estime=' + val_age_estime + '&val_etat=' + val_etat + '&val_stade=' + val_stade +
-            '&val_remarquable=' + val_remarquable + '&val_pied=' + val_pied + '&val_revetement=' + val_revetement +
-            '&val_port=' + val_port + '&val_feuillage=' + val_feuillage, */
+});*/
