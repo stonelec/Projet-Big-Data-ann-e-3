@@ -118,7 +118,7 @@ $(document).ready(function (){
 
     ajaxRequest('GET', 'PHP/request_post.php?action=ajouter_arbre_espece', function(response) {
 
-        //console.log("Especes : ")
+        console.log("Especes : ")
         console.log(response)
 
         for(let i=0; i<response.length; i++) {
