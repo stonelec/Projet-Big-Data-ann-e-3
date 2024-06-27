@@ -659,7 +659,7 @@ class Arbre {
         $statement->bindParam(':id_val_etat', $id_val_etat);
         $statement->execute();
 
-        return $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $statement->fetch()[0];
 
     }
 
@@ -676,7 +676,7 @@ class Arbre {
         $statement->bindParam(':id_val_stade', $id_val_stade);
         $statement->execute();
 
-        return $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $statement->fetch()[0];
 
     }
 
@@ -710,7 +710,7 @@ class Arbre {
         $statement->bindParam(':id_val_pied', $id_val_pied);
         $statement->execute();
 
-        return $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $statement->fetch()[0];
 
     }
 
@@ -727,7 +727,7 @@ class Arbre {
         $statement->bindParam(':id_val_feuillage', $id_val_feuillage);
         $statement->execute();
 
-        return $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $statement->fetch()[0];
 
     }
 
