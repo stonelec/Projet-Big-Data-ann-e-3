@@ -14,8 +14,7 @@ $result = null;
 // ---------- On récupère des variables de GET et de POST ----------
 
 $requestAction = isset($_GET['action']) ? $_GET['action'] : '';
-
-echo json_encode($requestAction);
+//echo json_encode($requestAction);
 
 switch ($requestAction) {
 
