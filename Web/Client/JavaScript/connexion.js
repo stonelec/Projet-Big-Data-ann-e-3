@@ -20,9 +20,9 @@ $(document).ready(function (){
 
             console.log(response_mail);
 
-            let n = data_mail.length;
+            let n = response_mail.length;
 
-            for(let i=0; i<n+1; i++){
+            for(let i=0; i<n; i++){
 
                 data_mail[i] = response_mail[i];
 
@@ -32,13 +32,13 @@ $(document).ready(function (){
 
                 console.log(response_mdp);
 
-                for(let i=0; i<n+1; i++){
+                for(let i=0; i<response_mdp.length; i++){
 
                     data_mot_de_passe[i] = response_mdp[i];
 
                 }
 
-                for(let i=0; i<n+1; i++){
+                for(let i=0; i<n; i++){
 
                     //console.log(data_mail[i].email_user);
                     //console.log(data_mot_de_passe[i].password_user);
