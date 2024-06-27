@@ -16,7 +16,7 @@ $(document).ready(function (){
         let data_mail = []
         let data_mot_de_passe = []
 
-        ajaxRequest('GET', 'PHP/request.php?action=recuperer_email',function(response)  {
+        ajaxRequest('GET', 'PHP/request.php?action=ajouter_arbre_etat',function(response)  {
 
             console.log(response);
 
