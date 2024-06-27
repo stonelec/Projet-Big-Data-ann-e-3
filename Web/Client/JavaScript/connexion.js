@@ -5,7 +5,7 @@
 
 $(document).ready(function (){
 
-    $('.connexion').submit(function(event) {
+    $('.form_connexion').submit(function(event) {
         event.preventDefault(); // Empêcher la soumission du formulaire
 
         console.log("ENVOYER")

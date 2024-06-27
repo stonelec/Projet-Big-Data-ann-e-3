@@ -68,20 +68,22 @@ $result=Users::connexion();
             </div>
             <p class="connexion-titre">Connectez - vous<br> à votre compte</p>
             <p class="connexion-sous-titre">Bon retour ! <br> Merci de renseigner les informations.</p>
-            <div class="connexion-form bottom-space form_connexion">
-                <div class="mb-3">
-                    <label for="inputEmail" class="form-label">Email</label>
-                    <input type="email" class="form-control email" id="inputEmail" placeholder="name@example.com">
-                </div>
-                <div class="mb-3">
-                    <label for="inputPassword5" class="form-label">Mot de passe</label>
-                    <input type="password" id="inputPassword5" class="form-control mot_de_passe" aria-describedby="passwordHelpBlock">
-                </div>
-                <button type="submit" class="btn btn-primary btn-brown">Se connecter</button>
-                <!-- <div class="register">
-                    <p>Vous n'avez pas de compte</p>
-                    <a href="connexion.css">S'enregistrer</a>
-                </div>-->
+            <div class="connexion-form bottom-space">
+                <form class="form_connexion">
+                    <div class="mb-3">
+                        <label for="inputEmail" class="form-label">Email</label>
+                        <input type="email" class="form-control email" id="inputEmail" placeholder="name@example.com">
+                    </div>
+                    <div class="mb-3">
+                        <label for="inputPassword5" class="form-label">Mot de passe</label>
+                        <input type="password" id="inputPassword5" class="form-control mot_de_passe" aria-describedby="passwordHelpBlock">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-brown">Se connecter</button>
+                    <!-- <div class="register">
+                        <p>Vous n'avez pas de compte</p>
+                        <a href="connexion.css">S'enregistrer</a>
+                    </div>-->
+                </form>
             </div>
         </div>
 
