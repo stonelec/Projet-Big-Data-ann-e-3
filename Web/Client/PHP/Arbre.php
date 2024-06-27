@@ -659,7 +659,7 @@ class Arbre {
         $statement->bindParam(':id_val_etat', $id_val_etat);
         $statement->execute();
 
-        return $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $statement->fetch()[0];
 
     }
 
@@ -676,7 +676,7 @@ class Arbre {
         $statement->bindParam(':id_val_stade', $id_val_stade);
         $statement->execute();
 
-        return $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $statement->fetch()[0];
 
     }
 
@@ -710,7 +710,7 @@ class Arbre {
         $statement->bindParam(':id_val_pied', $id_val_pied);
         $statement->execute();
 
-        return $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $statement->fetch()[0];
 
     }
 
@@ -727,7 +727,7 @@ class Arbre {
         $statement->bindParam(':id_val_feuillage', $id_val_feuillage);
         $statement->execute();
 
-        return $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $statement->fetch()[0];
 
     }
 
@@ -737,11 +737,6 @@ class Arbre {
 
     static function addNewArbre($id_user, $val_longitude, $val_latitude, $val_hauteur_totale, $val_hauteur_tronc, $val_diametre_tronc, $val_etat, $val_stade,
                                 $val_port, $val_pied,$val_espece, $val_remarquable, $val_feuillage, $val_age_estime, $val_revetement){
-
-        //Pour voir si les variables sont nul ou pas :
-        var_dump($id_user, $val_longitude, $val_latitude, $val_hauteur_totale, $val_hauteur_tronc, $val_diametre_tronc, $val_etat, $val_stade,
-         $val_port, $val_pied, $val_espece, $val_remarquable, $val_feuillage, $val_age_estime, $val_revetement);
-
 
         if (!empty($id_user) && !empty($val_longitude) && !empty($val_latitude) && !empty($val_hauteur_totale) && !empty($val_hauteur_tronc) && !empty($val_diametre_tronc) && !empty($val_etat) && !empty($val_stade) &&
             !empty($val_port) && !empty($val_pied) && !empty($val_espece) && !empty($val_remarquable) && !empty($val_feuillage) && !empty($val_age_estime) && !empty($val_revetement)) {
