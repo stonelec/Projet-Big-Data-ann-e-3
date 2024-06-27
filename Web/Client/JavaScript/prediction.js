@@ -333,7 +333,7 @@ function addResult(){
                     </div>
                     <div class="item">
                         <div class="label">Revêtement</div>
-                        <div class="value_revet_deracinement"></div>
+                        <div class="value_revetement_deracinement"></div>
                     </div>
                 </div>
             </div>`
