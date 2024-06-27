@@ -177,16 +177,16 @@ document.addEventListener('DOMContentLoaded', function() {
             button.classList.remove('btn-unselected');
 
             // Afficher ou masquer les contenus en fonction du bouton cliqué
-            if (button.querySelector('input').id === 'VisualiserTableau') {
+            if (button.querySelector('input').id === 'btn-table') {
                 ajaxRequest('GET', 'PHP/request_m.php/all_data', afficherTableau);
                 //afficherTableau();
 
                 document.getElementById('VisualisationTableau').style.display = 'block';
-                // Si vous avez un autre contenu pour la carte, vous pouvez le masquer ici
-                // document.getElementById('VisualisationCarte').style.display = 'none';
+
+                document.getElementById('VisualisationCarte').style.display = 'none';
             } else if (button.querySelector('input').id === 'VisualiserCarte') {
                 document.getElementById('VisualisationTableau').style.display = 'none';
-                // document.getElementById('VisualisationCarte').style.display = 'block';
+                document.getElementById('VisualisationCarte').style.display = 'block';
             }
         });
     });
