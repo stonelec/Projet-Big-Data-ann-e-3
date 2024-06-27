@@ -738,45 +738,41 @@ class Arbre {
     static function addNewArbre($id_user, $val_longitude, $val_latitude, $val_hauteur_totale, $val_hauteur_tronc, $val_diametre_tronc, $val_etat, $val_stade,
                                 $val_port, $val_pied,$val_espece, $val_remarquable, $val_feuillage, $val_age_estime, $val_revetement){
 
-        if (!empty($id_user)) {
-            try {
-                $db = DB::connexion();
+        try {
+            $db = DB::connexion();
 
-                $request = '
+            $request = '
                     INSERT INTO arbre(id_user, longitude, latitude, hauteur_tot, hauteur_tronc, 
                                       diametre_tronc, id_etat_arbre, id_stade_dev, id_port, id_pied, 
                                       espece, remarquable, id_feuillage, age_estim, revetement)
                     VALUES (:id_user, :val_longitude, :val_latitude, :val_hauteur_totale, :val_hauteur_tronc, 
                             :val_diametre_tronc, :val_etat, :val_stade, :val_port, :val_pied, :val_espece, 
                             :val_remarquable, :val_feuillage, :val_age_estime, :val_revetement);
-                ';
-                $statement = $db->prepare($request);
-                $statement->bindParam(':id_user', $id_user);
-                $statement->bindParam(':val_longitude', $val_longitude);
-                $statement->bindParam(':val_latitude', $val_latitude);
-                $statement->bindParam(':val_hauteur_totale', $val_hauteur_totale);
-                $statement->bindParam(':val_hauteur_tronc', $val_hauteur_tronc);
-                $statement->bindParam(':val_diametre_tronc', $val_diametre_tronc);
-                $statement->bindParam(':val_etat', $val_etat);
-                $statement->bindParam(':val_stade', $val_stade);
-                $statement->bindParam(':val_port', $val_port);
-                $statement->bindParam(':val_pied', $val_pied);
-                $statement->bindParam(':val_espece', $val_espece);
-                $statement->bindParam(':val_remarquable', $val_remarquable);
-                $statement->bindParam(':val_feuillage', $val_feuillage);
-                $statement->bindParam(':val_age_estime', $val_age_estime);
-                $statement->bindParam(':val_revetement', $val_revetement);
+             ';
+            $statement = $db->prepare($request);
+            $statement->bindParam(':id_user', $id_user);
+            $statement->bindParam(':val_longitude', $val_longitude);
+            $statement->bindParam(':val_latitude', $val_latitude);
+            $statement->bindParam(':val_hauteur_totale', $val_hauteur_totale);
+            $statement->bindParam(':val_hauteur_tronc', $val_hauteur_tronc);
+            $statement->bindParam(':val_diametre_tronc', $val_diametre_tronc);
+            $statement->bindParam(':val_etat', $val_etat);
+            $statement->bindParam(':val_stade', $val_stade);
+            $statement->bindParam(':val_port', $val_port);
+            $statement->bindParam(':val_pied', $val_pied);
+            $statement->bindParam(':val_espece', $val_espece);
+            $statement->bindParam(':val_remarquable', $val_remarquable);
+            $statement->bindParam(':val_feuillage', $val_feuillage);
+            $statement->bindParam(':val_age_estime', $val_age_estime);
+            $statement->bindParam(':val_revetement', $val_revetement);
 
-                $statement->execute();
-                return "ok";
-            } catch (PDOException $e) {
-                error_log('Request error: ' . $e->getMessage());
-                return "error";
-            }
-        }
-        else {
+            $statement->execute();
+            return "ok";
+        } catch (PDOException $e) {
+            error_log('Request error: ' . $e->getMessage());
             return "error";
         }
+
     }
 
 }
