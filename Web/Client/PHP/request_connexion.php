@@ -15,7 +15,9 @@ $result = null;
 
 $requestAction = isset($_GET['action']) ? $_GET['action'] : '';
 
+echo json_encode($requestAction);
 
+/*
 switch ($requestMethod){
 
     case 'GET':
@@ -41,4 +43,4 @@ switch ($requestMethod){
         echo json_encode("Pas dans le get");
         break;
 
-}
+}*/
