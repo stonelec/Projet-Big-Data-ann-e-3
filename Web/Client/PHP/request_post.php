@@ -23,7 +23,24 @@ $result = null;
 
 $requestAction_post=$_POST['ajouter_toutes_valeur'];
 
-echo json_encode($requestAction_post);
+if($requestMethod == $_GET){
+
+    echo json_encode("GET");
+
+}
+
+if($requestMethod == $_POST){
+
+    echo json_encode("POST")
+
+}
+
+else{
+
+    echo json_encode("Pas de get ni de post");
+
+}
+
 
 
 
