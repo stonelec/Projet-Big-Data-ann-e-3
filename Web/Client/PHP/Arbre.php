@@ -693,7 +693,7 @@ class Arbre {
         $statement->bindParam(':id_val_port', $id_val_port);
         $statement->execute();
 
-        return $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $statement->fetchAll(PDO::FETCH_ASSOC)[0];
 
     }
 
