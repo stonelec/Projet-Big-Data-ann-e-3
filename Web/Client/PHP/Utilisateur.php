@@ -14,7 +14,7 @@ class Utilisateur{
         //Si l'utilisateur est déja connecté et qu'il est sur la page de connexion, il retourne directement à l'accueil
         if (isset($_SESSION['user'])){
 
-            if ($file == 'Login.php'){
+            if ($file == 'connexion.php'){
 
                 header('Location: accueil.html');
                 exit();

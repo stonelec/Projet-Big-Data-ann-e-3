@@ -1,3 +1,9 @@
+<?php
+
+ session_start();
+
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -85,6 +91,11 @@ $result = Utilisateur::connexion_utilisateur();
                         <p>Vous n'avez pas de compte</p>
                         <a href="connexion.css">S'enregistrer</a>
                     </div>-->
+                    <?php
+                    if ($result == "E-Mail ou Mot de passe invalide !") {
+                        echo '<p id="erreur">' . $result . '</p>';
+                    }
+                    ?>
                 </form>
             </div>
         </div>
@@ -101,11 +112,6 @@ $result = Utilisateur::connexion_utilisateur();
             </div>
             <div class="col-12">
                 <p style="font-size: 1.2rem">Ethan LE PAN - Mathias PAITIER - Vincent ROCHER</p>
-                <?php
-                if ($result == "E-Mail ou Mot de passe invalide !") {
-                    echo '<p id="erreur">' . $result . '</p>';
-                }
-                ?>
                 <a href="https://isen-nantes.fr" style="font-style: italic; font-size: 1rem; color: white">https://isen-nantes.fr</a>
             </div>
         </div>
