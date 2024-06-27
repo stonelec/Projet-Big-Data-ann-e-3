@@ -35,14 +35,15 @@ $result = null;
 
 // ----- On récupère des variables de POST -----
 
+$val_espece = isset($_POST['val_espece']) ? $_POST['val_espece'] : '';
+
 if($requestMethod == 'GET'){
 
     echo json_encode("GET");
 
 }
-else if($requestMethod == 'POST'){
+else if($requestAction_post == 'ajouter_toutes_valeur'){
 
-    $val_espece = isset($_POST['val_espece']) ? $_POST['val_espece'] : '';
     echo json_encode($val_espece);
 
 }
