@@ -145,7 +145,7 @@ switch ($requestMethod) {
                 echo json_encode($tab);
 
                 */
-                if($val_latitude != NULL && $val_hauteur_totale != NULL && $val_hauteur_tronc != NULL
+                if($val_longitude != NULL && $val_latitude != NULL && $val_hauteur_totale != NULL && $val_hauteur_tronc != NULL
                     ){
 
                     /*
