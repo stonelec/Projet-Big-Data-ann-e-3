@@ -290,15 +290,37 @@ document.addEventListener('DOMContentLoaded', function() {
             // ================= Pour chaque attribut de l'arbre =================
             for (attribute of AttributeElement) {
                 const cell = document.createElement('td');
-                if(attribute === "predire"){
-                    cell.textContent = `<div class="dropdown"><button class="dropbtn"><i class="bi bi-three-dots h6 "></i></button><div class="dropdown-content"><a href="#">Age</a><a href="#">Taille</a><a href="#">Déracinement</a></div></div>`;
-                }
-                else {
+                if(attribute === "predire") {
+                    // ajouter le bouton <div class="dropdown"><button class="dropbtn"><i class="bi bi-three-dots h6 "></i></button><div class="dropdown-content"><a href="#">Age</a><a href="#">Taille</a><a href="#">Déracinement</a></div></div>
+                    const dropdown = document.createElement('div');
+                    dropdown.classList.add('dropdown');
+                    const button = document.createElement('button');
+                    button.classList.add('dropbtn');
+                    const icon = document.createElement('i');
+                    icon.classList.add('bi', 'bi-three-dots', 'h6');
+                    button.appendChild(icon);
+                    dropdown.appendChild(button);
+                    const dropdownContent = document.createElement('div');
+                    dropdownContent.classList.add('dropdown-content');
+                    const age = document.createElement('a');
+                    age.href = "#";                 // A MODIFIER
+                    age.textContent = "Age";
+                    const taille = document.createElement('a');
+                    taille.href = "#";              // A MODIFIER
+                    taille.textContent = "Taille";
+                    const deracinement = document.createElement('a');
+                    deracinement.href = "#";        // A MODIFIER
+                    deracinement.textContent = "Déracinement";
+                    dropdownContent.appendChild(age);
+                    dropdownContent.appendChild(taille);
+                    dropdownContent.appendChild(deracinement);
+                    dropdown.appendChild(dropdownContent);
+                    cell.appendChild(dropdown);
+
+                } else {
                     cell.textContent = `${data_arbres[id_arbre][attribute]}`;
                 }
                 row.appendChild(cell);
-                // ================= Pour le dernier attribut =================
-                // TO DO: Mettre un bouton pour prédire --> aucune idée de comment faire
             }
             tbody.appendChild(row);
         }
