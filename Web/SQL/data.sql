@@ -4,12 +4,12 @@
 
 INSERT INTO public.etat_arbre (etat_arb)
 VALUES
-    ('Abattu'),         -- 1
-    ('En place'),       -- 2
-    ('Essouché'),       -- 3
-    ('Non essouché'),   -- 4
-    ('Remplacé'),       -- 5
-    ('Supprimé');       -- 6
+    ('abattu'),         -- 1
+    ('en place'),       -- 2
+    ('essouché'),       -- 3
+    ('non essouché'),   -- 4
+    ('remplacé'),       -- 5
+    ('supprimé');       -- 6
 
 ------------------------------------------------------------
 -- Insertion des données dans stade_de_dev
@@ -17,10 +17,10 @@ VALUES
 
 INSERT INTO public.stade_de_dev (stade_dev)
 VALUES
-    ('Jeune'),          -- 1
-    ('Adulte'),         -- 2
-    ('Vieux'),          -- 3
-    ('Senescent');      -- 4
+    ('jeune'),          -- 1
+    ('adulte'),         -- 2
+    ('vieux'),          -- 3
+    ('senescent');      -- 4
 
 
 ------------------------------------------------------------
@@ -29,11 +29,11 @@ VALUES
 
 INSERT INTO public.type_de_pied (type_pied)
 VALUES
-    ('Bac de plantation'),              -- 1
-    ('Revêtement non perméable'),       -- 2
-    ('Terre'),                          -- 3
-    ('Fosse arbre'),                    -- 4
-    ('Gazon');                          -- 5
+    ('bac de plantation'),              -- 1
+    ('revetement non permeable'),       -- 2
+    ('terre'),                          -- 3
+    ('fosse arbre'),                    -- 4
+    ('gazon');                          -- 5
 
 ------------------------------------------------------------
 -- Insertion des données dans type_de_port
@@ -41,19 +41,19 @@ VALUES
 
 INSERT INTO public.type_de_port (type_port)
 VALUES
-    ('Couronne'),                       -- 1
-    ('Libre'),                          -- 2
-    ('Semi-libre'),                     -- 3
-    ('Architecturé'),                   -- 4
-    ('Cépée'),                          -- 5
-    ('Rideau'),                         -- 6
-    ('Réduit'),                         -- 7
-    ('Réduit relâché'),                 -- 8
-    ('Têtard'),                         -- 9
-    ('Têtard relâché'),                 -- 10
-    ('Tête de chat'),                   -- 11
-    ('Tête de chat relâchée'),          -- 12
-    ('Etêté');                          -- 13
+    ('couronne'),                       -- 1
+    ('libre'),                          -- 2
+    ('semi libre'),                     -- 3
+    ('architecturé'),                   -- 4
+    ('cépée'),                          -- 5
+    ('rideau'),                         -- 6
+    ('réduit'),                         -- 7
+    ('réduit relâché'),                 -- 8
+    ('têtard'),                         -- 9
+    ('têtard relâché'),                 -- 10
+    ('tête de chat'),                   -- 11
+    ('tête de chat relaché'),           -- 12
+    ('étêté');                          -- 13
 
 ------------------------------------------------------------
 -- Insertion des données dans type_de_user
@@ -61,8 +61,8 @@ VALUES
 
 INSERT INTO public.type_feuillage (feuillage)
 VALUES
-    ('Feuillu'),
-    ('Conifère');
+    ('feuillu'),
+    ('conifère');
 
 INSERT INTO public.user (nom_user, prenom_user, email_user, date_naissance, password_user, telephone_user)
 VALUES
@@ -73,7 +73,7 @@ VALUES
 ------------------------------------------------------------
 
 
-
+/*
 INSERT INTO public.arbre (id_user,longitude, latitude, hauteur_tot, hauteur_tronc, diametre_tronc, id_etat_arbre, id_stade_dev, id_port, id_pied, espece, remarquable, id_feuillage, age_estim, revetement)
 VALUES
     (1, '3.2932636093638927', '49.84050020512298', 6.0, 2.0, 37.0, 2, 1, 3, 5, 'QUERUB', 0,1,150,0),
@@ -112,3 +112,4 @@ VALUES
     (1, '3.2524220334375062', '49.82978522278478', 9.0, 2.0, 140.0, 2, 2, 10, 5, 'TILCOR', 0,1,50,0),
     (1, '3.252117065240142', '49.82967930289011', 9.0, 2.0, 110.0, 2, 2, 10, 5, 'TILCOR', 0,1,50,0),
     (1, '3.252003672805389', '49.82963609667133', 9.0, 3.0, 115.0, 2, 2, 10, 5, 'TILCOR', 0,1,50,0);
+*/
