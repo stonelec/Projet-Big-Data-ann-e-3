@@ -31,7 +31,7 @@ if($requestMethod == $_GET){
 
 if($requestMethod == $_POST){
 
-    echo json_encode("POST")
+    echo json_encode("POST");
 
 }
 
