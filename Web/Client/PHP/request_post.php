@@ -30,18 +30,29 @@ else if($requestMethod == 'POST'){
     $val_hauteur_totale = isset($_POST['val_hauteur_totale']) ? $_POST['val_hauteur_totale'] : '';
     $val_hauteur_tronc = isset($_POST['val_hauteur_tronc']) ? $_POST['val_hauteur_tronc'] : '';
     $val_diametre_tronc = isset($_POST['val_diametre_tronc']) ? $_POST['val_diametre_tronc'] : '';
-
-    $val_etat = isset($_POST['val_etat']) ? $_POST['val_etat'] : ''; //IL FAUT SON ID
-    $val_stade = isset($_POST['val_longitude']) ? $_POST['val_longitude'] : ''; //IL FAUT SON ID
-    $val_port = isset($_POST['val_port']) ? $_POST['val_port'] : ''; //IL FAUT SON ID
-    $val_pied = isset($_POST['val_pied']) ? $_POST['val_pied'] : ''; //IL FAUT SON ID
-
-    $val_espece = isset($_POST['val_espece']) ? $_POST['val_espece'] : '';
-    $val_remarquable = isset($_POST['val_remarquable']) ? $_POST['val_remarquable'] : '';
-
-    $val_feuillage = isset($_POST['val_feuillage']) ? $_POST['val_feuillage'] : ''; //IL FAUT SON ID
-
     $val_age_estime = isset($_POST['val_age_estime']) ? $_POST['val_age_estime'] : '';
+
+    //Il faut que quand on commence à rentrer des lettres il y a des propositions
+    $val_espece = isset($_POST['val_espece']) ? $_POST['val_espece'] : '';
+
+
+    $id_val_etat = isset($_POST['val_etat']) ? $_POST['val_etat'] : '';
+    $val_etat = Arbre::recupIdEtat($id_val_etat);
+
+    $id_val_stade = isset($_POST['val_stade']) ? $_POST['val_stade'] : '';
+    $val_stade = Arbre::recupIdStade($id_val_stade);
+
+    $id_val_port = isset($_POST['val_port']) ? $_POST['val_port'] : '';
+    $val_port = Arbre::recupIdPort($id_val_port);
+
+
+    $id_val_pied = isset($_POST['val_pied']) ? $_POST['val_pied'] : '';
+    $val_pied = Arbre::recupIdPied($id_val_pied);
+
+    $id_val_feuillage = isset($_POST['val_feuillage']) ? $_POST['val_feuillage'] : ''; //IL FAUT SON ID
+    $val_feuillage = Arbre::recupIdFeuillage($id_val_feuillage);
+
+    $val_remarquable = isset($_POST['val_remarquable']) ? $_POST['val_remarquable'] : '';
     $val_revetement = isset($_POST['val_revetement']) ? $_POST['val_revetement'] : '';
 
 }
@@ -94,33 +105,34 @@ switch ($requestMethod) {
 
             case 'ajouter_toutes_valeur':
 
-                /*
+
                 $tab = [$val_longitude, $val_latitude, $val_hauteur_totale, $val_hauteur_tronc, $val_diametre_tronc,
                     $val_etat,$val_stade,$val_port, $val_pied, $val_espece, $val_remarquable, $val_feuillage, $val_age_estime,
                     $val_revetement];
 
                 echo json_encode($tab);
-                */
 
+
+                /*
                 if($id_user != NULL && $val_longitude != NULL && $val_latitude != NULL && $val_hauteur_totale != NULL && $val_hauteur_tronc != NULL &&
                     $val_diametre_tronc != NULL && $val_etat != NULL && $val_stade != NULL && $val_port != NULL && $val_pied != NULL &&
                     $val_espece != NULL && $val_remarquable != NULL && $val_feuillage != NULL && $val_age_estime != NULL &&
                     $val_revetement != NULL){
 
-                    $result = Arbre::addNewArbre($id_user, $val_longitude, $val_latitude, $val_hauteur_totale, $val_hauteur_tronc, $val_diametre_tronc, $val_etat, $val_stade,
-                        $val_port, $val_pied, $val_espece, $val_remarquable, $val_feuillage, $val_age_estime, $val_revetement);
-                    echo json_encode($result);
-                    break;
+                    //$result = Arbre::addNewArbre($id_user, $val_longitude, $val_latitude, $val_hauteur_totale, $val_hauteur_tronc, $val_diametre_tronc, $val_etat, $val_stade,
+                    //    $val_port, $val_pied, $val_espece, $val_remarquable, $val_feuillage, $val_age_estime, $val_revetement);
+                    //echo json_encode($result);
+
+                    echo json_encode("Pas de valeur null");
 
                 }
-
 
                 else{
 
                     $result = "Problème dans les variables";
                     echo json_encode($result);
 
-                }
+                } */
 
                 break;
 

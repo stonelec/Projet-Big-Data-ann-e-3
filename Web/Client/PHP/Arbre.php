@@ -538,6 +538,10 @@ class Arbre {
         return $statement->fetch()[0];
     }
 
+    // --------------------------------------------------------------------------------------------------------
+    // ------------------------------ On récupère les noms de chaque variables : ------------------------------
+    // --------------------------------------------------------------------------------------------------------
+
     static function getAllEtat(){
 
         /**
@@ -637,6 +641,99 @@ class Arbre {
         return $statement->fetchAll(PDO::FETCH_ASSOC);
 
     }
+
+    // ----------------------------------------------------------------------------------
+    // ------------------------------ On récupère les id : ------------------------------
+    // ----------------------------------------------------------------------------------
+
+    static function recupIdEtat($id_val_etat){
+
+        $db = DB::connexion();
+
+        $request = 'SELECT id_etat_arbre
+                    FROM etat_arbre
+                    WHERE etat_arb= :id_val_etat;
+        ';
+
+        $statement = $db->prepare($request);
+        $statement->bindParam(':id_val_etat', $id_val_etat);
+        $statement->execute();
+
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    }
+
+    static function recupIdStade($id_val_stade){
+
+        $db = DB::connexion();
+
+        $request = 'SELECT id_stade_dev
+                    FROM stade_de_dev
+                    WHERE stade_dev= :id_val_stade;
+        ';
+
+        $statement = $db->prepare($request);
+        $statement->bindParam(':id_val_stade', $id_val_stade);
+        $statement->execute();
+
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    }
+
+    static function recupIdPort($id_val_stade){
+
+        $db = DB::connexion();
+
+        $request = 'SELECT id_stade_dev
+                    FROM stade_de_dev
+                    WHERE stade_dev= :id_val_stade;
+        ';
+
+        $statement = $db->prepare($request);
+        $statement->bindParam(':id_val_stade', $id_val_stade);
+        $statement->execute();
+
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    }
+
+    static function recupIdPied($id_val_pied){
+
+        $db = DB::connexion();
+
+        $request = 'SELECT id_pied
+                    FROM type_de_pied
+                    WHERE type_pied= :id_val_pied;
+        ';
+
+        $statement = $db->prepare($request);
+        $statement->bindParam(':id_val_pied', $id_val_pied);
+        $statement->execute();
+
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    }
+
+    static function recupIdFeuillage($id_val_feuillage){
+
+        $db = DB::connexion();
+
+        $request = 'SELECT id_feuillage
+                    FROM type_feuillage
+                    WHERE feuillage= :id_val_feuillage;
+        ';
+
+        $statement = $db->prepare($request);
+        $statement->bindParam(':id_val_feuillage', $id_val_feuillage);
+        $statement->execute();
+
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    }
+
+    // ---------------------------------------------------------------------------------------------------------
+    // ------------------------------ On créer un arbre avec toutes les valeurs : ------------------------------
+    // ---------------------------------------------------------------------------------------------------------
 
     static function addNewArbre($id_user, $val_longitude, $val_latitude, $val_hauteur_totale, $val_hauteur_tronc, $val_diametre_tronc, $val_etat, $val_stade,
                                 $val_port, $val_pied,$val_espece, $val_remarquable, $val_feuillage, $val_age_estime, $val_revetement){
