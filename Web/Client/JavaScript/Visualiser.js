@@ -64,7 +64,7 @@ function printOption() {
         document.getElementById("choix-option").insertAdjacentHTML(
             "afterbegin",
             `<select class="form-select" aria-label="Default select example">
-                     <option selected disabled="disabled">Ordre</option>
+                     <option selected disabled="disabled">Sélection du caractère remarquable</option>
                      <option value="1">oui</option>
                      <option value="0">non</option>
                   </select>`
@@ -160,9 +160,6 @@ function printOption() {
     }
 }
 
-function printDetailOption(detail_option) {
-
-}
 function printTrier() {
     console.log("printTrier");
     document.getElementsByClassName("supr")[0].remove();
@@ -170,11 +167,35 @@ function printTrier() {
         "afterend",
         `<button type="button" class="btn btn-brown shadow-none btn-sm supr">Trier</button>`
     );
-
-
-
-
 }
+
+// On écoute le bouton supr
+document.addEventListener('click', function(event) {
+    if (event.target.matches('.supr')) {
+        let colonne = document.getElementById("choix-colonne").value;
+        let option = document.getElementsByClassName("form-select")[1].value;
+        console.log(colonne);
+        console.log(option);
+        let url = "";
+        if (colonne === "Remarquable") {
+            //url = "PHP/request_m.php/all_data_remarquable?remarquable=" + option;
+        }
+        if (colonne === "Port") {
+            //url = "PHP/request_m.php/all_data_port?port=" + option;
+        }
+        if (colonne === "Pied") {
+            //url = "PHP/request_m.php/all_data_pied?pied=" + option;
+        }
+        if (colonne === "Stade") {
+            //url = "PHP/request_m.php/all_data_stade?stade=" + option;
+        }
+        if (colonne === "Etat") {
+            //url = "PHP/request_m.php/all_data_etat?etat=" + option;
+        }
+        //ajaxRequest('GET', url, afficherTableau);
+    }
+});
+
 function afficherTableau(data_arbres) {
     const container = document.getElementById('contenu');
     container.innerHTML = ''; // On supprime le contenu existant
