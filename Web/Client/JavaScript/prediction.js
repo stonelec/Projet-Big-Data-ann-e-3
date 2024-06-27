@@ -442,36 +442,6 @@ window.addEventListener("DOMContentLoaded", () => {
     btnSubmit.addEventListener("click", submit);
 });
 
-/*-------------------------------------------------------------------------------------------------------*/
-/*-------------------------------------------------------------------------------------------------------*/
-/*-------------------------------------------------------------------------------------------------------*/
-/*-------------------------------------------------------------------------------------------------------*/
-/*-------------------------------------------------------------------------------------------------------*/
-/*-------------------------------------------------------------------------------------------------------*/
-
-document.addEventListener('DOMContentLoaded', function() {
-
-    // Sélectionner tous les boutons du groupe
-    const buttons = document.querySelectorAll('.btn-tab-map .btn');
-
-    // Ajouter un gestionnaire d'événements à chaque bouton
-    buttons.forEach(button => {
-        button.addEventListener('click', function () {
-            // Réinitialiser toutes les classes pour tous les boutons
-            buttons.forEach(btn => {
-                btn.classList.remove('btn-selected');
-                btn.classList.add('btn-unselected');
-            });
-
-            // Ajouter la classe btn-selected au bouton cliqué
-            button.classList.add('btn-selected');
-            button.classList.remove('btn-unselected');
-
-        });
-    });
-
-
-});
 function data_age(id_arbre){
 
     ajaxRequest('GET', 'PHP/request.php?action=hauteur_tronc&id=' + id_arbre, function (response) {
