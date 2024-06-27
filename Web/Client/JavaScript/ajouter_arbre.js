@@ -126,18 +126,60 @@ $(document).ready(function (){
         console.log("Especes : ")
         console.log(response)
 
+        let option = []
+
         for(let i=0; i<response.length; i++) {
 
-            option_especes += '<option value="'+ response[i] +'"></option>';
+            option_especes += '<option value="'+ response[i].espece +'"></option>';
+            option[i] = response[i].espece;
 
         }
 
-        $('#espece_list').html('<option selected disabled="disabled">Sélectionner</option>' +
-            option_especes
-        );
+        $('#espece_list').html('<option selected disabled="disabled">Sélectionner</option>');
+
+        option.forEach(option =>{
+
+            let datalist = document.getElementById('espece_list');
+            let element_de_option = document.createElement('option');
+            element_de_option.value = option;
+            datalist.push(element_de_option);
+
+
+        });
+
+        document.getElementById('espece').addEventListener('input', function() {
+            const value = this.value.toLowerCase();
+
+            // Filtrer les options en fonction de la valeur de l'entrée
+            const filteredOptions = options.filter(option => option.toLowerCase().startsWith(value));
+
+            // Mettre à jour le datalist avec les options filtrées
+            updateDatalist(filteredOptions);
+        });
 
     });
 
+
+    // Fonction pour mettre à jour le datalist
+    function updateDatalist(filteredOptions) {
+
+        filteredOptions.forEach(option => {
+            const optionElement = document.createElement('option');
+            optionElement.value = option;
+            datalist.appendChild(optionElement);
+        });
+    }
+
+    // Ajouter un écouteur d'événements à l'élément input
+    document.getElementById('espece').addEventListener('input', function() {
+        const value = this.value;
+
+        // Filtrer les options en fonction de la valeur de l'entrée
+        const filteredOptions = options.filter(option => option.startsWith(value));
+
+        // Mettre à jour le datalist avec les options filtrées
+        updateDatalist(filteredOptions);
+    });
     // --------------------------------
     // ----- Noms des revetements -----
     // --------------------------------

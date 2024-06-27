@@ -92,13 +92,39 @@
     flex-direction: column;
     align-items: center;
     align-content: center;
-    margin-top: 2rem;
     margin-bottom: 5rem;
     background-color: white;
-    padding: 15px 15px 15px 15px;
-    border-radius :20px;
+    padding: 15px;
+    border-radius :20px 0 20px 20px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 .map-container .map {
     width: 100%;
+}
+/*mode*/
+#mode-div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    justify-content: space-around;
+    margin-top: 1rem;
+    margin-left: auto;
+    margin-right: 22.5%;
+    background-color: white;
+    padding: 8px;
+    border-radius: 15px 15px 0 0;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+
+}
+
+#mode-div .title{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    justify-content: space-around;
+    height: 100%;
+    padding-top: 10px;
+    padding-right: 10px;
 }

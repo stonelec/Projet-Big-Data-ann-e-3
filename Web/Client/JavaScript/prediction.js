@@ -284,7 +284,7 @@ function addResult(){
                 '<p>' + response + '</p>');
         });
 
-// -------------------------------------------------- Prédiction Age ------------------------------------------------
+// -------------------------------------------------- Prédiction taille (cluster) ------------------------------------------------
         ajaxRequest('GET', 'PHP/request.php?action=prediction_taille&id=' + id, function (response) {
             console.log("Prediction de la taille de l'arbre : ", response);
             // Afficher le résultat dans votre page HTML
