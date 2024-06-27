@@ -21,7 +21,7 @@ $result = null;
 
 // ----- On récupère des variables de POST -----
 
-$requestAction_post=$_POST['ajouter_toutes_valeur'];
+//$requestAction_post=$_POST['ajouter_toutes_valeur'];
 
 
 
@@ -43,7 +43,7 @@ $requestAction_post=$_POST['ajouter_toutes_valeur'];
 
 
 
-
+/*
 //-------------------------------------------------------
 $id_user = 1; //On pourra le récupérer en changeant l'url
 $val_longitude = $_POST['$val_longitude'];
@@ -64,7 +64,7 @@ $val_feuillage = $_POST['val_hauteur_tronc']; //IL FAUT SON ID
 
 $val_age_estime = $_POST['val_hauteur_tronc'];
 $val_revetement = $_POST['val_hauteur_tronc'];
-
+*/
 
 //echo json_encode($val_latitude);
 //echo json_encode($val_hauteur_totale);
@@ -80,7 +80,7 @@ $val_revetement = $_POST['val_hauteur_tronc'];
 //echo json_encode($val_age_estime);
 //echo json_encode($val_revetement);
 
-
+/*
 switch ($requestMethod) {
 
     case 'GET':
@@ -119,7 +119,7 @@ switch ($requestMethod) {
 
         }
         break;
-
+       */
     /*
     case 'POST':
 
@@ -168,7 +168,7 @@ switch ($requestMethod) {
         echo json_encode(['error' => 'IL EST PAS RENTRER DANS GET OU POST']);
         break;
     */
-}
+//}
 
 
 
