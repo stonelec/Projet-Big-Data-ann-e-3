@@ -345,7 +345,7 @@ function addResult(){
                 <div>Prédiction : </div>
             </div>
             <div class="card-data-resulte">
-                <div>Déracinement ?</div>
+                <div>Déracinement</div>
                 <div class="prediction3" style="color: #6F8F72; font-weight: bold;">1800</div>
             </div>
         </div>`
@@ -415,10 +415,10 @@ function addResult(){
             console.log("Prediction du déracinement de l'arbre : ", response);
             // Afficher le résultat dans votre page HTML
             if(response == "0"){
-                $('.prediction3').html('Non déraciné');
+                $('.prediction3').html('Non');
             }
             else if (response == "1"){
-                $('.prediction3').html('Déraciné');
+                $('.prediction3').html('Oui');
             }
             else {
                 $('.prediction3').html(response);
