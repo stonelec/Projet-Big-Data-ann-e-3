@@ -41,8 +41,6 @@ else{
 
 }
 
-echo json_encode("rien");
-
 
 
 
