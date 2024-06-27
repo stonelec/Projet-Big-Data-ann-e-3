@@ -26,23 +26,23 @@ else if($requestMethod == 'POST'){
 
     $id_user = 1; //On pourra le récupérer en changeant l'url
     $val_longitude = isset($_POST['val_longitude']) ? $_POST['val_longitude'] : '';
-    $val_latitude = isset($_POST['val_longitude']) ? $_POST['val_longitude'] : '';
-    $val_hauteur_totale = isset($_POST['val_longitude']) ? $_POST['val_longitude'] : '';
-    $val_hauteur_tronc = isset($_POST['val_longitude']) ? $_POST['val_longitude'] : '';
-    $val_diametre_tronc = isset($_POST['val_longitude']) ? $_POST['val_longitude'] : '';
+    $val_latitude = isset($_POST['val_latitude']) ? $_POST['val_latitude'] : '';
+    $val_hauteur_totale = isset($_POST['$al_hauteur_totale']) ? $_POST['val_hauteur_totale'] : '';
+    $val_hauteur_tronc = isset($_POST['val_hauteur_tronc']) ? $_POST['val_hauteur_tronc'] : '';
+    $val_diametre_tronc = isset($_POST['val_diametre_tronc']) ? $_POST['val_diametre_tronc'] : '';
 
-    $val_etat = isset($_POST['val_longitude']) ? $_POST['val_longitude'] : ''; //IL FAUT SON ID
+    $val_etat = isset($_POST['val_etat']) ? $_POST['val_etat'] : ''; //IL FAUT SON ID
     $val_stade = isset($_POST['val_longitude']) ? $_POST['val_longitude'] : ''; //IL FAUT SON ID
-    $val_port = isset($_POST['val_longitude']) ? $_POST['val_longitude'] : ''; //IL FAUT SON ID
-    $val_pied = isset($_POST['val_longitude']) ? $_POST['val_longitude'] : ''; //IL FAUT SON ID
+    $val_port = isset($_POST['val_port']) ? $_POST['val_port'] : ''; //IL FAUT SON ID
+    $val_pied = isset($_POST['val_pied']) ? $_POST['val_pied'] : ''; //IL FAUT SON ID
 
-    $val_espece = isset($_POST['val_longitude']) ? $_POST['val_longitude'] : '';
-    $val_remarquable = isset($_POST['val_longitude']) ? $_POST['val_longitude'] : '';
+    $val_espece = isset($_POST['val_espece']) ? $_POST['val_espece'] : '';
+    $val_remarquable = isset($_POST['val_remarquable']) ? $_POST['val_remarquable'] : '';
 
-    $val_feuillage = isset($_POST['val_longitude']) ? $_POST['val_longitude'] : ''; //IL FAUT SON ID
+    $val_feuillage = isset($_POST['val_feuillage']) ? $_POST['val_feuillage'] : ''; //IL FAUT SON ID
 
-    $val_age_estime = isset($_POST['val_longitude']) ? $_POST['val_longitude'] : '';
-    $val_revetement = isset($_POST['val_longitude']) ? $_POST['val_longitude'] : '';
+    $val_age_estime = isset($_POST['val_age_estime']) ? $_POST['val_age_estime'] : '';
+    $val_revetement = isset($_POST['val_revetement']) ? $_POST['val_revetement'] : '';
 
 }
 
