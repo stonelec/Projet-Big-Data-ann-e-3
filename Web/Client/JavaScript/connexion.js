@@ -46,7 +46,13 @@ $(document).ready(function (){
 
             if(val_email === data_mail[i].email_user && mot_de_passe === data_mot_de_passe[i].password_user){
 
-                console.log("VALID")
+                console.log("VALID");
+
+            }
+
+            else {
+
+                console.log("ERREUR");
 
             }
 
