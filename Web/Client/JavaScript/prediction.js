@@ -128,7 +128,7 @@ function addResult(){
                 <div class="card-content card-blanche-content">
                     <div class="item">
                         <div class="label">Feuillage</div>
-                        <div class="value">1800</div>
+                        <div class="value_feuillage">1800</div>
                     </div>
                     <div class="item">
                         <div class="label">Hauteur tronc</div>
@@ -161,6 +161,18 @@ function addResult(){
             </div>
         </div>`
         );
+
+        ajaxRequest('GET', 'PHP/request.php?action=feuillage&id=' + id_arbre, function (response) {
+            console.log("Feuillage de l'arbre : ", response);
+            // Afficher le résultat dans votre page HTML
+            $('.value_feuillage').html(
+                '<p> Le feuillage est : ' +
+                response +
+                '</p>');
+
+        });
+
+
     }else if(pred == "taille"){
         console.log("result : taille");
         document.getElementById("affichage-top").insertAdjacentHTML(
