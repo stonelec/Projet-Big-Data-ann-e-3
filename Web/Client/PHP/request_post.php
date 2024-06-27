@@ -26,11 +26,22 @@ else if($requestMethod == 'POST'){
 
     $id_user = 1; //On pourra le récupérer en changeant l'url
     $val_longitude = isset($_POST['val_longitude']) ? $_POST['val_longitude'] : '';
+    $val_longitude += floatval($val_longitude);
+
     $val_latitude = isset($_POST['val_latitude']) ? $_POST['val_latitude'] : '';
+    $val_latitude += floatval($val_latitude);
+
     $val_hauteur_totale = isset($_POST['val_hauteur_totale']) ? $_POST['val_hauteur_totale'] : '';
+    $val_hauteur_totale += floatval($val_hauteur_totale);
+
     $val_hauteur_tronc = isset($_POST['val_hauteur_tronc']) ? $_POST['val_hauteur_tronc'] : '';
+    $val_hauteur_tronc += floatval($val_hauteur_tronc);
+
     $val_diametre_tronc = isset($_POST['val_diametre_tronc']) ? $_POST['val_diametre_tronc'] : '';
+    $val_diametre_tronc += floatval($val_diametre_tronc);
+
     $val_age_estime = isset($_POST['val_age_estime']) ? $_POST['val_age_estime'] : '';
+    $val_age_estime += intval($val_age_estime);
 
     //Il faut que quand on commence à rentrer des lettres il y a des propositions
     $val_espece = isset($_POST['val_espece']) ? $_POST['val_espece'] : '';
@@ -51,7 +62,31 @@ else if($requestMethod == 'POST'){
     $val_feuillage = Arbre::recupIdFeuillage($id_val_feuillage);
 
     $val_remarquable = isset($_POST['val_remarquable']) ? $_POST['val_remarquable'] : '';
+
+    if($val_remarquable == 'Oui'){
+
+        $val_remarquable = 0;
+
+    }
+    else{
+
+        $val_remarquable = 1;
+
+    }
+
     $val_revetement = isset($_POST['val_revetement']) ? $_POST['val_revetement'] : '';
+
+    if($val_revetement == 'Oui'){
+
+        $val_revetement = 0;
+
+    }
+    else{
+
+        $val_revetement = 1;
+
+    }
+
 
 }
 
