@@ -9,7 +9,7 @@ $(document).ready(function (){
     let option_pied;
     let option_port;
     let option_feuillage;
-    let option_especes;
+    let options = [];
 
     // --------------------------
     // ----- Noms des etats -----
@@ -126,16 +126,35 @@ $(document).ready(function (){
         console.log("Especes : ")
         console.log(response)
 
-        for(let i=0; i<response.length; i++) {
+        // Stocker les options dans le tableau 'options'
+        options = response.map(item => item.espece);
 
-            option_especes += '<option value="'+ response[i].espece +'"></option>';
+        // Initialement, ajouter toutes les options à la datalist
+        updateDatalist(options);
 
-        }
+    });
 
-        $('#espece_list').html('<option selected disabled="disabled">Sélectionner</option>' +
-            option_especes
-        );
+    // Fonction pour mettre à jour le datalist
+    function updateDatalist(filteredOptions) {
+        const datalist = document.getElementById('espece_list');
+        datalist.innerHTML = '<option selected disabled="disabled">Sélectionner</option>';
 
+        filteredOptions.forEach(option => {
+            const optionElement = document.createElement('option');
+            optionElement.value = option;
+            datalist.appendChild(optionElement);
+        });
+    }
+
+    // Ajouter un écouteur d'événements à l'élément input
+    document.getElementById('espece').addEventListener('input', function() {
+        const value = this.value;
+
+        // Filtrer les options en fonction de la valeur de l'entrée
+        const filteredOptions = options.filter(option => option.startsWith(value));
+
+        // Mettre à jour le datalist avec les options filtrées
+        updateDatalist(filteredOptions);
     });
 
     // --------------------------------
