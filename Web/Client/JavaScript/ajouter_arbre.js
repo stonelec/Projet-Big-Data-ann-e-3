@@ -134,21 +134,37 @@ $(document).ready(function (){
 
         //console.log("ENVOYER")
 
+        let tab_request = [];
+
         let val_espece = $('#espece').val();
+        tab_request.push(val_espece);
         let val_latitude = $('#latitude').val();
+        tab_request.push(val_latitude);
         let val_longitude = $('#longitude').val();
+        tab_request.push(val_longitude);
         let val_hauteur_totale = $('#hauteur_total').val();
+        tab_request.push(val_hauteur_totale);
         let val_hauteur_tronc = $('#hauteur_tronc').val();
+        tab_request.push(val_hauteur_tronc);
         let val_diametre_tronc = $('#diametre_tronc').val();
+        tab_request.push(val_diametre_tronc);
         let val_age_estime = $('#age_estime').val();
+        tab_request.push(val_age_estime);
 
         let val_etat = $('#option_etat').val();
+        tab_request.push(val_etat);
         let val_stade = $('#option_stade').val();
+        tab_request.push(val_stade);
         let val_remarquable = $('#option_remarquable').val();
+        tab_request.push(val_remarquable);
         let val_pied = $('#option_pied').val();
+        tab_request.push(val_pied);
         let val_revetement = $('#option_revetement').val();
+        tab_request.push(val_revetement);
         let val_port = $('#option_port').val();
+        tab_request.push(val_port);
         let val_feuillage = $('#option_feuillage').val();
+        tab_request.push(val_feuillage);
 
         //Pour afficher les différentes valeurs dans la console
         //console.log("Valeur espece : ", val_espece);
@@ -168,13 +184,13 @@ $(document).ready(function (){
         //console.log("Valeur feuillage : ", val_feuillage);
 
 
-        ajaxRequest('POST', 'PHP/request_post.php?action=ajouter_toutes_valeur'+'&val_latitude=' + val_latitude,function(response)  {
+        ajaxRequest('POST', 'PHP/request_post.php?action=ajouter_toutes_valeur',function(response)  {
 
             console.log(response);
             //console.log("Toutes les valeurs ont été ajouté");
             //console.log("Ca doit afficher la hauteur du tronc : ", response)
 
-        });
+        }, tab_request);
 
     });
 
