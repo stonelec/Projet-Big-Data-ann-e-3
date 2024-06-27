@@ -3,7 +3,7 @@ window.addEventListener("DOMContentLoaded", () => {
     let btnTable = document.getElementById("btn-table");
     let btnCarte = document.getElementById("btn-carte");
     btnTable.addEventListener("click", () => {addTable()});
-    btnCarte.addEventListener("click", () => {addCarte()});
+    btnCarte.addEventListener("click", () => {addCarte("general")});
 });
 addTable();
 function addTable() {
@@ -110,11 +110,11 @@ function afficherTableau(data_arbres) {
     const AttributeElement = [
         "id_arbre", "espece", "etat_arb", "stade_dev", "type_pied", "type_port", "remarquable", "latitude", "longitude","predire"
     ];
-
-    console.log(data_arbres[0]["id_arbre"])
-
+    console.log("nb_arb :")
+    console.log(nb_arb)
     // ================= Pour chaque arbre de la database =================
     for (let id_arbre = 0; id_arbre < nb_arb; id_arbre++) {
+
         let identifiant = data_arbres[id_arbre]["id_arbre"];
         const row = document.createElement('tr');
         // ================= Pour chaque attribut de l'arbre =================
@@ -169,8 +169,9 @@ function afficherTableau(data_arbres) {
     table.appendChild(tbody);
     container.appendChild(table);
 }
-function addCarte() {
+function addCarte(mode) {
     console.log("addCarte");
+    console.log(mode)
     let bt = document.getElementById("btn-table");
     let bc = document.getElementById("btn-carte");
     bt.style.backgroundColor = "#504136";
@@ -178,12 +179,31 @@ function addCarte() {
     cleanPage();
     document.getElementById("contenu").insertAdjacentHTML(
         "afterbegin",
-        `     
+        `<div id="mode-div">
+            <div class="title">
+                <p >Mode : </p>
+            </div>
+            <div class="btn-group" role="group" aria-label="Basic example" id="mode">
+                <button type="button" class="btn btn-green shadow-none btn-sm" id="btn-generale">Générale</button>
+                <button type="button" class="btn btn-brown shadow-none btn-sm" id="btn-cluster">Cluster</button>
+            </div>
+        </div>   
         <div class="map-container bottom-space">
             <div id='myDiv' class="myDiv"><!-- Plotly chart will be drawn inside this DIV --></div>
         </div>`
     );
-    showMap();
+    let btnGenerale = document.getElementById("btn-generale");
+    let btnCluster = document.getElementById("btn-cluster");
+    btnGenerale.addEventListener("click", () => {addCarte("general")});
+    btnCluster.addEventListener("click", () => {addCarte("cluster")});
+    if (mode == "general"){
+        btnGenerale.style.backgroundColor = "#BFD3C1FF";
+        btnCluster.style.backgroundColor = "#6F8F72";
+    }else{
+        btnGenerale.style.backgroundColor = "#6F8F72";
+        btnCluster.style.backgroundColor = "#BFD3C1FF";
+    }
+    showMap(mode);
 
 
 }
@@ -204,7 +224,7 @@ window.addEventListener("DOMContentLoaded", () => {
     let btnTable = document.getElementById("btn-table");
     let btnCarte = document.getElementById("btn-carte");
     btnTable.addEventListener("click", () => {addTable()});
-    btnCarte.addEventListener("click", () => {addCarte()});
+    btnCarte.addEventListener("click", () => {addCarte("general")});
 });
 /*
 document.addEventListener('DOMContentLoaded', function() {

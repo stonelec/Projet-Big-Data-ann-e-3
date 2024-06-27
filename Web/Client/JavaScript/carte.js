@@ -1,6 +1,6 @@
-function showMap() {
+function showMap(mode) {
 d3.csv(
-    "../../Data_arbre.csv",
+    "../SQL/Data_arbre.csv",
     function(err, rows) {
         function unpack(rows, key) {
             return rows.map(function(row) {
@@ -18,10 +18,7 @@ d3.csv(
                         Tronc_diamètre: ${row.tronc_diam}<br>
                         Etat: ${row.fk_arb_etat}<br>
                         Stade: ${row.fk_stadedev}<br>
-                        Port: ${row.fk_port}<br>
-                        
- 
-                        
+                        Port: ${row.fk_port}<br>  
             `;
             });
         }
