@@ -10,6 +10,7 @@ $requestMethod = $_SERVER['REQUEST_METHOD'];
 //TOUT EST BON ICI :
 echo json_encode($requestMethod);
 
+/*
 $requestAction = isset($_GET['action']) ? $_GET['action'] : '';
 
 //TOUT EST BON ICI :
@@ -18,29 +19,10 @@ $requestAction = isset($_GET['action']) ? $_GET['action'] : '';
 $id = isset($_GET['id']) ? $_GET['id'] : NULL;
 
 $result = null;
-
+*/
 // ----- On récupère des variables de POST -----
 
 //$requestAction_post=$_POST['ajouter_toutes_valeur'];
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /*
