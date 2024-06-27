@@ -9,6 +9,7 @@ $(document).ready(function (){
     let option_pied;
     let option_port;
     let option_feuillage;
+    let option_especes;
 
     // --------------------------
     // ----- Noms des etats -----
@@ -115,6 +116,10 @@ $(document).ready(function (){
         );
 
     });
+
+    // -------------------------------
+    // ----- Noms des especes -----
+    // -------------------------------
 
     ajaxRequest('GET', 'PHP/request_post.php?action=ajouter_arbre_espece', function(response) {
 
