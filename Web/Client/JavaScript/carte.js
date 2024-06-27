@@ -22,13 +22,38 @@ d3.csv(
             `;
             });
         }
+
+
+        if (mode === "cluster") {
+            console.log("Clustering...");
+            ajaxRequest('GET', 'PHP/request.php?action=prediction_toutes_taille', function(response) {
+                /*console.log("Prediction de la taille de l'arbre pour ID", id, ":", response);*/
+                console.log("response");
+                console.log(response);
+            });
+        }
+
         var data = [
             {
                 type: "scattermapbox",
                 text: combineText(rows),
                 lon: unpack(rows, "longitude"),
                 lat: unpack(rows, "latitude"),
-                marker: { color: "fuchsia", size: 4 }
+                marker: {
+                    color: rows.map(row => {
+                        if (mode === "cluster") {
+                            switch (row.cluster) {
+                                case "0": return "blue";
+                                case "1": return "green";
+                                case "2": return "red";
+                                case undefined: return "yellow";
+                            }
+                        } else {
+                            return "green";
+                        }
+                    }),
+                    size: 4
+                }
             }
         ];
 

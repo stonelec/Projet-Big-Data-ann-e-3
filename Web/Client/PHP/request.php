@@ -335,6 +335,31 @@ switch ($requestAction) {
         }
         break;
 
+# =============================================================
+# ===================== visualiser_detail =====================
+# =============================================================
+    case 'prediction_toutes_taille':
+        // Vérifier si l'ID est fourni
+        $n_arbres = Arbre::getNbArbre();
+        $result = [];
+        $id_hey = 0;
+        for ($id_hey = 1; $id_hey <= $n_arbres; $id_hey++) {
+
+            $hauteurTronc = Arbre::getHauteurTronc($id_hey);
+            $ageEstim = Arbre::getAgeEstim($id_hey);
+            $troncDiam = Arbre::getDiametre($id_hey);
+
+            $command = 'cd ../../python/scripts && python3 fonc1.py '.$hauteurTronc.' '.$ageEstim.' '.$troncDiam.' kmeans';
+            // $command = " python3 fonc1.py 50 10 20 kmeans "
+            exec($command, $output, $result);
+
+            $resultJson = file_get_contents('../../python/scripts/fonc1.json');
+            $result[] = json_decode($resultJson, true); // Ajouter chaque résultat décodé au tableau
+        }
+        echo json_encode($n_arbres);
+        break;
+
+
     default:
         // Retourner une erreur si l'action n'est pas reconnue
         echo json_encode(['error' => 'Action non reconnue']);

@@ -840,6 +840,19 @@ class Arbre {
 
     }
 
+    static function getNbArbre(){
+        $db = DB::connexion();
+
+        $request = 'SELECT count(*)
+                    FROM arbre;
+        ';
+
+        $statement = $db->prepare($request);
+        $statement->execute();
+
+        return $statement->fetch()[0];
+    }
+
     // ---------------------------------------------------------------------------------------------------------
     // ------------------------------ On créer un arbre avec toutes les valeurs : ------------------------------
     // ---------------------------------------------------------------------------------------------------------
