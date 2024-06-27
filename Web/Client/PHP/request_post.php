@@ -12,14 +12,12 @@ $requestMethod = $_SERVER['REQUEST_METHOD'];
 
 $result = null;
 
-// ----- On récupère des variables de POST -----
+// ---------- On récupère des variables de GET et de POST ----------
 
 if($requestMethod == 'GET'){
 
     $requestAction_get = isset($_GET['action']) ? $_GET['action'] : '';
     $id = isset($_GET['id']) ? $_GET['id'] : NULL;
-
-    echo json_encode('SUper cool le get');
 
 }
 else if($requestMethod == 'POST'){
@@ -28,57 +26,34 @@ else if($requestMethod == 'POST'){
 
     $id_user = 1; //On pourra le récupérer en changeant l'url
     $val_longitude = isset($_POST['val_longitude']) ? $_POST['val_longitude'] : '';
-    $val_latitude = $_POST['val_latitude'];
-    $val_hauteur_totale = $_POST['$val_hauteur_totale'];
-    $val_hauteur_tronc = $_POST['val_hauteur_tronc'];
-    $val_diametre_tronc = $_POST['val_hauteur_tronc'];
+    $val_latitude = isset($_POST['val_longitude']) ? $_POST['val_longitude'] : '';
+    $val_hauteur_totale = isset($_POST['val_longitude']) ? $_POST['val_longitude'] : '';
+    $val_hauteur_tronc = isset($_POST['val_longitude']) ? $_POST['val_longitude'] : '';
+    $val_diametre_tronc = isset($_POST['val_longitude']) ? $_POST['val_longitude'] : '';
 
-    $val_etat = $_POST['val_hauteur_tronc']; //IL FAUT SON ID
-    $val_stade = $_POST['val_hauteur_tronc']; //IL FAUT SON ID
-    $val_port = $_POST['val_hauteur_tronc']; //IL FAUT SON ID
-    $val_pied = $_POST['val_hauteur_tronc']; //IL FAUT SON ID
+    $val_etat = isset($_POST['val_longitude']) ? $_POST['val_longitude'] : ''; //IL FAUT SON ID
+    $val_stade = isset($_POST['val_longitude']) ? $_POST['val_longitude'] : ''; //IL FAUT SON ID
+    $val_port = isset($_POST['val_longitude']) ? $_POST['val_longitude'] : ''; //IL FAUT SON ID
+    $val_pied = isset($_POST['val_longitude']) ? $_POST['val_longitude'] : ''; //IL FAUT SON ID
 
-    $val_espece = $_POST['val_hauteur_tronc'];
-    $val_remarquable = $_POST['val_hauteur_tronc'];
+    $val_espece = isset($_POST['val_longitude']) ? $_POST['val_longitude'] : '';
+    $val_remarquable = isset($_POST['val_longitude']) ? $_POST['val_longitude'] : '';
 
-    $val_feuillage = $_POST['val_hauteur_tronc']; //IL FAUT SON ID
+    $val_feuillage = isset($_POST['val_longitude']) ? $_POST['val_longitude'] : ''; //IL FAUT SON ID
 
-    $val_age_estime = $_POST['val_hauteur_tronc'];
-    $val_revetement = $_POST['val_hauteur_tronc'];
-
-    echo json_encode($val_longitude);
-
-}
-else{
-
-    echo json_encode("Pas de GET ni de POST");
+    $val_age_estime = isset($_POST['val_longitude']) ? $_POST['val_longitude'] : '';
+    $val_revetement = isset($_POST['val_longitude']) ? $_POST['val_longitude'] : '';
 
 }
 
+// -------------------------------------------------------
 
-//-------------------------------------------------------
 
-
-//echo json_encode($val_latitude);
-//echo json_encode($val_hauteur_totale);
-//echo json_encode($val_hauteur_tronc);
-//echo json_encode($val_diametre_tronc);
-//echo json_encode($val_etat);
-//echo json_encode($val_stade);
-//echo json_encode($val_port);
-//echo json_encode($val_pied);
-//echo json_encode($val_espece);
-//echo json_encode($val_remarquable);
-//echo json_encode($val_feuillage);
-//echo json_encode($val_age_estime);
-//echo json_encode($val_revetement);
-
-/*
 switch ($requestMethod) {
 
     case 'GET':
 
-        switch ($requestAction) {
+        switch ($requestAction_get) {
 
             case 'ajouter_arbre_etat':
                 $result = Arbre::getAllEtat();
@@ -112,8 +87,8 @@ switch ($requestMethod) {
 
         }
         break;
-       */
-    /*
+
+
     case 'POST':
 
         switch ($requestAction_post){
@@ -125,7 +100,7 @@ switch ($requestMethod) {
                 echo json_encode($val_longitude);
                 break;
 
-
+                /*
                 if($id_user != NULL && $val_longitude != NULL && $val_latitude != NULL && $val_hauteur_totale != NULL && $val_hauteur_tronc != NULL &&
                     $val_diametre_tronc != NULL && $val_etat != NULL && $val_stade != NULL && $val_port != NULL && $val_pied != NULL &&
                     $val_espece != NULL && $val_remarquable != NULL && $val_feuillage != NULL && $val_age_estime != NULL &&
@@ -146,7 +121,7 @@ switch ($requestMethod) {
 
                 //$result = "C'est good tu peux pleurer";
                 //echo json_encode($result);
-                //break;
+                //break;*/
 
             default:
                 // Retourner une erreur si l'action n'est pas reconnue
@@ -160,7 +135,7 @@ switch ($requestMethod) {
         // Retourner une erreur si l'action n'est pas reconnue
         echo json_encode(['error' => 'IL EST PAS RENTRER DANS GET OU POST']);
         break;
-    */
+
 //}
 
 
