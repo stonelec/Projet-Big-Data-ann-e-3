@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 require_once "db.php";
 /**
  * Class User
@@ -185,7 +187,97 @@ class User {
         }
     }
 
+    static function getAllMail(){
 
+        $db = DB::connexion();
+
+        $request = 'SELECT email_user 
+                    FROM public.user;
+                    ';
+
+        $statement = $db->prepare($request);
+        $statement->bindParam(':id_user', $id_user);
+        $statement->execute();
+
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    }
+
+    static function getAllMotDePasse(){
+
+        $db = DB::connexion();
+
+        $request = 'SELECT password_user
+                    FROM public.user;
+                    ';
+
+        $statement = $db->prepare($request);
+        $statement->bindParam(':id_user', $id_user);
+        $statement->execute();
+
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    }
+
+    static function connexion(){
+
+        //Chemin depuis la racine vers le fichier utilisé
+        $path = explode('/', $_SERVER['PHP_SELF']);
+        $file = array_pop($path);   //Fichier où se trouve l'utilisateur
+
+        //Si l'utilisateur est déja connecté, on le renvoie sur la page d'accueil :
+
+        if (isset($_SESSION['user'])){
+
+            if ($file == 'Login.php'){
+
+                header('Location: ../accueil.html');
+
+            }
+            return $_SESSION['user'];
+        }
+
+        //Si l'utilisateur se déconnecte, il le renvoie sur la page d'accueil :
+        if (!isset($_SESSION['id_utilisateur']) && $file != 'Login.php') {    //Utilisateur qui se déconnecte
+            header('Location: ../accueil.html');
+        }
+
+        //Il rentre un mail et mot de passe :
+        if (!empty($_POST['mail']) && !empty($_POST['password'])) { //S'il a rentré les deux champs
+            try {
+
+                $db = DB::connexion();
+
+                //On regarde l'id du user et son mot de passe en fonction du mail :
+                $statement = $db->prepare('SELECT id_user, password_user FROM public.user WHERE email_user=:mail');
+
+                $statement->bindParam(':mail', $_POST['mail']);
+                $statement->execute();
+                $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+            } catch (PDOException $exception) {
+
+                error_log('Connection error: ' . $exception->getMessage());
+                return false;
+
+            }
+
+            //On regarde si les 2 mots de passe sont les mêmes :
+            if (password_verify($_POST['password'], $result['mot_de_passe']) && !empty($result)) {
+                $_SESSION['user'] = $result['id_user'];
+                header('Location: ../accueil.html');
+            }
+
+            else {
+                return "E-Mail ou Mot de passe invalide !";
+            }
+
+            //on retourne sa session pour les prochains fichiers
+            return $_SESSION['user'];
+        }
+        return false;
+
+    }
 
 }
 ?>

@@ -231,6 +231,11 @@ switch ($requestAction) {
 # ===================== visualiser =====================
 # ======================================================
 
+    case 'all_data':
+        $result = Arbre::getAll();
+        echo json_encode($result);
+        break;
+
     case 'all_data_remarquable':
         // Vérifier si l'ID est fourni
         if ($id !== NULL) {
