@@ -1,9 +1,61 @@
-window.addEventListener("DOMContentLoaded", () => {
-    let btnTable = document.getElementById("btn-table");
-    let btnCarte = document.getElementById("btn-carte");
-    btnTable.addEventListener("click", () => {addTable()});
-    btnCarte.addEventListener("click", () => {addCarte()});
-});
+function afficherTableau(data_arbres) {
+    const container = document.getElementById('VisualisationTableau');
+    container.innerHTML = ''; // On supprime le contenu existant
+
+    // On créé le tableau
+    const table = document.createElement('table');
+    table.classList.add('table', 'table-bordered', 'table-striped');
+
+    const HeaderElement = [
+        "ID", "Espèce", "Etat", "Stade de dev.", "Pied", "Port", "Remarquable", "Latitude", "Longitude", "Prédire"
+    ];
+
+    // On créé le header du tableau
+    const thead = document.createElement('thead');
+    const headRow = document.createElement('tr');
+    for (let j = 0; j < 10; j++) {
+        const th = document.createElement('th');
+        th.textContent = HeaderElement[j];
+        headRow.appendChild(th);
+    }
+    thead.appendChild(headRow);
+    table.appendChild(thead);
+
+    // Create 5 rows
+    const tbody = document.createElement('tbody');
+
+    let nb_arb = data_arbres.length;
+    const AttributeElement = [
+        "id_arbre", "espece", "etat_arb", "stade_dev", "type_pied", "type_port", "remarquable", "latitude", "longitude","predire"
+    ];
+
+    // ================= Pour chaque arbre de la database =================
+    for (let id_arbre = 0; id_arbre < nb_arb; id_arbre++) {
+        const row = document.createElement('tr');
+        // ================= Pour chaque attribut de l'arbre =================
+        for (attribute of AttributeElement) {
+            const cell = document.createElement('td');
+            if(attribute === "predire") {
+                cell.textContent = `<div class="dropdown"><button class="dropbtn"><i class="bi bi-three-dots h6 "></i></button><div class="dropdown-content"><a href="#">Age</a><a href="#">Taille</a><a href="#">Déracinement</a></div></div>`;
+            }
+            else {
+                const cell = document.createElement('td');
+                cell.textContent = `${data_arbres[id_arbre][attribute]}`;
+                row.appendChild(cell);
+            }
+
+        }
+        tbody.appendChild(row);
+
+    }
+    table.appendChild(tbody);
+
+    container.appendChild(table);
+}
+
+
+
+
 addTable();
 function addTable() {
     console.log("addTable");
@@ -55,40 +107,9 @@ function addTable() {
                     <th class="header" scope="col" style="width: 5rem">Prédire</th>
 
                 </tr>
-
+                
                 </thead>
-                    <tbody class="table-group-divider">
-                        <tr><td>1</td><td>Mark</td><td>Otto</td><td>@mdo</td><td>Mark</td><td>@mdo</td><td>Mark</td><td>Otto</td><td>@mdo</td><td><div class="dropdown"><button class="dropbtn"><i class="bi bi-three-dots h6 "></i></button><div class="dropdown-content"><a href="#">Age</a><a href="#">Taille</a><a href="#">Déracinement</a></div></div></td></tr>
-                        <tr><td>1</td><td>Mark</td><td>Otto</td><td>@mdo</td><td>Mark</td><td>@mdo</td><td>Mark</td><td>Otto</td><td>@mdo</td><td><div class="dropdown"><button class="dropbtn"><i class="bi bi-three-dots h6 "></i></button><div class="dropdown-content"><a href="#">Age</a><a href="#">Taille</a><a href="#">Déracinement</a></div></div></td></tr>
-                        <tr><td>1</td><td>Mark</td><td>Otto</td><td>@mdo</td><td>Mark</td><td>@mdo</td><td>Mark</td><td>Otto</td><td>@mdo</td><td><div class="dropdown"><button class="dropbtn"><i class="bi bi-three-dots h6 "></i></button><div class="dropdown-content"><a href="#">Age</a><a href="#">Taille</a><a href="#">Déracinement</a></div></div></td></tr>
-                        <tr><td>1</td><td>Mark</td><td>Otto</td><td>@mdo</td><td>Mark</td><td>@mdo</td><td>Mark</td><td>Otto</td><td>@mdo</td><td><div class="dropdown"><button class="dropbtn"><i class="bi bi-three-dots h6 "></i></button><div class="dropdown-content"><a href="#">Age</a><a href="#">Taille</a><a href="#">Déracinement</a></div></div></td></tr>
-                        <tr><td>1</td><td>Mark</td><td>Otto</td><td>@mdo</td><td>Mark</td><td>@mdo</td><td>Mark</td><td>Otto</td><td>@mdo</td><td><div class="dropdown"><button class="dropbtn"><i class="bi bi-three-dots h6 "></i></button><div class="dropdown-content"><a href="#">Age</a><a href="#">Taille</a><a href="#">Déracinement</a></div></div></td></tr>
-                        <tr><td>1</td><td>Mark</td><td>Otto</td><td>@mdo</td><td>Mark</td><td>@mdo</td><td>Mark</td><td>Otto</td><td>@mdo</td><td><div class="dropdown"><button class="dropbtn"><i class="bi bi-three-dots h6 "></i></button><div class="dropdown-content"><a href="#">Age</a><a href="#">Taille</a><a href="#">Déracinement</a></div></div></td></tr>
-                        <tr><td>1</td><td>Mark</td><td>Otto</td><td>@mdo</td><td>Mark</td><td>@mdo</td><td>Mark</td><td>Otto</td><td>@mdo</td><td><div class="dropdown"><button class="dropbtn"><i class="bi bi-three-dots h6 "></i></button><div class="dropdown-content"><a href="#">Age</a><a href="#">Taille</a><a href="#">Déracinement</a></div></div></td></tr>
-                        <tr><td>1</td><td>Mark</td><td>Otto</td><td>@mdo</td><td>Mark</td><td>@mdo</td><td>Mark</td><td>Otto</td><td>@mdo</td><td><div class="dropdown"><button class="dropbtn"><i class="bi bi-three-dots h6 "></i></button><div class="dropdown-content"><a href="#">Age</a><a href="#">Taille</a><a href="#">Déracinement</a></div></div></td></tr>
-                        <tr><td>1</td><td>Mark</td><td>Otto</td><td>@mdo</td><td>Mark</td><td>@mdo</td><td>Mark</td><td>Otto</td><td>@mdo</td><td><div class="dropdown"><button class="dropbtn"><i class="bi bi-three-dots h6 "></i></button><div class="dropdown-content"><a href="#">Age</a><a href="#">Taille</a><a href="#">Déracinement</a></div></div></td></tr>
-                        <tr><td>1</td><td>Mark</td><td>Otto</td><td>@mdo</td><td>Mark</td><td>@mdo</td><td>Mark</td><td>Otto</td><td>@mdo</td><td><div class="dropdown"><button class="dropbtn"><i class="bi bi-three-dots h6 "></i></button><div class="dropdown-content"><a href="#">Age</a><a href="#">Taille</a><a href="#">Déracinement</a></div></div></td></tr>
-                        <tr><td>1</td><td>Mark</td><td>Otto</td><td>@mdo</td><td>Mark</td><td>@mdo</td><td>Mark</td><td>Otto</td><td>@mdo</td><td><div class="dropdown"><button class="dropbtn"><i class="bi bi-three-dots h6 "></i></button><div class="dropdown-content"><a href="#">Age</a><a href="#">Taille</a><a href="#">Déracinement</a></div></div></td></tr>
-                        <tr><td>1</td><td>Mark</td><td>Otto</td><td>@mdo</td><td>Mark</td><td>@mdo</td><td>Mark</td><td>Otto</td><td>@mdo</td><td><div class="dropdown"><button class="dropbtn"><i class="bi bi-three-dots h6 "></i></button><div class="dropdown-content"><a href="#">Age</a><a href="#">Taille</a><a href="#">Déracinement</a></div></div></td></tr>
-                        <tr><td>1</td><td>Mark</td><td>Otto</td><td>@mdo</td><td>Mark</td><td>@mdo</td><td>Mark</td><td>Otto</td><td>@mdo</td><td><div class="dropdown"><button class="dropbtn"><i class="bi bi-three-dots h6 "></i></button><div class="dropdown-content"><a href="#">Age</a><a href="#">Taille</a><a href="#">Déracinement</a></div></div></td></tr>
-                        <tr><td>1</td><td>Mark</td><td>Otto</td><td>@mdo</td><td>Mark</td><td>@mdo</td><td>Mark</td><td>Otto</td><td>@mdo</td><td><div class="dropdown"><button class="dropbtn"><i class="bi bi-three-dots h6 "></i></button><div class="dropdown-content"><a href="#">Age</a><a href="#">Taille</a><a href="#">Déracinement</a></div></div></td></tr>
-                        <tr><td>1</td><td>Mark</td><td>Otto</td><td>@mdo</td><td>Mark</td><td>@mdo</td><td>Mark</td><td>Otto</td><td>@mdo</td><td><div class="dropdown"><button class="dropbtn"><i class="bi bi-three-dots h6 "></i></button><div class="dropdown-content"><a href="#">Age</a><a href="#">Taille</a><a href="#">Déracinement</a></div></div></td></tr>
-                        <tr><td>1</td><td>Mark</td><td>Otto</td><td>@mdo</td><td>Mark</td><td>@mdo</td><td>Mark</td><td>Otto</td><td>@mdo</td><td><div class="dropdown"><button class="dropbtn"><i class="bi bi-three-dots h6 "></i></button><div class="dropdown-content"><a href="#">Age</a><a href="#">Taille</a><a href="#">Déracinement</a></div></div></td></tr>
-                        <tr><td>1</td><td>Mark</td><td>Otto</td><td>@mdo</td><td>Mark</td><td>@mdo</td><td>Mark</td><td>Otto</td><td>@mdo</td><td><div class="dropdown"><button class="dropbtn"><i class="bi bi-three-dots h6 "></i></button><div class="dropdown-content"><a href="#">Age</a><a href="#">Taille</a><a href="#">Déracinement</a></div></div></td></tr>
-                        <tr><td>1</td><td>Mark</td><td>Otto</td><td>@mdo</td><td>Mark</td><td>@mdo</td><td>Mark</td><td>Otto</td><td>@mdo</td><td><div class="dropdown"><button class="dropbtn"><i class="bi bi-three-dots h6 "></i></button><div class="dropdown-content"><a href="#">Age</a><a href="#">Taille</a><a href="#">Déracinement</a></div></div></td></tr>
-                        <tr><td>1</td><td>Mark</td><td>Otto</td><td>@mdo</td><td>Mark</td><td>@mdo</td><td>Mark</td><td>Otto</td><td>@mdo</td><td><div class="dropdown"><button class="dropbtn"><i class="bi bi-three-dots h6 "></i></button><div class="dropdown-content"><a href="#">Age</a><a href="#">Taille</a><a href="#">Déracinement</a></div></div></td></tr>
-                        <tr><td>1</td><td>Mark</td><td>Otto</td><td>@mdo</td><td>Mark</td><td>@mdo</td><td>Mark</td><td>Otto</td><td>@mdo</td><td><div class="dropdown"><button class="dropbtn"><i class="bi bi-three-dots h6 "></i></button><div class="dropdown-content"><a href="#">Age</a><a href="#">Taille</a><a href="#">Déracinement</a></div></div></td></tr>
-                        <tr><td>1</td><td>Mark</td><td>Otto</td><td>@mdo</td><td>Mark</td><td>@mdo</td><td>Mark</td><td>Otto</td><td>@mdo</td><td><div class="dropdown"><button class="dropbtn"><i class="bi bi-three-dots h6 "></i></button><div class="dropdown-content"><a href="#">Age</a><a href="#">Taille</a><a href="#">Déracinement</a></div></div></td></tr>
-                        <tr><td>1</td><td>Mark</td><td>Otto</td><td>@mdo</td><td>Mark</td><td>@mdo</td><td>Mark</td><td>Otto</td><td>@mdo</td><td><div class="dropdown"><button class="dropbtn"><i class="bi bi-three-dots h6 "></i></button><div class="dropdown-content"><a href="#">Age</a><a href="#">Taille</a><a href="#">Déracinement</a></div></div></td></tr>
-                        <tr><td>1</td><td>Mark</td><td>Otto</td><td>@mdo</td><td>Mark</td><td>@mdo</td><td>Mark</td><td>Otto</td><td>@mdo</td><td><div class="dropdown"><button class="dropbtn"><i class="bi bi-three-dots h6 "></i></button><div class="dropdown-content"><a href="#">Age</a><a href="#">Taille</a><a href="#">Déracinement</a></div></div></td></tr>
-                        <tr><td>1</td><td>Mark</td><td>Otto</td><td>@mdo</td><td>Mark</td><td>@mdo</td><td>Mark</td><td>Otto</td><td>@mdo</td><td><div class="dropdown"><button class="dropbtn"><i class="bi bi-three-dots h6 "></i></button><div class="dropdown-content"><a href="#">Age</a><a href="#">Taille</a><a href="#">Déracinement</a></div></div></td></tr>
-                        <tr><td>1</td><td>Mark</td><td>Otto</td><td>@mdo</td><td>Mark</td><td>@mdo</td><td>Mark</td><td>Otto</td><td>@mdo</td><td><div class="dropdown"><button class="dropbtn"><i class="bi bi-three-dots h6 "></i></button><div class="dropdown-content"><a href="#">Age</a><a href="#">Taille</a><a href="#">Déracinement</a></div></div></td></tr>
-                        <tr><td>1</td><td>Mark</td><td>Otto</td><td>@mdo</td><td>Mark</td><td>@mdo</td><td>Mark</td><td>Otto</td><td>@mdo</td><td><div class="dropdown"><button class="dropbtn"><i class="bi bi-three-dots h6 "></i></button><div class="dropdown-content"><a href="#">Age</a><a href="#">Taille</a><a href="#">Déracinement</a></div></div></td></tr>
-                        <tr><td>1</td><td>Mark</td><td>Otto</td><td>@mdo</td><td>Mark</td><td>@mdo</td><td>Mark</td><td>Otto</td><td>@mdo</td><td><div class="dropdown"><button class="dropbtn"><i class="bi bi-three-dots h6 "></i></button><div class="dropdown-content"><a href="#">Age</a><a href="#">Taille</a><a href="#">Déracinement</a></div></div></td></tr>
-                        <tr><td>1</td><td>Mark</td><td>Otto</td><td>@mdo</td><td>Mark</td><td>@mdo</td><td>Mark</td><td>Otto</td><td>@mdo</td><td><div class="dropdown"><button class="dropbtn"><i class="bi bi-three-dots h6 "></i></button><div class="dropdown-content"><a href="#">Age</a><a href="#">Taille</a><a href="#">Déracinement</a></div></div></td></tr>
-                        <tr><td>1</td><td>Mark</td><td>Otto</td><td>@mdo</td><td>Mark</td><td>@mdo</td><td>Mark</td><td>Otto</td><td>@mdo</td><td><div class="dropdown"><button class="dropbtn"><i class="bi bi-three-dots h6 "></i></button><div class="dropdown-content"><a href="#">Age</a><a href="#">Taille</a><a href="#">Déracinement</a></div></div></td></tr>
-
-                    </tbody>
+                
                 </table>
             </div>`
     );
@@ -152,7 +173,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Afficher ou masquer les contenus en fonction du bouton cliqué
             if (button.querySelector('input').id === 'VisualiserTableau') {
-                ajaxRequest('GET', 'PHP/request_m.php/all_data', afficherTableau);
+
                 //afficherTableau();
 
                 document.getElementById('VisualisationTableau').style.display = 'block';
@@ -171,54 +192,5 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Fonction pour afficher le tableau avec Bootstrap
-    function afficherTableau(data_arbres) {
-        const container = document.getElementById('VisualisationTableau');
-        container.innerHTML = ''; // On supprime le contenu existant
 
-        // On créé le tableau
-        const table = document.createElement('table');
-        table.classList.add('table', 'table-bordered', 'table-striped');
-
-        const HeaderElement = [
-            "ID", "Espèce", "Etat", "Stade de dev.", "Pied", "Port", "Remarquable", "Latitude", "Longitude", "Prédire"
-        ];
-
-        // On créé le header du tableau
-        const thead = document.createElement('thead');
-        const headRow = document.createElement('tr');
-        for (let j = 0; j < 10; j++) {
-            const th = document.createElement('th');
-            th.textContent = HeaderElement[j];
-            headRow.appendChild(th);
-        }
-        thead.appendChild(headRow);
-        table.appendChild(thead);
-
-        // Create 5 rows
-        const tbody = document.createElement('tbody');
-
-        let nb_arb = data_arbres.length;
-        const AttributeElement = [
-            "id_arbre", "espece", "etat_arb", "stade_dev", "type_pied", "type_port", "remarquable", "latitude", "longitude","id_arbre"
-        ];
-
-        // ================= Pour chaque arbre de la database =================
-        for (let id_arbre = 0; id_arbre < nb_arb; id_arbre++) {               // 37 --> car 36 arbres
-            const row = document.createElement('tr');
-            // ================= Pour chaque attribut de l'arbre =================
-            for (attribute of AttributeElement) {
-                const cell = document.createElement('td');
-                cell.textContent = `${data_arbres[id_arbre][attribute]}`;
-                row.appendChild(cell);
-
-                // ================= Pour le dernier attribut =================
-                // TO DO: Mettre un bouton pour prédire --> aucune idée de comment faire
-            }
-            tbody.appendChild(row);
-
-        }
-        table.appendChild(tbody);
-
-        container.appendChild(table);
-    }
 });
