@@ -251,9 +251,10 @@ function afficherTableau(data_arbres) {
     thead.style.position = 'sticky';
     thead.style.top = '0';
     const headRow = document.createElement('tr');
-    for (let j = 0; j < 10; j++) {
+
+    for (header of HeaderElement) {
         const th = document.createElement('th');
-        th.textContent = HeaderElement[j];
+        th.textContent = header;
         headRow.appendChild(th);
     }
     thead.appendChild(headRow);
