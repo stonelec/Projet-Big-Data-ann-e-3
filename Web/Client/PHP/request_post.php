@@ -87,7 +87,6 @@ switch ($requestMethod) {
         }
         break;
 
-
     case 'POST':
 
         switch ($requestAction_post){
@@ -101,10 +100,10 @@ switch ($requestMethod) {
                 break;
 
         }
+        break;
 
     default:
-        // Retourner une erreur si l'action n'est pas reconnue
-        echo json_encode(['error' => 'IL EST PAS RENTRER DANS GET OU POST']);
+        echo json_encode("PAS DANS LE GET NI DANS LE POST");
         break;
 
 }
