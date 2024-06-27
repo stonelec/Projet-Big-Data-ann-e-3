@@ -26,7 +26,7 @@ $(document).ready(function (){
 
         }
 
-        $('#option_etat').html('<option selected disabled="disabled">Please select</option>' +
+        $('#option_etat').html('<option selected disabled="disabled">Sélectionner</option>' +
             option_etat
         );
 
@@ -47,7 +47,7 @@ $(document).ready(function (){
 
         }
 
-        $('#option_stade').html('<option selected disabled="disabled">Please select</option>' +
+        $('#option_stade').html('<option selected disabled="disabled">Sélectionner</option>' +
             option_stade
         );
 
@@ -69,7 +69,7 @@ $(document).ready(function (){
 
         }
 
-        $('#option_pied').html('<option selected disabled="disabled">Please select</option>' +
+        $('#option_pied').html('<option selected disabled="disabled">Sélectionner</option>' +
             option_pied
         );
 
@@ -90,7 +90,7 @@ $(document).ready(function (){
 
         }
 
-        $('#option_port').html('<option selected disabled="disabled">Please select</option>' +
+        $('#option_port').html('<option selected disabled="disabled">Sélectionner</option>' +
             option_port
         );
 
@@ -111,7 +111,7 @@ $(document).ready(function (){
 
         }
 
-        $('#option_feuillage').html('<option selected disabled="disabled">Please select</option>' +
+        $('#option_feuillage').html('<option selected disabled="disabled">Sélectionner</option>' +
             option_feuillage
         );
 

@@ -1,0 +1,59 @@
+.connexion{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    width: 80%;
+    margin-top: 1.8rem;
+}
+.connexion .connexion-image{
+    height: 10rem;
+    border-radius: 2000px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+
+}
+.connexion-titre{
+    font-size: 2.5rem;
+    font-family: marianne-bold;
+    text-align: center;
+}
+.connexion-sous-titre{
+    text-align: center;
+    color: var(--brown);
+    margin-top: -20px;
+    margin-bottom: 1rem;
+}
+.connexion-form{
+    display: flex;
+    flex-direction: column;
+    width: 22.5rem;
+    background-color: rgba(255, 255, 255, 0.55);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    border-radius: 15px;
+    padding: 15px;
+
+}
+.connexion-form .btn-brown{
+    margin: 1rem 0;
+}
+.connexion-form .register{
+    display: flex;
+    flex-direction: row;
+    justify-content: stretch;
+
+}
+.connexion-form .register p{
+    margin-right: 0.5rem;
+}
+.connexion-form .register a{
+    margin-right: 0.5rem;
+    color: var(--brown);
+    text-decoration: underline;
+}
+.connexion-form .register a:hover{
+    color: var(--dark-beige);
+}
+.connexion-form .register a:active{
+    color: var(--brown);
+}

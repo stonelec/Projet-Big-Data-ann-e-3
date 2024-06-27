@@ -48,9 +48,9 @@
                     Prédire
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="prediction.html">Âge</a>
-                    <a class="dropdown-item" href="prediction_taille.html">Taille</a>
-                    <a class="dropdown-item" href="prediction_deraciner.html">Déraciner</a>
+                    <a class="dropdown-item" href="prediction.html?pred=age&id=0">Âge</a>
+                    <a class="dropdown-item" href="prediction.html?pred=taille&id=0">Taille</a>
+                    <a class="dropdown-item" href="prediction.html?pred=deraciner&id=0">Déraciner</a>
                 </div>
             </li>
         </ul>
@@ -86,25 +86,25 @@
                     <div class="form-individual">
                         <div class="custom-card">
                             <p>Latitude</p>
-                            <input type="text" class="form-control" id="latitude" aria-describedby="...">
+                            <input type="number" class="form-control" id="latitude" aria-describedby="...">
                             <p>Longitude</p>
-                            <input type="text" class="form-control" id="longitude" aria-describedby="...">
+                            <input type="number" class="form-control" id="longitude" aria-describedby="...">
                         </div>
                     </div>
                     <div class="form-individual">
                         <div class="custom-card">
                             <p>Hauteur total</p>
-                            <input type="text" class="form-control" id="hauteur_total" aria-describedby="...">
+                            <input type="number" class="form-control" id="hauteur_total" aria-describedby="...">
                             <p>Hauteur tronc</p>
-                            <input type="text" class="form-control" id="hauteur_tronc" aria-describedby="...">
+                            <input type="number" class="form-control" id="hauteur_tronc" aria-describedby="...">
                             <p>Diametre tronc</p>
-                            <input type="text" class="form-control" id="diametre_tronc" aria-describedby="...">
+                            <input type="number" class="form-control" id="diametre_tronc" aria-describedby="...">
                         </div>
                     </div>
                     <div class="form-individual">
                         <div class="custom-card">
                             <p>Age estimé</p>
-                            <input type="text" class="form-control" id="age_estime" aria-describedby="...">
+                            <input type="number" class="form-control" id="age_estime" aria-describedby="...">
                         </div>
                     </div>
 
@@ -124,7 +124,7 @@
                             </select>
                             <p>Remarquable</p>
                             <select id="option_remarquable">
-                                <option selected disabled="disabled">Please select</option>
+                                <option selected disabled="disabled">Sélectionner</option>
                                 <option>Oui</option>
                                 <option>Non</option>
                             </select>
@@ -137,7 +137,7 @@
                             </select>
                             <p>Revetement</p>
                             <select id="option_revetement">
-                                <option selected disabled="disabled">Please select</option>
+                                <option selected disabled="disabled">Sélectionner</option>
                                 <option>Oui</option>
                                 <option>Non</option>
                             </select>
