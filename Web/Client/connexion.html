@@ -28,8 +28,8 @@
 <body>
 
 <?php
-require_once ('PHP/Users.php');
-$result=Users::connexion();
+    require_once ('PHP/Utilisateur.php');
+    $result=Utilisateur::connexion_utilisateur();
 ?>
 
 <!-- =================================== NAVBAR ================================== -->
@@ -70,20 +70,26 @@ $result=Users::connexion();
             <p class="connexion-titre">Connectez - vous<br> à votre compte</p>
             <p class="connexion-sous-titre">Bon retour ! <br> Merci de renseigner les informations.</p>
             <div class="connexion-form bottom-space">
-                <form class="form_connexion">
+                <form class="form_connexion" method="post" id="LoginForm">
                     <div class="mb-3">
                         <label for="inputEmail" class="form-label">Email</label>
-                        <input type="email" class="form-control email" id="inputEmail" placeholder="name@example.com">
+                        <input type="email" class="form-control" id="inputEmail" placeholder="name@example.com" name="mail">
                     </div>
                     <div class="mb-3">
                         <label for="inputPassword5" class="form-label">Mot de passe</label>
-                        <input type="password" id="inputPassword5" class="form-control mot_de_passe" aria-describedby="passwordHelpBlock">
+                        <input type="password" id="inputPassword5" class="form-control mot_de_passe" aria-describedby="passwordHelpBlock" name="password">
                     </div>
                     <button type="submit" class="btn btn-primary btn-brown">Se connecter</button>
                     <!-- <div class="register">
                         <p>Vous n'avez pas de compte</p>
                         <a href="connexion.css">S'enregistrer</a>
                     </div>-->
+
+                    <?php
+                        if ($result == "E-Mail ou Mot de passe invalide !") {
+                            echo '<p id="erreur">' . $result . '</p>';
+                    }
+                    ?>
                 </form>
             </div>
         </div>

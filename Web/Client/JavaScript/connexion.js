@@ -32,7 +32,8 @@ $(document).ready(function (){
 
                 console.log(response_mdp);
 
-                for(let i=0; i<response_mdp.length; i++){
+                //Récupère tout les
+                for(let i=0; i<n; i++){
 
                     data_mot_de_passe[i] = response_mdp[i];
 
