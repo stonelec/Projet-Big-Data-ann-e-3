@@ -258,8 +258,8 @@ function afficherTableau(data_arbres) {
     const AttributeElement = [
         "id_arbre", "espece", "etat_arb", "stade_dev", "type_pied", "type_port", "remarquable", "latitude", "longitude","predire"
     ];
-    //console.log("nb_arb :")
-    //console.log(nb_arb)
+    console.log("nb_arb :")
+    console.log(nb_arb)
     // ================= Pour chaque arbre de la database =================
     for (let id_arbre = 0; id_arbre < nb_arb; id_arbre++) {
 
