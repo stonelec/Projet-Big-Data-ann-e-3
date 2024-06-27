@@ -81,29 +81,31 @@ switch ($requestMethod) {
 
             default:
                 // Retourner une erreur si l'action n'est pas reconnue
-                echo json_encode(['error' => 'IL EST PAS RENTRER DANS LE GET']);
+                echo json_encode("Error => Rentrer dans le GET mais pas dans le case");
                 break;
 
         }
         break;
+
 
     case 'POST':
 
         switch ($requestAction_post){
 
             case 'ajouter_toutes_valeur':
-                echo json_encode($val_longitude);
+                echo json_encode($val_pied);
                 break;
 
             default:
-                echo json_encode("Rentre dans le bon switch mais il entre pas dans le bon case");
+                echo json_encode("Error => Rentrer dans le POST mais pas dans le case");
                 break;
 
         }
         break;
 
     default:
-        echo json_encode("PAS DANS LE GET NI DANS LE POST");
+
+        echo json_encode("Error => Pas rentrer dans le GET ou le POST");
         break;
 
 }
