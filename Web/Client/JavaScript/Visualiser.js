@@ -171,6 +171,12 @@ function printTrier() {
 
 document.addEventListener('click', function(event) {
     if (event.target.matches('.supr')) {
+
+        let colonne = document.getElementById("choix-colonne").value;
+        let option = document.getElementsByClassName("form-select")[1].value;
+        console.log(colonne);
+        console.log(option);
+
         cleanPage();
 
         document.getElementById("contenu").insertAdjacentHTML(
@@ -199,10 +205,6 @@ document.addEventListener('click', function(event) {
         );
 
 
-        let colonne = document.getElementById("choix-colonne").value;
-        let option = document.getElementsByClassName("form-select")[1].value;
-        console.log(colonne);
-        console.log(option);
         let url = "";
         if (colonne === "Remarquable") {
             url = "PHP/request.php/all_data_remarquable?id=" + option;
