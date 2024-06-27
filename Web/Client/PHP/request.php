@@ -131,12 +131,12 @@ switch ($requestAction) {
 
     //----- CONNEXION -----
 
-    case 'recuperer_email' :
+    case 'recuperermail' :
         $result = User::getAllMail();
         echo json_encode($result);
         break;
 
-    case 'recuperer_mot_de_passe' :
+    case 'recuperermdp' :
         $result = User::getAllMotDePasse();
         echo json_encode($result);
         break;
