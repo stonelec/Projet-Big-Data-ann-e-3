@@ -27,7 +27,7 @@ else if($requestMethod == 'POST'){
     $requestAction_post = isset($_POST['action']) ? $_POST['action'] : '';
 
     $id_user = 1; //On pourra le récupérer en changeant l'url
-    $val_longitude = $_POST['$val_longitude'];
+    $val_longitude = isset($_POST['val_longitude']) ? $_POST['val_longitude'] : '';
     $val_latitude = $_POST['val_latitude'];
     $val_hauteur_totale = $_POST['$val_hauteur_totale'];
     $val_hauteur_tronc = $_POST['val_hauteur_tronc'];
@@ -46,7 +46,7 @@ else if($requestMethod == 'POST'){
     $val_age_estime = $_POST['val_hauteur_tronc'];
     $val_revetement = $_POST['val_hauteur_tronc'];
 
-    echo json_encode($requestAction_post);
+    echo json_encode($val_longitude);
 
 }
 else{
