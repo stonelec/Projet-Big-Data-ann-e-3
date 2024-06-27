@@ -121,7 +121,6 @@ $(document).ready(function (){
     // ----- Noms des especes -----
     // -------------------------------
 
-
     //C'est ici qu'on va stocker les options :
     let options = []
 
@@ -137,13 +136,12 @@ $(document).ready(function (){
 
         }
 
-        updateDatalist(options);
+        tableau_list_options(options);
 
     });
 
-
     // Fonction pour mettre à jour le datalist
-    function updateDatalist(option_selctionne) {
+    function tableau_list_options(option_selctionne) {
 
         const datalist = document.getElementById('espece_list');
         datalist.innerHTML = '<option selected disabled="disabled">Sélectionner</option>';
@@ -156,12 +154,11 @@ $(document).ready(function (){
 
     }
 
-
     document.getElementById('espece').addEventListener('input', function() {
         const value = this.value;
 
         const new_option = option.filter(option => option.startsWith(value));
-        updateDatalist(new_option);
+        tableau_list_options(new_option);
 
     });
 
