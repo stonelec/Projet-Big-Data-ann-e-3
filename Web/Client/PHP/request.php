@@ -227,6 +227,71 @@ switch ($requestAction) {
         echo json_encode($result);
         break;
 
+# ======================================================
+# ===================== visualiser =====================
+# ======================================================
+
+    case 'all_data':
+        $result = Arbre::getAll();
+        echo json_encode($result);
+        break;
+
+    case 'all_data_remarquable':
+        // Vérifier si l'ID est fourni
+        if ($id !== NULL) {
+            $result = Arbre::getAll_byRemar($id);
+            echo json_encode($result);
+        } else {
+            // Retourner une erreur si l'ID n'est pas fourni
+            echo json_encode(['error' => 'Valeur de remarquable manquante']);
+        }
+        break;
+
+    case 'all_data_port':
+        // Vérifier si l'ID est fourni
+        if ($id !== NULL) {
+            $result = Arbre::getAll_byPort($id);
+            echo json_encode($result);
+        } else {
+            // Retourner une erreur si l'ID n'est pas fourni
+            echo json_encode(['error' => 'ID du port manquant']);
+        }
+        break;
+
+    case 'all_data_pied':
+        // Vérifier si l'ID est fourni
+        if ($id !== NULL) {
+            $result = Arbre::getAll_byPied($id);
+            echo json_encode($result);
+        } else {
+            // Retourner une erreur si l'ID n'est pas fourni
+            echo json_encode(['error' => 'ID du pied manquant']);
+        }
+        break;
+
+    case 'all_data_stade':
+        // Vérifier si l'ID est fourni
+        if ($id !== NULL) {
+            $result = Arbre::getAll_byStade($id);
+            echo json_encode($result);
+        } else {
+            // Retourner une erreur si l'ID n'est pas fourni
+            echo json_encode(['error' => 'ID du stade manquant']);
+        }
+        break;
+
+    case 'all_data_etat':
+        // Vérifier si l'ID est fourni
+        if ($id !== NULL) {
+            $result = Arbre::getAll_byEtat($id);
+            echo json_encode($result);
+        } else {
+            // Retourner une erreur si l'ID n'est pas fourni
+            echo json_encode(['error' => 'ID de l\'etat manquant']);
+        }
+        break;
+
+
 # =============================================================
 # ===================== visualiser_detail =====================
 # =============================================================

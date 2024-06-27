@@ -7,7 +7,7 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 addTable();
 function addTable() {
-    console.log("addTable");
+    //console.log("addTable");
     let bt = document.getElementById("btn-table");
     let bc = document.getElementById("btn-carte");
     bt.style.backgroundColor = "#6F8F72";
@@ -38,7 +38,7 @@ function addTable() {
                 </div>
             </div>`
     );
-    ajaxRequest('GET', 'PHP/request_m.php/all_data', afficherTableau);
+    ajaxRequest('GET', 'PHP/request.php?action=all_data', afficherTableau);
     let colonnne = document.getElementById("choix-colonne");
     colonnne.addEventListener("click", () => {printOption()});
 
@@ -46,10 +46,10 @@ function addTable() {
 
 }
 function printOption() {
-    console.log("printOption");
+    //console.log("printOption");
     let colonne = document.getElementById("choix-colonne").value;
-    console.log(colonne);
-    console.log("Remarquable");
+    //console.log(colonne);
+    //console.log("Remarquable");
     document.getElementById("choix-option").remove();
     document.getElementById("choix-colonne-div").insertAdjacentHTML(
         "afterend",
@@ -64,7 +64,7 @@ function printOption() {
         document.getElementById("choix-option").insertAdjacentHTML(
             "afterbegin",
             `<select class="form-select" aria-label="Default select example">
-                     <option selected disabled="disabled">Ordre</option>
+                     <option selected disabled="disabled">Sélection du caractère remarquable</option>
                      <option value="1">oui</option>
                      <option value="0">non</option>
                   </select>`
@@ -160,29 +160,91 @@ function printOption() {
     }
 }
 
-function printDetailOption(detail_option) {
-
-}
 function printTrier() {
-    console.log("printTrier");
+    //console.log("printTrier");
     document.getElementsByClassName("supr")[0].remove();
     document.getElementById("choix-option").insertAdjacentHTML(
         "afterend",
         `<button type="button" class="btn btn-brown shadow-none btn-sm supr">Trier</button>`
     );
-
-
-
-
 }
+
+document.addEventListener('click', function(event) {
+    if (event.target.matches('.supr')) {
+
+        let colonne = document.getElementById("choix-colonne").value;
+        let option = document.getElementsByClassName("form-select")[1].value;
+        option = parseInt(option);
+        option = option + 1;
+
+        //console.log(colonne);
+        //console.log(option);
+
+        cleanPage();
+
+        document.getElementById("contenu").insertAdjacentHTML(
+            "beforebegin",
+            `<div class="tri-stock">
+                <div class="tri">
+                    <div>
+                        Sélectionner le tri :
+                    </div>
+                    <div id="choix-colonne-div"> <!--dibv set juste pour l'espacement-->
+                        <select class="form-select" aria-label="Default select example" id="choix-colonne">
+                            <option selected disabled="disabled">Colonne</option>
+                            <option value="Etat">Etat</option>
+                            <option value="Stade">Stade</option>
+                            <option value="Pied">Pied</option>
+                            <option value="Port">Port</option>
+                            <option value="Remarquable">Remarquable</option>
+                        </select>
+                    </div>
+                    <div id="choix-option">
+
+                    </div>
+                     <button type="button" class="btn btn-brown shadow-none btn-sm supr" hidden></button>
+                </div>
+            </div>`
+        );
+
+
+        let url = "";
+        if (colonne === "Remarquable") {
+            url = "PHP/request.php?action=all_data_remarquable&id=" + option;
+        }
+        if (colonne === "Port") {
+            url = "PHP/request.php?action=all_data_port&id=" + option;
+        }
+        if (colonne === "Pied") {
+            url = "PHP/request.php?action=all_data_pied&id=" + option;
+        }
+        if (colonne === "Stade") {
+            url = "PHP/request.php?action=all_data_stade&id=" + option;
+        }
+        if (colonne === "Etat") {
+            url = "PHP/request.php?action=all_data_etat&id=" + option;
+        }
+        ajaxRequest('GET', url, afficherTableau);
+
+        let colonnne = document.getElementById("choix-colonne");
+        colonnne.addEventListener("click", () => {printOption()});
+    }
+});
+
 function afficherTableau(data_arbres) {
+
+    console.log(data_arbres)
+    let nb_arb = data_arbres.length;
+    console.log("nb_arb :")
+    console.log(nb_arb)
+
     const container = document.getElementById('contenu');
     container.innerHTML = ''; // On supprime le contenu existant
     // On créé le tableau
     const table = document.createElement('table');
     table.classList.add('table', 'table-bordered', 'table-striped', 'table-hover', 'table-light', 'bottom-space');
     const HeaderElement = [
-        "ID", "Espèce", "Etat", "Stade", "Pied", "Port", "Remarquable", "Latitude", "Longitude", "Prédire"
+        "ID", "Espèce", "Etat", "Stade", "Pied", "Port", "Remarquable", "Hauteur", "Diamètre", "Prédire"
     ];
     // On créé le header du tableau
     const thead = document.createElement('thead');
@@ -198,12 +260,11 @@ function afficherTableau(data_arbres) {
     table.appendChild(thead);
     // Create 5 rows
     const tbody = document.createElement('tbody');
-    let nb_arb = data_arbres.length;
+
     const AttributeElement = [
-        "id_arbre", "espece", "etat_arb", "stade_dev", "type_pied", "type_port", "remarquable", "latitude", "longitude","predire"
+        "id_arbre", "espece", "etat_arb", "stade_dev", "type_pied", "type_port", "remarquable", "hauteur_tot", "diametre_tronc","predire"
     ];
-    console.log("nb_arb :")
-    console.log(nb_arb)
+
     // ================= Pour chaque arbre de la database =================
     for (let id_arbre = 0; id_arbre < nb_arb; id_arbre++) {
 
@@ -248,8 +309,10 @@ function afficherTableau(data_arbres) {
                 }
             }
             else if (attribute === "id_arbre") {
-                cell.textContent = `${data_arbres[id_arbre][attribute]}`;
-                cell.href = "visualiser_detail.html";
+                const link = document.createElement('a');
+                link.href = "visualiser_detail.html?id=" + data_arbres[id_arbre][attribute];
+                link.textContent = `${data_arbres[id_arbre][attribute]}`;
+                cell.appendChild(link);
             }
             else {
                 cell.textContent = `${data_arbres[id_arbre][attribute]}`;
@@ -262,8 +325,8 @@ function afficherTableau(data_arbres) {
     container.appendChild(table);
 }
 function addCarte(mode) {
-    console.log("addCarte");
-    console.log(mode)
+    //console.log("addCarte");
+    //console.log(mode)
     let bt = document.getElementById("btn-table");
     let bc = document.getElementById("btn-carte");
     bt.style.backgroundColor = "#504136";
@@ -300,7 +363,7 @@ function addCarte(mode) {
 
 }
 function cleanPage(){
-    console.log("cleanPage");
+    //console.log("cleanPage");
     let sousTitre = document.getElementsByClassName("btn-group")[0];
     while (sousTitre.nextSibling) {
         sousTitre.nextSibling.remove();
