@@ -97,18 +97,17 @@ switch ($requestMethod) {
                 if($val_longitude != NULL){
 
                     echo json_encode("Rien n'est égal à 0");
-                    break;
                 }
 
                 else{
 
                     $result = "Problème dans les variables";
                     echo json_encode($result);
-                    break;
 
                 }
+                break;
 
-                //break;
+            //break;
 
             default:
                 echo json_encode("Error => Rentrer dans le POST mais pas dans le case");
