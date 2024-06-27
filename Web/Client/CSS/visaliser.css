@@ -1,0 +1,104 @@
+.tri-stock{
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    align-items: flex-end;
+    height: 30px;
+}
+.tri-stock .tri{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 35%;
+    height: 30px;
+    margin-left: auto;
+    margin-right: 5%;
+}
+.tri-stock .tri select{
+    border-radius: 20px;
+}
+.tri-stock .tri div{
+    font-size: larger;
+}
+.table{
+    margin-top: 1rem;
+    width: 90%;
+}
+.table-group-divider{
+    font-size: 0.9rem;
+}
+.bi-three-dots{
+    padding: -2px 0;
+}
+.table td, .table th {
+    padding: 4.5px 0;
+}
+/*--------------------------DROP BOX-------------------*/
+/*source : https://www.w3schools.com/css/css_dropdowns.asp*/
+/* Style The Dropdown Button */
+.dropbtn {
+    border: none;
+    cursor: pointer;
+    color: black;
+    background-color: rgba(255, 255, 255, 0);
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 140px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 0 20px 20px 20px;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    border-radius: 20px 20px 20px 20px;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+    background-color: #f1f1f1
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+    color: var(--dark-beige);
+}
+
+/*--------------------------MAP-------------------*/
+.map-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    margin-top: 2rem;
+    margin-bottom: 5rem;
+    background-color: white;
+    padding: 15px 15px 15px 15px;
+    border-radius :20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+.map-container .map {
+    width: 100%;
+}
