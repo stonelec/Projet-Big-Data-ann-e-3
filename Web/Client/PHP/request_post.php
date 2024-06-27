@@ -25,23 +25,23 @@ if($requestMethod == 'GET'){
 else if($requestMethod == 'POST'){
 
     $id_user = 1; //On pourra le récupérer en changeant l'url
-    $val_longitude = isset($_POST['val_longitude']) ? $_POST['val_longitude'] : '';
-    $val_longitude = floatval($val_longitude);
+    $val_longitude_base = isset($_POST['val_longitude']) ? $_POST['val_longitude'] : '';
+    $val_longitude = floatval($val_longitude_base);
 
-    $val_latitude = isset($_POST['val_latitude']) ? $_POST['val_latitude'] : '';
-    $val_latitude = floatval($val_latitude);
+    $val_latitude_base = isset($_POST['val_latitude']) ? $_POST['val_latitude'] : '';
+    $val_latitude = floatval($val_latitude_base);
 
-    $val_hauteur_totale = isset($_POST['val_hauteur_totale']) ? $_POST['val_hauteur_totale'] : '';
-    $val_hauteur_totale = floatval($val_hauteur_totale);
+    $val_hauteur_totale_base = isset($_POST['val_hauteur_totale']) ? $_POST['val_hauteur_totale'] : '';
+    $val_hauteur_totale = floatval($val_hauteur_totale_base);
 
-    $val_hauteur_tronc = isset($_POST['val_hauteur_tronc']) ? $_POST['val_hauteur_tronc'] : '';
-    $val_hauteur_tronc = floatval($val_hauteur_tronc);
+    $val_hauteur_tronc_base = isset($_POST['val_hauteur_tronc']) ? $_POST['val_hauteur_tronc'] : '';
+    $val_hauteur_tronc = floatval($val_hauteur_tronc_base);
 
-    $val_diametre_tronc = isset($_POST['val_diametre_tronc']) ? $_POST['val_diametre_tronc'] : '';
-    $val_diametre_tronc = floatval($val_diametre_tronc);
+    $val_diametre_tronc_base = isset($_POST['val_diametre_tronc']) ? $_POST['val_diametre_tronc'] : '';
+    $val_diametre_tronc = floatval($val_diametre_tronc_base);
 
-    $val_age_estime = isset($_POST['val_age_estime']) ? $_POST['val_age_estime'] : '';
-    $val_age_estime = intval($val_age_estime);
+    $val_age_estime_base = isset($_POST['val_age_estime']) ? $_POST['val_age_estime'] : '';
+    $val_age_estime = intval($val_age_estime_base);
 
     //Il faut que quand on commence à rentrer des lettres il y a des propositions
     $val_espece = isset($_POST['val_espece']) ? $_POST['val_espece'] : '';
@@ -137,34 +137,9 @@ switch ($requestMethod) {
 
             case 'ajouter_toutes_valeur':
 
-                /*
-                $tab = [$val_longitude, $val_latitude, $val_hauteur_totale, $val_hauteur_tronc, $val_diametre_tronc,
-                        $val_etat,$val_stade,$val_port, $val_pied, $val_espece, $val_remarquable, $val_feuillage, $val_age_estime,
-                        $val_revetement];
-
-                echo json_encode($tab);
-
-                */
-                if($val_longitude != NULL && $val_latitude != NULL && $val_hauteur_totale != NULL && $val_hauteur_tronc != NULL &&
-                    $val_diametre_tronc != NULL && $val_etat != NULL && $val_stade != NULL && $val_port != NULL && $val_pied != NULL &&
-                    $val_espece != NULL && $val_remarquable != NULL && $val_feuillage != NULL && $val_age_estime != NULL &&
-                    $val_revetement != NULL){
-
-                    /*
-                    $result = Arbre::addNewArbre($id_user, $val_longitude, $val_latitude, $val_hauteur_totale, $val_hauteur_tronc, $val_diametre_tronc, $val_etat, $val_stade,
-                        $val_port, $val_pied, $val_espece, $val_remarquable, $val_feuillage, $val_age_estime, $val_revetement);
-                    echo json_encode($result);*/
-
-
-                    echo json_encode("toutes les valeurs sont bonnes : ");
-
-                }
-
-                else{
-
-                    echo json_encode("Problèmes dans les variables : ");
-
-                }
+                $result = Arbre::addNewArbre($id_user, $val_longitude, $val_latitude, $val_hauteur_totale, $val_hauteur_tronc, $val_diametre_tronc, $val_etat, $val_stade,
+                    $val_port, $val_pied, $val_espece, $val_remarquable, $val_feuillage, $val_age_estime, $val_revetement);
+                echo json_encode($result);
 
                 break;
 
