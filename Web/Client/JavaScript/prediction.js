@@ -3,11 +3,11 @@ console.log("prediction.js loaded")
 url_string = window.location.href;
 let url = new URL(url_string);
 let pred = url.searchParams.get("pred");
-let id_arbre = url.searchParams.get("id");
-console.log(id_arbre);
+let id = url.searchParams.get("id");
+console.log(id);
 console.log(pred);
 
-if(id_arbre == 0) {
+if(id == 0) {
     console.log("id non renseigné");
     if(pred === "age"){
         console.log("age");
@@ -162,7 +162,7 @@ function addResult(){
         </div>`
         );
 
-        ajaxRequest('GET', 'PHP/request.php?action=feuillage&id=' + id_arbre, function (response) {
+        ajaxRequest('GET', 'PHP/request.php?action=feuillage&id=' + id, function (response) {
             console.log("Feuillage de l'arbre : ", response);
             // Afficher le résultat dans votre page HTML
             $('.value_feuillage').html(
