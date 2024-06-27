@@ -370,7 +370,7 @@ function cleanPage(){
     }
     document.getElementById("menu").insertAdjacentHTML(
         "afterend",
-        `<div id="contenu" style="width: 100%; display: flex; flex-direction: column; align-items: center"></div>`
+        `<div id="contenu"></div>`
     )
 }
 

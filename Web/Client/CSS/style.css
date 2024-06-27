@@ -219,9 +219,9 @@ html {
 
 .navbar-custom {
     background-color: var(--dark-green);
-    position: fixed;
     top: 0;
     width: 100%;
+    position: fixed;
 }
 .navbar-custom .collapse .navbar-nav {
     font-size: 1.1rem; /* taille de la police */
@@ -286,6 +286,7 @@ html {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    margin-top: 55px;
 }
 @media only screen and (max-width: 768px) {
     .page {
@@ -296,10 +297,10 @@ html {
 .footer {
     background-color: var(--dark-green); /* Light grey background */
     color: white;
-    padding: 20px;
+    padding: 20px 0;
     position: relative;
+    bottom: 0;
     width: 100%;
-    bottom: 0; left: 0; right: 0;
 }
 .footer-logo {
     max-width: 150px; /* Adjust as needed */
