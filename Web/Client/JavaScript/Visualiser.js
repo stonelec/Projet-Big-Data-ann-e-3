@@ -310,8 +310,10 @@ function afficherTableau(data_arbres) {
                 }
             }
             else if (attribute === "id_arbre") {
-                cell.textContent = `${data_arbres[id_arbre][attribute]}`;
-                cell.href = "visualiser_detail.html";
+                const link = document.createElement('a');
+                link.href = "visualiser_detail.html?id=" + data_arbres[id_arbre][attribute];
+                link.textContent = `${data_arbres[id_arbre][attribute]}`;
+                cell.appendChild(link);
             }
             else {
                 cell.textContent = `${data_arbres[id_arbre][attribute]}`;
