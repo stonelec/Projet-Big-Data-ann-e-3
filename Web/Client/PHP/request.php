@@ -165,11 +165,11 @@ switch ($requestAction) {
             $ageEstim = Arbre::getAgeEstim($id);
             $troncDiam = Arbre::getDiametre($id);
 
-            $command = 'cd ../../python/scripts && python3 fonc1.py '.$hauteurTronc.' '.$ageEstim.' '.$troncDiam.' kmeans';
+            $command = 'cd ../python/scripts && python3 fonc1.py '.$hauteurTronc.' '.$ageEstim.' '.$troncDiam.' kmeans';
             // $command = " python3 fonc1.py 50 10 20 kmeans "
             exec($command,$output, $result);
 
-            $result = file_get_contents('../../python/scripts/fonc1.json');
+            $result = file_get_contents('../python/scripts/fonc1.json');
 
             echo json_encode($result);
         } else {
@@ -186,11 +186,11 @@ switch ($requestAction) {
             $hauteurTot = Arbre::getHauteurTot($id);
             $hauteurTronc = Arbre::getHauteurTronc($id);
 
-            $command = 'cd ../../python/scripts && python3 fonc2.py '.$troncDiam.' '.$hauteurTot.' '.$hauteurTronc.' rf';
+            $command = 'cd ../python/scripts && python3 fonc2.py '.$troncDiam.' '.$hauteurTot.' '.$hauteurTronc.' rf';
 
             exec($command,$output, $result);
 
-            $result = file_get_contents('../../python/scripts/fonc2.json');
+            $result = file_get_contents('../python/scripts/fonc2.json');
 
             echo json_encode($result);
         } else {
@@ -212,11 +212,11 @@ switch ($requestAction) {
             $fkRevet = Arbre::getRevetement($id);
 
             // ['haut_tot', 'haut_tronc', 'tronc_diam', 'fk_port', 'feuillage', 'X', 'Y']
-            $command = 'cd ../../python/scripts && python3 fonc3.py '.$hauteurTot.' '.$hauteurTronc.' '.$troncDiam.' '.$fkPort.' '.$feuillage.' '.$fkPied.' '.$fkRevet.' rf';
+            $command = 'cd ../python/scripts && python3 fonc3.py '.$hauteurTot.' '.$hauteurTronc.' '.$troncDiam.' '.$fkPort.' '.$feuillage.' '.$fkPied.' '.$fkRevet.' rf';
 
             exec($command,$output, $result);
 
-            $result = file_get_contents('../../python/scripts/fonc3.json');
+            $result = file_get_contents('../python/scripts/fonc3.json');
 
             echo json_encode($result);
         } else {
@@ -381,11 +381,11 @@ switch ($requestAction) {
             $ageEstim = Arbre::getAgeEstim($id_hey);
             $troncDiam = Arbre::getDiametre($id_hey);
 
-            $command = 'cd ../../python/scripts && python3 fonc1.py '.$hauteurTronc.' '.$ageEstim.' '.$troncDiam.' kmeans';
+            $command = 'cd ../python/scripts && python3 fonc1.py '.$hauteurTronc.' '.$ageEstim.' '.$troncDiam.' kmeans';
             // $command = " python3 fonc1.py 50 10 20 kmeans "
             exec($command, $output, $resultCommand);
 
-            $resultNumber = (int)file_get_contents('../../python/scripts/fonc1.json');
+            $resultNumber = (int)file_get_contents('../python/scripts/fonc1.json');
             $result[$id_hey-1] = $resultNumber;
         }
         echo json_encode($result);
