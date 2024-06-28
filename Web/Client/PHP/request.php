@@ -146,8 +146,8 @@ switch ($requestAction) {
         break;
 
     case 'id_du_user' :
-        //$result = User::getId($mail,$password);
-        echo json_encode("bite");
+        $result = User::getId($mail,$password);
+        echo json_encode("proute_de_pipi");
         break;
 
 # ----------------------- Prédire les infos -----------------------
