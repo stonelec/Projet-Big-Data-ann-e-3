@@ -244,14 +244,14 @@ $(document).ready(function (){
             console.log(val_port);
             console.log(val_feuillage);
 
-            let data = [];
-
-            data = 'action=ajouter_toutes_valeur' + '&id=' + id_user + '&val_espece=' + val_espece + '&val_latitude=' + val_latitude +
+            let data = 'action=ajouter_toutes_valeur' + '&id=' + id_user + '&val_espece=' + val_espece + '&val_latitude=' + val_latitude +
                 '&val_longitude=' + val_longitude + '&val_hauteur_totale=' + val_hauteur_totale +
                 '&val_hauteur_tronc=' + val_hauteur_tronc + '&val_diametre_tronc=' + val_diametre_tronc +
                 '&val_age_estime=' + val_age_estime + '&val_etat=' + val_etat + '&val_stade=' + val_stade +
                 '&val_remarquable=' + val_remarquable + '&val_pied=' + val_pied + '&val_revetement=' + val_revetement +
                 '&val_port=' + val_port + '&val_feuillage=' + val_feuillage;
+
+            console.log(data);
 
             ajaxRequest('POST', 'PHP/request_post.php',function(response)  {
 
