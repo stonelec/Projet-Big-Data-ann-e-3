@@ -33,6 +33,7 @@ $(document).ready(function (){
 
                 console.log("L'id : ");
                 console.log(response);
+                localStorage.setItem('id_user', response);
                 //Faire une autre ajaxRequest ou cette fois on va appeler la fonction des sessions
                 //pour stocker l'id de la session
 
