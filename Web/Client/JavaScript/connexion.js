@@ -15,8 +15,10 @@ $(document).ready(function (){
 
         console.log(val_email);
         console.log(mot_de_passe);
+        let data = []
+        data = ['&email=' + val_email + '&mot_de_passe=' + mot_de_passe]
 
-        ajaxRequest('GET', 'PHP/request.php?action=id_du_user&email=' + val_email + "&mot_de_passe=" + mot_de_passe, function (response){
+        ajaxRequest('GET', 'PHP/request.php?action=id_du_user&email=' + val_email + '&mot_de_passe=' + mot_de_passe, function (response){
 
             if(response == null){
 
