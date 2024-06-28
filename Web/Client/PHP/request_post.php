@@ -147,21 +147,18 @@ switch ($requestMethod) {
                 $val_diametre_tronc =! null && $val_etat =! null && $val_stade =! null && $val_port =! null && $val_pied=! null &&
                                     $val_espece =! null && $val_remarquable =! null && $val_feuillage =! null && $val_age_estime =! null && $val_revetement){
 
-                    echo json_encode("c'est good");
-                    break;
+                    $result = Arbre::addNewArbre($id_user, $val_longitude, $val_latitude, $val_hauteur_totale, $val_hauteur_tronc, $val_diametre_tronc, $val_etat, $val_stade,
+                        $val_port, $val_pied, $val_espece, $val_remarquable, $val_feuillage, $val_age_estime, $val_revetement);
+                    echo json_encode($result);
 
                 }
 
                 else{
-                    echo json_encode("marche pas");
-                    break;
+                    echo json_encode("error");
                 }
-                /*
-                $result = Arbre::addNewArbre($id_user, $val_longitude, $val_latitude, $val_hauteur_totale, $val_hauteur_tronc, $val_diametre_tronc, $val_etat, $val_stade,
-                    $val_port, $val_pied, $val_espece, $val_remarquable, $val_feuillage, $val_age_estime, $val_revetement);
-                echo json_encode($result);
 
-                break;*/
+
+                break;
 
             default:
                 echo json_encode("Error => Rentrer dans le POST mais pas dans le case");
