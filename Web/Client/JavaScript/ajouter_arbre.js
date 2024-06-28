@@ -207,6 +207,7 @@ $(document).ready(function (){
     $('.form_ajouter_arbre').submit(function(event) {
         event.preventDefault(); // Empêcher la soumission du formulaire
 
+
         if(localStorage.getItem('id_user') != null){
 
 
@@ -228,7 +229,6 @@ $(document).ready(function (){
             let val_port = $('#option_port').val();
             let val_feuillage = $('#option_feuillage').val();
 
-            console.log(id_user);
             console.log(val_espece);
             console.log(val_latitude);
             console.log(val_longitude);
@@ -252,22 +252,32 @@ $(document).ready(function (){
                 '&val_port=' + val_port + '&val_feuillage=' + val_feuillage;
 
             console.log(data);
+            if (val_espece === "" || val_latitude === "" || val_longitude === "" || val_hauteur_totale === "" || val_hauteur_tronc === "" || val_diametre_tronc === "" || val_age_estime === "" || val_etat === "" || val_stade === "" || val_remarquable === "" || val_pied === "" || val_revetement === "" || val_port === "" || val_feuillage === "") {
+                console.log("Erreur champs vide");
+                document.getElementById('error-ajouter-show').style.display = 'block';
+                document.getElementById('add-ajouter-show').style.display = 'none';
+            }else {
+                ajaxRequest('POST', 'PHP/request_post.php',function(response)  {
 
-            ajaxRequest('POST', 'PHP/request_post.php',function(response)  {
+                    console.log(response);
 
-                console.log(response);
+                    if (response == "error") {
+                        console.log("Erreur lors de l'ajout de l'arbre");
+                        document.getElementById('error-ajouter-show').style.display = 'block';
+                        document.getElementById('add-ajouter-show').style.display = 'none';
 
-                if (response == "error") {
-                    console.log("Erreur lors de l'ajout de l'arbre");
-                    document.getElementById('error-ajouter-show').style.display = 'block';
-                    document.getElementById('add-ajouter-show').style.display = 'none';
-                }else {
-                    console.log("L'arbre a bien été ajouté");
-                    document.getElementById('error-ajouter-show').style.display = 'none';
-                    document.getElementById('add-ajouter-show').style.display = 'block';
-                }
+                    }else {
+                        console.log("L'arbre a bien été ajouté");
+                        document.getElementById('error-ajouter-show').style.display = 'none';
+                        document.getElementById('add-ajouter-show').style.display = 'block';
+                        document.getElementsByClassName("form_ajouter_arbre")[0].reset();
 
-            }, data);
+                    }
+
+                }, data);
+
+            }
+
 
         }
 

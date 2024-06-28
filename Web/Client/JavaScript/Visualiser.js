@@ -380,7 +380,7 @@ function afficherTableau(data_arbres) {
                 cell.appendChild(link);
             }
             else if (attribute === "longitude" || attribute === "latitude") {
-                console.log(data_arbres[id_arbre][attribute])
+                //console.log(data_arbres[id_arbre][attribute])
                 let round = data_arbres[id_arbre][attribute];
                 round = Number(round).toFixed(5);
                 cell.textContent = `${round}`;
