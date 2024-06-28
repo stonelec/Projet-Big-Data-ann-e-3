@@ -175,56 +175,62 @@ $(document).ready(function (){
 
         console.log("ENVOYER")
 
-        let val_espece = $('#espece').val();
-        let val_latitude = $('#latitude').val();
-        let val_longitude = $('#longitude').val();
-        let val_hauteur_totale = $('#hauteur_total').val();
-        let val_hauteur_tronc = $('#hauteur_tronc').val();
-        let val_diametre_tronc = $('#diametre_tronc').val();
-        let val_age_estime = $('#age_estime').val();
+        if(localStorage.getItem('id_user') != null){
 
-        let val_etat = $('#option_etat').val();
-        let val_stade = $('#option_stade').val();
-        let val_remarquable = $('#option_remarquable').val();
-        let val_pied = $('#option_pied').val();
-        let val_revetement = $('#option_revetement').val();
-        let val_port = $('#option_port').val();
-        let val_feuillage = $('#option_feuillage').val();
 
-        let data = {
-            val_espece: val_espece,
-            val_latitude: val_latitude,
-            val_longitude: val_longitude,
-            val_hauteur_totale: val_hauteur_totale,
-            val_hauteur_tronc: val_hauteur_tronc,
-            val_diametre_tronc: val_diametre_tronc,
-            val_age_estime: val_age_estime,
-            val_etat: val_etat,
-            val_stade: val_stade,
-            val_remarquable: val_remarquable,
-            val_pied: val_pied,
-            val_revetement: val_revetement,
-            val_port: val_port,
-            val_feuillage: val_feuillage
-        };
+            let val_espece = $('#espece').val();
+            let val_latitude = $('#latitude').val();
+            let val_longitude = $('#longitude').val();
+            let val_hauteur_totale = $('#hauteur_total').val();
+            let val_hauteur_tronc = $('#hauteur_tronc').val();
+            let val_diametre_tronc = $('#diametre_tronc').val();
+            let val_age_estime = $('#age_estime').val();
 
-        data = 'action=ajouter_toutes_valeur' + '&val_espece=' + val_espece + '&val_latitude=' + val_latitude +
-            '&val_longitude=' + val_longitude + '&val_hauteur_totale=' + val_hauteur_totale +
-            '&val_hauteur_tronc=' + val_hauteur_tronc + '&val_diametre_tronc=' + val_diametre_tronc +
-            '&val_age_estime=' + val_age_estime + '&val_etat=' + val_etat + '&val_stade=' + val_stade +
-            '&val_remarquable=' + val_remarquable + '&val_pied=' + val_pied + '&val_revetement=' + val_revetement +
-            '&val_port=' + val_port + '&val_feuillage=' + val_feuillage;
+            let val_etat = $('#option_etat').val();
+            let val_stade = $('#option_stade').val();
+            let val_remarquable = $('#option_remarquable').val();
+            let val_pied = $('#option_pied').val();
+            let val_revetement = $('#option_revetement').val();
+            let val_port = $('#option_port').val();
+            let val_feuillage = $('#option_feuillage').val();
 
-        ajaxRequest('POST', 'PHP/request_post.php',function(response)  {
+            let data = {
+                val_espece: val_espece,
+                val_latitude: val_latitude,
+                val_longitude: val_longitude,
+                val_hauteur_totale: val_hauteur_totale,
+                val_hauteur_tronc: val_hauteur_tronc,
+                val_diametre_tronc: val_diametre_tronc,
+                val_age_estime: val_age_estime,
+                val_etat: val_etat,
+                val_stade: val_stade,
+                val_remarquable: val_remarquable,
+                val_pied: val_pied,
+                val_revetement: val_revetement,
+                val_port: val_port,
+                val_feuillage: val_feuillage
+            };
 
-            console.log(response);
-            if (response === "error") {
-                alert("Veuillez remplir tous les champs");
-            }else {
-                alert("Arbre ajouté avec succès");
-            }
+            data = 'action=ajouter_toutes_valeur' + '&val_espece=' + val_espece + '&val_latitude=' + val_latitude +
+                '&val_longitude=' + val_longitude + '&val_hauteur_totale=' + val_hauteur_totale +
+                '&val_hauteur_tronc=' + val_hauteur_tronc + '&val_diametre_tronc=' + val_diametre_tronc +
+                '&val_age_estime=' + val_age_estime + '&val_etat=' + val_etat + '&val_stade=' + val_stade +
+                '&val_remarquable=' + val_remarquable + '&val_pied=' + val_pied + '&val_revetement=' + val_revetement +
+                '&val_port=' + val_port + '&val_feuillage=' + val_feuillage + '&id_user =' + localStorage.getItem('id_user');
 
-        }, data);
+            ajaxRequest('POST', 'PHP/request_post.php',function(response)  {
+
+                console.log(response);
+                if (response === "error") {
+                    alert("Veuillez remplir tous les champs");
+                }else {
+                    alert("Arbre ajouté avec succès");
+                }
+
+            }, data);
+
+        }
+
 
     });
 

@@ -24,7 +24,6 @@ if($requestMethod == 'GET'){
 }
 else if($requestMethod == 'POST'){
 
-    $id_user = 1; //On pourra le récupérer en changeant l'url
     $val_longitude_base = isset($_POST['val_longitude']) ? $_POST['val_longitude'] : '';
     $val_longitude = floatval($val_longitude_base);
 
@@ -62,6 +61,7 @@ else if($requestMethod == 'POST'){
     $val_feuillage = Arbre::recupIdFeuillage($id_val_feuillage);
 
     $val_remarquable = isset($_POST['val_remarquable']) ? $_POST['val_remarquable'] : '';
+    $id_user = isset($_POST['id_user']) ? $_POST['id_user'] : '';
 
     if($val_remarquable == 'Oui'){
 
