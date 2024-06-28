@@ -254,7 +254,6 @@ $(document).ready(function (){
 
                 console.log(response);
 
-                console.log(response);
                 if (response === "error") {
                     console.log("Erreur lors de l'ajout de l'arbre");
                     document.getElementById('error-ajouter-show').style.display = 'block';
