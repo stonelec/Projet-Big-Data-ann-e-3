@@ -24,6 +24,7 @@ if($requestMethod == 'GET'){
 }
 else if($requestMethod == 'POST'){
 
+    $id = isset($_POST['id']) ? $_POST['id'] : NULL;
     $val_longitude_base = isset($_POST['val_longitude']) ? $_POST['val_longitude'] : '';
     $val_longitude = floatval($val_longitude_base);
 

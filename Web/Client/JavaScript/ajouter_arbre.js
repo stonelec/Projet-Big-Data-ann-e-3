@@ -248,7 +248,7 @@ $(document).ready(function (){
                 '&val_hauteur_tronc=' + val_hauteur_tronc + '&val_diametre_tronc=' + val_diametre_tronc +
                 '&val_age_estime=' + val_age_estime + '&val_etat=' + val_etat + '&val_stade=' + val_stade +
                 '&val_remarquable=' + val_remarquable + '&val_pied=' + val_pied + '&val_revetement=' + val_revetement +
-                '&val_port=' + val_port + '&val_feuillage=' + val_feuillage + '&id_user =' + id_user;
+                '&val_port=' + val_port + '&val_feuillage=' + val_feuillage + '&id=' + id_user;
 
             ajaxRequest('POST', 'PHP/request_post.php',function(response)  {
 
