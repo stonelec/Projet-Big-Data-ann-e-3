@@ -12,9 +12,9 @@ sudo apt install postgresql
 sudo apt install python3
 sudo apt-get install pip
 
-pip install pandas --break-system-packages
-pip install asyncpg --break-system-packages
-pip install scikit-learn --break-system-packages
+sudo pip install pandas --break-system-packages
+sudo pip install asyncpg --break-system-packages
+sudo pip install scikit-learn --break-system-packages
 
 sudo apt install git
 ```
