@@ -15,30 +15,11 @@ class User {
         $db = DB::connexion();
 
         $request = 'SELECT nom_user 
-                    FROM user 
+                    FROM public.user 
                     WHERE id_user=:id_user;';
 
         $statement = $db->prepare($request);
         $statement->bindParam(':id_user', $id_user);
-        $statement->execute();
-
-        return $statement->fetch()[0];
-    }
-
-    static function getPrenom($mdp){
-        /**
-         * Fonction qui permet de récupérer le prénom d'un utilisateur
-         * @param $id_album
-         * @return mixed
-         */
-        $db = DB::connexion();
-
-        $request = 'SELECT prenom_user
-                    FROM public.user
-                    WHERE password_user=:mdp;';
-
-        $statement = $db->prepare($request);
-        $statement->bindParam(':mdp', $mdp);
         $statement->execute();
 
         return $statement->fetch()[0];

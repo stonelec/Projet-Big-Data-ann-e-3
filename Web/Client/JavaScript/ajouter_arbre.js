@@ -1,3 +1,21 @@
+
+
+window.onload(Event => {
+
+    if(localStorage.getItem('id_user') != null){
+
+        ajaxRequest('GET', '/PHP/request.php/action=recup_user&id=' + localStorage.getItem('id_user'), function(response){
+
+            let nom_user = response;
+
+            $('#connect').html(nom_user);
+
+        });
+
+    }
+
+})
+
 // -------------------------------------------------------------------------------------------------------------------------
 // -------------------- Récupérer tous les noms de la base de données pour les mettres dans les options --------------------
 //--------------------------------------------------------------------------------------------------------------------------

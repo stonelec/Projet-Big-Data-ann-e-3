@@ -150,6 +150,11 @@ switch ($requestAction) {
         echo json_encode($result);
         break;
 
+    case  'recup_user':
+        $result = User::getNom($id);
+        echo json_encode($result);
+        break;
+
 # ----------------------- Prédire les infos -----------------------
 
     case 'prediction_taille':
