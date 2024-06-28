@@ -35,7 +35,7 @@ class User {
 
         $request = 'SELECT prenom_user
                     FROM public.user
-                    WHERE id_user=:id_user;';
+                    WHERE email_user=:id_user;';
 
         $statement = $db->prepare($request);
         $statement->bindParam(':id_user', $id_user);
