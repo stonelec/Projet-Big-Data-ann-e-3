@@ -143,15 +143,17 @@ switch ($requestMethod) {
 
             case 'ajouter_toutes_valeur':
 
-                if($val_longitude =! null && $val_latitude =! null && $val_hauteur_totale =! null && $val_hauteur_tronc =! null){
+                if($val_longitude =! null && $val_latitude =! null && $val_hauteur_totale =! null && $val_hauteur_tronc =! null &&
+                $val_diametre_tronc =! null && $val_etat =! null && $val_stade =! null && $val_port =! null && $val_pied=! null &&
+                                    $val_espece =! null && $val_remarquable =! null && $val_feuillage =! null && $val_age_estime =! null && $val_revetement){
 
-                    echo json_encode("marche pas");
+                    echo json_encode("c'est good");
                     break;
 
                 }
 
                 else{
-                    echo json_encode("c'est good");
+                    echo json_encode("marche pas");
                     break;
                 }
                 /*
