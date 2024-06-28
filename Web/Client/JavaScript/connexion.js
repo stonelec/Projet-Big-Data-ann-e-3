@@ -19,7 +19,7 @@ $(document).ready(function (){
         let data = []
         data = ['action=id_du_user' + '&mot_de_passe=' + mot_de_passe + '&email=' + val_email]
 
-        ajaxRequest('GET', 'PHP/request.php', function (response){
+        ajaxRequest('GET', 'PHP/request.php/', function (response){
 
             if(response == null){
 
