@@ -21,6 +21,7 @@ $(document).ready(function (){
                 console.log("L'id : ");
                 console.log(response);
                 //Ecrire dans la page qu'il y a une erreur
+                document.getElementById('connexion-error').style.display = 'block';
 
 
             }

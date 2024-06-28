@@ -89,7 +89,7 @@ CREATE TABLE public.arbre(
                              remarquable      INT  NOT NULL ,
                              latitude         FLOAT  NOT NULL ,
                              longitude        FLOAT  NOT NULL ,
-                             age_estim        INT  NOT NULL ,
+                             age_estim        INT ,
                              revetement       INT  NOT NULL ,
                              id_user          INT  NOT NULL ,
                              id_etat_arbre    INT  NOT NULL ,

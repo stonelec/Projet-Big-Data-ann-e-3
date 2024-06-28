@@ -6,6 +6,7 @@
     justify-content: center;
     width: 80%;
     margin-top: 1.8rem;
+    margin-bottom: 18rem;
 }
 .connexion .connexion-image{
     height: 10rem;
@@ -34,9 +35,6 @@
     padding: 15px;
 
 }
-.connexion-form .btn-brown{
-    margin: 1rem 0;
-}
 .connexion-form .register{
     display: flex;
     flex-direction: row;
@@ -46,14 +44,20 @@
 .connexion-form .register p{
     margin-right: 0.5rem;
 }
-.connexion-form .register a{
-    margin-right: 0.5rem;
-    color: var(--brown);
-    text-decoration: underline;
+.connexion-form #btn-connexion{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
 }
-.connexion-form .register a:hover{
-    color: var(--dark-beige);
+.connexion-form #btn-connexion button{
+    width: 100%;
+    margin-top: 1.5rem;
 }
-.connexion-form .register a:active{
-    color: var(--brown);
+.connexion-form #btn-connexion #connexion-error{
+    color: red;
+    margin-top: 0.5rem;
+    margin-bottom: -0.4rem;
 }
