@@ -38,7 +38,6 @@ $(document).ready(function (){
 
     });
 
-
     let option_etat;
     let option_stade;
     let option_pied;
@@ -212,7 +211,8 @@ $(document).ready(function (){
 
         if(localStorage.getItem('id_user') != null){
 
-
+            let id_user =  localStorage.getItem('id_user');
+            console.log(id_user);
             let val_espece = $('#espece').val();
             let val_latitude = $('#latitude').val();
             let val_longitude = $('#longitude').val();
