@@ -146,8 +146,8 @@ switch ($requestAction) {
         break;
 
     case 'id_du_user' :
-        $result = User::getId($mail,$password);
-        echo json_encode($result);
+        //$result = User::getId($mail,$password);
+        echo json_encode($password);
         break;
 
 # ----------------------- Prédire les infos -----------------------
