@@ -13,6 +13,9 @@ $(document).ready(function (){
         let val_email = $('.mail').val();
         let mot_de_passe = $('.mot_de_passe').val();
 
+        console.log(val_email);
+        console.log(mot_de_passe);
+
         ajaxRequest('GET', 'PHP/request.php?action=id_du_user&email=' + val_email + "&mot_de_passe=" + mot_de_passe, function (response){
 
             if(response == null){
@@ -36,13 +39,6 @@ $(document).ready(function (){
 
         //console.log(val_email);
         //console.log(mot_de_passe);
-
-        /*
-        ajaxRequest('GET', 'PHP/request.php?action=verif&login=' + login, function (response){
-
-            console.log(response);
-
-        })*/
 
         /*
 
