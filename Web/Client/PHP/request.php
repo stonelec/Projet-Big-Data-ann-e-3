@@ -146,7 +146,7 @@ switch ($requestAction) {
         break;
 
     case 'id_du_user' :
-        $result = User::getPrenom($mail);
+        $result = User::getPrenom($mail, $password);
         echo json_encode($result);
         break;
 

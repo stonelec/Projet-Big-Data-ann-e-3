@@ -25,7 +25,7 @@ class User {
         return $statement->fetch()[0];
     }
 
-    static function getPrenom($id_user){
+    static function getPrenom($mail, $mdp){
         /**
          * Fonction qui permet de récupérer le prénom d'un utilisateur
          * @param $id_album
@@ -35,10 +35,11 @@ class User {
 
         $request = 'SELECT prenom_user
                     FROM public.user
-                    WHERE email_user=:id_user;';
+                    WHERE email_user=:mail AND mot_de_passe=:mdp;';
 
         $statement = $db->prepare($request);
-        $statement->bindParam(':id_user', $id_user);
+        $statement->bindParam(':mail', $mail);
+        $statement->bindParam(':mdp', $mdp);
         $statement->execute();
 
         return $statement->fetch()[0];
