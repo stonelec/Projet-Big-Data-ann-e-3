@@ -11,15 +11,15 @@ $(document).ready(function (){
         console.log("ENVOYER")
 
         let val_email = $('.mail').val();
-        let mot_de_passe = $('.mot_de_passe').val();
+        let mdp = $('.mot_de_passe').val();
 
         console.log(val_email);
-        console.log(mot_de_passe);
+        console.log(mdp);
 
         let data = []
-        data = ['&mot_de_passe=' + mot_de_passe + '&email=' + val_email]
+        data = ['action=id_du_user' + '&mot_de_passe=' + mdp + '&email=' + val_email]
 
-        ajaxRequest('GET', 'PHP/request.php?action=id_du_user', function (response){
+        ajaxRequest('GET', 'PHP/request.php', function (response){
 
             if(response == null){
 
