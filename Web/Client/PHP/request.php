@@ -11,11 +11,13 @@ $requestMethod = $_SERVER['REQUEST_METHOD'];
 $requestAction = isset($_GET['action']) ? $_GET['action'] : '';
 $id = isset($_GET['id']) ? $_GET['id'] : NULL;
 
+echo json_encode($requestAction);
+
 $mail = isset($_GET['email']) ? $_GET['email'] : NULL;
 $password = isset($_GET['mot_de_passe']) ? $_GET['mot_de_passe'] : NULL;
 
 $result = null;
-
+/*
 switch ($requestAction) {
 
 # =============================================================
@@ -393,6 +395,6 @@ switch ($requestAction) {
         break;
 
 }
-
+*/
 ?>
 
