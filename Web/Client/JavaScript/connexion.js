@@ -17,9 +17,9 @@ $(document).ready(function (){
         console.log(mot_de_passe);
 
         let data = []
-        data = ['action=id_du_user' + '&mot_de_passe=' + mot_de_passe + '&email=' + val_email]
+        data = ['&mot_de_passe=' + mot_de_passe + '&email=' + val_email]
 
-        ajaxRequest('GET', 'PHP/request.php?', function (response){
+        ajaxRequest('GET', 'PHP/request.php?action=id_du_user', function (response){
 
             if(response == null){
 
