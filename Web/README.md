@@ -14,6 +14,7 @@ sudo apt-get install pip
 
 pip install pandas --break-system-packages
 pip install asyncpg --break-system-packages
+pip install scikit-learn --break-system-packages
 
 sudo apt install git
 ```
