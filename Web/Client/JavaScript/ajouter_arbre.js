@@ -265,7 +265,6 @@ $(document).ready(function (){
 
         }
 
-
     });
 
 });
