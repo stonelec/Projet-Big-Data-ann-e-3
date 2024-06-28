@@ -3,7 +3,29 @@ let url = new URL(url_string);
 let id = url.searchParams.get("id");
 console.log(id);
 
+$(document).ready(function () {
 
+    if (localStorage.getItem('id_user') != null) {
+
+        console.log("ID USER", localStorage.getItem('id_user'));
+
+        let data = []
+
+        data = ['action=recup_user' + '&id=' + localStorage.getItem('id_user')];
+
+        ajaxRequest('GET', 'PHP/request.php', function (response) {
+
+            console.log("LA REPONSE", response);
+
+            let nom_user = response;
+
+            $('#connect').html(nom_user);
+
+        }, data);
+
+    }
+
+});
 
 function afficherInfos(data_infos) {
     const attributsInfos = [
