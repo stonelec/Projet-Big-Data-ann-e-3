@@ -1,8 +1,3 @@
-
-//1er on récupère le mail et le mot de passe :
-//2ème on vérifie avec la base de donnée si ça correspond
-//3ème, on trouve un moyen de récupérer l'id du user
-
 $(document).ready(function (){
 
     $('.form_connexion').submit(function(event) {
