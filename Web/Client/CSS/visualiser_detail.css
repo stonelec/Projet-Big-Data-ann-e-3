@@ -1,0 +1,70 @@
+.page{
+    background-color: white;
+    background-image: none;
+}
+.form-individual{
+    margin-top: 1rem;
+}
+#arbre-top{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    justify-content: space-around;
+
+}
+#arbre-top img{
+    width: 80%;
+    height: auto;
+    margin-left: 2%;
+
+}
+#arbre-tronc{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    justify-content: space-around;
+    width: 100%;
+}
+#arbre-tronc #tronc-gauche{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: start;
+    width: 50%;
+    height: 100%;
+}
+#arbre-tronc #tronc-droit{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: space-between;
+    width: 50%;
+    height: 100%;
+}
+#arbre-tronc #tronc-centre{
+    width: 6%;
+    height: 1px;
+    background-color: var(--brown);
+}
+#arbre-sol {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    justify-content: space-around;
+}
+#arbre-sol img{
+    width: 25%;
+    height: auto;
+    margin-right: 1%;
+}
+.card-marron{
+    margin-top: 30%;
+
+}

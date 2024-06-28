@@ -45,7 +45,7 @@ html {
     margin-bottom: 7rem;
 }
 .big-bottom-space{
-    margin-bottom: 30rem;
+    margin-bottom: 40rem;
 }
 /*------------------------boutons------------*/
 /*marron*/
@@ -95,10 +95,7 @@ html {
     margin-top: 1.5rem;
 }
 /*------------------------cards------------*/
-.card-content .value {
-    color: #000;
-    float: right;
-}
+
 .card-content .item {
     display: flex;
     justify-content: space-between;
@@ -111,6 +108,7 @@ html {
     padding: 0 15px 10px 15px;
     border-color: white;
     background-color: white;
+    height: auto;
 }
 .card-header-blanche {
     background-color: white;
@@ -127,7 +125,31 @@ html {
     margin-right: 50px;
 }
 /*verte*/
+.card-green {
+    width: 250px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    padding: 0 15px 10px 15px;
+    border-color: white;
+    background-color: var(--dark-green);
+}
+.card-header-green {
+    background-color: var(--dark-green);
+    color: white;
+    border-radius: 60px;
+    padding: 5px 10px 5px 10px;
+    font-weight: bold;
+    border-color: white;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 
+}
+.card-green-content .label {
+    color: var(--dark-beige);
+    font-weight: bold;
+}
+.card-green-content .value {
+    color: white;
+}
 /*marron*/
 .card-marron {
     width: 250px;
@@ -138,8 +160,8 @@ html {
     background-color: var(--brown);
 }
 .card-header-marron {
-    width: 5rem;
-    background-color: white;
+    background-color: var(--brown);
+    color: white;
     border-radius: 60px;
     padding: 5px 10px 5px 10px;
     font-weight: bold;
@@ -147,9 +169,38 @@ html {
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 
 }
-.card-content .label {
+.card-marron-content .label {
     color: var(--dark-beige);
     font-weight: bold;
+}
+.card-marron-content .value {
+    color: white;
+}
+/*beige*/
+.card-beige {
+    width: 300px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    padding: 0 15px 10px 15px;
+    border-color: white;
+    background-color: var(--dark-beige);
+}
+.card-header-beige {
+    background-color: var(--dark-beige);
+    color: white;
+    border-radius: 60px;
+    padding: 5px 10px 5px 10px;
+    font-weight: bold;
+    border-color: white;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+
+}
+.card-beige-content .label {
+    color: var(--brown);
+    font-weight: bold;
+}
+.card-beige-content .value {
+    color: white;
 }
 /*result*/
 .card-resulte{
@@ -222,6 +273,7 @@ html {
     top: 0;
     width: 100%;
     position: fixed;
+    z-index: 1;
 }
 .navbar-custom .collapse .navbar-nav {
     font-size: 1.1rem; /* taille de la police */
@@ -272,7 +324,7 @@ html {
 /* =================================== PAGE =================================== */
 .page {
     display: grid;
-    grid-template-columns: 8% 84% 8%;
+    grid-template-columns: 10% 80% 10%;
     margin-top: 15px;
     height: auto;
     width: 100%;
@@ -319,7 +371,6 @@ html {
 
 .grid-item {
     background-color: rgba(255, 255, 255, 0.8);
-    border: 1px solid rgba(0, 0, 0, 0.8);
     padding: 20px;
     font-size: 30px;
     text-align: center;

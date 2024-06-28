@@ -57,25 +57,28 @@ function printOption() {
 
                     </div>`
     );
-    let option = document.getElementById("choix-option");
-    option.addEventListener("click", () => {printTrier()});
+
 
     if (colonne === "Remarquable") {
         document.getElementById("choix-option").insertAdjacentHTML(
             "afterbegin",
-            `<select class="form-select" aria-label="Default select example">
+            `<select class="form-select" aria-label="Default select example" id="choix-option-click">
                      <option selected disabled="disabled">Sélection du caractère remarquable</option>
                      <option value="1">oui</option>
                      <option value="0">non</option>
                   </select>`
         );
+        let option = document.getElementById("choix-option-click");
+        option.addEventListener("click", () => {printTrier()});
     }
     if (colonne === "Port") {
         ajaxRequest('GET', 'PHP/request_post.php?action=ajouter_arbre_port', function(response) {
             const choix_option = document.getElementById('choix-option');
             const form_select = document.createElement('select');
             form_select.classList.add('form-select');
+            form_select.id = "choix-option-click";
             form_select.setAttribute('aria-label', 'Default select example');
+
 
             const option_title = document.createElement('option');
             option_title.selected = true;
@@ -90,6 +93,8 @@ function printOption() {
                 form_select.appendChild(option_port);
             }
             choix_option.appendChild(form_select);
+            let option = document.getElementById("choix-option-click");
+            option.addEventListener("click", () => {printTrier()});
         });
     }
     if (colonne === "Pied") {
@@ -97,6 +102,7 @@ function printOption() {
             const choix_option = document.getElementById('choix-option');
             const form_select = document.createElement('select');
             form_select.classList.add('form-select');
+            form_select.id = "choix-option-click";
             form_select.setAttribute('aria-label', 'Default select example');
 
             const option_title = document.createElement('option');
@@ -112,6 +118,8 @@ function printOption() {
                 form_select.appendChild(option_pied);
             }
             choix_option.appendChild(form_select);
+            let option = document.getElementById("choix-option-click");
+            option.addEventListener("click", () => {printTrier()});
         });
     }
     if (colonne === "Stade") {
@@ -119,6 +127,7 @@ function printOption() {
             const choix_option = document.getElementById('choix-option');
             const form_select = document.createElement('select');
             form_select.classList.add('form-select');
+            form_select.id = "choix-option-click";
             form_select.setAttribute('aria-label', 'Default select example');
 
             const option_title = document.createElement('option');
@@ -134,6 +143,8 @@ function printOption() {
                 form_select.appendChild(option_stade);
             }
             choix_option.appendChild(form_select);
+            let option = document.getElementById("choix-option-click");
+            option.addEventListener("click", () => {printTrier()});
         });
     }
     if (colonne === "Etat") {
@@ -141,6 +152,7 @@ function printOption() {
             const choix_option = document.getElementById('choix-option');
             const form_select = document.createElement('select');
             form_select.classList.add('form-select');
+            form_select.id = "choix-option-click";
             form_select.setAttribute('aria-label', 'Default select example');
 
             const option_title = document.createElement('option');
@@ -156,8 +168,11 @@ function printOption() {
                 form_select.appendChild(option_etat);
             }
             choix_option.appendChild(form_select);
+            let option = document.getElementById("choix-option-click");
+            option.addEventListener("click", () => {printTrier()});
         });
     }
+
 }
 
 function printTrier() {
@@ -249,7 +264,8 @@ function afficherTableau(data_arbres) {
     // On créé le header du tableau
     const thead = document.createElement('thead');
     thead.style.position = 'sticky';
-    thead.style.top = '0';
+    thead.style.top = '65px';
+    thead.style.zIndex = '1';
     const headRow = document.createElement('tr');
 
     for (header of HeaderElement) {
@@ -314,7 +330,13 @@ function afficherTableau(data_arbres) {
                 link.href = "visualiser_detail.html?id=" + data_arbres[id_arbre][attribute];
                 link.textContent = `${data_arbres[id_arbre][attribute]}`;
                 cell.appendChild(link);
-            }
+            }/*
+            else if (attribute === "longitude" || attribute === "latitude") {
+                console.log(data_arbres[id_arbre][attribute])
+                let round = data_arbres[id_arbre][attribute];
+                round = Number(round).toFixed(5);
+                cell.textContent = `${round}`;
+            }*/
             else {
                 cell.textContent = `${data_arbres[id_arbre][attribute]}`;
             }
