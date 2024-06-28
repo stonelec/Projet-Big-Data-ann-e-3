@@ -146,11 +146,12 @@ switch ($requestMethod) {
                 if($id =! null && $val_longitude =! null && $val_latitude =! null && $val_hauteur_totale =! null && $val_hauteur_tronc =! null &&
                 $val_diametre_tronc =! null && $val_etat =! null && $val_stade =! null && $val_port =! null && $val_pied=! null &&
                                     $val_espece =! null && $val_remarquable =! null && $val_feuillage =! null && $val_age_estime =! null && $val_revetement){
-
+                    /*
                     $result = Arbre::addNewArbre($id_user, $val_longitude, $val_latitude, $val_hauteur_totale, $val_hauteur_tronc, $val_diametre_tronc, $val_etat, $val_stade,
                         $val_port, $val_pied, $val_espece, $val_remarquable, $val_feuillage, $val_age_estime, $val_revetement);
                     echo json_encode($result);
-
+                    */
+                    echo json_encode("good");
                 }
 
                 else{
