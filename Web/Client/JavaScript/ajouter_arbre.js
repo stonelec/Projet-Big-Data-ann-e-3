@@ -12,7 +12,7 @@ $(document).ready(function (){
 
         data = ['action=recup_user' + '&id=' + localStorage.getItem('id_user')];
 
-        ajaxRequest('GET', '/PHP/request.php', function(response){
+        ajaxRequest('GET', 'PHP/request.php', function(response){
 
             console.log("LA REPONSE", response);
 
