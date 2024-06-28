@@ -13,8 +13,6 @@ $(document).ready(function (){
         let val_email = $('.mail').val();
         let mot_de_passe = $('.mot_de_passe').val();
 
-        let login = [val_email,mot_de_passe];
-
         ajaxRequest('GET', 'PHP/request.php?action=id_du_user&email=' + val_email + "&mot_de_passe=" + mot_de_passe, function (response){
 
             if(response == null){
