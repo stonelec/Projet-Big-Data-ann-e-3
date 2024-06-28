@@ -25,7 +25,6 @@ if($requestMethod == 'GET'){
 else if($requestMethod == 'POST'){
 
     $id = $_POST['id'];
-    $id_user = intval($id);
 
     $val_longitude_base = isset($_POST['val_longitude']) ? $_POST['val_longitude'] : '';
     $val_longitude = floatval($val_longitude_base);
@@ -145,9 +144,9 @@ switch ($requestMethod) {
 
             case 'ajouter_toutes_valeur':
 
-                //$result = Arbre::addNewArbre($id_user, $val_longitude, $val_latitude, $val_hauteur_totale, $val_hauteur_tronc, $val_diametre_tronc, $val_etat, $val_stade,
+                //$result = Arbre::addNewArbre($id, $val_longitude, $val_latitude, $val_hauteur_totale, $val_hauteur_tronc, $val_diametre_tronc, $val_etat, $val_stade,
                 //        $val_port, $val_pied, $val_espece, $val_remarquable, $val_feuillage, $val_age_estime, $val_revetement);
-                echo json_encode($id_user);
+                echo json_encode($id);
 
                 break;
 
