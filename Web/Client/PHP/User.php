@@ -284,10 +284,8 @@ class User {
                     WHERE email_user = :mail AND password_user = :password;';
 
         $statement = $db->prepare($request);
-
-        $statement->bindParam(':mail', $mail);
         $statement->bindParam(':password', $password);
-        $statement = $db->prepare($request);
+        $statement->bindParam(':mail', $mail);
         $statement->execute();
 
         return $statement->fetch()[0];
