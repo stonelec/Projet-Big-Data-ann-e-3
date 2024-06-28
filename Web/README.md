@@ -51,16 +51,16 @@ Base de donnée :
     - `php/` : Contient les scripts PHP.
     - `___.html` : Différentes pages html.
 
-- `python/`
-    - `fonctionnalite1/` : Contient les .pkl pour la fonctionnalité 1.
-    - `fonctionnalite2/` : Contient les .pkl pour la fonctionnalité 2.
-    - `fonctionnalite3/` : Contient les .pkl pour la fonctionnalité 3.
-    - `script/` : Contient les scripts des différentes fonctionnalités.
+    - `python/`
+        - `fonctionnalite1/` : Contient les .pkl pour la fonctionnalité 1.
+        - `fonctionnalite2/` : Contient les .pkl pour la fonctionnalité 2.
+        - `fonctionnalite3/` : Contient les .pkl pour la fonctionnalité 3.
+        - `script/` : Contient les scripts des différentes fonctionnalités.
 
-- `SQL/`
-    - `data.sql` : Contient les scripts SQL pour la gestion des données.
-    - `model.sql` : Contient les scripts SQL pour la création du modèle de base de données.
-    - `import_data.py` : Fichier python qui import le fichier Data_Arbres.csv.
-    - `Data_Arbres.csv` : Fichier contenant les informations des données.
+    - `SQL/`
+        - `data.sql` : Contient les scripts SQL pour la gestion des données.
+        - `model.sql` : Contient les scripts SQL pour la création du modèle de base de données.
+        - `import_data.py` : Fichier python qui import le fichier Data_Arbres.csv.
+        - `Data_Arbres.csv` : Fichier contenant les informations des données.
 
 - `README.md` : Ce fichier de documentation décrivant le projet.
