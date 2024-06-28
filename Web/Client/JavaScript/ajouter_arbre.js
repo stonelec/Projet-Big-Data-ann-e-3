@@ -209,22 +209,40 @@ $(document).ready(function (){
 
         if(localStorage.getItem('id_user') != null){
 
-            let id_user =  parseInt(localStorage.getItem('id_user'));
-            let val_espece = $('#espece').val();
-            let val_latitude = $('#latitude').val();
-            let val_longitude = $('#longitude').val();
-            let val_hauteur_totale = $('#hauteur_total').val();
-            let val_hauteur_tronc = $('#hauteur_tronc').val();
-            let val_diametre_tronc = $('#diametre_tronc').val();
-            let val_age_estime = $('#age_estime').val();
+            let id_user =  0;
+            let val_espece = '';
+            let val_latitude = 0;
+            let val_longitude = 0;
+            let val_hauteur_totale = 0;
+            let val_hauteur_tronc = 0;
+            let val_diametre_tronc = 0;
+            let val_age_estime = 0;
 
-            let val_etat = $('#option_etat').val();
-            let val_stade = $('#option_stade').val();
-            let val_remarquable = $('#option_remarquable').val();
-            let val_pied = $('#option_pied').val();
-            let val_revetement = $('#option_revetement').val();
-            let val_port = $('#option_port').val();
-            let val_feuillage = $('#option_feuillage').val();
+            let val_etat = '';
+            let val_stade = '';
+            let val_remarquable = '';
+            let val_pied = '';
+            let val_revetement = '';
+            let val_port = '';
+            let val_feuillage = '';
+
+
+            id_user =  parseInt(localStorage.getItem('id_user'));
+            val_espece = $('#espece').val();
+            val_latitude = $('#latitude').val();
+            val_longitude = $('#longitude').val();
+            val_hauteur_totale = $('#hauteur_total').val();
+            val_hauteur_tronc = $('#hauteur_tronc').val();
+            val_diametre_tronc = $('#diametre_tronc').val();
+            val_age_estime = $('#age_estime').val();
+
+            val_etat = $('#option_etat').val();
+            val_stade = $('#option_stade').val();
+            val_remarquable = $('#option_remarquable').val();
+            val_pied = $('#option_pied').val();
+            val_revetement = $('#option_revetement').val();
+            val_port = $('#option_port').val();
+            val_feuillage = $('#option_feuillage').val();
 
             console.log(id_user);
             console.log(val_espece);
@@ -242,22 +260,7 @@ $(document).ready(function (){
             console.log(val_port);
             console.log(val_feuillage);
 
-            let data = {
-                val_espece: val_espece,
-                val_latitude: val_latitude,
-                val_longitude: val_longitude,
-                val_hauteur_totale: val_hauteur_totale,
-                val_hauteur_tronc: val_hauteur_tronc,
-                val_diametre_tronc: val_diametre_tronc,
-                val_age_estime: val_age_estime,
-                val_etat: val_etat,
-                val_stade: val_stade,
-                val_remarquable: val_remarquable,
-                val_pied: val_pied,
-                val_revetement: val_revetement,
-                val_port: val_port,
-                val_feuillage: val_feuillage
-            };
+            let data = [];
 
             data = 'action=ajouter_toutes_valeur' + '&val_espece=' + val_espece + '&val_latitude=' + val_latitude +
                 '&val_longitude=' + val_longitude + '&val_hauteur_totale=' + val_hauteur_totale +
