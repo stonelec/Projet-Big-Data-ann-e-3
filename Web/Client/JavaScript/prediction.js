@@ -20,6 +20,20 @@ $(document).ready(function () {
 
     }
 
+    const bouton_connect = document.getElementById("connect");
+
+    bouton_connect.addEventListener("click", () => {
+
+        if (localStorage.getItem('id_user') != null) {
+
+            localStorage.setItem('id_user', null);
+
+            $('#connect').html('Connexion');
+
+        }
+
+    });
+
 });
 
 

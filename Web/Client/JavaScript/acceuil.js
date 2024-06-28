@@ -20,7 +20,7 @@ $(document).ready(function () {
 
     }
 
-    const bouton_connect = document.getElementById("connect")
+    const bouton_connect = document.getElementById("connect");
 
     bouton_connect.addEventListener("click", () => {
 
