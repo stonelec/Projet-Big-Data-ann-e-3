@@ -2,7 +2,7 @@
     margin-top: 2rem;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
     width: 100%;
     align-items: flex-end;
     height: 30px;
@@ -11,10 +11,13 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    width: 45%;
-    height: 30px;
+    width: 60%;
     margin-left: auto;
-    margin-right: 5%;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    border-radius: 20px;
+    padding: 5px 20px 5px 20px;
+
 }
 .tri-stock .tri select{
     border-radius: 20px;
@@ -107,10 +110,8 @@
     flex-direction: row;
     align-items: center;
     align-content: center;
-    justify-content: space-around;
     margin-top: 1rem;
-    margin-left: auto;
-    margin-right: 22.5%;
+    margin-left: 31.65rem;
     background-color: white;
     padding: 8px;
     border-radius: 15px 15px 0 0;
@@ -134,4 +135,22 @@
     flex-direction: column;
     align-items: center;
     min-height: 80vh;
+}
+.tri-stock #nb_total_arbre{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    width: 25%;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    border-radius: 20px;
+    padding : 20px 5px 5px 5px;
+    height: 125%;
+}
+.tri-stock #nb_total_arbre #number_total_arbre{
+    font-weight: bold;
+    color: var(--dark-beige);
+    margin-left: 20px;
 }

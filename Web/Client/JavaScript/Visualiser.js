@@ -56,7 +56,12 @@ function addTable() {
     document.getElementById("contenu").insertAdjacentHTML(
         "beforebegin",
         `<div class="tri-stock">
+               <div id="nb_total_arbre">
+                    <p>Nombre d'abre séléctioner :</p>
+                    <p id="number_total_arbre"></p>
+                </div>
                 <div class="tri">
+
                     <div>
                         Sélectionner le tri :
                     </div>
@@ -239,6 +244,11 @@ document.addEventListener('click', function(event) {
         document.getElementById("contenu").insertAdjacentHTML(
             "beforebegin",
             `<div class="tri-stock">
+               <div id="nb_total_arbre">
+                    <p>Nombre d'abre séléctioner :</p>
+                    <p id="number_total_arbre"></p>
+                </div>
+
                 <div class="tri">
                     <div>
                         Sélectionner le tri :
@@ -291,14 +301,13 @@ function afficherTableau(data_arbres) {
     let nb_arb = data_arbres.length;
     console.log("nb_arb :")
     console.log(nb_arb)
-
     const container = document.getElementById('contenu');
     container.innerHTML = ''; // On supprime le contenu existant
     // On créé le tableau
     const table = document.createElement('table');
     table.classList.add('table', 'table-bordered', 'table-striped', 'table-hover', 'table-light', 'bottom-space');
     const HeaderElement = [
-        "ID", "Espèce", "Etat", "Stade", "Pied", "Port", "Remarquable", "Hauteur Totale", "Hauteur Tronc", "Diamètre", "Latitude", "Longitude","Prédire"
+        "ID", "Espèce", "Etat", "Stade", "Pied", "Port", "Remarquable", "Hauteur Totale (m)", "Hauteur Tronc (m)", "Diamètre (cm)", "Latitude", "Longitude","Prédire"
     ];
     // On créé le header du tableau
     const thead = document.createElement('thead');
@@ -369,13 +378,13 @@ function afficherTableau(data_arbres) {
                 link.href = "visualiser_detail.html?id=" + data_arbres[id_arbre][attribute];
                 link.textContent = `${data_arbres[id_arbre][attribute]}`;
                 cell.appendChild(link);
-            }/*
+            }
             else if (attribute === "longitude" || attribute === "latitude") {
                 console.log(data_arbres[id_arbre][attribute])
                 let round = data_arbres[id_arbre][attribute];
                 round = Number(round).toFixed(5);
                 cell.textContent = `${round}`;
-            }*/
+            }
             else {
                 cell.textContent = `${data_arbres[id_arbre][attribute]}`;
             }
@@ -383,8 +392,11 @@ function afficherTableau(data_arbres) {
         }
         tbody.appendChild(row);
     }
+
     table.appendChild(tbody);
     container.appendChild(table);
+    document.getElementById('number_total_arbre').textContent = nb_arb;
+
 }
 function addCarte(mode) {
     //console.log("addCarte");

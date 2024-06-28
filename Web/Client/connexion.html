@@ -53,7 +53,7 @@
     </ul>
 </nav>
 <!-- =================================== PAGE ================================== -->
-<div class="conteneur page">
+<div class="conteneur page ">
     <div class="box"></div>
     <div class="box centre">
         <div class="connexion">
@@ -62,7 +62,7 @@
             </div>
             <p class="connexion-titre">Connectez - vous<br> à votre compte</p>
             <p class="connexion-sous-titre">Bon retour ! <br> Merci de renseigner les informations.</p>
-            <div class="connexion-form bottom-space">
+            <div class="connexion-form ">
                 <form class="form_connexion" method="post" id="LoginForm">
                     <div class="mb-3">
                         <label for="inputEmail" class="form-label">Email</label>
@@ -72,11 +72,11 @@
                         <label for="inputPassword5" class="form-label">Mot de passe</label>
                         <input type="password" id="inputPassword5" class="form-control mot_de_passe" aria-describedby="passwordHelpBlock" name="password">
                     </div>
-                    <button type="submit" class="btn btn-primary btn-brown">Se connecter</button>
-                    <!-- <div class="register">
-                        <p>Vous n'avez pas de compte</p>
-                        <a href="connexion.css">S'enregistrer</a>
-                    </div>-->
+                    <div id="btn-connexion">
+                        <button type="submit" class="btn btn-primary btn-brown" >Se connecter</button>
+                        <p id="connexion-error" style="display: none">Identifiant ou mot de passe invalide</p>
+                    </div>
+
                 </form>
             </div>
         </div>

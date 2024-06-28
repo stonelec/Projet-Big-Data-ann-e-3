@@ -19,17 +19,34 @@
     height: 100%;
     align-items: center;
 }
-.add-button{
+#add-button-pt{
     display: flex;
     justify-content: center;
-    margin-top: 2.5rem;
-    margin-bottom: 1rem;
+    margin-bottom: -100px;
+    padding-bottom: 0;
+    height: auto    ;
 }
 
 @media only screen and (max-width: 900px) {
     .valeurs{
         display: flex;
         flex-direction: column;
+        text-align: center;
+        align-content: center;
+        align-items: center;
         width: 100%;
     }
+}
+#champ-obligatoire{
+    width: 100%;
+    margin-top: 2.5rem;
+    text-align: center;
+}
+#error-ajouter{
+    width: 100%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    color: red;
+    margin-bottom: -20px;
 }

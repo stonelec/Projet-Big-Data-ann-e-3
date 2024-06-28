@@ -257,7 +257,8 @@ $(document).ready(function (){
 
                 console.log(response);
                 if (response === "error") {
-                    alert("Veuillez remplir tous les champs");
+                    console.log("Erreur lors de l'ajout de l'arbre");
+                    document.getElementById('error-ajouter-show').style.display = 'block';
                 }else {
                     alert("Arbre ajouté avec succès");
                 }
