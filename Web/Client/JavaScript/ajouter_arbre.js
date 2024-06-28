@@ -209,7 +209,6 @@ $(document).ready(function (){
 
         if(localStorage.getItem('id_user') != null){
 
-            let id_user =  0;
             let val_espece = '';
             let val_latitude = 0;
             let val_longitude = 0;
@@ -227,7 +226,8 @@ $(document).ready(function (){
             let val_feuillage = '';
 
 
-            id_user =  parseInt(localStorage.getItem('id_user'));
+            let id_user =  parseInt(localStorage.getItem('id_user'));
+            console.log("id_user", id_user);
             val_espece = $('#espece').val();
             val_latitude = $('#latitude').val();
             val_longitude = $('#longitude').val();
@@ -262,12 +262,12 @@ $(document).ready(function (){
 
             let data = [];
 
-            data = 'action=ajouter_toutes_valeur' + '&val_espece=' + val_espece + '&val_latitude=' + val_latitude +
+            data = 'action=ajouter_toutes_valeur' + '&id=' + id_user + '&val_espece=' + val_espece + '&val_latitude=' + val_latitude +
                 '&val_longitude=' + val_longitude + '&val_hauteur_totale=' + val_hauteur_totale +
                 '&val_hauteur_tronc=' + val_hauteur_tronc + '&val_diametre_tronc=' + val_diametre_tronc +
                 '&val_age_estime=' + val_age_estime + '&val_etat=' + val_etat + '&val_stade=' + val_stade +
                 '&val_remarquable=' + val_remarquable + '&val_pied=' + val_pied + '&val_revetement=' + val_revetement +
-                '&val_port=' + val_port + '&val_feuillage=' + val_feuillage + '&id=' + id_user;
+                '&val_port=' + val_port + '&val_feuillage=' + val_feuillage;
 
             ajaxRequest('POST', 'PHP/request_post.php',function(response)  {
 
