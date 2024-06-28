@@ -209,7 +209,7 @@ $(document).ready(function (){
 
         if(localStorage.getItem('id_user') != null){
 
-            let id_user =  localStorage.getItem('id_user');
+            let id_user =  parseInt(localStorage.getItem('id_user'));
             let val_espece = $('#espece').val();
             let val_latitude = $('#latitude').val();
             let val_longitude = $('#longitude').val();
