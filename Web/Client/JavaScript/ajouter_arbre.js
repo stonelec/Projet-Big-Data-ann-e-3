@@ -8,7 +8,7 @@ $(document).ready(function (){
 
         console.log("ID USER", localStorage.getItem('id_user'));
 
-        ajaxRequest('GET', '/PHP/request.php/action=recup_user&id=' + localStorage.getItem('id_user'), function(response){
+        ajaxRequest('GET', '/PHP/request.php?action=recup_user&id=' + localStorage.getItem('id_user'), function(response){
 
             console.log("LA REPONSE", response);
 
