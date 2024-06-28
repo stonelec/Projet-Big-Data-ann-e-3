@@ -10,6 +10,8 @@ $(document).ready(function (){
 
         ajaxRequest('GET', '/PHP/request.php/action=recup_user&id=' + localStorage.getItem('id_user'), function(response){
 
+            console.log("LA REPONSE", response);
+
             let nom_user = response;
 
             $('#connect').html(nom_user);
