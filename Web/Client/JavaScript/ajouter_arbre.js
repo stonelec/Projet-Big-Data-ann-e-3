@@ -6,6 +6,8 @@ $(document).ready(function (){
 
     if(localStorage.getItem('id_user') != null){
 
+        console.log("ID USER", localStorage.getItem('id_user'));
+
         ajaxRequest('GET', '/PHP/request.php/action=recup_user&id=' + localStorage.getItem('id_user'), function(response){
 
             let nom_user = response;
