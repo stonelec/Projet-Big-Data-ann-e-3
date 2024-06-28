@@ -143,11 +143,23 @@ switch ($requestMethod) {
 
             case 'ajouter_toutes_valeur':
 
+                if($id_user =! null && $val_longitude =! null && $val_latitude =! null && $val_hauteur_totale =! null && $val_hauteur_tronc =! null){
+
+                    echo json_encode("error");
+                    break;
+
+                }
+
+                else{
+                    echo json_encode("c'est good");
+                    break;
+                }
+                /*
                 $result = Arbre::addNewArbre($id_user, $val_longitude, $val_latitude, $val_hauteur_totale, $val_hauteur_tronc, $val_diametre_tronc, $val_etat, $val_stade,
                     $val_port, $val_pied, $val_espece, $val_remarquable, $val_feuillage, $val_age_estime, $val_revetement);
                 echo json_encode($result);
 
-                break;
+                break;*/
 
             default:
                 echo json_encode("Error => Rentrer dans le POST mais pas dans le case");
