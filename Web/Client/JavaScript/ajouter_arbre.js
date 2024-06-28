@@ -207,12 +207,9 @@ $(document).ready(function (){
     $('.form_ajouter_arbre').submit(function(event) {
         event.preventDefault(); // Empêcher la soumission du formulaire
 
-        console.log("ENVOYER")
-
         if(localStorage.getItem('id_user') != null){
 
             let id_user =  localStorage.getItem('id_user');
-            console.log(id_user);
             let val_espece = $('#espece').val();
             let val_latitude = $('#latitude').val();
             let val_longitude = $('#longitude').val();
@@ -251,9 +248,11 @@ $(document).ready(function (){
                 '&val_hauteur_tronc=' + val_hauteur_tronc + '&val_diametre_tronc=' + val_diametre_tronc +
                 '&val_age_estime=' + val_age_estime + '&val_etat=' + val_etat + '&val_stade=' + val_stade +
                 '&val_remarquable=' + val_remarquable + '&val_pied=' + val_pied + '&val_revetement=' + val_revetement +
-                '&val_port=' + val_port + '&val_feuillage=' + val_feuillage + '&id_user =' + localStorage.getItem('id_user');
+                '&val_port=' + val_port + '&val_feuillage=' + val_feuillage + '&id_user =' + id_user;
 
             ajaxRequest('POST', 'PHP/request_post.php',function(response)  {
+
+                console.log(response);
 
                 console.log(response);
                 if (response === "error") {
