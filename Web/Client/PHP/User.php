@@ -33,8 +33,8 @@ class User {
          */
         $db = DB::connexion();
 
-        $request = 'SELECT prenom_user 
-                    FROM user 
+        $request = 'SELECT prenom_user
+                    FROM public.user
                     WHERE id_user=:id_user;';
 
         $statement = $db->prepare($request);
