@@ -35,7 +35,7 @@ class User {
 
         $request = 'SELECT prenom_user
                     FROM public.user
-                    WHERE mot_de_passe=:mdp;';
+                    WHERE password_user=:mdp;';
 
         $statement = $db->prepare($request);
         $statement->bindParam(':mdp', $mdp);
