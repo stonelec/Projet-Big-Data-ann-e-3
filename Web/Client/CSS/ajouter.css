@@ -47,6 +47,11 @@
     text-align: center;
     display: flex;
     justify-content: center;
-    color: red;
     margin-bottom: -20px;
+}
+#error-ajouter #error-ajouter-show{
+    color: red;
+}
+#error-ajouter-show #add-ajouter-show{
+    color: green;
 }

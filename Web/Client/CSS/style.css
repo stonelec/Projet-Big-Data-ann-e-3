@@ -307,7 +307,10 @@ html {
 .navbar-custom .navbar-nav .nav-item {
     margin-right: 10%; /* Espacement de 5% */
 }
-
+.navbar-nav .nav-item #connect {
+    width: 120%;
+    height: 100%;
+}
 
 /* Styles pour l'icône de compte */
 .account-link {

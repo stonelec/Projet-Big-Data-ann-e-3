@@ -30,7 +30,7 @@ $(document).ready(function (){
                 console.log("L'id : ");
                 console.log(response);
                 localStorage.setItem('id_user', response);
-                window.location.href = "/etude_du_patrimoine_arbore/Web/Client/ajouter.html";
+                window.location.href = "/index.html";
                 //Faire une autre ajaxRequest ou cette fois on va appeler la fonction des sessions
                 //pour stocker l'id de la session
 

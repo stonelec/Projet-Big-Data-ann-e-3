@@ -226,6 +226,22 @@ $(document).ready(function (){
             let val_port = $('#option_port').val();
             let val_feuillage = $('#option_feuillage').val();
 
+            console.log(id_user);
+            console.log(val_espece);
+            console.log(val_latitude);
+            console.log(val_longitude);
+            console.log(val_hauteur_totale);
+            console.log(val_hauteur_tronc);
+            console.log(val_diametre_tronc);
+            console.log(val_age_estime);
+            console.log(val_etat);
+            console.log(val_stade);
+            console.log(val_remarquable);
+            console.log(val_pied);
+            console.log(val_revetement);
+            console.log(val_port);
+            console.log(val_feuillage);
+
             let data = {
                 val_espece: val_espece,
                 val_latitude: val_latitude,
@@ -254,11 +270,14 @@ $(document).ready(function (){
 
                 console.log(response);
 
-                if (response === "error") {
+                if (response == "error") {
                     console.log("Erreur lors de l'ajout de l'arbre");
                     document.getElementById('error-ajouter-show').style.display = 'block';
+                    document.getElementById('add-ajouter-show').style.display = 'none';
                 }else {
-                    alert("Arbre ajouté avec succès");
+                    console.log("L'arbre a bien été ajouté");
+                    document.getElementById('error-ajouter-show').style.display = 'none';
+                    document.getElementById('add-ajouter-show').style.display = 'block';
                 }
 
             }, data);
