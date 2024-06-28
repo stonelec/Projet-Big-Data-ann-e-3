@@ -1,3 +1,10 @@
+url_string = window.location.href;
+let url = new URL(url_string);
+let id = url.searchParams.get("id");
+console.log(id);
+
+
+
 function afficherInfos(data_infos) {
     const attributsInfos = [
         "espece", "remarquable", "etat_arb", "stade_dev"
@@ -26,8 +33,14 @@ function afficherDimensions(data_infos) {
     for (attribute of attributsInfos) {
         document.getElementById(attribute).textContent = data_infos[attribute];
     }
+    afficherTronc(data_infos['hauteur_tot']);
 }
-
+function afficherTronc(taille){
+    console.log("taille : ", taille);
+    taille = taille*6.5;
+    const place = document.getElementById('tronc-centre');
+    place.style.height = taille + 'rem';
+}
 function afficherSol(data_infos) {
     const attributsInfos = [
         "type_pied", "longitude", "latitude"
@@ -45,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {
 // ===============================================================================
 //                          A MODIFIER -- id_arbre
 // ===============================================================================
-    let id_arbre = 5;
+    let id_arbre = id;
 
     ajaxRequest('GET', 'PHP/request.php?action=infos&id='+id_arbre, afficherInfos);
     ajaxRequest('GET', 'PHP/request.php?action=visuel&id='+id_arbre, afficherVisuel);
@@ -66,6 +79,7 @@ form.addEventListener('submit', function(event) {
     ajaxRequest('GET', 'PHP/request.php?action=visuel&id='+id_arbre, afficherVisuel);
     ajaxRequest('GET', 'PHP/request.php?action=dimensions&id='+id_arbre, afficherDimensions);
     ajaxRequest('GET', 'PHP/request.php?action=sol&id='+id_arbre, afficherSol);
+
 
 });
 

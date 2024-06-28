@@ -78,20 +78,69 @@
     margin-top: 100px;
     display: flex;
     flex-direction: column;
+    align-items: center;
     width: 50%;
 }
+.racine .racine_gauche{
+    justify-content: end;
+}
+.racine .racine_droite{
+    justify-content: start;
+
+}
+.racine-case{
+    width: 60%;
+    height: auto;
+    background-color: var(--dark-beige);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(--brown);
+}
 .racine .racine_centre{
-    height: 1000px;
+    height: 90rem;
     width: 15px;
     background-color: var(--dark-beige);
     border-radius: 20px;
 }
-/*=================================== RACINE ===================================*/
+.racine .racine-case p{
+    font-size: 1.5rem;
+    margin-top: 2rem;
+    font-family: marianne-bold;
+    text-align: center;
+}
+.racine  p{
+    font-size: 1rem;
+    margin: 2rem 0;
+    text-align: justify;
+    width: 70%;
+}
+.racine i{
+    font-size: 7rem;
+    margin-top: -4rem;
+}
+#racine-equipe{
+    margin-top: 40%;
+}
+#racine-prédir{
+    margin-top: 40%;
+}
+
+.racine-case:hover{
+    background-color: var(--light-beige);
+    cursor: pointer;
+}
+.racine-case:active{
+    background-color: var(--dark-beige);
+}
+/*=================================== EQUIPE ===================================*/
 .equipe{
     display: flex;
     flex-direction: row;
     width: 60rem;
-    margin-top: 1rem;
+    margin-top: 5rem;
     justify-content: space-around;
 
 }

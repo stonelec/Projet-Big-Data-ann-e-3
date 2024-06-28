@@ -227,7 +227,7 @@ class User {
 
             if ($file == 'Login.php'){
 
-                header('Location: ../accueil.html');
+                header('Location: ../index.html');
 
             }
             return $_SESSION['user'];
@@ -235,7 +235,7 @@ class User {
 
         //Si l'utilisateur se déconnecte, il le renvoie sur la page d'accueil :
         if (!isset($_SESSION['id_utilisateur']) && $file != 'Login.php') {    //Utilisateur qui se déconnecte
-            header('Location: ../accueil.html');
+            header('Location: ../index.html');
         }
 
         //Il rentre un mail et mot de passe :
@@ -261,7 +261,7 @@ class User {
             //On regarde si les 2 mots de passe sont les mêmes :
             if (password_verify($_POST['password'], $result['mot_de_passe']) && !empty($result)) {
                 $_SESSION['user'] = $result['id_user'];
-                header('Location: ../accueil.html');
+                header('Location: ../index.html');
             }
 
             else {

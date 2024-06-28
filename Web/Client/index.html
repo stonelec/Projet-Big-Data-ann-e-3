@@ -13,6 +13,8 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="JavaScript/acceuil.js"></script>
+
 
     <!-- Inclure le CSS -->
     <link href="CSS/style.css" rel="stylesheet">
@@ -23,7 +25,7 @@
 <body>
 <!-- =================================== NAVBAR ================================== -->
 <nav class="navbar navbar-expand-lg navbar-custom">
-    <a class="navbar-brand" href="accueil.html">
+    <a class="navbar-brand" href="index.html">
         <img src="Images/logo_green_resize.png" alt="Home" class="d-inline-block align-top" style="height: 40px;">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -74,23 +76,53 @@
         </div>
         <div class="bar"></div>
         <div class="presentation">
-            <div class="projet">
+            <div class="projet"  style ="text-align: justify">
                 <p class="titre">LE PROJET</p>
-                <p class="texte">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque maximus semper purus, in tempus lacus. Integer volutpat massa vel lorem dictum, quis sollicitudin sem accumsan. Donec interdum laoreet dui sit amet iaculis. Maecenas vitae tempor arcu. Cras accumsan augue ut molestie cursus. Etiam euismod nec urna et iaculis. Fusce lacinia orci id orci varius, ac eleifend ipsum sollicitudin. Phasellus ut faucibus tortor. Ut et quam sagittis, fermentum purus id, lobortis tellus. Fusce quis ex diam. Nam malesuada magna sit amet eros sodales, at dapibus augue venenatis. Suspendisse id nulla sed nunc convallis sodales. Suspendisse eu aliquam sapien. Nullam eget hendrerit nisl. Fusce augue magna, venenatis vitae pharetra condimentum, mollis pulvinar leo. Vestibulum dapibus tellus nec turpis fringilla gravida.
-                    <br>
-                    <br>
-                    Fusce at gravida justogna sed purus lobortis hendrerit ac ac justor adipiscing elit. Quisque maximgna sed purus lobortis hendrenibh. Donec mollis vitae orci vestibulum porta. Mauris eget massa eget diam loex diam. Nam mal dui sit amet iaculis. Maecenas vitae tesuadabortis convallis.</p>
+                Ce site web, conçu par des étudiants en troisième année de l'école d'ingénieurs ISEN, a pour but de vous offrir une immersion complète dans le patrimoine arboricole de la ville de Sainte Quentin. Vous y trouverez une carte interactive qui vous permet de localiser et de découvrir les arbres de la ville en un clin d'œil, ainsi qu'un tableau détaillé répertoriant leurs caractéristiques. Vous aurez la possibilité d'ajouter de nouveaux arbres à notre base de données si un identifiant vous est accordé, contribuant ainsi activement à la préservation et à l'enrichissement de notre patrimoine vert. Grâce à notre outil innovant de prédiction basé sur l'intelligence artificielle, vous pouvez également obtenir des informations précieuses sur les arbres, telles que leur taille estimée, leur âge et les risques de chute en cas de tempête.
+                <br>
+                <br>
+                Ce projet étudiant vise à sensibiliser et à impliquer la communauté dans la gestion durable de notre environnement urbain. Nous espérons que vous trouverez ce site utile et agréable à utiliser, et nous vous remercions de votre visite.</p>
             </div>
             <img src="Images/arbre_fond.svg" alt="Home" class="d-inline-block align-top">
         </div>
         <div class="racine">
             <div class="racine_gauche">
+                <div id="racine-ajouter" class="racine-case">
+                    <p>AJOUTER</p>
+                    <i class="bi bi-plus"></i>
+                </div>
+                <p>
+                    La fonction d'ajout d'arbres sur notre site est conçue pour permettre à chaque utilisateur de contribuer activement à l'enrichissement de notre base de données arboricole.
+                </p>
+                <div id="racine-equipe" class="racine-case">
+                    <p>L'EQUIPE</p>
+                    <i class="bi bi-people-fill"></i>
 
+                </div>
+                <p>
+                    L'équipe derrière ce site est composée d'étudiants en troisième année de l'école d'ingénieurs ISEN. Passionnés par les nouvelles technologies et soucieux de l'environnement, nous avons mis nos compétences et notre créativité au service de ce projet pour la ville de Saint-Quentin.
+                </p>
             </div>
             <div class="racine_centre">
 
             </div>
             <div class="racine_droite">
+                <div id="racine-visualiser" class="racine-case">
+                    <p>VISUALISER</p>
+                    <i class="bi bi-eye-fill"></i>
+
+                </div>
+                <p>
+                    La fonction de visualisation sur notre site vous permet de découvrir les arbres de la ville de Saint-Quentin de manière interactive et détaillée. Grâce à une carte intuitive, vous pouvez localiser chaque arbre avec précision et accéder à des informations complètes telles que l'espèce, la taille et l'âge.
+                </p>
+                <div id="racine-prédir" class="racine-case">
+                    <p>PREDIRE</p>
+                    <i class="bi bi-calculator-fill"></i>
+
+                </div>
+                <p>
+                    La fonction de prédiction sur notre site utilise l'intelligence artificielle pour vous fournir des informations prévisionnelles précieuses sur les arbres de Saint-Quentin. Pour chaque arbre, vous pouvez obtenir des estimations sur la taille future des arbres, leur âge approximatif, et évaluer les risques de chute en cas de tempête.
+                </p>
 
             </div>
         </div>
@@ -98,17 +130,17 @@
             <div class="membre">
                 <img src="Images/equipe/eLP.png" alt="Home" class="d-inline-block align-top">
                 <p>LE PAN Ethan</p>
-                <a href="fr.linkedin.com"><i class="bi bi-linkedin h2"></i></a>
+                <a href="https://www.linkedin.com/in/ethan-le-pan-631834316/"><i class="bi bi-linkedin h2"></i></a>
             </div>
             <div class="membre">
                 <img src="Images/equipe/mP.png" alt="Home" class="d-inline-block align-top">
                 <p>PAITIER Mathias</p>
-                <a href="fr.linkedin.com"><i class="bi bi-linkedin h2"></i></a>
+                <a href="https://www.linkedin.com/in/mathias-paitier-2423a9297/"><i class="bi bi-linkedin h2"></i></a>
             </div>
             <div class="membre">
                 <img src="Images/equipe/vR.png" alt="Home" class="d-inline-block align-top">
                 <p>ROCHER Vincent</p>
-                <a href="fr.linkedin.com"><i class="bi bi-linkedin h2"></i></a>
+                <a href="https://www.linkedin.com/in/vincent-rocher-7a9342204/"><i class="bi bi-linkedin h2"></i></a>
             </div>
         </div>
 

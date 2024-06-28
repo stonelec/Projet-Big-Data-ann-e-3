@@ -102,7 +102,7 @@ function submit(){
     id_sub =   document.getElementById("idArbre").value;
     if(id_sub == ""){
         console.log("Erreur : id non renseigné");
-        document.getElementById("idArbre").style.backgroundColor = "rgb(255,0,0)";
+        document.getElementById("idArbre").style.backgroundColor = "rgba(255,0,0,0.3)";
     }else{
         id = id_sub;
         console.log(id);

@@ -173,7 +173,7 @@ $(document).ready(function (){
     $('.form_ajouter_arbre').submit(function(event) {
         event.preventDefault(); // Empêcher la soumission du formulaire
 
-        //console.log("ENVOYER")
+        console.log("ENVOYER")
 
         let val_espece = $('#espece').val();
         let val_latitude = $('#latitude').val();
@@ -218,6 +218,11 @@ $(document).ready(function (){
         ajaxRequest('POST', 'PHP/request_post.php',function(response)  {
 
             console.log(response);
+            if (response === "error") {
+                alert("Veuillez remplir tous les champs");
+            }else {
+                alert("Arbre ajouté avec succès");
+            }
 
         }, data);
 

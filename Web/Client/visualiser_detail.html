@@ -16,13 +16,19 @@
 
     <!-- Inclure le CSS -->
     <link href="CSS/style.css" rel="stylesheet">
+    <link href="CSS/visualiser_detail.css" rel="stylesheet">
+
+    <!-- ================================= JAVA SCRIPT ================================= -->
+    <script src="JavaScript/visualiser_detail.js" defer></script>
+    <script src="JavaScript/ajax.js" defer></script>
+
 
 </head>
 
 <body>
 <!-- =================================== NAVBAR ================================== -->
 <nav class="navbar navbar-expand-lg navbar-custom">
-    <a class="navbar-brand" href="accueil.html">
+    <a class="navbar-brand" href="index.html">
         <img src="Images/logo_green_resize.png" alt="Home" class="d-inline-block align-top" style="height: 40px;">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -65,110 +71,129 @@
     <div class="grid-item"></div>
 
     <!-- ======================== VISUALISER LES DONNEES ========================-->
-    <div class="grid-item">
-        <h1> <bold>VISUALISER ARBRE</bold> </h1>
-        <br>
+    <div class="conteneur page">
+        <div class="box"></div>
+        <div class="box centre">
+            <p class="titre-page">VISUALISER ARBRE</p>
 
-        <div class="container">
-            <form id="arbreForm">
-                <div class="mb-3">
-                    <label for="idArbre" class="form-label">ID de l'Arbre</label>
-                    <input type="number" class="form-control" id="idArbre" required>
+            <div class="form-individual">
+                <div class="custom-card form-individual-size">
+                    <p>ID</p>
+                    <form id="arbreForm">
+                     <div class="d-flex flex-row mb-3">
+                            <input class="form-control" id="idArbre" required aria-describedby="id arbre" placeholder="ID de l'arbre">
+                            <button class="btn  btn-brown shadow-none" type="submit">Visualiser</button>
+                        </div>
+                    </form>
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
-        </div>
-
-        <br>
-        <div class="card-blanche">
-            <div class="card-header-blanche">Infos</div>
-
-            <div class="card-content card-blanche-content">
-                <div class="item">
-                    <div class="label">Espece</div>
-                    <div class="value" id="espece">Inconnu</div>
-                </div>
-                <div class="item">
-                    <div class="label">Remarquable</div>
-                    <div class="value" id="remarquable">Inconnu</div>
-                </div>
-                <div class="item">
-                    <div class="label">Etat</div>
-                    <div class="value" id="etat_arb">Inconnu</div>
-                </div>
-                <div class="item">
-                    <div class="label">Stade</div>
-                    <div class="value" id="stade_dev">Inconnu</div>
-                </div>
-
             </div>
-        </div>
-        <br>
-        <div class="card-blanche">
-            <div class="card-header-blanche">Visuel</div>
-
-            <div class="card-content card-blanche-content">
-                <div class="item">
-                    <div class="label">Feuillage</div>
-                    <div class="value" id="feuillage">Inconnu</div>
-                </div>
-                <div class="item">
-                    <div class="label">Port</div>
-                    <div class="value" id="type_port">Inconnu</div>
-                </div>
-
+            <div id="arbre-top">
+                <img src="Images/arbre_top.png">
             </div>
-        </div>
-        <br>
-        <div class="card-blanche">
-            <div class="card-header-blanche">Dimensions</div>
 
-            <div class="card-content card-blanche-content">
-                <div class="item">
-                    <div class="label">Hauteur tronc</div>
-                    <div class="value" id="hauteur_tronc">Inconnu</div>
-                </div>
-                <div class="item">
-                    <div class="label">Diamètre tronc</div>
-                    <div class="value" id="diametre_tronc">Inconnu</div>
-                </div>
-                <div class="item">
-                    <div class="label">Hauteur totale</div>
-                    <div class="value" id="hauteur_tot">Inconnu</div>
-                </div>
+            <div id="arbre-tronc">
+                <div id="tronc-gauche">
 
+                    <div class="card-blanche">
+                        <div class="card-header-blanche">Infos</div>
+
+                        <div class="card-content card-blanche-content">
+                            <div class="item">
+                                <div class="label">Espece</div>
+                                <div class="value" id="espece">Inconnu</div>
+                            </div>
+                            <div class="item">
+                                <div class="label">Remarquable</div>
+                                <div class="value" id="remarquable">Inconnu</div>
+                            </div>
+                            <div class="item">
+                                <div class="label">Etat</div>
+                                <div class="value" id="etat_arb">Inconnu</div>
+                            </div>
+                            <div class="item">
+                                <div class="label">Stade</div>
+                                <div class="value" id="stade_dev">Inconnu</div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="card-marron">
+                        <div class="card-header-marron">Dimensions</div>
+
+                        <div class="card-content card-marron-content" >
+                            <div class="item">
+                                <div class="label">Hauteur tronc</div>
+                                <div class="value" id="hauteur_tronc">Inconnu</div>
+                            </div>
+                            <div class="item">
+                                <div class="label">Diamètre tronc</div>
+                                <div class="value" id="diametre_tronc">Inconnu</div>
+                            </div>
+                            <div class="item">
+                                <div class="label">Hauteur totale</div>
+                                <div class="value" id="hauteur_tot">Inconnu</div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div id="tronc-centre">
+                </div>
+                <div id="tronc-droit">
+
+                    <div class="card-green">
+                        <div class="card-header-green">Visuel</div>
+
+                        <div class="card-content card-green-content">
+                            <div class="item">
+                                <div class="label">Feuillage</div>
+                                <div class="value" id="feuillage">Inconnu</div>
+                            </div>
+                            <div class="item">
+                                <div class="label">Port</div>
+                                <div class="value" id="type_port">Inconnu</div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="card-beige">
+                        <div class="card-header-beige">Sol</div>
+                        <div class="card-content card-beige-content">
+                            <div class="item">
+                                <div class="label">Pied</div>
+                                <div class="value" id="type_pied">Inconnu</div>
+                            </div>
+                            <div class="item">
+                                <div class="label">Longitude</div>
+                                <div class="value" id="longitude">Inconnu</div>
+                            </div>
+                            <div class="item">
+                                <div class="label">Latitude</div>
+                                <div class="value" id="latitude">Inconnu</div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                </div>
             </div>
-        </div>
-        <br>
-        <div class="card-blanche">
-            <div class="card-header-blanche">Sol</div>
-            <div class="card-content card-blanche-content">
-                <div class="item">
-                    <div class="label">Pied</div>
-                    <div class="value" id="type_pied">Inconnu</div>
-                </div>
-                <div class="item">
-                    <div class="label">Longitude</div>
-                    <div class="value" id="longitude">Inconnu</div>
-                </div>
-                <div class="item">
-                    <div class="label">Latitude</div>
-                    <div class="value" id="latitude">Inconnu</div>
-                </div>
 
-
+            <div id="arbre-sol">
+                <img src="Images/arbre_sol.png">
             </div>
+
+
+
+
+
+
+
+
         </div>
-
-
-
-
-
-
-
+        <div class="box"></div>
     </div>
 
-    <div class="grid-item"></div>
 
 </div>
 
@@ -190,8 +215,6 @@
 </footer>
 
 
-<!-- ================================= JAVA SCRIPT ================================= -->
-<script src="JavaScript/visualiser_detail.js"></script>
-<script src="JavaScript/ajax.js"></script>
+
 </body>
 </html>
