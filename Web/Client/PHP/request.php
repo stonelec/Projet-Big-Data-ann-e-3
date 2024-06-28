@@ -2,7 +2,7 @@
 
 require_once('Arbre.php');
 require_once('User.php');
-require_once('Utilisateur.php');
+//require_once('Utilisateur.php');
 
 // Récupérer la méthode de la requête (GET, POST, etc.)
 $requestMethod = $_SERVER['REQUEST_METHOD'];
