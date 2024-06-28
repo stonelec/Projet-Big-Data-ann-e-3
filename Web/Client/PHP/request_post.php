@@ -143,7 +143,7 @@ switch ($requestMethod) {
 
             case 'ajouter_toutes_valeur':
 
-                if($id_user =! null && $val_longitude =! null && $val_latitude =! null && $val_hauteur_totale =! null && $val_hauteur_tronc =! null){
+                if($val_longitude =! null && $val_latitude =! null && $val_hauteur_totale =! null && $val_hauteur_tronc =! null){
 
                     echo json_encode("marche pas");
                     break;
