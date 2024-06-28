@@ -39,7 +39,7 @@ $(document).ready(function () {
 
 function showMap(mode) {
 d3.csv(
-    "../SQL/Data_Arbre.csv",
+    "SQL/Data_Arbre.csv",
     function(err, rows) {
         function unpack(rows, key) {
             return rows.map(function(row) {
