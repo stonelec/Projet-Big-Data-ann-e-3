@@ -290,7 +290,7 @@ class User {
         $statement = $db->prepare($request);
         $statement->execute();
 
-        return $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $statement->fetch()[0];
 
     }
 
