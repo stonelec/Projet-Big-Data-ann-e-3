@@ -66,7 +66,8 @@ VALUES
 
 INSERT INTO public.user (nom_user, prenom_user, email_user, date_naissance, password_user, telephone_user)
 VALUES
-    ('LE PAN', 'Ethan', 'ethan.le-pan@isen-ouest.yncrea.fr','2003-12-03','ethan','0652245323');
+    ('LE PAN', 'Ethan', 'ethan.le-pan@isen-ouest.yncrea.fr','2003-12-03','ethan','0652245323'),
+    ('LE PAN', 'Ethan', 'ethan@i','2003-12-03','ethan','0652245323');
 
 ------------------------------------------------------------
 -- Ajout des arbres depuis un fichier CSV
